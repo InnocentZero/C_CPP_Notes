@@ -79,7 +79,7 @@
     code span.vs { color: #da4453; } /* VerbatimString */
     code span.wa { color: #da4453; } /* Warning */
   </style>
-  <link rel="stylesheet" href="./style_for_markdown.css" />
+  <link rel="stylesheet" href="/home/innocentzero/Templates/style_for_markdown.css" />
   <!--[if lt IE 9]>
     <script src="//cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv-printshiv.min.js"></script>
   <![endif]-->
@@ -226,7 +226,7 @@ Robin Sloane
 <li><p><code>long double</code>: Same as <code>double</code> except it stores 128 bits.</p></li>
 </ul>
 <blockquote>
-<p><code>%d</code> for a <code>char</code> prints its ASCII value. If a <code>char</code> is defined as ‘ABC’, <code>%d</code> prints (ASCII_A)·256<sup>2</sup> + (ASCII_B)·256 + (ASCII_C) where ASCII_ is the ascii value for that character. <code>%c</code> only accesses the last valid byte (i.e. <code>'C'</code> in this case). If the char is defined as <code>'ABCDE'</code>, only the last valid byte is processed and stored, and <code>%d</code> accesses all 4 bytes including the 3 following it, while <code>%c</code> works the same.</p>
+<p><code>%d</code> for a <code>char</code> prints its ASCII value. If a <code>char</code> is defined as ‘ABC’, <code>%d</code> prints (ASCII_A)·256<sup>2</sup> + (ASCII_B)·256 + (ASCII_C) where ASCII_ is the ascii value for that character. <code>%c</code> only accesses the last (or first, depending on whether the processor is little Endian or big Endian) valid byte (i.e. <code>'C'</code> in this case). If the char is defined as <code>'ABCDE'</code>, only the last (or first, again depending on the processor) valid byte is processed and stored, and <code>%d</code> accesses all 4 bytes including the 3 following it, while <code>%c</code> works the same.</p>
 </blockquote>
 <h3 id="arrays">Arrays</h3>
 <p>Arrays are uniform aggregates of one type. Declaration occurs as follows:</p>
