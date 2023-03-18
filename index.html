@@ -1,0 +1,971 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <title>CS1111</title>
+  <style>
+    code{white-space: pre-wrap;}
+    span.smallcaps{font-variant: small-caps;}
+    span.underline{text-decoration: underline;}
+    div.column{display: inline-block; vertical-align: top; width: 50%;}
+    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+    ul.task-list{list-style: none;}
+    pre > code.sourceCode { white-space: pre; position: relative; }
+    pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+    pre > code.sourceCode > span:empty { height: 1.2em; }
+    .sourceCode { overflow: visible; }
+    code.sourceCode > span { color: inherit; text-decoration: inherit; }
+    div.sourceCode { margin: 1em 0; }
+    pre.sourceCode { margin: 0; }
+    @media screen {
+    div.sourceCode { overflow: auto; }
+    }
+    @media print {
+    pre > code.sourceCode { white-space: pre-wrap; }
+    pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+    }
+    pre.numberSource code
+      { counter-reset: source-line 0; }
+    pre.numberSource code > span
+      { position: relative; left: -4em; counter-increment: source-line; }
+    pre.numberSource code > span > a:first-child::before
+      { content: counter(source-line);
+        position: relative; left: -1em; text-align: right; vertical-align: baseline;
+        border: none; display: inline-block;
+        -webkit-touch-callout: none; -webkit-user-select: none;
+        -khtml-user-select: none; -moz-user-select: none;
+        -ms-user-select: none; user-select: none;
+        padding: 0 4px; width: 4em;
+        background-color: #232629;
+        color: #7a7c7d;
+      }
+    pre.numberSource { margin-left: 3em; border-left: 1px solid #7a7c7d;  padding-left: 4px; }
+    div.sourceCode
+      { color: #cfcfc2; background-color: #181818; }
+    @media screen {
+    pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+    }
+    code span { color: #cfcfc2; } /* Normal */
+    code span.al { color: #95da4c; background-color: #4d1f24; font-weight: bold; } /* Alert */
+    code span.an { color: #3f8058; } /* Annotation */
+    code span.at { color: #2980b9; } /* Attribute */
+    code span.bn { color: #f67400; } /* BaseN */
+    code span.bu { color: #7f8c8d; } /* BuiltIn */
+    code span.cf { color: #fdbc4b; font-weight: bold; } /* ControlFlow */
+    code span.ch { color: #3daee9; } /* Char */
+    code span.cn { color: #27aeae; font-weight: bold; } /* Constant */
+    code span.co { color: #7a7c7d; } /* Comment */
+    code span.cv { color: #7f8c8d; } /* CommentVar */
+    code span.do { color: #a43340; } /* Documentation */
+    code span.dt { color: #2980b9; } /* DataType */
+    code span.dv { color: #f67400; } /* DecVal */
+    code span.er { color: #da4453; text-decoration: underline; } /* Error */
+    code span.ex { color: #0099ff; font-weight: bold; } /* Extension */
+    code span.fl { color: #f67400; } /* Float */
+    code span.fu { color: #8e44ad; } /* Function */
+    code span.im { color: #27ae60; } /* Import */
+    code span.in { color: #c45b00; } /* Information */
+    code span.kw { color: #cfcfc2; font-weight: bold; } /* Keyword */
+    code span.op { color: #cfcfc2; } /* Operator */
+    code span.ot { color: #27ae60; } /* Other */
+    code span.pp { color: #27ae60; } /* Preprocessor */
+    code span.re { color: #2980b9; background-color: #153042; } /* RegionMarker */
+    code span.sc { color: #3daee9; } /* SpecialChar */
+    code span.ss { color: #da4453; } /* SpecialString */
+    code span.st { color: #f44f4f; } /* String */
+    code span.va { color: #27aeae; } /* Variable */
+    code span.vs { color: #da4453; } /* VerbatimString */
+    code span.wa { color: #da4453; } /* Warning */
+  </style>
+  <link rel="stylesheet" href="./style_for_markdown.css" />
+  <!--[if lt IE 9]>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv-printshiv.min.js"></script>
+  <![endif]-->
+</head>
+<body>
+<h1 id="c">C</h1>
+<div class="epigraph">
+<blockquote>
+Programming is not all the same. Normal written languages have different rhythms and idioms, right? Well, so do programming languages. The language called C is all harsh imperatives, almost raw computer-speak. The language called Lisp is like one long, looping sentence, full of subclauses, so long in fact that you usually forget what it was even about in the first place. The language called Erlang is just like it sounds: eccentric and Scandinavian.
+<footer>
+Robin Sloane
+</footer>
+</blockquote>
+</div>
+<h2 id="basic-structure">Basic Structure</h2>
+<blockquote>
+<p><code>#include &lt;stdio.h&gt;</code>: searches only in the main directory.</p>
+</blockquote>
+<blockquote>
+<p><code>#incude “stdio.h”</code> : searches in both the current and the main directory.</p>
+</blockquote>
+<p><code>#</code> indicates to open stdio.h first and then compile the rest of the code. This is called a <span class="texthighlight">preprocessor directive.</span></p>
+<p><code>#define a1 a2</code>: Preprocessor replaces every instance of a1 with a2 literally. <code>a1</code> has to be a valid variable.</p>
+<blockquote>
+<p><code>#define</code> is a macro.</p>
+</blockquote>
+<div class="sourceCode" id="cb1"><pre class="sourceCode c"><code class="sourceCode c"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="pp">#include </span><span class="im">&lt;stdio.h&gt;</span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="pp">#define SQ(x) x*x</span></span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="dt">int</span> main<span class="op">(</span><span class="dt">void</span><span class="op">){</span></span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>    printf<span class="op">(</span><span class="st">&quot;%d</span><span class="sc">\n</span><span class="st">&quot;</span><span class="op">,</span>SQ<span class="op">(</span><span class="dv">2</span><span class="op">*</span><span class="dv">3</span><span class="op">));</span></span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code></pre></div>
+<p>The above code will print 11 and not 25 because the compiler interprets it as <code>2 + 3*2 + 3</code> instead of <code>(2+3)*(2+3)</code>. To solve this use <code>#define SQ(x) (x)*(x)</code> or use <code>SQ((2+3))</code>.</p>
+<p><code>#include &lt;limits.h&gt;</code> is for including all the limits in the compiler.</p>
+<div class="sourceCode" id="cb2"><pre class="sourceCode c"><code class="sourceCode c"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="dt">int</span> main<span class="op">(</span>arguments<span class="op">){</span></span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>    printf<span class="op">(</span>“Hello World<span class="op">!</span>\n”<span class="op">);</span>   </span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code></pre></div>
+<p><code>main</code> function is the first one to be called, regardless of the order in which the functions are written. This can be overridden by <code>#pragma</code>, another preprocessor directive that works as instructions to the compiler. Some compilers only allow <code>main</code> to return an <code>int</code>.</p>
+<blockquote>
+<p><code>printf</code> : formatted printing</p>
+</blockquote>
+<p>However the indentation is not necessary.</p>
+<p>The above is same as</p>
+<div class="sourceCode" id="cb3"><pre class="sourceCode c"><code class="sourceCode c"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="pp">#include  </span><span class="im">&lt;stdio.h&gt;</span></span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a><span class="dt">int</span> main<span class="op">()</span> <span class="op">{</span>printf<span class="op">(</span>“Hello World<span class="op">!</span>”<span class="op">);}</span></span></code></pre></div>
+<h2 id="data-types">Data Types</h2>
+<ul>
+<li><code>int</code>: Integer. At least as large as <code>short</code>. Usually 32 bits.</li>
+<li><code>short</code>: Short integer. Usually 16 bits.</li>
+<li><code>long</code>: Long integer. At least as large as <code>int</code>. Usually 32 bits.</li>
+<li><code>long long</code>: Very long integer. At least as large as <code>long</code>. Usually 64 bits.</li>
+</ul>
+<blockquote>
+<p>All these use <a href="https://en.wikipedia.org/wiki/Two%27s_complement">two’s compliment</a>.</p>
+</blockquote>
+<ul>
+<li><code>unsigned int</code>: Unsigned integer. At least as large as <code>unsigned short</code>. Usually 32 bits.</li>
+<li><code>unsigned short</code>: Unsigned short integer. Usually 16 bits.</li>
+<li><code>unsigned long</code>: Unsigned long integer. At least as large as <code>unsigned int</code>. Usually 32 bits.</li>
+<li><code>unsigned long long</code>: Unsigned very long integer. At least as large as <code>unsigned long</code>. Usually 64 bits.</li>
+</ul>
+<blockquote>
+<p>Same sizes as above; only that the ranges are modified and 2’s compliment is absent.</p>
+</blockquote>
+<ul>
+<li><code>signed char</code>: -128 to 127. ASCII characters only. Can actually store upto 32 bits.</li>
+<li><code>unsigned char</code>: 0 to 255. ASCII characters only. Can actually store upto 32 bits.</li>
+</ul>
+<table>
+<thead>
+<tr class="header">
+<th style="text-align: center;">Escape Sequence</th>
+<th style="text-align: center;">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: center;">\n</td>
+<td style="text-align: center;">moves the cursor to the beginning of the next line</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">\t</td>
+<td style="text-align: center;">tab</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;">\r</td>
+<td style="text-align: center;">Carraige return. Moves the cursor to the beginning of the line.</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">\a</td>
+<td style="text-align: center;">Alerts the system bell</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;">\\</td>
+<td style="text-align: center;">Prints backslash</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">\"</td>
+<td style="text-align: center;">Prints double quotes</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;">\f</td>
+<td style="text-align: center;">Goes to the line immediately below the cursor and gives a space</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">\b</td>
+<td style="text-align: center;">Backspace</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;">\'</td>
+<td style="text-align: center;">single quote</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">\0</td>
+<td style="text-align: center;">Null character; denotes end of string</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;">\v</td>
+<td style="text-align: center;">tab but in vertical direction</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">\?</td>
+<td style="text-align: center;">print a question mark</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;">\117</td>
+<td style="text-align: center;">Octal code for characters</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">\x45</td>
+<td style="text-align: center;">Hexadecimal code for characters</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;">\u20B9</td>
+<td style="text-align: center;">Unicode</td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li><p><code>float</code>: Floating point decimal number. Stores 32 bits.</p></li>
+<li><p><code>double</code>: Same as <code>float</code> except it stores 64 bits.</p></li>
+<li><p><code>long double</code>: Same as <code>double</code> except it stores 128 bits.</p></li>
+</ul>
+<blockquote>
+<p><code>%d</code> for a <code>char</code> prints its ASCII value. If a <code>char</code> is defined as ‘ABC’, <code>%d</code> prints (ASCII_A)·256<sup>2</sup> + (ASCII_B)·256 + (ASCII_C) where ASCII_ is the ascii value for that character. <code>%c</code> only accesses the last valid byte (i.e. <code>'C'</code> in this case). If the char is defined as <code>'ABCDE'</code>, only the last valid byte is processed and stored, and <code>%d</code> accesses all 4 bytes including the 3 following it, while <code>%c</code> works the same.</p>
+</blockquote>
+<h3 id="arrays">Arrays</h3>
+<p>Arrays are uniform aggregates of one type. Declaration occurs as follows:</p>
+<div class="sourceCode" id="cb4"><pre class="sourceCode c"><code class="sourceCode c"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="dt">int</span> main<span class="op">(){</span></span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>    <span class="dt">char</span> arr<span class="op">[</span>length<span class="op">];</span></span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>    <span class="dt">int</span> nums<span class="op">[]</span> <span class="op">=</span> <span class="op">{</span><span class="dv">4</span><span class="op">,</span> <span class="dv">53</span><span class="op">,</span> <span class="dv">5</span><span class="op">,</span> <span class="dv">553</span><span class="op">,</span> <span class="dv">3</span><span class="op">}</span></span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>    nums<span class="op">[</span><span class="dv">1</span><span class="op">]</span> <span class="op">=</span> <span class="dv">2</span>  \\ but length can’t be changed</span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a>    <span class="dt">int</span> nums<span class="op">[</span><span class="dv">10</span><span class="op">]</span> <span class="op">=</span> <span class="op">{</span><span class="dv">2</span><span class="op">,</span> <span class="dv">3</span><span class="op">}</span> \\ till <span class="dv">10</span><span class="er">th</span> index<span class="op">;</span> last <span class="dv">8</span> would be <span class="dv">0</span></span>
+<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a>    nums<span class="op">[</span><span class="dv">9</span><span class="op">]</span> <span class="op">=</span> <span class="dv">5</span></span>
+<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a>    <span class="dt">int</span> nums<span class="op">[</span><span class="dv">15</span><span class="op">];</span> \\ leads to segmentation fault<span class="op">,</span> core dumped</span>
+<span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code></pre></div>
+<p>Similar to this 2D arrays can be declared as well.</p>
+<h3 id="variable-declaration">Variable Declaration</h3>
+<blockquote>
+<p>Variables declared outside of main are global variables.</p>
+</blockquote>
+<p><code>data_type var</code> when the value is not known.</p>
+<p><code>data_type var = value</code> when the value is known.</p>
+<p>We can also use <code>typedef</code>.</p>
+<p><code>typedef existing_name alias_name;</code></p>
+<p>This is better than <code>#define</code> as it allows you typecast.</p>
+<p><code>enum var_type {val_1,val_2,val_3};</code> : This declares a new enumeration type. The default values are 0, 1, 2 and so on. We can also define variables of the <code>var_type</code> using <code>enum var_type {...} new_var;</code> or by:</p>
+<div class="sourceCode" id="cb5"><pre class="sourceCode c"><code class="sourceCode c"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="kw">enum</span> var_type <span class="op">{</span>val_1<span class="op">,</span>val_2<span class="op">,</span>val_3<span class="op">};</span></span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="kw">enum</span> var_type var<span class="op">;</span></span></code></pre></div>
+<p>We can also define our own values using <code>enum var_type {var1 = 1,var_2 = 2};</code>. If in between some values are undefined then their value is set as the previous value + 1.</p>
+<ul>
+<li>enum values must be integer constants or characters.</li>
+</ul>
+<h3 id="type-casting">type casting</h3>
+<p><strong>Explicit:</strong> <code>(type_name) expression</code></p>
+<p><strong>Implicit:</strong> <code>type_name new_var = expression</code></p>
+<p>Implicit typecasting also occurs when we perform an operation between a lower level data type and a higher level data type. Eg. int &amp; float, int and long, float and double etc.</p>
+<p>In all of the above examples, the first one gets typecased to the second.</p>
+<h2 id="giving-output">Giving output</h2>
+<p><code>printf</code> is used for formatted printing. It is included in <code>&lt;stdio.h&gt;</code>. It returns the number of characters printed if successful. Otherwise it returns a negative number.</p>
+<p><code>puts</code> is used to print a string followed by a newline. It returns a non-negative value if successful or an <code>EOF</code> if unsuccessful.</p>
+<h3 id="format-specifiers">Format specifiers</h3>
+<p>The format is a string starting with % and ends with conversion character (like c, i, f, d, etc.). The format specifier can also contain sub-specifiers: flags, width, .precision and modifiers (in that order), which are optional and follow these specifications:</p>
+<h4 id="flags">Flags</h4>
+<ul>
+<li>A minus ( <code>-</code> ) sign indicates left alignment.</li>
+<li>A plus ( <code>+</code> ) sign forces the sign of the number, even when it is positive.</li>
+<li>( <code>space</code> ) removes the sign from the number.</li>
+<li>A hash ( <code>#</code> ), if used with o, x, X puts 0, 0x, 0X in front of the output.</li>
+<li>A zero ( <code>0</code> ) left pads the number with 0 instead of spaces if padding is specified.</li>
+</ul>
+<h4 id="width">Width</h4>
+<ul>
+<li>A ( <code>number</code> ) specifies the field width of the output.</li>
+<li>An asterisk ( <code>*</code> ) specifies it before the arguement.</li>
+</ul>
+<h4 id="precision">Precision</h4>
+<ul>
+<li>A <code>.number</code> specifies the precision for a number. Also works for a string, printing the first n characters.</li>
+<li>An asterisk <code>.*</code> specifies the precision before the arguement.</li>
+</ul>
+<table>
+<colgroup>
+<col style="width: 58%" />
+<col style="width: 41%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: center;">Placeholder</th>
+<th style="text-align: center;">Type</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: center;">%c</td>
+<td style="text-align: center;">char<br/>unsigned char</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">%s</td>
+<td style="text-align: center;">string</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;">%p</td>
+<td style="text-align: center;">pointer address</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">%i</td>
+<td style="text-align: center;">signed integer</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;">%hi</td>
+<td style="text-align: center;">signed short integer</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">%li</td>
+<td style="text-align: center;">signed long integer</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;">%lli</td>
+<td style="text-align: center;">signed long long integer</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">%u ; %hu ; %lu ; %llu</td>
+<td style="text-align: center;">same as above except for unsigned integers</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;">%d ; %hd ; %ld ; %lld</td>
+<td style="text-align: center;">signed integer in decimal base</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">%o ; %ho ; %lo ; %llo</td>
+<td style="text-align: center;">unsigned integer in octal base</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;">%x ; %hx ; %lx ; %llx</td>
+<td style="text-align: center;">unsigned integer in hexadecimal base, lowercase</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">%X ; %hX ; %lX ; %llX</td>
+<td style="text-align: center;">unsigned integer in hexadecimal base, uppercase</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;">%f</td>
+<td style="text-align: center;">floating point<br/>double</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">%Lf</td>
+<td style="text-align: center;">long double</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;">%e ; %E ; %Le ; %LE</td>
+<td style="text-align: center;">signed floating point value in scientific notation</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">%g ; %G ; %Lg ; %LG</td>
+<td style="text-align: center;">uses the shortest representation; either %f or %e</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;">%a ; %A ; %La ; %LA</td>
+<td style="text-align: center;">hexadecimal floating point in scientific notation</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">%n</td>
+<td style="text-align: center;">prints nothing and stores the number of characters written to the arguement which is a pointer to a signed integer.</td>
+</tr>
+</tbody>
+</table>
+<div class="epigraph">
+<blockquote>
+Christ, people. Learn C, instead of just stringing random characters together until it compiles (with warnings).
+<footer>
+Linus Torvalds, <cite>LKM mailing list</cite>
+</footer>
+</blockquote>
+</div>
+<h2 id="taking-input">Taking Input</h2>
+<div class="sourceCode" id="cb6"><pre class="sourceCode c"><code class="sourceCode c"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="dt">int</span> main<span class="op">(</span>arguments<span class="op">){</span></span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>    <span class="dt">int</span> lol<span class="op">;</span></span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>    scanf<span class="op">(</span><span class="st">&quot;%d&quot;</span><span class="op">,</span> <span class="op">&amp;</span>lol<span class="op">);</span></span>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a>    printf<span class="op">(</span>“<span class="op">%</span>d”<span class="op">,</span>lol<span class="op">);</span>   </span>
+<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code></pre></div>
+<blockquote>
+<p>Just like <code>printf</code>, <code>scanf</code> is formatted scanning.</p>
+</blockquote>
+<p><code>scanf</code> can also take multiple inputs separated by ’ ’ or newline. It can also modify the value of a variable.</p>
+<div class="sourceCode" id="cb7"><pre class="sourceCode c"><code class="sourceCode c"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="dt">int</span> main<span class="op">(</span>arguments<span class="op">){</span></span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>    <span class="dt">int</span> lol1<span class="op">,</span> lol2<span class="op">,</span> lol3<span class="op">,</span> lol4 <span class="op">;</span></span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>    scanf<span class="op">(</span><span class="st">&quot;%d%d%d%d&quot;</span><span class="op">,</span> <span class="op">&amp;</span>lol1<span class="op">,</span> <span class="op">&amp;</span>lol2<span class="op">,</span> <span class="op">&amp;</span>lol3<span class="op">,</span> <span class="op">&amp;</span>lol4<span class="op">);</span></span>
+<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a>    printf<span class="op">(</span>“<span class="op">%</span>d\n”<span class="op">,</span>lol1<span class="op">);</span>    </span>
+<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a>    printf<span class="op">(</span>“<span class="op">%</span>d\n”<span class="op">,</span>lol2<span class="op">);</span>    </span>
+<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a>    printf<span class="op">(</span>“<span class="op">%</span>d\n”<span class="op">,</span>lol3<span class="op">);</span>    </span>
+<span id="cb7-7"><a href="#cb7-7" aria-hidden="true" tabindex="-1"></a>    printf<span class="op">(</span>“<span class="op">%</span>d\n”<span class="op">,</span>lol4<span class="op">);</span>    </span>
+<span id="cb7-8"><a href="#cb7-8" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code></pre></div>
+<p>The <code>&amp;</code> (ampersand) is used to <strong>point</strong> to the address of the variable. It can also overwrite whatever was written in the variable beforehand.</p>
+<div class="epigraph">
+<blockquote>
+Every good work of software starts by scratching a developer’s personal itch.
+<footer>
+Eric S. Raymond, <cite>The Cathedral and the Bazaar</cite>
+</footer>
+</blockquote>
+</div>
+<h2 id="control-structures">Control Structures</h2>
+<h3 id="arithmetic">Arithmetic</h3>
+<ul>
+<li>Addition: <code>a + b</code></li>
+<li>Subtraction: <code>a - b</code></li>
+<li>Multiplication: <code>a*b</code></li>
+<li>Division: <code>a/b</code></li>
+<li>Remainder / Modulus: <code>a%b</code></li>
+</ul>
+<blockquote>
+<p>Multiplication can easily run out of the bounds of the given datatype. So take care while multiplying numbers.</p>
+</blockquote>
+<blockquote>
+<p>Division by zero mostly leads to a fatal error. So take care of b being 0 explicitly.</p>
+</blockquote>
+<blockquote>
+<p>Remainder can be negative too if you use the modulus operator. SO take care when you need the remainders according to mathematical logic.</p>
+</blockquote>
+<blockquote>
+<p>Syntactic sugar for assignment: <code>c += 3;</code> and similar for other arithmetic operations as well.</p>
+</blockquote>
+<p><span class="texthighlight">An easy method to reverse a number:</span></p>
+<div class="sourceCode" id="cb8"><pre class="sourceCode c"><code class="sourceCode c"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="dt">int</span> rev_num<span class="op">(</span><span class="dt">int</span> num<span class="op">){</span></span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>    <span class="dt">int</span> revnum <span class="op">=</span> <span class="dv">0</span><span class="op">;</span></span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>    <span class="cf">while</span> <span class="op">(</span>num <span class="op">!=</span> <span class="dv">0</span><span class="op">){</span></span>
+<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a>        revnum <span class="op">=</span> revnum<span class="op">*</span><span class="dv">10</span> <span class="op">+</span> num<span class="op">%</span><span class="dv">10</span><span class="op">;</span></span>
+<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a>        num <span class="op">=</span> num<span class="op">/</span><span class="dv">10</span><span class="op">;</span></span>
+<span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a>    <span class="op">}</span></span>
+<span id="cb8-7"><a href="#cb8-7" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code></pre></div>
+<p><span class="texthighlight">An easy method to swap two numbers without additional variables:</span></p>
+<div class="sourceCode" id="cb9"><pre class="sourceCode c"><code class="sourceCode c"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="pp">#define swap (x, y) {x = x^y; y = x^y; x = x^y};</span></span></code></pre></div>
+<h3 id="increment-and-decrement-operators">Increment and Decrement Operators</h3>
+<table>
+<colgroup>
+<col style="width: 50%" />
+<col style="width: 50%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: center;">Operator</th>
+<th style="text-align: center;">Explanation</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: center;">a++</td>
+<td style="text-align: center;">Use the current value of a in the expression in which it resides, and then increment by 1</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">++a</td>
+<td style="text-align: center;">First increment and then use value</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;">a-- ; --a</td>
+<td style="text-align: center;">Same as above except for decrementing</td>
+</tr>
+</tbody>
+</table>
+<h3 id="comparison-operators">Comparison Operators</h3>
+<table>
+<thead>
+<tr class="header">
+<th style="text-align: center;">Comparison</th>
+<th style="text-align: center;">Purpose</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: center;">a == b</td>
+<td style="text-align: center;">If the numbers are equal</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">a != b</td>
+<td style="text-align: center;">If the numbers are not equal to each other</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;">a &lt;= b</td>
+<td style="text-align: center;">If a is less than or equal to b</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">a &gt;= b</td>
+<td style="text-align: center;">If a is greater than or equal to b</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;">a &gt; b</td>
+<td style="text-align: center;">If a is greater than b</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">a &lt; b</td>
+<td style="text-align: center;">If a is less than b</td>
+</tr>
+</tbody>
+</table>
+<h3 id="logical-operators">Logical Operators</h3>
+<p><code>&amp;&amp;</code> logical and</p>
+<p><code>||</code> logical or</p>
+<p><code>!</code> logical not</p>
+<h3 id="if-else"><code>if-else</code></h3>
+<div class="sourceCode" id="cb10"><pre class="sourceCode c"><code class="sourceCode c"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span><span class="op">(</span>expr<span class="op">){</span>statements<span class="op">}</span></span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a><span class="cf">else</span><span class="op">{</span>statements<span class="op">}</span></span></code></pre></div>
+<p>Multiple <code>if-else</code> can be chained together.</p>
+<div class="sourceCode" id="cb11"><pre class="sourceCode c"><code class="sourceCode c"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span><span class="op">(</span>expr<span class="op">){</span>statements<span class="op">}</span></span>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a><span class="cf">else</span> <span class="cf">if</span><span class="op">(</span>expr<span class="op">){</span>statements<span class="op">}</span></span>
+<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a><span class="cf">else</span> <span class="cf">if</span><span class="op">(</span>expr<span class="op">){</span>statements<span class="op">}</span></span></code></pre></div>
+<p>Syntactic sugar for <code>if else</code>: <code>expr ? output if true : output if false</code></p>
+<blockquote>
+<p>Short Circuiting: If the first statement in an <code>&amp;&amp;</code> structure is false, then the second statement is not evaluated. Similarly, if the first statement in an <code>||</code> structure is true, the second statement is not evaluated.</p>
+</blockquote>
+<blockquote>
+<p>Dangling <code>else</code>: An <code>else</code> is related to the closest <code>if</code> unless brackets <code>{}</code> are used.</p>
+</blockquote>
+<h3 id="switch-case"><code>switch-case</code></h3>
+<p>Only for equality and integers(used as ASCII values)</p>
+<div class="sourceCode" id="cb12"><pre class="sourceCode c"><code class="sourceCode c"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a>scanf<span class="op">(</span><span class="st">&quot;%d&quot;</span><span class="op">,&amp;</span>isd<span class="op">);</span></span>
+<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a><span class="cf">switch</span> <span class="op">(</span>isd<span class="op">){</span></span>
+<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a>    <span class="cf">case</span> <span class="dv">91</span><span class="op">:</span> printf<span class="op">(</span><span class="st">&quot;India</span><span class="sc">\n</span><span class="st">&quot;</span><span class="op">);</span> <span class="cf">break</span><span class="op">;</span></span>
+<span id="cb12-4"><a href="#cb12-4" aria-hidden="true" tabindex="-1"></a>    <span class="cf">case</span> <span class="dv">1</span><span class="op">:</span> printf<span class="op">(</span><span class="st">&quot;US-Canada</span><span class="sc">\n</span><span class="st">&quot;</span><span class="op">);</span> <span class="cf">break</span><span class="op">;</span></span>
+<span id="cb12-5"><a href="#cb12-5" aria-hidden="true" tabindex="-1"></a>    <span class="cf">case</span> <span class="dv">61</span><span class="op">:</span> printf<span class="op">(</span><span class="st">&quot;Astralia</span><span class="sc">\n</span><span class="st">&quot;</span><span class="op">);</span> <span class="cf">break</span><span class="op">;</span></span>
+<span id="cb12-6"><a href="#cb12-6" aria-hidden="true" tabindex="-1"></a>    <span class="cf">default</span><span class="op">:</span> printf<span class="op">(</span><span class="st">&quot;India</span><span class="sc">\n</span><span class="st">&quot;</span><span class="op">);</span> </span>
+<span id="cb12-7"><a href="#cb12-7" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code></pre></div>
+<div class="epigraph">
+<blockquote>
+A computer is like air conditioning - it becomes useless when you open Windows.
+<footer>
+Linus Torvalds
+</footer>
+</blockquote>
+</div>
+<h2 id="iterators">Iterators</h2>
+<h3 id="for-loops">For loops</h3>
+<div class="sourceCode" id="cb13"><pre class="sourceCode c"><code class="sourceCode c"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="dt">int</span> main<span class="op">(){</span></span>
+<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a>    <span class="dt">int</span> count <span class="op">=</span> <span class="dv">10</span></span>
+<span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span><span class="op">(</span><span class="dt">int</span> i <span class="op">=</span> <span class="dv">0</span><span class="op">;</span> i <span class="op">&lt;</span> count<span class="op">;</span> i<span class="op">++){</span></span>
+<span id="cb13-4"><a href="#cb13-4" aria-hidden="true" tabindex="-1"></a>        printf<span class="op">(</span><span class="st">&quot;%d&quot;</span><span class="op">,</span>i<span class="op">);</span></span>
+<span id="cb13-5"><a href="#cb13-5" aria-hidden="true" tabindex="-1"></a>    <span class="op">}</span></span>
+<span id="cb13-6"><a href="#cb13-6" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code></pre></div>
+<p>The shortest <code>for</code> loop is <code>for(;;){}</code> which does nothing.</p>
+<p>There can be multiple values and multiple conditions. A for loop can also be written as follows:</p>
+<div class="sourceCode" id="cb14"><pre class="sourceCode c"><code class="sourceCode c"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="dt">int</span> main<span class="op">(){</span></span>
+<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a>    <span class="dt">int</span> stud <span class="op">=</span> <span class="dv">0</span><span class="op">,</span> NSTUD <span class="op">=</span> <span class="dv">10</span><span class="op">;</span></span>
+<span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span><span class="op">(;;){</span></span>
+<span id="cb14-4"><a href="#cb14-4" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span> <span class="op">(</span>stud <span class="op">&lt;</span> NSTUD<span class="op">){</span></span>
+<span id="cb14-5"><a href="#cb14-5" aria-hidden="true" tabindex="-1"></a>            printf<span class="op">(</span><span class="st">&quot;%d&quot;</span><span class="op">,</span>stud<span class="op">);</span></span>
+<span id="cb14-6"><a href="#cb14-6" aria-hidden="true" tabindex="-1"></a>            stud<span class="op">++;</span></span>
+<span id="cb14-7"><a href="#cb14-7" aria-hidden="true" tabindex="-1"></a>            <span class="cf">continue</span><span class="op">;</span></span>
+<span id="cb14-8"><a href="#cb14-8" aria-hidden="true" tabindex="-1"></a>        <span class="op">}</span></span>
+<span id="cb14-9"><a href="#cb14-9" aria-hidden="true" tabindex="-1"></a>        <span class="cf">break</span><span class="op">;</span></span>
+<span id="cb14-10"><a href="#cb14-10" aria-hidden="true" tabindex="-1"></a>    <span class="op">}</span></span>
+<span id="cb14-11"><a href="#cb14-11" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code></pre></div>
+<p>Loops can also be nested as usual.</p>
+<h3 id="while-loops">While loops</h3>
+<div class="sourceCode" id="cb15"><pre class="sourceCode c"><code class="sourceCode c"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="dt">int</span> main<span class="op">(){</span></span>
+<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a>    <span class="dt">int</span> iterator<span class="op">;</span></span>
+<span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a>    <span class="cf">while</span> <span class="op">(</span>iterator <span class="op">=</span> <span class="dv">0</span><span class="op">;</span> <span class="co">/*some condition*/</span><span class="op">){</span></span>
+<span id="cb15-4"><a href="#cb15-4" aria-hidden="true" tabindex="-1"></a>        <span class="co">//do some shit</span></span>
+<span id="cb15-5"><a href="#cb15-5" aria-hidden="true" tabindex="-1"></a>        iterator<span class="op">++;</span></span>
+<span id="cb15-6"><a href="#cb15-6" aria-hidden="true" tabindex="-1"></a>    <span class="op">}</span></span>
+<span id="cb15-7"><a href="#cb15-7" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code></pre></div>
+<p>This can also be written as</p>
+<div class="sourceCode" id="cb16"><pre class="sourceCode c"><code class="sourceCode c"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="dt">int</span> main<span class="op">(){</span></span>
+<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a>    <span class="dt">int</span> iterator <span class="op">=</span> <span class="dv">0</span><span class="op">;</span></span>
+<span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a>    <span class="cf">while</span> <span class="op">(</span>iterator<span class="op">++</span> <span class="op">&lt;=</span> <span class="dv">10</span><span class="op">){</span></span>
+<span id="cb16-4"><a href="#cb16-4" aria-hidden="true" tabindex="-1"></a>        <span class="co">//do some shit</span></span>
+<span id="cb16-5"><a href="#cb16-5" aria-hidden="true" tabindex="-1"></a>    <span class="op">}</span></span>
+<span id="cb16-6"><a href="#cb16-6" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code></pre></div>
+<p>This utilises the properties of postincrement operator.</p>
+<ul>
+<li>iterator cannot be declared inside <code>while</code></li>
+<li><code>for</code> and <code>while</code> are the same in backend</li>
+</ul>
+<h3 id="do-while-loop">Do-while loop</h3>
+<p>It is possible the while doesn’t even execute once. Use do while if the first iteration is known to happen in all scenarios.</p>
+<div class="sourceCode" id="cb17"><pre class="sourceCode c"><code class="sourceCode c"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="dt">int</span> main<span class="op">(){</span></span>
+<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a>    <span class="dt">int</span> iterator <span class="op">=</span> <span class="dv">0</span><span class="op">;</span></span>
+<span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a>    <span class="cf">do</span><span class="op">{</span></span>
+<span id="cb17-4"><a href="#cb17-4" aria-hidden="true" tabindex="-1"></a>        <span class="co">//do some shit</span></span>
+<span id="cb17-5"><a href="#cb17-5" aria-hidden="true" tabindex="-1"></a>        iterator<span class="op">++;</span></span>
+<span id="cb17-6"><a href="#cb17-6" aria-hidden="true" tabindex="-1"></a>    <span class="op">}</span> <span class="cf">while</span> <span class="op">(</span>iterator <span class="op">!=</span> <span class="dv">0</span><span class="op">);</span></span>
+<span id="cb17-7"><a href="#cb17-7" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code></pre></div>
+<p>If an equivalent <code>while</code> loop would have been written it would have never executed.</p>
+<h2 id="functions">Functions</h2>
+<div class="sourceCode" id="cb18"><pre class="sourceCode c"><code class="sourceCode c"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a><span class="dt">int</span> myfunc<span class="op">(</span><span class="dt">int</span> x<span class="op">);</span> <span class="co">//function prototype / declaration</span></span>
+<span id="cb18-3"><a href="#cb18-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-4"><a href="#cb18-4" aria-hidden="true" tabindex="-1"></a><span class="dt">int</span> myfunc<span class="op">(</span><span class="dt">int</span> a<span class="op">){</span></span>
+<span id="cb18-5"><a href="#cb18-5" aria-hidden="true" tabindex="-1"></a>    <span class="co">//do some shit</span></span>
+<span id="cb18-6"><a href="#cb18-6" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> val<span class="op">;</span></span>
+<span id="cb18-7"><a href="#cb18-7" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span>
+<span id="cb18-8"><a href="#cb18-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-9"><a href="#cb18-9" aria-hidden="true" tabindex="-1"></a><span class="dt">int</span> main<span class="op">(){</span></span>
+<span id="cb18-10"><a href="#cb18-10" aria-hidden="true" tabindex="-1"></a>    <span class="co">//do some shit</span></span>
+<span id="cb18-11"><a href="#cb18-11" aria-hidden="true" tabindex="-1"></a>    <span class="dt">int</span> c <span class="op">=</span> myfunc<span class="op">(</span>b<span class="op">);</span></span>
+<span id="cb18-12"><a href="#cb18-12" aria-hidden="true" tabindex="-1"></a>    <span class="co">//do some shit</span></span>
+<span id="cb18-13"><a href="#cb18-13" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code></pre></div>
+<p>Usually it is a good programming practice to have a header file that contains the definitions of functions used along with a comment gitving its function (pun intended), and a separate file containing the function itself (the function is not redefined unless you put a semicolon at its end).</p>
+<blockquote>
+<p>Format of a function: <code>return-value-type function-name(parameter-list);</code> Parameter list is a comma separated list of values that have to be taken as input.</p>
+</blockquote>
+<p>We can return <code>void</code> from a function that doesn’t have to return a value, but just perform operations.</p>
+<p>Arrays cannot be returned by a function unless the array is declared globally or made global by the use of <code>extern</code> (deprecated) keyword.</p>
+<p>To take an array as an input, simply pass the pointer to its first element and keep incrementing its pointer to access further elements. However, C performs no checks for illegal access if the pointer crosses the array length. It is a good practice for us to pass pointers to arrays along with their lengths as functions.</p>
+<h2 id="compiler-process">Compiler Process</h2>
+<dl>
+<dt>gcc</dt>
+<dd>GNU C Compiler
+</dd>
+</dl>
+<pre><code>c=&gt;preprocessed file=&gt;IR=&gt;Assembly Language(.s)=&gt;.o=&gt;Machine Code (0&amp;1)</code></pre>
+<div class="sourceCode" id="cb20"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a><span class="va">$gcc</span> <span class="at">-E</span> file.c <span class="co">#This gives the preprocessed file</span></span>
+<span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-3"><a href="#cb20-3" aria-hidden="true" tabindex="-1"></a><span class="va">$gcc</span> <span class="at">-S</span> file.c <span class="co">#This produces the assembly file</span></span>
+<span id="cb20-4"><a href="#cb20-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-5"><a href="#cb20-5" aria-hidden="true" tabindex="-1"></a><span class="va">$gcc</span> <span class="at">-c</span> file.c <span class="co">#This gives the machine code</span></span></code></pre></div>
+<p><code>gcc hello.c</code> compiles the code.</p>
+<p><code>a.out</code> or <code>./a.out</code> executes the code.</p>
+<hr />
+<h1 id="c-1">C++</h1>
+<div class="epigraph">
+<blockquote>
+C++ is a horrible language. It’s made more horrible by the fact that a lot of substandard programmers use it, to the point where it’s much much easier to generate total and utter crap with it.
+<footer>
+Linus Torvalds, <cite>Message to gmane.comp.version-control.git mailing list</cite>
+</footer>
+</blockquote>
+</div>
+<blockquote>
+<p>Any valid C code is for most part also a valid C++ code. Some differences exist and they can be found by comparing <a href="https://devdocs.io/cpp/">this</a> and <a href="https://devdocs.io/c/">this</a>.</p>
+</blockquote>
+<h2 id="basic-structure-1">basic structure</h2>
+<p>The syntax structure is quite similar to C.</p>
+<div class="sourceCode" id="cb21"><pre class="sourceCode c++"><code class="sourceCode cpp"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a><span class="pp">#include </span><span class="im">&lt;iostream&gt;</span></span>
+<span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb21-3"><a href="#cb21-3" aria-hidden="true" tabindex="-1"></a><span class="kw">using</span> <span class="kw">namespace</span> std<span class="op">;</span></span>
+<span id="cb21-4"><a href="#cb21-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb21-5"><a href="#cb21-5" aria-hidden="true" tabindex="-1"></a><span class="dt">int</span> main<span class="op">(){</span></span>
+<span id="cb21-6"><a href="#cb21-6" aria-hidden="true" tabindex="-1"></a>    cout <span class="op">&lt;&lt;</span> <span class="st">&quot;lorem ipsum&quot;</span> <span class="op">&lt;&lt;</span> endl<span class="op">;</span></span>
+<span id="cb21-7"><a href="#cb21-7" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> <span class="dv">0</span><span class="op">;</span></span>
+<span id="cb21-8"><a href="#cb21-8" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code></pre></div>
+<p>Preprocessor directives work the same as in C.</p>
+<h2 id="io">IO</h2>
+<p><code>iostream</code> is the header file responsible for input and output. <code>std</code> is the namespace for <code>cout</code> object which is <strong>normally</strong> connected to the screen. <code>&lt;&lt;</code> is the <em>stream insertion operator</em>. <code>endl</code> is equivalent to <code>"\n" &lt;&lt; flush</code>. What this basically means is that a newline escape character is inserted into the stream and the output that was buffered in the memory was expelled onto the the screen.</p>
+<blockquote>
+<p>C++ buffers it because printing is an expensive task for memory and CPU.</p>
+</blockquote>
+<div class="epigraph">
+<blockquote>
+I made up the term ‘object-oriented’, and I can tell you I didn’t have C++ in mind.
+<footer>
+Alan Kay, <cite>OOPSLA ’97</cite>
+</footer>
+</blockquote>
+</div>
+<h2 id="variables">variables</h2>
+<div class="sourceCode" id="cb22"><pre class="sourceCode c++"><code class="sourceCode cpp"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a><span class="dt">char</span> grade1<span class="op">,</span> grade2<span class="op">;</span></span>
+<span id="cb22-2"><a href="#cb22-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-3"><a href="#cb22-3" aria-hidden="true" tabindex="-1"></a>grade1 <span class="op">=</span> <span class="ch">&#39;A&#39;</span></span></code></pre></div>
+<h2 id="datatypes">Datatypes</h2>
+<h4 id="strings">Strings</h4>
+<p><code>char</code> Use ’’. Single character.</p>
+<p><code>string</code></p>
+<div class="sourceCode" id="cb23"><pre class="sourceCode c++"><code class="sourceCode cpp"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a>string<span class="op">.</span>length<span class="op">()</span></span>
+<span id="cb23-2"><a href="#cb23-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb23-3"><a href="#cb23-3" aria-hidden="true" tabindex="-1"></a>string<span class="op">.</span>substr<span class="op">(</span>starting index<span class="op">,</span> length<span class="op">)</span></span>
+<span id="cb23-4"><a href="#cb23-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb23-5"><a href="#cb23-5" aria-hidden="true" tabindex="-1"></a>string<span class="op">[</span>index<span class="op">]</span> <span class="op">=</span> <span class="dt">char</span></span>
+<span id="cb23-6"><a href="#cb23-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb23-7"><a href="#cb23-7" aria-hidden="true" tabindex="-1"></a>string<span class="op">.</span>find<span class="op">(</span>substring<span class="op">,</span> from which index to look<span class="op">)</span></span></code></pre></div>
+<h4 id="numbers">Numbers:</h4>
+<p><code>int</code></p>
+<p><code>double</code></p>
+<p>Values with decimals. More precise than float.</p>
+<p><code>float</code></p>
+<div class="sourceCode" id="cb24"><pre class="sourceCode c++"><code class="sourceCode cpp"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a>numeric<span class="op">++;</span> <span class="co">// increase variable value by 1</span></span>
+<span id="cb24-2"><a href="#cb24-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb24-3"><a href="#cb24-3" aria-hidden="true" tabindex="-1"></a>numeric <span class="op">+=</span> <span class="dv">80</span><span class="op">;</span></span></code></pre></div>
+<blockquote>
+<p>Math between two integers always gives integer only in return</p>
+</blockquote>
+<p><code>10/3 = 3</code> but, <code>10.0/3 = 3.33333</code></p>
+<div class="sourceCode" id="cb25"><pre class="sourceCode c++"><code class="sourceCode cpp"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a><span class="pp">#include  </span><span class="im">&lt;cmath&gt;</span></span>
+<span id="cb25-2"><a href="#cb25-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-3"><a href="#cb25-3" aria-hidden="true" tabindex="-1"></a>pow<span class="op">(</span><span class="dv">3</span><span class="op">,</span><span class="dv">4</span><span class="op">);</span> <span class="op">=</span> <span class="dv">3</span><span class="op">^</span><span class="dv">4</span></span>
+<span id="cb25-4"><a href="#cb25-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-5"><a href="#cb25-5" aria-hidden="true" tabindex="-1"></a>sqrt<span class="op">(</span><span class="dv">35</span><span class="op">)=</span><span class="fl">5.91608</span></span>
+<span id="cb25-6"><a href="#cb25-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-7"><a href="#cb25-7" aria-hidden="true" tabindex="-1"></a>round<span class="op">(</span><span class="fl">4.5</span><span class="op">)</span> <span class="op">=</span> <span class="dv">5</span></span>
+<span id="cb25-8"><a href="#cb25-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-9"><a href="#cb25-9" aria-hidden="true" tabindex="-1"></a>ceil<span class="op">(</span><span class="fl">4.3</span><span class="op">)</span> <span class="op">=</span> <span class="dv">5</span></span>
+<span id="cb25-10"><a href="#cb25-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-11"><a href="#cb25-11" aria-hidden="true" tabindex="-1"></a>floor<span class="op">(</span><span class="fl">4.6</span><span class="op">)</span> <span class="op">=</span> <span class="dv">4</span></span>
+<span id="cb25-12"><a href="#cb25-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-13"><a href="#cb25-13" aria-hidden="true" tabindex="-1"></a>fmax<span class="op">(</span>number<span class="op">,</span> number<span class="op">)</span></span>
+<span id="cb25-14"><a href="#cb25-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-15"><a href="#cb25-15" aria-hidden="true" tabindex="-1"></a>fmin<span class="op">(</span>number<span class="op">,</span> number<span class="op">)</span></span></code></pre></div>
+<h4 id="arrays-1">Arrays:</h4>
+<div class="sourceCode" id="cb26"><pre class="sourceCode c++"><code class="sourceCode cpp"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a><span class="dt">int</span> nums<span class="op">[]</span> <span class="op">=</span> <span class="op">{</span><span class="dv">4</span><span class="op">,</span> <span class="dv">53</span><span class="op">,</span> <span class="dv">5</span><span class="op">,</span> <span class="dv">553</span><span class="op">,</span> <span class="dv">3</span><span class="op">}</span></span>
+<span id="cb26-2"><a href="#cb26-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb26-3"><a href="#cb26-3" aria-hidden="true" tabindex="-1"></a>nums<span class="op">[</span><span class="dv">1</span><span class="op">]</span> <span class="op">=</span> <span class="dv">2</span>  \\ but length can’t be changed</span>
+<span id="cb26-4"><a href="#cb26-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb26-5"><a href="#cb26-5" aria-hidden="true" tabindex="-1"></a><span class="dt">int</span> nums<span class="op">[</span><span class="dv">10</span><span class="op">]</span> <span class="op">=</span> <span class="op">{</span><span class="dv">2</span><span class="op">,</span> <span class="dv">3</span><span class="op">}</span> \\ till <span class="dv">10</span><span class="er">th</span> index<span class="op">;</span> last <span class="dv">8</span> would be <span class="dv">0</span></span>
+<span id="cb26-6"><a href="#cb26-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb26-7"><a href="#cb26-7" aria-hidden="true" tabindex="-1"></a>nums<span class="op">[</span><span class="dv">9</span><span class="op">]</span> <span class="op">=</span> <span class="dv">5</span></span>
+<span id="cb26-8"><a href="#cb26-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb26-9"><a href="#cb26-9" aria-hidden="true" tabindex="-1"></a><span class="dt">int</span> nums<span class="op">[</span><span class="dv">15</span><span class="op">];</span> \\ leads to an error</span></code></pre></div>
+<h2 id="input">Input:</h2>
+<div class="sourceCode" id="cb27"><pre class="sourceCode c++"><code class="sourceCode cpp"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a>string name<span class="op">;</span></span>
+<span id="cb27-2"><a href="#cb27-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb27-3"><a href="#cb27-3" aria-hidden="true" tabindex="-1"></a>cout <span class="op">&lt;&lt;</span> “Enter your name<span class="op">:-</span> ”<span class="op">;</span> \\ Prince Garg</span>
+<span id="cb27-4"><a href="#cb27-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb27-5"><a href="#cb27-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb27-6"><a href="#cb27-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb27-7"><a href="#cb27-7" aria-hidden="true" tabindex="-1"></a>cin <span class="op">&gt;&gt;</span> name<span class="op">;</span></span>
+<span id="cb27-8"><a href="#cb27-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb27-9"><a href="#cb27-9" aria-hidden="true" tabindex="-1"></a>cout <span class="op">&lt;&lt;</span> “your name is ” <span class="op">&lt;&lt;</span> name<span class="op">;</span> \\ your name is Prince Garg</span></code></pre></div>
+<p>but with</p>
+<pre><code>getline(cin, name);
+
+cout &lt;&lt; “your name is ” &lt;&lt; name; =&gt; Prince Garg</code></pre>
+<pre><code>functions:-</code></pre>
+<p>void FuncName(DataType VarName *if func wants to input any data seperated by comma) =&gt; void means that function won’t return anything</p>
+<p>{</p>
+<pre><code>cmd lines to execute</code></pre>
+<p>}</p>
+<p>int main() =&gt; func executed by default</p>
+<p>{</p>
+<pre><code>FuncName(VarValue1, VarValue2);  =&gt; calling a function
+
+return 0;</code></pre>
+<p>}</p>
+<p>additional functions must be declared before the main func. else error. to bypass need to specify the func. above like:-</p>
+<p>void FuncName(DataTypes Variables);</p>
+<pre><code>Return:-</code></pre>
+<p>if function has to return also then</p>
+<p>DataType_to_be_returned function_name()</p>
+<p>{</p>
+<p>}</p>
+<p>return function break out of the function any cmd line below it would not be executed</p>
+<pre><code>If:-</code></pre>
+<p>if(condition){</p>
+<p>} else if(condition){ =&gt; can be on next line also</p>
+<p>} else{</p>
+<p>}</p>
+<p>and = &amp;&amp; =&gt; can also write “and”</p>
+<p>or = ||</p>
+<p>not = !</p>
+<pre><code>Comparison:-</code></pre>
+<p>&lt;</p>
+<blockquote>
+
+</blockquote>
+<p>==</p>
+<blockquote>
+<p>=</p>
+</blockquote>
+<p>&lt;=</p>
+<p>!=</p>
+<pre><code>Switch:-</code></pre>
+<p>switch(num){</p>
+<pre><code>case 0:   =&gt;if num==0
+
+commands
+
+break;     =&gt; else will check on next case 
+
+
+
+default:   =&gt; if no case matches
+
+commands</code></pre>
+<p>}</p>
+<pre><code>While:-</code></pre>
+<p>int index = 1;</p>
+<p>while(condition){</p>
+<pre><code>commands
+
+index ++;</code></pre>
+<p>}</p>
+<pre><code>do while:-</code></pre>
+<p>do{</p>
+<pre><code>commands
+
+index++;</code></pre>
+<p>}while(condition);</p>
+<p>first execute and then check the condition</p>
+<pre><code>For Loop:-</code></pre>
+<p>for(create variable; looping condition; command after each iteration){</p>
+<pre><code>commands</code></pre>
+<p>}</p>
+<p>example-</p>
+<p>for(int i = 1 ; i &lt;= 5 ; i++0{</p>
+<pre><code>cout &lt;&lt; i &lt;&lt;  endl ;</code></pre>
+<p>}</p>
+<pre><code>2D Array:-</code></pre>
+<p>int NumGrid[rows][columns] = {</p>
+<pre><code>                        {1, 2},
+
+                        {2, 3},
+
+                        {3, 4}
+
+                        };</code></pre>
+<p>=&gt;(here rows = 3, columns = 2)</p>
+<p>similarly n-dimensional arrays</p>
+<pre><code>Comments:-</code></pre>
+<p>// this text will be ignored(single line)</p>
+<p>/* this</p>
+<p>text will also be</p>
+<p>ignored */</p>
+<pre><code>Pointers:-</code></pre>
+<p>they are just the physical memory address of any variable</p>
+<p>int Age = 18;</p>
+<p>int *pAge = &amp;Age;</p>
+<p>cout &lt;&lt; pAge; =&gt; cout &lt;&lt; &amp;Age; =&gt; displays the physical address of the variable Age</p>
+<p>cout &lt;&lt; *pAge =&gt; displays the value of variable Age = 18 =&gt; called dereferencing a pointer</p>
+<p>Age == *&amp;Age</p>
+<p>pAge == &amp;Age</p>
+<pre><code>Classes and Objects:-</code></pre>
+<p>a class is basically a new datatype</p>
+<p>object is the actual variable that use that datatype</p>
+<p>class Book{</p>
+<pre><code>public:
+
+    string name;
+
+    string author;
+
+    int pages;
+
+
+
+    Book(){
+
+
+
+    }
+
+
+
+    Book(string aname, .. ){   =&gt; Constructors
+
+        string name = aname;
+
+    }
+
+
+
+    bool MorePages(){  =&gt; function named MorePages inside class
+
+        if(pages &gt; 500){
+
+            return true;
+
+        }
+
+        return false
+
+    }</code></pre>
+<p>}; =&gt; creates a book datatype which can store its name, author and no. of pages</p>
+<p>Constructors are executed each time the object is created</p>
+<p>we can create as many constructors as we want</p>
+<p>int main(){</p>
+<pre><code>Book book1;
+
+book1.name = “Harry Potter”;
+
+book1.author = “JK Rollings”;
+
+book1.pages = 400;
+
+
+
+        OR
+
+
+
+Book book1(“Harry Potter”, “JK Rollings”, 400);
+
+
+
+Book book2(“Lord of the rings” , “author” , 700);
+
+
+
+//book1.name = “Lord of the Rings”;
+
+cout &lt;&lt; book1.name ;
+
+
+
+cout &lt;&lt; book1.MorePages();  =&gt; calling the function</code></pre>
+<p>}</p>
+<p>above Class = Book</p>
+<p>object = book1</p>
+<p>example 2- Setters and Getters</p>
+<p>class Movie{</p>
+<pre><code>private :  =&gt; cmds underneath can only be accessed inside this class
+
+    string rating;
+
+public :    =&gt; cmds underneath can be accessed from anywhere
+
+    string name;
+
+    string director;
+
+
+
+    Movie(string aName, string aDirector, string aRating){
+
+        name = aName;
+
+        director = aDirector;
+
+        setRating(aRating);
+
+    }
+
+    void setRating(string aRating){   =&gt; Setter
+
+        if (aRating == “A” || aRating == “B” || aRating == “C” || aRating == “D” || aRating == “E”){
+
+            rating = aRating;
+
+        } else {
+
+            rating = “NR”
+
+        }
+
+    }
+
+
+
+    string getRating(){
+
+        return rating;
+
+    }</code></pre>
+<p>};</p>
+<pre><code>Inheritance:-</code></pre>
+<p>class Physics : public Book{ =&gt;physics class can do everything the book class can now</p>
+<pre><code>public :  =&gt; can do much more
+
+    string difficulty;
+
+
+
+    bool MorePages(){  =&gt; can also overwrite previously declared functions
+
+        if(pages&gt;300){
+
+            return true;
+
+        }
+
+        return false;
+
+    }</code></pre>
+<p>};</p>
+<p>convert any datatype to string =&gt;</p>
+<p>#include <string></p>
+<p>…</p>
+<pre><code>string str = to_string(num);</code></pre>
+</body>
+</html>
