@@ -62,7 +62,7 @@ blockquote{
  
 pre {
     background-color: #111111;
-    overflow: auto;
+    white-space: pre-wrap;
     font-family: "Fira-Code", monospace;
     font-variant-ligatures: normal;
     padding: 0 1em;
@@ -85,6 +85,7 @@ code {
     border-radius: 10px;
     word-wrap: break-word; 
     overflow-wrap: break-word; 
+    white-space: pre-wrap;
   }
 
 
@@ -98,6 +99,7 @@ pre code {
     word-break: break-all;
     word-wrap: break-word; 
     overflow-wrap: break-word; 
+    white-space: pre-wrap;
   }
 
 table th,table td {
