@@ -37,27 +37,26 @@ dt {
     background-repeat: no-repeat, no-repeat, repeat-x;
     text-shadow: 0.03em 0 #181818, -0.03em 0 #181818, 0 0.03em #181818, 0 -0.03em #181818, 0.06em 0 #181818, -0.06em 0 #181818, 0.09em 0 #181818, -0.09em 0 #181818, 0.12em 0 #181818, -0.12em 0 #181818, 0.15em 0 #181818, -0.15em 0 #181818;
     background-position: 0% 53%, 100% 53%, 0% 75%;
-    
 }
 
-blockquote p::before{
- content: "";
- display: block;
- position: absolute;
- top: 0;
- bottom: 0;
- left: 0;
- width: 4px;
- border-radius: 8px;
- background: #c8ccd0;
- }
+blockquote p::before {
+    content: "";
+    display: block;
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    width: 4px;
+    border-radius: 8px;
+    background: #c8ccd0;
+}
 
 
-blockquote{
- color:#535a60;
- padding:.8em .8em .8em 1em;
- position: relative;
- }
+blockquote {
+    color:#535a60;
+    padding:.8em .8em .8em 1em;
+    position: relative;
+}
 
 pre {
     background-color: #111111;
@@ -70,13 +69,12 @@ pre {
     word-wrap: break-word; 
     overflow-wrap: break-word; 
     white-space: pre-wrap;
- }
+}
 
 
 code {
     font-family:"Fira-Code", monospace;
     font-variant-ligatures: normal;
-    font-size: $base-font-size;
     line-height: 100%;
     background-color: #111111;
     padding: 0.2em;
@@ -87,13 +85,12 @@ code {
     word-wrap: break-word; 
     overflow-wrap: break-word; 
     white-space: pre-wrap;
- }
+}
 
 
 pre code {
     border: none;
     background: none;
-    font-size: $base-font-size * 0.875;
     font-family: "Fira-Code", monospace;
     line-height: 1em;
     letter-spacing: normal;
@@ -102,59 +99,61 @@ pre code {
     word-wrap: break-word; 
     overflow-wrap: break-word; 
     white-space: pre-wrap;
- }
+}
 
 table th,table td {
-  border: 1px white;
-  border-style: solid;
- }
+    border: 1px white;
+    border-style: solid;
+}
 
 table {
-  width: 100%;
- }
+    width: 100%;
+}
 
 th:first-of-type {
-  border-top-left-radius: 10px;
- }
+    border-top-left-radius: 10px;
+}
+
 th:last-of-type {
-  border-top-right-radius: 10px;
- }
+    border-top-right-radius: 10px;
+}
+
 tr:last-of-type td:first-of-type {
-  border-bottom-left-radius: 10px;
- }
+    border-bottom-left-radius: 10px;
+}
+
 tr:last-of-type td:last-of-type {
-  border-bottom-right-radius: 10px;
- }
+    border-bottom-right-radius: 10px;
+}
 
 .texthighlight{
-  color: black;
-  background-color: #FFFF00;
-  padding: 0.2em;
-  line-height: 1em;
-  border-radius: 10px;
- }
+    color: black;
+    background-color: #FFFF00;
+    padding: 0.2em;
+    line-height: 1em;
+    border-radius: 10px;
+}
 
 /* Chapter Epigraphs */
 div.epigraph {
     margin: 5em 0;
- }
+}
 
 div.epigraph > blockquote {
     margin-top: 3em;
     margin-bottom: 3em;
- }
+}
 
 div.epigraph > blockquote:before{
- position: absolute;
- /* -- inside the relative position of blockquote -- */
- top: 1px;
- color: #E8E8E8;
- font-size: 44px;
- content: "\275d";
- margin-right: 13px;
- margin-top: -13px;
- right: 100%;
- }
+    position: absolute;
+    top: 1px;
+    color: #E8E8E8;
+    font-size: 44px;
+    content: "\275d";
+    margin-right: 13px;
+    margin-top: -13px;
+    right: 100%;
+}
 
 
 .epigraph > blockquote,
