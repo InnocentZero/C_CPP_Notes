@@ -59,19 +59,18 @@ blockquote{
  position: relative;
  }
 
- 
 pre {
     background-color: #111111;
     font-family: "Fira-Code", monospace;
     font-variant-ligatures: normal;
     padding: 0 1em;
     border-radius: 10px;
-    inline-size: 90%;
+    inline-size: 10%;
     word-break: break-all;
     word-wrap: break-word; 
     overflow-wrap: break-word; 
     white-space: pre-wrap;
-  }
+ }
 
 
 code {
@@ -83,12 +82,12 @@ code {
     padding: 0.2em;
     letter-spacing: -0.05em;
     border-radius: 10px;
-    inline-size: 90%;
+    inline-size: 10%;
     word-break: break-all;
     word-wrap: break-word; 
     overflow-wrap: break-word; 
     white-space: pre-wrap;
-  }
+ }
 
 
 pre code {
@@ -98,62 +97,63 @@ pre code {
     font-family: "Fira-Code", monospace;
     line-height: 1em;
     letter-spacing: normal;
-    inline-size: 90%;
+    inline-size: 10%;
     word-break: break-all;
     word-wrap: break-word; 
     overflow-wrap: break-word; 
     white-space: pre-wrap;
-  }
+ }
 
 table th,table td {
   border: 1px white;
   border-style: solid;
-}
+ }
+
 table {
   width: 100%;
-}
+ }
 
 th:first-of-type {
   border-top-left-radius: 10px;
-}
+ }
 th:last-of-type {
   border-top-right-radius: 10px;
-}
+ }
 tr:last-of-type td:first-of-type {
   border-bottom-left-radius: 10px;
-}
+ }
 tr:last-of-type td:last-of-type {
   border-bottom-right-radius: 10px;
-}
+ }
 
 .texthighlight{
   color: black;
   background-color: #FFFF00;
   padding: 0.2em;
   line-height: 1em;
-    border-radius: 10px;
-}
+  border-radius: 10px;
+ }
 
 /* Chapter Epigraphs */
 div.epigraph {
     margin: 5em 0;
-}
+ }
 
 div.epigraph > blockquote {
     margin-top: 3em;
     margin-bottom: 3em;
-}
+ }
 
 div.epigraph > blockquote:before{
-     position: absolute;
-     /* -- inside the relative position of blockquote -- */
-     top: 1px;
-     color: #E8E8E8;
-     font-size: 44px;
-     content: "\275d";
-     margin-right: 13px;
-     margin-top: -13px;
-     right: 100%;
+ position: absolute;
+ /* -- inside the relative position of blockquote -- */
+ top: 1px;
+ color: #E8E8E8;
+ font-size: 44px;
+ content: "\275d";
+ margin-right: 13px;
+ margin-top: -13px;
+ right: 100%;
  }
 
 
