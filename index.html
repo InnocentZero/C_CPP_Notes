@@ -632,22 +632,132 @@ Linus Torvalds, <cite>Message to gmane.comp.version-control.git mailing list</ci
 <blockquote>
 <p>Any valid C code is for most part also a valid C++ code. Some differences exist and they can be found by comparing <a href="https://devdocs.io/cpp/">this</a> and <a href="https://devdocs.io/c/">this</a>.</p>
 </blockquote>
-<h2 id="basic-structure-1">basic structure</h2>
-<p>The syntax structure is quite similar to C.</p>
+<h2 id="basic-structure-1">Basic Structure</h2>
+<blockquote>
+<p><code>#include &lt;iostream&gt;</code>: searches only in the main directory.</p>
+</blockquote>
+<blockquote>
+<p><code>#incude “iostream”</code> : searches in both the current and the main directory.</p>
+</blockquote>
+<p><code>#</code> indicates to open iostream first and then compile the rest of the code. This is called a <span class="texthighlight">preprocessor directive.</span></p>
+<p><code>#define a1 a2</code>: Preprocessor replaces every instance of a1 with a2 literally. <code>a1</code> has to be a valid variable.</p>
+<blockquote>
+<p><code>#define</code> is a macro as it rewrites portions of the code before compilation.</p>
+</blockquote>
 <div class="sourceCode" id="cb21"><pre class="sourceCode c++"><code class="sourceCode cpp"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a><span class="pp">#include </span><span class="im">&lt;iostream&gt;</span></span>
-<span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb21-3"><a href="#cb21-3" aria-hidden="true" tabindex="-1"></a><span class="kw">using</span> <span class="kw">namespace</span> std<span class="op">;</span></span>
-<span id="cb21-4"><a href="#cb21-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb21-5"><a href="#cb21-5" aria-hidden="true" tabindex="-1"></a><span class="dt">int</span> main<span class="op">(){</span></span>
-<span id="cb21-6"><a href="#cb21-6" aria-hidden="true" tabindex="-1"></a>    cout <span class="op">&lt;&lt;</span> <span class="st">&quot;lorem ipsum&quot;</span> <span class="op">&lt;&lt;</span> endl<span class="op">;</span></span>
-<span id="cb21-7"><a href="#cb21-7" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> <span class="dv">0</span><span class="op">;</span></span>
-<span id="cb21-8"><a href="#cb21-8" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code></pre></div>
-<p>Preprocessor directives work the same as in C.</p>
+<span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a><span class="pp">#define SQ</span><span class="op">(</span>x<span class="op">)</span><span class="pp"> </span>x<span class="op">*</span>x</span>
+<span id="cb21-3"><a href="#cb21-3" aria-hidden="true" tabindex="-1"></a><span class="dt">int</span> main<span class="op">(</span><span class="dt">void</span><span class="op">){</span></span>
+<span id="cb21-4"><a href="#cb21-4" aria-hidden="true" tabindex="-1"></a>    cout <span class="op">&lt;&lt;</span> SQ<span class="op">(</span><span class="dv">2</span><span class="op">*</span><span class="dv">3</span><span class="op">)</span> <span class="op">&lt;&lt;</span> endl<span class="op">;</span></span>
+<span id="cb21-5"><a href="#cb21-5" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code></pre></div>
+<p>The above code will print 11 and not 25 because the compiler interprets it as <code>2 + 3*2 + 3</code> instead of <code>(2+3)*(2+3)</code>. To solve this use <code>#define SQ(x) (x)*(x)</code> or use <code>SQ((2+3))</code>.</p>
+<p><code>#include &lt;climits&gt;</code> is for including all the limits in the compiler.</p>
+<div class="sourceCode" id="cb22"><pre class="sourceCode c++"><code class="sourceCode cpp"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a><span class="dt">int</span> main<span class="op">(</span>arguments<span class="op">){</span></span>
+<span id="cb22-2"><a href="#cb22-2" aria-hidden="true" tabindex="-1"></a>    cout <span class="op">&lt;&lt;</span> “Hello World<span class="op">!</span>” <span class="op">&lt;&lt;</span> endl<span class="op">;</span>     </span>
+<span id="cb22-3"><a href="#cb22-3" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code></pre></div>
+<p><code>main</code> function is the first one to be called, regardless of the order in which the functions are written. This can be overridden by <code>#pragma</code>, another preprocessor directive that works as instructions to the compiler. Some compilers only allow <code>main</code> to return an <code>int</code>.</p>
 <h2 id="io">IO</h2>
 <p><code>iostream</code> is the header file responsible for input and output. <code>std</code> is the namespace for <code>cout</code> object which is <strong>normally</strong> connected to the screen. <code>&lt;&lt;</code> is the <em>stream insertion operator</em>. <code>endl</code> is equivalent to <code>"\n" &lt;&lt; flush</code>. What this basically means is that a newline escape character is inserted into the stream and the output that was buffered in the memory was expelled onto the the screen.</p>
 <blockquote>
 <p>C++ buffers it because printing is an expensive task for memory and CPU.</p>
 </blockquote>
+<h2 id="data-types-1">Data Types</h2>
+<ul>
+<li><code>int</code>: Integer. At least as large as <code>short</code>. Usually 32 bits.</li>
+<li><code>short</code>: Short integer. Usually 16 bits.</li>
+<li><code>long</code>: Long integer. At least as large as <code>int</code>. Usually 32 bits.</li>
+<li><code>long long</code>: Very long integer. At least as large as <code>long</code>. Usually 64 bits.</li>
+</ul>
+<blockquote>
+<p>All these use <a href="https://en.wikipedia.org/wiki/Two%27s_complement">two’s compliment</a>.</p>
+</blockquote>
+<ul>
+<li><code>unsigned int</code>: Unsigned integer. At least as large as <code>unsigned short</code>. Usually 32 bits.</li>
+<li><code>unsigned short</code>: Unsigned short integer. Usually 16 bits.</li>
+<li><code>unsigned long</code>: Unsigned long integer. At least as large as <code>unsigned int</code>. Usually 32 bits.</li>
+<li><code>unsigned long long</code>: Unsigned very long integer. At least as large as <code>unsigned long</code>. Usually 64 bits.</li>
+</ul>
+<blockquote>
+<p>Same sizes as above; only that the ranges are modified and 2’s compliment is absent.</p>
+</blockquote>
+<ul>
+<li><code>signed char</code>: -128 to 127. ASCII characters only. Can actually store upto 32 bits.</li>
+<li><code>unsigned char</code>: 0 to 255. ASCII characters only. Can actually store upto 32 bits.</li>
+</ul>
+<table>
+<thead>
+<tr class="header">
+<th style="text-align: center;">Escape Sequence</th>
+<th style="text-align: center;">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: center;">\n</td>
+<td style="text-align: center;">moves the cursor to the beginning of the next line</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">\t</td>
+<td style="text-align: center;">tab</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;">\r</td>
+<td style="text-align: center;">Carraige return. Moves the cursor to the beginning of the line.</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">\a</td>
+<td style="text-align: center;">Alerts the system bell</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;">\\</td>
+<td style="text-align: center;">Prints backslash</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">\"</td>
+<td style="text-align: center;">Prints double quotes</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;">\f</td>
+<td style="text-align: center;">Goes to the line immediately below the cursor and gives a space</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">\b</td>
+<td style="text-align: center;">Backspace</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;">\'</td>
+<td style="text-align: center;">single quote</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">\0</td>
+<td style="text-align: center;">Null character; denotes end of string</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;">\v</td>
+<td style="text-align: center;">tab but in vertical direction</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">\?</td>
+<td style="text-align: center;">print a question mark</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;">\117</td>
+<td style="text-align: center;">Octal code for characters</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">\x45</td>
+<td style="text-align: center;">Hexadecimal code for characters</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;">\u20B9</td>
+<td style="text-align: center;">Unicode</td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li><p><code>float</code>: Floating point decimal number. Stores 32 bits.</p></li>
+<li><p><code>double</code>: Same as <code>float</code> except it stores 64 bits.</p></li>
+<li><p><code>long double</code>: Same as <code>double</code> except it stores 80 bits.</p></li>
+</ul>
 <div class="epigraph">
 <blockquote>
 I made up the term ‘object-oriented’, and I can tell you I didn’t have C++ in mind.
@@ -656,68 +766,113 @@ Alan Kay, <cite>OOPSLA ’97</cite>
 </footer>
 </blockquote>
 </div>
-<h2 id="variables">variables</h2>
-<div class="sourceCode" id="cb22"><pre class="sourceCode c++"><code class="sourceCode cpp"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a><span class="dt">char</span> grade1<span class="op">,</span> grade2<span class="op">;</span></span>
-<span id="cb22-2"><a href="#cb22-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb22-3"><a href="#cb22-3" aria-hidden="true" tabindex="-1"></a>grade1 <span class="op">=</span> <span class="ch">&#39;A&#39;</span></span></code></pre></div>
-<h2 id="datatypes">Datatypes</h2>
 <h4 id="strings">Strings</h4>
-<p><code>char</code> Use ’’. Single character.</p>
-<p><code>string</code></p>
-<div class="sourceCode" id="cb23"><pre class="sourceCode c++"><code class="sourceCode cpp"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a>string<span class="op">.</span>length<span class="op">()</span></span>
-<span id="cb23-2"><a href="#cb23-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb23-3"><a href="#cb23-3" aria-hidden="true" tabindex="-1"></a>string<span class="op">.</span>substr<span class="op">(</span>starting index<span class="op">,</span> length<span class="op">)</span></span>
+<p>Strings in C++ are used to store text or sequences of characters. C++ supports both C style strings and strings as a class.</p>
+<div class="sourceCode" id="cb23"><pre class="sourceCode c++"><code class="sourceCode cpp"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a><span class="pp">#include </span><span class="im">&lt;iostream&gt;</span></span>
+<span id="cb23-2"><a href="#cb23-2" aria-hidden="true" tabindex="-1"></a><span class="pp">#include </span><span class="im">&lt;string&gt;</span></span>
+<span id="cb23-3"><a href="#cb23-3" aria-hidden="true" tabindex="-1"></a><span class="kw">using</span> <span class="kw">namespace</span> std<span class="op">;</span></span>
 <span id="cb23-4"><a href="#cb23-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb23-5"><a href="#cb23-5" aria-hidden="true" tabindex="-1"></a>string<span class="op">[</span>index<span class="op">]</span> <span class="op">=</span> <span class="dt">char</span></span>
-<span id="cb23-6"><a href="#cb23-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb23-7"><a href="#cb23-7" aria-hidden="true" tabindex="-1"></a>string<span class="op">.</span>find<span class="op">(</span>substring<span class="op">,</span> from which index to look<span class="op">)</span></span></code></pre></div>
+<span id="cb23-5"><a href="#cb23-5" aria-hidden="true" tabindex="-1"></a><span class="co">//creating a new string using assignment</span></span>
+<span id="cb23-6"><a href="#cb23-6" aria-hidden="true" tabindex="-1"></a>string greeting1 <span class="op">=</span> <span class="st">&quot;Hello &quot;</span><span class="op">;</span></span>
+<span id="cb23-7"><a href="#cb23-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb23-8"><a href="#cb23-8" aria-hidden="true" tabindex="-1"></a><span class="co">//Creating a new string using the constructor</span></span>
+<span id="cb23-9"><a href="#cb23-9" aria-hidden="true" tabindex="-1"></a>string greeeting2<span class="op">(</span><span class="st">&quot;World&quot;</span><span class="op">);</span></span></code></pre></div>
+<p>There are various cons of using C-style strings:</p>
+<ul>
+<li>If allocated on the stack, it will always occupy a size you specify (a character occupies a byte assuming a byte is 8 bits long) no matter how long the text it contains is.</li>
+<li>If allocated on the heap (using malloc()) or on the Free Store (new char[]) you’re responsible for releasing the memory afterwards and you will always have the overhead of a heap allocation.</li>
+<li>If you copy a text of more than 256 chars into the array, it might crash, produce ugly assertion messages or cause unexplainable (mis-)behavior somewhere else in your program.</li>
+<li>To determine the text’s length, the array has to be scanned, character by character, for a \0 character.</li>
+<li>You need to check and handle oversized strings yourself else the code will be unsafe (looking at you <code>strcpy</code>).</li>
+</ul>
+<p>Pros of using C style strings:</p>
+<ul>
+<li>If it is a string literal, it is best to define it as a C style string since allocation on stack is much faster than heap.</li>
+<li>It will certainly be faster lookup wise and memory wise.</li>
+</ul>
+<p>There are issues with <code>std::string</code> as well:</p>
+<ul>
+<li>Two distinct STL string instances can not share the same underlying buffer. So if we pass a string by value you will always get a new copy- there is some performance penalty.</li>
+<li>Slower overall than stack allocated strings.</li>
+</ul>
+<p>However, the benefits are much more:</p>
+<ul>
+<li>Short strings of size 16 bytes (assuming 8 bits) or less are stored on the stack for faster access and less fragmentation of heap (or the Free Store).</li>
+<li>They can contain embedded ‘\0’ characters.</li>
+<li><code>string.size()</code> (or <code>string.length()</code>) have constant time complexity, unlike <code>strlen()</code>.</li>
+<li>Appending and inserting characters and text have linear time complexity with the object being added in contrast to strcat being linear in both the array being added to and the array being added.</li>
+</ul>
+<blockquote>
+<p>Note: add this ex <code>std::string myString = "Hello World"; const char *myStringChars = myString.c_str();</code></p>
+</blockquote>
+<div class="sourceCode" id="cb24"><pre class="sourceCode c++"><code class="sourceCode cpp"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a><span class="co">//accessing individual characters of a string</span></span>
+<span id="cb24-2"><a href="#cb24-2" aria-hidden="true" tabindex="-1"></a>cout <span class="op">&lt;&lt;</span> greeting1<span class="op">[</span><span class="dv">1</span><span class="op">]</span> <span class="st">&quot;is &#39;e&#39;&quot;</span> <span class="op">&lt;&lt;</span> endl<span class="op">;</span></span>
+<span id="cb24-3"><a href="#cb24-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb24-4"><a href="#cb24-4" aria-hidden="true" tabindex="-1"></a><span class="co">//Length of the string</span></span>
+<span id="cb24-5"><a href="#cb24-5" aria-hidden="true" tabindex="-1"></a>cout <span class="op">&lt;&lt;</span> greeting<span class="op">.</span>length<span class="op">()</span> <span class="op">&lt;&lt;</span> endl<span class="op">;</span></span>
+<span id="cb24-6"><a href="#cb24-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb24-7"><a href="#cb24-7" aria-hidden="true" tabindex="-1"></a><span class="co">//substring from the starting index for a specified length</span></span>
+<span id="cb24-8"><a href="#cb24-8" aria-hidden="true" tabindex="-1"></a><span class="co">// gives &quot;ell&quot; in this case</span></span>
+<span id="cb24-9"><a href="#cb24-9" aria-hidden="true" tabindex="-1"></a>cout <span class="op">&lt;&lt;</span> greeting<span class="op">.</span>substr<span class="op">(</span><span class="dv">1</span><span class="op">,</span> <span class="dv">3</span><span class="op">)</span> <span class="op">&lt;&lt;</span> endl<span class="op">;</span></span>
+<span id="cb24-10"><a href="#cb24-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb24-11"><a href="#cb24-11" aria-hidden="true" tabindex="-1"></a><span class="co">//adding two Strings</span></span>
+<span id="cb24-12"><a href="#cb24-12" aria-hidden="true" tabindex="-1"></a>string greeting <span class="op">=</span> greeting1 <span class="op">+</span> greeting2<span class="op">;</span></span>
+<span id="cb24-13"><a href="#cb24-13" aria-hidden="true" tabindex="-1"></a>cout <span class="op">&lt;&lt;</span> greeting <span class="op">&lt;&lt;</span> endl<span class="op">;</span></span>
+<span id="cb24-14"><a href="#cb24-14" aria-hidden="true" tabindex="-1"></a><span class="co">//OR </span></span>
+<span id="cb24-15"><a href="#cb24-15" aria-hidden="true" tabindex="-1"></a>string second_greeting <span class="op">=</span> greeting1<span class="op">.</span>append<span class="op">(</span>greeting2<span class="op">);</span></span>
+<span id="cb24-16"><a href="#cb24-16" aria-hidden="true" tabindex="-1"></a>cout <span class="op">&lt;&lt;</span> greeting <span class="op">&lt;&lt;</span> endl<span class="op">;</span></span></code></pre></div>
+<blockquote>
+<p>In the above program, instead of <code>greeting1.length()</code>, we could also have used <code>greeting1.size()</code> as both are synonymous.</p>
+</blockquote>
+<div class="sourceCode" id="cb25"><pre class="sourceCode c++"><code class="sourceCode cpp"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a><span class="co">//find a given substring in the string, starting from the given index</span></span>
+<span id="cb25-2"><a href="#cb25-2" aria-hidden="true" tabindex="-1"></a>string<span class="op">.</span>find<span class="op">(</span>substring<span class="op">,</span> index<span class="op">)</span></span></code></pre></div>
 <h4 id="numbers">Numbers:</h4>
 <p><code>int</code></p>
 <p><code>double</code></p>
 <p>Values with decimals. More precise than float.</p>
 <p><code>float</code></p>
-<div class="sourceCode" id="cb24"><pre class="sourceCode c++"><code class="sourceCode cpp"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a>numeric<span class="op">++;</span> <span class="co">// increase variable value by 1</span></span>
-<span id="cb24-2"><a href="#cb24-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb24-3"><a href="#cb24-3" aria-hidden="true" tabindex="-1"></a>numeric <span class="op">+=</span> <span class="dv">80</span><span class="op">;</span></span></code></pre></div>
+<div class="sourceCode" id="cb26"><pre class="sourceCode c++"><code class="sourceCode cpp"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a>numeric<span class="op">++;</span> <span class="co">// increase variable value by 1</span></span>
+<span id="cb26-2"><a href="#cb26-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb26-3"><a href="#cb26-3" aria-hidden="true" tabindex="-1"></a>numeric <span class="op">+=</span> <span class="dv">80</span><span class="op">;</span></span></code></pre></div>
 <blockquote>
 <p>Math between two integers always gives integer only in return</p>
 </blockquote>
 <p><code>10/3 = 3</code> but, <code>10.0/3 = 3.33333</code></p>
-<div class="sourceCode" id="cb25"><pre class="sourceCode c++"><code class="sourceCode cpp"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a><span class="pp">#include  </span><span class="im">&lt;cmath&gt;</span></span>
-<span id="cb25-2"><a href="#cb25-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb25-3"><a href="#cb25-3" aria-hidden="true" tabindex="-1"></a>pow<span class="op">(</span><span class="dv">3</span><span class="op">,</span><span class="dv">4</span><span class="op">);</span> <span class="op">=</span> <span class="dv">3</span><span class="op">^</span><span class="dv">4</span></span>
-<span id="cb25-4"><a href="#cb25-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb25-5"><a href="#cb25-5" aria-hidden="true" tabindex="-1"></a>sqrt<span class="op">(</span><span class="dv">35</span><span class="op">)=</span><span class="fl">5.91608</span></span>
-<span id="cb25-6"><a href="#cb25-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb25-7"><a href="#cb25-7" aria-hidden="true" tabindex="-1"></a>round<span class="op">(</span><span class="fl">4.5</span><span class="op">)</span> <span class="op">=</span> <span class="dv">5</span></span>
-<span id="cb25-8"><a href="#cb25-8" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb25-9"><a href="#cb25-9" aria-hidden="true" tabindex="-1"></a>ceil<span class="op">(</span><span class="fl">4.3</span><span class="op">)</span> <span class="op">=</span> <span class="dv">5</span></span>
-<span id="cb25-10"><a href="#cb25-10" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb25-11"><a href="#cb25-11" aria-hidden="true" tabindex="-1"></a>floor<span class="op">(</span><span class="fl">4.6</span><span class="op">)</span> <span class="op">=</span> <span class="dv">4</span></span>
-<span id="cb25-12"><a href="#cb25-12" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb25-13"><a href="#cb25-13" aria-hidden="true" tabindex="-1"></a>fmax<span class="op">(</span>number<span class="op">,</span> number<span class="op">)</span></span>
-<span id="cb25-14"><a href="#cb25-14" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb25-15"><a href="#cb25-15" aria-hidden="true" tabindex="-1"></a>fmin<span class="op">(</span>number<span class="op">,</span> number<span class="op">)</span></span></code></pre></div>
-<h4 id="arrays-1">Arrays:</h4>
-<div class="sourceCode" id="cb26"><pre class="sourceCode c++"><code class="sourceCode cpp"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a><span class="dt">int</span> nums<span class="op">[]</span> <span class="op">=</span> <span class="op">{</span><span class="dv">4</span><span class="op">,</span> <span class="dv">53</span><span class="op">,</span> <span class="dv">5</span><span class="op">,</span> <span class="dv">553</span><span class="op">,</span> <span class="dv">3</span><span class="op">}</span></span>
-<span id="cb26-2"><a href="#cb26-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb26-3"><a href="#cb26-3" aria-hidden="true" tabindex="-1"></a>nums<span class="op">[</span><span class="dv">1</span><span class="op">]</span> <span class="op">=</span> <span class="dv">2</span>  \\ but length can’t be changed</span>
-<span id="cb26-4"><a href="#cb26-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb26-5"><a href="#cb26-5" aria-hidden="true" tabindex="-1"></a><span class="dt">int</span> nums<span class="op">[</span><span class="dv">10</span><span class="op">]</span> <span class="op">=</span> <span class="op">{</span><span class="dv">2</span><span class="op">,</span> <span class="dv">3</span><span class="op">}</span> \\ till <span class="dv">10</span><span class="er">th</span> index<span class="op">;</span> last <span class="dv">8</span> would be <span class="dv">0</span></span>
-<span id="cb26-6"><a href="#cb26-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb26-7"><a href="#cb26-7" aria-hidden="true" tabindex="-1"></a>nums<span class="op">[</span><span class="dv">9</span><span class="op">]</span> <span class="op">=</span> <span class="dv">5</span></span>
-<span id="cb26-8"><a href="#cb26-8" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb26-9"><a href="#cb26-9" aria-hidden="true" tabindex="-1"></a><span class="dt">int</span> nums<span class="op">[</span><span class="dv">15</span><span class="op">];</span> \\ leads to an error</span></code></pre></div>
-<h2 id="input">Input:</h2>
-<div class="sourceCode" id="cb27"><pre class="sourceCode c++"><code class="sourceCode cpp"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a>string name<span class="op">;</span></span>
+<div class="sourceCode" id="cb27"><pre class="sourceCode c++"><code class="sourceCode cpp"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a><span class="pp">#include  </span><span class="im">&lt;cmath&gt;</span></span>
 <span id="cb27-2"><a href="#cb27-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb27-3"><a href="#cb27-3" aria-hidden="true" tabindex="-1"></a>cout <span class="op">&lt;&lt;</span> “Enter your name<span class="op">:-</span> ”<span class="op">;</span> \\ Prince Garg</span>
+<span id="cb27-3"><a href="#cb27-3" aria-hidden="true" tabindex="-1"></a>pow<span class="op">(</span><span class="dv">3</span><span class="op">,</span><span class="dv">4</span><span class="op">);</span> <span class="op">=</span> <span class="dv">3</span><span class="op">^</span><span class="dv">4</span></span>
 <span id="cb27-4"><a href="#cb27-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb27-5"><a href="#cb27-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb27-5"><a href="#cb27-5" aria-hidden="true" tabindex="-1"></a>sqrt<span class="op">(</span><span class="dv">35</span><span class="op">)=</span><span class="fl">5.91608</span></span>
 <span id="cb27-6"><a href="#cb27-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb27-7"><a href="#cb27-7" aria-hidden="true" tabindex="-1"></a>cin <span class="op">&gt;&gt;</span> name<span class="op">;</span></span>
+<span id="cb27-7"><a href="#cb27-7" aria-hidden="true" tabindex="-1"></a>round<span class="op">(</span><span class="fl">4.5</span><span class="op">)</span> <span class="op">=</span> <span class="dv">5</span></span>
 <span id="cb27-8"><a href="#cb27-8" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb27-9"><a href="#cb27-9" aria-hidden="true" tabindex="-1"></a>cout <span class="op">&lt;&lt;</span> “your name is ” <span class="op">&lt;&lt;</span> name<span class="op">;</span> \\ your name is Prince Garg</span></code></pre></div>
+<span id="cb27-9"><a href="#cb27-9" aria-hidden="true" tabindex="-1"></a>ceil<span class="op">(</span><span class="fl">4.3</span><span class="op">)</span> <span class="op">=</span> <span class="dv">5</span></span>
+<span id="cb27-10"><a href="#cb27-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb27-11"><a href="#cb27-11" aria-hidden="true" tabindex="-1"></a>floor<span class="op">(</span><span class="fl">4.6</span><span class="op">)</span> <span class="op">=</span> <span class="dv">4</span></span>
+<span id="cb27-12"><a href="#cb27-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb27-13"><a href="#cb27-13" aria-hidden="true" tabindex="-1"></a>fmax<span class="op">(</span>number<span class="op">,</span> number<span class="op">)</span></span>
+<span id="cb27-14"><a href="#cb27-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb27-15"><a href="#cb27-15" aria-hidden="true" tabindex="-1"></a>fmin<span class="op">(</span>number<span class="op">,</span> number<span class="op">)</span></span></code></pre></div>
+<h4 id="arrays-1">Arrays:</h4>
+<div class="sourceCode" id="cb28"><pre class="sourceCode c++"><code class="sourceCode cpp"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a><span class="dt">int</span> nums<span class="op">[]</span> <span class="op">=</span> <span class="op">{</span><span class="dv">4</span><span class="op">,</span> <span class="dv">53</span><span class="op">,</span> <span class="dv">5</span><span class="op">,</span> <span class="dv">553</span><span class="op">,</span> <span class="dv">3</span><span class="op">}</span></span>
+<span id="cb28-2"><a href="#cb28-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb28-3"><a href="#cb28-3" aria-hidden="true" tabindex="-1"></a>nums<span class="op">[</span><span class="dv">1</span><span class="op">]</span> <span class="op">=</span> <span class="dv">2</span>  \\ but length can’t be changed</span>
+<span id="cb28-4"><a href="#cb28-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb28-5"><a href="#cb28-5" aria-hidden="true" tabindex="-1"></a><span class="dt">int</span> nums<span class="op">[</span><span class="dv">10</span><span class="op">]</span> <span class="op">=</span> <span class="op">{</span><span class="dv">2</span><span class="op">,</span> <span class="dv">3</span><span class="op">}</span> \\ till <span class="dv">10</span><span class="er">th</span> index<span class="op">;</span> last <span class="dv">8</span> would be <span class="dv">0</span></span>
+<span id="cb28-6"><a href="#cb28-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb28-7"><a href="#cb28-7" aria-hidden="true" tabindex="-1"></a>nums<span class="op">[</span><span class="dv">9</span><span class="op">]</span> <span class="op">=</span> <span class="dv">5</span></span>
+<span id="cb28-8"><a href="#cb28-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb28-9"><a href="#cb28-9" aria-hidden="true" tabindex="-1"></a><span class="dt">int</span> nums<span class="op">[</span><span class="dv">15</span><span class="op">];</span> \\ leads to an error</span></code></pre></div>
+<h2 id="input">Input:</h2>
+<div class="sourceCode" id="cb29"><pre class="sourceCode c++"><code class="sourceCode cpp"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a>string name<span class="op">;</span></span>
+<span id="cb29-2"><a href="#cb29-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb29-3"><a href="#cb29-3" aria-hidden="true" tabindex="-1"></a>cout <span class="op">&lt;&lt;</span> “Enter your name<span class="op">:-</span> ”<span class="op">;</span> \\ Prince Garg</span>
+<span id="cb29-4"><a href="#cb29-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb29-5"><a href="#cb29-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb29-6"><a href="#cb29-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb29-7"><a href="#cb29-7" aria-hidden="true" tabindex="-1"></a>cin <span class="op">&gt;&gt;</span> name<span class="op">;</span></span>
+<span id="cb29-8"><a href="#cb29-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb29-9"><a href="#cb29-9" aria-hidden="true" tabindex="-1"></a>cout <span class="op">&lt;&lt;</span> “your name is ” <span class="op">&lt;&lt;</span> name<span class="op">;</span> \\ your name is Prince Garg</span></code></pre></div>
 <p>but with</p>
 <pre><code>getline(cin, name);
 
