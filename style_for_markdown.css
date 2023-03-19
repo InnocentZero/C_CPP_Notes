@@ -62,14 +62,15 @@ blockquote{
  
 pre {
     background-color: #111111;
-    white-space: pre-wrap;
     font-family: "Fira-Code", monospace;
     font-variant-ligatures: normal;
     padding: 0 1em;
     border-radius: 10px;
+    inline-size: 90%;
     word-break: break-all;
     word-wrap: break-word; 
     overflow-wrap: break-word; 
+    white-space: pre-wrap;
   }
 
 
@@ -81,8 +82,9 @@ code {
     background-color: #111111;
     padding: 0.2em;
     letter-spacing: -0.05em;
-    word-break: break-all;
     border-radius: 10px;
+    inline-size: 90%;
+    word-break: break-all;
     word-wrap: break-word; 
     overflow-wrap: break-word; 
     white-space: pre-wrap;
@@ -96,6 +98,7 @@ pre code {
     font-family: "Fira-Code", monospace;
     line-height: 1em;
     letter-spacing: normal;
+    inline-size: 90%;
     word-break: break-all;
     word-wrap: break-word; 
     overflow-wrap: break-word; 
