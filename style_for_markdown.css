@@ -66,9 +66,6 @@ pre {
     border-radius: 10px;
     inline-size: 10%;
     word-break: break-all;
-    word-wrap: break-word; 
-    overflow-wrap: break-word; 
-    white-space: pre-wrap;
 }
 
 
@@ -82,9 +79,6 @@ code {
     border-radius: 10px;
     inline-size: 10%;
     word-break: break-all;
-    word-wrap: break-word; 
-    overflow-wrap: break-word; 
-    white-space: pre-wrap;
 }
 
 
@@ -96,9 +90,6 @@ pre code {
     letter-spacing: normal;
     inline-size: 10%;
     word-break: break-all;
-    word-wrap: break-word; 
-    overflow-wrap: break-word; 
-    white-space: pre-wrap;
 }
 
 table th,table td {
