@@ -65,7 +65,7 @@ pre {
     padding: 0 1em;
     border-radius: 10px;
     inline-size: 10%;
-    overflow-wrap: break-word; 
+    white-space: pre-wrap;
 }
 
 
@@ -78,7 +78,7 @@ code {
     letter-spacing: -0.05em;
     border-radius: 10px;
     inline-size: 10%;
-    overflow-wrap: break-word; 
+    white-space: pre-wrap;
 }
 
 
@@ -89,7 +89,7 @@ pre code {
     line-height: 1em;
     letter-spacing: normal;
     inline-size: 10%;
-    overflow-wrap: break-word; 
+    white-space: pre-wrap;
 }
 
 table th,table td {
