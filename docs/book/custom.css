@@ -1,0 +1,142 @@
+.ayu {
+    --bg: hsl(0, 0%, 3.9%);
+    --fg: #c5c5c5;
+    --sidebar-bg: #141414;
+}
+
+.coal {
+    --bg: hsl(0, 0%, 3.9%);
+    --fg: #c5c5c5;
+    --sidebar-bg: #141414;
+}
+
+.light{
+    --bg: hsl(0, 0%, 3.9%);
+    --fg: #c5c5c5;
+    --sidebar-bg: #141414;
+    --sidebar-fg: hsl(0,0,80%);
+    --sidebar-active: #fff;
+    --icons-hover: #efefef;
+    --theme-popup-bg: #111111;
+    --theme-hover: #666666;
+}
+
+
+.navy{
+    --bg: hsl(0, 0%, 3.9%);
+    --fg: #c5c5c5;
+    --sidebar-bg: #141414;
+}
+
+.rust{
+    --bg: hsl(0, 0%, 3.9%);
+    --fg: #c5c5c5;
+    --sidebar-bg: #141414;
+}
+
+.card {
+    margin: 4% 1% 0 1%;
+    padding: 0.0%;
+    display: flex;
+    width: 18%;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: "";
+    flex-direction: column;
+}
+
+/* :root{     */
+/*     --link-font: "Trebuchet MS", sans-serif; */
+/*     --link-color-normal: #dddddd; */
+/*     --link-border-color-normal: #dddddd; */
+/*     --link-color-hover: #ffffff; */
+/*     --link-border-color-hover: #ffffff; */
+/* } */
+
+
+
+
+.link {
+    /* text-transform : lowercase; */
+    text-decoration: none;
+    background-color: #00000050;
+    color: var(--link-color-normal);
+    font-family: var(--link-font);
+    font-weight: 500;
+    letter-spacing: 1px;
+    margin: 0em 0em 6em 0em;
+    padding: 0.5em;
+    transition: color 0.15s, left 0.15s, border 0.15s;
+    position: relative;
+    left: 0;
+    border: 0.5px solid var(--link-border-color-normal);
+    border-radius: 3px;
+}
+
+.link:hover {
+    background-color: #0A0A0A;
+    color: var(--link-color-hover);
+    border: 0.5px solid var(--link-border-color-hover);
+}
+
+.container {
+    display: flex;
+    justify-content: space-around;
+    align-items: auto;
+    margin: end;
+    width: inherit;
+}
+
+.main {
+    width: 70vw;
+    margin: auto;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+/* Chapter Epigraphs */
+div.epigraph {
+    margin: 5em 0;
+}
+
+div.epigraph > blockquote {
+    margin-top: 3em;
+    margin-bottom: 3em;
+}
+
+div.epigraph > blockquote:before{
+    position: absolute;
+    top: 1px;
+    color: #E8E8E8;
+    font-size: 44px;
+    content: "\275d";
+    margin-right: 13px;
+    margin-top: -13px;
+    right: 100%;
+}
+
+
+.epigraph > blockquote,
+.epigraph > blockquote > p {
+    font-style: italic;
+}
+
+.epigraph > blockquote > footer {
+    font-style: normal;
+    text-align: right;
+}
+
+.epigraph > blockquote > footer > cite {
+    font-style: italic;
+    text-align: right;
+}
+
+.texthighlight{
+    color: black;
+    background-color: #FFFF00;
+    padding: 0.2em;
+    line-height: 1em;
+    border-radius: 10px;
+}
