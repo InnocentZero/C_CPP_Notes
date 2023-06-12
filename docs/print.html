@@ -87,7 +87,7 @@
 
         <nav id="sidebar" class="sidebar" aria-label="Table of contents">
             <div class="sidebar-scrollbox">
-                <ol class="chapter"><li class="chapter-item "><a href="cpp.html"><strong aria-hidden="true">1.</strong> CPP</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item "><a href="basic_preproc.html"><strong aria-hidden="true">1.1.</strong> Basic Structure and Preprocessor Directives</a></li></ol></li></ol>
+                <ol class="chapter"><li class="chapter-item "><a href="cpp.html"><strong aria-hidden="true">1.</strong> CPP</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item "><a href="basic_preproc.html"><strong aria-hidden="true">1.1.</strong> Basic Structure and Preprocessor Directives</a></li><li class="chapter-item "><a href="io.html"><strong aria-hidden="true">1.2.</strong> IO</a></li></ol></li></ol>
             </div>
             <div id="sidebar-resize-handle" class="sidebar-resize-handle"></div>
         </nav>
@@ -160,83 +160,6 @@
 <blockquote><p>C++ is a horrible language. It's made more horrible by the fact that a lot of substandard programmers use it, to the point where it's much much easier to generate total and utter crap with it. </p>
 <footer>Linus Torvalds, <cite>Message to gmane.comp.version-control.git mailing list</cite></footer></blockquote>
 </div>
-<h2 id="io"><a class="header" href="#io">IO</a></h2>
-<p><code>iostream</code> is the header file responsible for input and output. <code>std</code> is the namespace for <code>cout</code> object which is <strong>normally</strong> connected to the screen. <code>&lt;&lt;</code> is the <em>stream insertion operator</em>. <code>endl</code> is equivalent to <code>&quot;\n&quot; &lt;&lt; flush</code>. What this basically means is that a newline escape character is inserted into the stream and the output that was buffered in the memory was expelled onto the the screen.</p>
-<blockquote>
-<p>C++ buffers it because printing is an expensive task for memory and CPU. </p>
-</blockquote>
-<h2 id="data-types"><a class="header" href="#data-types">Data Types</a></h2>
-<ul>
-<li><code>int</code>: Integer. At least as large as <code>short</code>.  Usually 32 bits.</li>
-<li><code>short</code>: Short integer. Usually 16 bits.</li>
-<li><code>long</code>: Long integer. At least as large as <code>int</code>.  Usually 32 bits.</li>
-<li><code>long long</code>: Very long integer. At least as large as <code>long</code>.  Usually 64 bits.</li>
-</ul>
-<blockquote>
-<p>All these use <a href="https://en.wikipedia.org/wiki/Two%27s_complement">two’s complement</a>.</p>
-</blockquote>
-<ul>
-<li><code>unsigned int</code>: Unsigned integer. At least as large as <code>unsigned short</code>.  Usually 32 bits.</li>
-<li><code>unsigned short</code>: Unsigned short integer. Usually 16 bits.</li>
-<li><code>unsigned long</code>: Unsigned long integer. At least as large as <code>unsigned int</code>.  Usually 32 bits.</li>
-<li><code>unsigned long long</code>: Unsigned very long integer. At least as large as <code>unsigned long</code>.  Usually 64 bits.</li>
-</ul>
-<blockquote>
-<p>Same sizes as above; only that the ranges are modified and 2’s complement is absent.</p>
-</blockquote>
-<ul>
-<li><code>signed char</code>: -128 to 127. ASCII characters only. Can actually store upto 32 bits. </li>
-<li><code>unsigned char</code>: 0 to 255. ASCII characters only. Can actually store upto 32 bits. </li>
-</ul>
-<div class="table-wrapper"><table><thead><tr><th style="text-align: center">Escape Sequence</th><th style="text-align: center">Description</th></tr></thead><tbody>
-<tr><td style="text-align: center">\n</td><td style="text-align: center">moves the cursor to the beginning of the next line</td></tr>
-<tr><td style="text-align: center">\t</td><td style="text-align: center">tab</td></tr>
-<tr><td style="text-align: center">\r</td><td style="text-align: center">Carraige return. Moves the cursor to the beginning of the line.</td></tr>
-<tr><td style="text-align: center">\a</td><td style="text-align: center">Alerts the system bell</td></tr>
-<tr><td style="text-align: center">\\</td><td style="text-align: center">Prints backslash</td></tr>
-<tr><td style="text-align: center">\&quot;</td><td style="text-align: center">Prints double quotes</td></tr>
-<tr><td style="text-align: center">\f</td><td style="text-align: center">Goes to the line immediately below the cursor and gives a space</td></tr>
-<tr><td style="text-align: center">\b</td><td style="text-align: center">Backspace</td></tr>
-<tr><td style="text-align: center">\'</td><td style="text-align: center">single quote</td></tr>
-<tr><td style="text-align: center">\0</td><td style="text-align: center">Null character; denotes end of string</td></tr>
-<tr><td style="text-align: center">\v</td><td style="text-align: center">tab but in vertical direction</td></tr>
-<tr><td style="text-align: center">\?</td><td style="text-align: center">print a question mark</td></tr>
-<tr><td style="text-align: center">\117</td><td style="text-align: center">Octal code for characters</td></tr>
-<tr><td style="text-align: center">\x45</td><td style="text-align: center">Hexadecimal code for characters</td></tr>
-<tr><td style="text-align: center">\u20B9</td><td style="text-align: center">Unicode</td></tr>
-</tbody></table>
-</div>
-<ul>
-<li>
-<p><code>float</code>: Floating point decimal number. Stores 32 bits.</p>
-</li>
-<li>
-<p><code>double</code>: Same as <code>float</code> except it stores 64 bits.</p>
-</li>
-<li>
-<p><code>long double</code>: Same as <code>double</code> except it stores 80 bits.</p>
-</li>
-</ul>
-<blockquote>
-<p><code>%d</code> for a <code>char</code> prints its ASCII value. If a <code>char</code> is defined as ‘ABC’, <code>%d</code> prints (ASCII_A)·256^2^ + (ASCII_B)·256 + (ASCII_C) where ASCII_ is the ascii value for that character. <code>%c</code> only accesses the last (or first, depending on whether the processor is little Endian or big Endian) valid byte (i.e. <code>'C'</code> in this case). If the char is defined as <code>'ABCDE'</code>, only the last (or first, again depending on the processor) valid byte is processed and stored, and <code>%d</code> accesses all 4 bytes including the 3 following it, while <code>%c</code> works the same.</p>
-</blockquote>
-<p>However, there are fixed width integer types as well. All of them are included in <code>&lt;cstdint&gt;</code> header file.</p>
-<p>They can be annotated using <code>uintN_t</code>, where <code>N</code> is the size of the integer. It must be a multiple of 8 to fit exact bytes. </p>
-<p>Examples:</p>
-<ul>
-<li><code>uint64_t</code></li>
-<li><code>int24_t</code></li>
-<li><code>uint8_t</code></li>
-</ul>
-<p>They have macro constants as well for maximum and minimum values of some fixed sizes.</p>
-<ul>
-<li><code>INT8_MAX</code>/<code>INT8_MIN</code></li>
-<li><code>INT16_MAX</code>/<code>INT16_MIN</code></li>
-<li><code>INT32_MAX</code>/<code>INT32_MIN</code></li>
-<li><code>INT64_MAX</code>/<code>INT64_MIN</code></li>
-</ul>
-<div class="epigraph"><blockquote><p> I made up the term 'object-oriented', and I can tell you I didn't have C++ in mind.</p><footer>
-Alan Kay, <cite>OOPSLA '97</cite></footer></blockquote></div>
 <h3 id="strings"><a class="header" href="#strings">Strings</a></h3>
 <p>Strings in C++ are used to store text or sequences of characters. C++ supports both C style strings and strings as a class.</p>
 <pre><code class="language-cpp">#include &lt;iostream&gt;
@@ -874,6 +797,11 @@ int main(void){
 }
 </code></pre>
 <p><code>main</code> function is the first one to be called, regardless of the order in which the functions are written. This can be overridden by <code>#pragma</code>, another preprocessor directive that works as instructions to the compiler. Some compilers only allow <code>main</code> to return an <code>int</code>.</p>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="io"><a class="header" href="#io">IO</a></h1>
+<p><code>iostream</code> is the header file responsible for input and output. <code>std</code> is the namespace for <code>cout</code> object which is <strong>normally</strong> connected to the screen. <code>&lt;&lt;</code> is the <em>stream insertion operator</em>. <code>endl</code> is equivalent to <code>&quot;\n&quot; &lt;&lt; flush</code>. What this basically means is that a newline escape character is inserted into the stream and the output that was buffered in the memory was expelled onto the the screen.</p>
+<blockquote>
+<p>C++ buffers it because printing is an expensive task for memory and CPU. </p>
+</blockquote>
 
                     </main>
 
@@ -892,22 +820,6 @@ int main(void){
 
         </div>
 
-        <!-- Livereload script (if served using the cli tool) -->
-        <script>
-            const wsProtocol = location.protocol === 'https:' ? 'wss:' : 'ws:';
-            const wsAddress = wsProtocol + "//" + location.host + "/" + "__livereload";
-            const socket = new WebSocket(wsAddress);
-            socket.onmessage = function (event) {
-                if (event.data === "reload") {
-                    socket.close();
-                    location.reload();
-                }
-            };
-
-            window.onbeforeunload = function() {
-                socket.close();
-            }
-        </script>
 
 
 
