@@ -87,7 +87,7 @@
 
         <nav id="sidebar" class="sidebar" aria-label="Table of contents">
             <div class="sidebar-scrollbox">
-                <ol class="chapter"><li class="chapter-item "><a href="cpp.html"><strong aria-hidden="true">1.</strong> CPP</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item "><a href="basic_preproc.html"><strong aria-hidden="true">1.1.</strong> Basic Structure and Preprocessor Directives</a></li><li class="chapter-item "><a href="io.html"><strong aria-hidden="true">1.2.</strong> IO</a></li></ol></li></ol>
+                <ol class="chapter"><li class="chapter-item "><a href="cpp.html"><strong aria-hidden="true">1.</strong> CPP</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item "><a href="basic_preproc.html"><strong aria-hidden="true">1.1.</strong> Basic Structure and Preprocessor Directives</a></li><li class="chapter-item "><a href="io.html"><strong aria-hidden="true">1.2.</strong> IO</a></li><li class="chapter-item "><a href="data_types.html"><strong aria-hidden="true">1.3.</strong> Datatypes</a></li><li class="chapter-item "><a href="strings_arrays.html"><strong aria-hidden="true">1.4.</strong> Strings and Arrays</a></li></ol></li></ol>
             </div>
             <div id="sidebar-resize-handle" class="sidebar-resize-handle"></div>
         </nav>
@@ -160,88 +160,6 @@
 <blockquote><p>C++ is a horrible language. It's made more horrible by the fact that a lot of substandard programmers use it, to the point where it's much much easier to generate total and utter crap with it. </p>
 <footer>Linus Torvalds, <cite>Message to gmane.comp.version-control.git mailing list</cite></footer></blockquote>
 </div>
-<h3 id="strings"><a class="header" href="#strings">Strings</a></h3>
-<p>Strings in C++ are used to store text or sequences of characters. C++ supports both C style strings and strings as a class.</p>
-<pre><code class="language-cpp">#include &lt;iostream&gt;
-#include &lt;string&gt;
-using namespace std;
-
-//creating a new string using assignment
-string greeting1 = &quot;Hello &quot;;
-
-//Creating a new string using the constructor
-string greeeting2(&quot;World&quot;);
-</code></pre>
-<p>There are various cons of using C-style strings:</p>
-<ul>
-<li>If allocated on the stack, it will always occupy a size you specify (a character occupies a byte assuming a byte is 8 bits long) no matter how long the text it contains is.</li>
-<li>If allocated on the heap (using malloc()) or on the Free Store (new char[]) you’re responsible for releasing the memory afterwards and you will always have the overhead of a heap allocation. </li>
-<li>If you copy a text of more than 256 chars into the array, it might crash, produce ugly assertion messages or cause unexplainable (mis-)behavior somewhere else in your program.</li>
-<li>To determine the text’s length, the array has to be scanned, character by character, for a \0 character. </li>
-<li>You need to check and handle oversized strings yourself else the code will be unsafe (looking at you <code>strcpy</code>).</li>
-</ul>
-<p>Pros of using C style strings:</p>
-<ul>
-<li>If it is a string literal, it is best to define it as a C style string since allocation on stack is much faster than heap.</li>
-<li>It will certainly be faster lookup wise and memory wise.</li>
-</ul>
-<p>There are issues with <code>std::string</code> as well:</p>
-<ul>
-<li>Two distinct STL string instances can not share the same underlying buffer. So if we pass a string by value you will always get a new copy- there is some performance penalty.</li>
-<li>Slower overall than stack allocated strings.</li>
-</ul>
-<p>However, the benefits are much more:</p>
-<ul>
-<li>Short strings of size 16 bytes (assuming 8 bits) or less are stored on the stack for faster access and less fragmentation of heap (or the Free Store).</li>
-<li>They can contain embedded ‘\0’ characters.</li>
-<li><code>string.size()</code> (or <code>string.length()</code>) have constant time complexity, unlike <code>strlen()</code>.</li>
-<li>Appending and inserting characters and text have linear time complexity with the object being added in contrast to strcat being linear in both the array being added to and the array being added.</li>
-<li>A <code>const</code> qualified string is hardcoded in memory. So it has zero runtime cost. But be aware while using it as it can literally be read through the binary data.</li>
-</ul>
-<pre><code class="language-cpp">//accessing individual characters of a string
-cout &lt;&lt; greeting1[1] &quot;is 'e'&quot; &lt;&lt; endl;
-
-//Length of the string
-cout &lt;&lt; greeting.length() &lt;&lt; endl;
-
-//substring from the starting index for a specified length
-// gives &quot;ell&quot; in this case
-cout &lt;&lt; greeting.substr(1, 3) &lt;&lt; endl;
-
-//adding two Strings
-string greeting = greeting1 + greeting2;
-cout &lt;&lt; greeting &lt;&lt; endl;
-//OR 
-string second_greeting = greeting1.append(greeting2);
-cout &lt;&lt; greeting &lt;&lt; endl;
-
-//find a given substring in the string, starting from the given index
-string.find(substring, index)
-</code></pre>
-<blockquote>
-<p>In the above program, instead of <code>greeting1.length()</code>, we could also have used <code>greeting1.size()</code> as both are synonymous.</p>
-</blockquote>
-<blockquote>
-<p>A special example: converting an <code>std::string</code> to a C style heap allocated string. <code>const char *myStringChars = myString.c_str();</code></p>
-</blockquote>
-<h3 id="arrays"><a class="header" href="#arrays">Arrays</a></h3>
-<p>Arrays are uniform aggregates of one type. Declaration occurs as follows:</p>
-<pre><code class="language-cpp">int main(){
-    char arr[length];
-    int nums[] = {4, 53, 5, 553, 3}
-    nums[1] = 2  \\ but length can’t be changed
-    int nums[10] = {2, 3} \\ till 10th index; last 8 would be 0
-    nums[9] = 5
-    cout &lt;&lt; nums[15]; \\ leads to segmentation fault, core dumped
-    int bruh[] = {4, 53, 5, 553, 3}
-    bruh[1] = 2  \\ but length can’t be changed
-    int bruh[10] = {2, 3} \\ till 10th index; last 8 would be 0
-    bruh[9] = 5
-    int bruh[15]; \\ leads to an error
-}
-</code></pre>
-<p>Similar to this 2D arrays can be declared as well.</p>
-<p>The values for an array are only set to 0 if the length of the array is known at compile-time. If not, the values are garbage values (that may or may not be 0).</p>
 <h3 id="variable-declaration"><a class="header" href="#variable-declaration">Variable Declaration</a></h3>
 <blockquote>
 <p>Variables declared outside of main are global variables.</p>
@@ -802,6 +720,160 @@ int main(void){
 <blockquote>
 <p>C++ buffers it because printing is an expensive task for memory and CPU. </p>
 </blockquote>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="data-types"><a class="header" href="#data-types">Data Types</a></h1>
+<ul>
+<li><code>int</code>: Integer. At least as large as <code>short</code>.  Usually 32 bits.</li>
+<li><code>short</code>: Short integer. Usually 16 bits.</li>
+<li><code>long</code>: Long integer. At least as large as <code>int</code>.  Usually 32 bits.</li>
+<li><code>long long</code>: Very long integer. At least as large as <code>long</code>.  Usually 64 bits.</li>
+</ul>
+<blockquote>
+<p>All these use <a href="https://en.wikipedia.org/wiki/Two%27s_complement">two’s complement</a>.</p>
+</blockquote>
+<ul>
+<li><code>unsigned int</code>: Unsigned integer. At least as large as <code>unsigned short</code>.  Usually 32 bits.</li>
+<li><code>unsigned short</code>: Unsigned short integer. Usually 16 bits.</li>
+<li><code>unsigned long</code>: Unsigned long integer. At least as large as <code>unsigned int</code>.  Usually 32 bits.</li>
+<li><code>unsigned long long</code>: Unsigned very long integer. At least as large as <code>unsigned long</code>.  Usually 64 bits.</li>
+</ul>
+<blockquote>
+<p>Same sizes as above; only that the ranges are modified and 2’s complement is absent.</p>
+</blockquote>
+<ul>
+<li><code>signed char</code>: -128 to 127. ASCII characters only. Can actually store upto 32 bits. </li>
+<li><code>unsigned char</code>: 0 to 255. ASCII characters only. Can actually store upto 32 bits. </li>
+</ul>
+<div class="table-wrapper"><table><thead><tr><th style="text-align: center">Escape Sequence</th><th style="text-align: center">Description</th></tr></thead><tbody>
+<tr><td style="text-align: center">\n</td><td style="text-align: center">moves the cursor to the beginning of the next line</td></tr>
+<tr><td style="text-align: center">\t</td><td style="text-align: center">tab</td></tr>
+<tr><td style="text-align: center">\r</td><td style="text-align: center">Carraige return. Moves the cursor to the beginning of the line.</td></tr>
+<tr><td style="text-align: center">\a</td><td style="text-align: center">Alerts the system bell</td></tr>
+<tr><td style="text-align: center">\\</td><td style="text-align: center">Prints backslash</td></tr>
+<tr><td style="text-align: center">\&quot;</td><td style="text-align: center">Prints double quotes</td></tr>
+<tr><td style="text-align: center">\f</td><td style="text-align: center">Goes to the line immediately below the cursor and gives a space</td></tr>
+<tr><td style="text-align: center">\b</td><td style="text-align: center">Backspace</td></tr>
+<tr><td style="text-align: center">\'</td><td style="text-align: center">single quote</td></tr>
+<tr><td style="text-align: center">\0</td><td style="text-align: center">Null character; denotes end of string</td></tr>
+<tr><td style="text-align: center">\v</td><td style="text-align: center">tab but in vertical direction</td></tr>
+<tr><td style="text-align: center">\?</td><td style="text-align: center">print a question mark</td></tr>
+<tr><td style="text-align: center">\117</td><td style="text-align: center">Octal code for characters</td></tr>
+<tr><td style="text-align: center">\x45</td><td style="text-align: center">Hexadecimal code for characters</td></tr>
+<tr><td style="text-align: center">\u20B9</td><td style="text-align: center">Unicode</td></tr>
+</tbody></table>
+</div>
+<ul>
+<li>
+<p><code>float</code>: Floating point decimal number. Stores 32 bits.</p>
+</li>
+<li>
+<p><code>double</code>: Same as <code>float</code> except it stores 64 bits.</p>
+</li>
+<li>
+<p><code>long double</code>: Same as <code>double</code> except it stores 80 bits.</p>
+</li>
+</ul>
+<blockquote>
+<p><code>%d</code> for a <code>char</code> prints its ASCII value. If a <code>char</code> is defined as ‘ABC’, <code>%d</code> prints (ASCII_A)·256^2^ + (ASCII_B)·256 + (ASCII_C) where ASCII_ is the ascii value for that character. <code>%c</code> only accesses the last (or first, depending on whether the processor is little Endian or big Endian) valid byte (i.e. <code>'C'</code> in this case). If the char is defined as <code>'ABCDE'</code>, only the last (or first, again depending on the processor) valid byte is processed and stored, and <code>%d</code> accesses all 4 bytes including the 3 following it, while <code>%c</code> works the same.</p>
+</blockquote>
+<p>However, there are fixed width integer types as well. All of them are included in <code>&lt;cstdint&gt;</code> header file.</p>
+<p>They can be annotated using <code>uintN_t</code>, where <code>N</code> is the size of the integer. It must be a multiple of 8 to fit exact bytes. </p>
+<p>Examples:</p>
+<ul>
+<li><code>uint64_t</code></li>
+<li><code>int24_t</code></li>
+<li><code>uint8_t</code></li>
+</ul>
+<p>They have macro constants as well for maximum and minimum values of some fixed sizes.</p>
+<ul>
+<li><code>INT8_MAX</code>/<code>INT8_MIN</code></li>
+<li><code>INT16_MAX</code>/<code>INT16_MIN</code></li>
+<li><code>INT32_MAX</code>/<code>INT32_MIN</code></li>
+<li><code>INT64_MAX</code>/<code>INT64_MIN</code></li>
+</ul>
+<div class="epigraph"><blockquote><p> I made up the term 'object-oriented', and I can tell you I didn't have C++ in mind.</p><footer>
+Alan Kay, <cite>OOPSLA '97</cite></footer></blockquote></div>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="strings"><a class="header" href="#strings">Strings</a></h1>
+<p>Strings in C++ are used to store text or sequences of characters. C++ supports both C style strings and strings as a class.</p>
+<pre><code class="language-cpp">#include &lt;iostream&gt;
+#include &lt;string&gt;
+using namespace std;
+
+//creating a new string using assignment
+string greeting1 = &quot;Hello &quot;;
+
+//Creating a new string using the constructor
+string greeeting2(&quot;World&quot;);
+</code></pre>
+<p>There are various cons of using C-style strings:</p>
+<ul>
+<li>If allocated on the stack, it will always occupy a size you specify (a character occupies a byte assuming a byte is 8 bits long) no matter how long the text it contains is.</li>
+<li>If allocated on the heap (using malloc()) or on the Free Store (new char[]) you’re responsible for releasing the memory afterwards and you will always have the overhead of a heap allocation. </li>
+<li>If you copy a text of more than 256 chars into the array, it might crash, produce ugly assertion messages or cause unexplainable (mis-)behavior somewhere else in your program.</li>
+<li>To determine the text’s length, the array has to be scanned, character by character, for a \0 character. </li>
+<li>You need to check and handle oversized strings yourself else the code will be unsafe (looking at you <code>strcpy</code>).</li>
+</ul>
+<p>Pros of using C style strings:</p>
+<ul>
+<li>If it is a string literal, it is best to define it as a C style string since allocation on stack is much faster than heap.</li>
+<li>It will certainly be faster lookup wise and memory wise.</li>
+</ul>
+<p>There are issues with <code>std::string</code> as well:</p>
+<ul>
+<li>Two distinct STL string instances can not share the same underlying buffer. So if we pass a string by value you will always get a new copy- there is some performance penalty.</li>
+<li>Slower overall than stack allocated strings.</li>
+</ul>
+<p>However, the benefits are much more:</p>
+<ul>
+<li>Short strings of size 16 bytes (assuming 8 bits) or less are stored on the stack for faster access and less fragmentation of heap (or the Free Store).</li>
+<li>They can contain embedded ‘\0’ characters.</li>
+<li><code>string.size()</code> (or <code>string.length()</code>) have constant time complexity, unlike <code>strlen()</code>.</li>
+<li>Appending and inserting characters and text have linear time complexity with the object being added in contrast to strcat being linear in both the array being added to and the array being added.</li>
+<li>A <code>const</code> qualified string is hardcoded in memory. So it has zero runtime cost. But be aware while using it as it can literally be read through the binary data.</li>
+</ul>
+<pre><code class="language-cpp">//accessing individual characters of a string
+cout &lt;&lt; greeting1[1] &quot;is 'e'&quot; &lt;&lt; endl;
+
+//Length of the string
+cout &lt;&lt; greeting.length() &lt;&lt; endl;
+
+//substring from the starting index for a specified length
+// gives &quot;ell&quot; in this case
+cout &lt;&lt; greeting.substr(1, 3) &lt;&lt; endl;
+
+//adding two Strings
+string greeting = greeting1 + greeting2;
+cout &lt;&lt; greeting &lt;&lt; endl;
+//OR 
+string second_greeting = greeting1.append(greeting2);
+cout &lt;&lt; greeting &lt;&lt; endl;
+
+//find a given substring in the string, starting from the given index
+string.find(substring, index)
+</code></pre>
+<blockquote>
+<p>In the above program, instead of <code>greeting1.length()</code>, we could also have used <code>greeting1.size()</code> as both are synonymous.</p>
+</blockquote>
+<blockquote>
+<p>A special example: converting an <code>std::string</code> to a C style heap allocated string. <code>const char *myStringChars = myString.c_str();</code></p>
+</blockquote>
+<h1 id="arrays"><a class="header" href="#arrays">Arrays</a></h1>
+<p>Arrays are uniform aggregates of one type. Declaration occurs as follows:</p>
+<pre><code class="language-cpp">int main(){
+    char arr[length];
+    int nums[] = {4, 53, 5, 553, 3}
+    nums[1] = 2  \\ but length can’t be changed
+    int nums[10] = {2, 3} \\ till 10th index; last 8 would be 0
+    nums[9] = 5
+    cout &lt;&lt; nums[15]; \\ leads to segmentation fault, core dumped
+    int bruh[] = {4, 53, 5, 553, 3}
+    bruh[1] = 2  \\ but length can’t be changed
+    int bruh[10] = {2, 3} \\ till 10th index; last 8 would be 0
+    bruh[9] = 5
+    int bruh[15]; \\ leads to an error
+}
+</code></pre>
+<p>Similar to this 2D arrays can be declared as well.</p>
+<p>The values for an array are only set to 0 if the length of the array is known at compile-time. If not, the values are garbage values (that may or may not be 0).</p>
 
                     </main>
 
