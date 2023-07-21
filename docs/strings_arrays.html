@@ -174,7 +174,7 @@ string greeeting2(&quot;World&quot;);
 </ul>
 <p>There are issues with <code>std::string</code> as well:</p>
 <ul>
-<li>Two distinct STL string instances can not share the same underlying buffer. So if we pass a string by value you will always get a new copy- there is some performance penalty.</li>
+<li>Two distinct STL string instances can not share the same underlying buffer. So if we pass a string by value you will always get a new copy - there is some performance penalty.</li>
 <li>Slower overall than stack allocated strings.</li>
 </ul>
 <p>However, the benefits are much more:</p>
@@ -186,7 +186,7 @@ string greeeting2(&quot;World&quot;);
 <li>A <code>const</code> qualified string is hardcoded in memory. So it has zero runtime cost. But be aware while using it as it can literally be read through the binary data.</li>
 </ul>
 <pre><code class="language-cpp">//accessing individual characters of a string
-cout &lt;&lt; greeting1[1] &quot;is 'e'&quot; &lt;&lt; endl;
+cout &lt;&lt; greeting1[1] &quot; is 'e'&quot; &lt;&lt; endl;
 
 //Length of the string
 cout &lt;&lt; greeting.length() &lt;&lt; endl;

@@ -160,37 +160,6 @@
 <blockquote><p>C++ is a horrible language. It's made more horrible by the fact that a lot of substandard programmers use it, to the point where it's much much easier to generate total and utter crap with it. </p>
 <footer>Linus Torvalds, <cite>Message to gmane.comp.version-control.git mailing list</cite></footer></blockquote>
 </div>
-<h3 id="variable-declaration"><a class="header" href="#variable-declaration">Variable Declaration</a></h3>
-<blockquote>
-<p>Variables declared outside of main are global variables.</p>
-</blockquote>
-<p><code>data_type var</code> when the value is not known.</p>
-<p><code>data_type var = value</code> when the value is known.</p>
-<p>We can also use <code>typedef</code>.</p>
-<p><code>typedef existing_name alias_name;</code> </p>
-<p>This is better than <code>#define</code> as it allows you typecast.</p>
-<p><code>enum var_type {val_1,val_2,val_3};</code> : This declares a new enumeration type. The default values are 0, 1, 2 and so on. We can also define variables of the <code>var_type</code> using <code>enum var_type {...} new_var;</code> or by:</p>
-<pre><code class="language-cpp">enum var_type {val_1,val_2,val_3};
-enum var_type var;
-</code></pre>
-<p>We can also define our own values using <code>enum var_type {var1 = 1,var_2 = 2};</code>.
-If in between some values are undefined then their value is set as the previous value + 1.</p>
-<ul>
-<li>enum values must be integer constants or characters.</li>
-</ul>
-<h3 id="typecasting"><a class="header" href="#typecasting">Typecasting</a></h3>
-<p>To typecast between two different types we use <code>static_cast&lt;type_to_be_casted_to&gt;(thing to cast)</code>. See <a href="https://en.cppreference.com/w/cpp/language/static_cast">this</a> for examples and when they work.</p>
-<p>To typecast a <code>const</code> pointer to a non-<code>const</code> one use <code>const_cast</code>. Piece of advice, never use it.</p>
-<p>There is another cast that is used to convert a pointer from one type to another. It is <code>dynamic_cast</code>. It performs a runtime check, as opposed to a compile time check in <code>static_cast</code>. It returns a <code>nullptr</code> in case failing to convert the given pointer.</p>
-<h4 id="c-style-casts"><a class="header" href="#c-style-casts">C style casts:</a></h4>
-<p><strong>Explicit:</strong> <code>(type_name) expression</code></p>
-<p><strong>Implicit:</strong> <code>type_name new_var = expression</code></p>
-<p>Implicit typecasting also occurs when we perform an operation between a lower level data type and a higher level data type. Eg. int &amp; float, int and long, float and double etc. </p>
-<p>In all of the above examples, the first one gets typecased to the second.</p>
-<div class="epigraph">
-<blockquote><p> Christ, people. Learn C, instead of just stringing random characters together until it compiles (with warnings).</p>
-<footer>Linus Torvalds, <cite>LKM mailing list</cite></footer></blockquote>
-</div>
 <blockquote>
 <p>TODO: add references and lvalue, rvalue, xvalue etc.</p>
 </blockquote>
@@ -792,6 +761,38 @@ int main(void){
 </ul>
 <div class="epigraph"><blockquote><p> I made up the term 'object-oriented', and I can tell you I didn't have C++ in mind.</p><footer>
 Alan Kay, <cite>OOPSLA '97</cite></footer></blockquote></div>
+<h2 id="variable-declaration"><a class="header" href="#variable-declaration">Variable Declaration</a></h2>
+<blockquote>
+<p>Variables declared outside of main are global variables.</p>
+</blockquote>
+<p><code>data_type var</code> when the value is not known.</p>
+<p><code>data_type var = value</code> when the value is known.</p>
+<p>We can also use <code>typedef</code>.</p>
+<p><code>typedef existing_name alias_name;</code> </p>
+<p>This is better than <code>#define</code> as it allows you typecast.</p>
+<p><code>enum var_type {val_1,val_2,val_3};</code> : This declares a new enumeration type. The default values are 0, 1, 2 and so on. We can also define variables of the <code>var_type</code> using <code>enum var_type {...} new_var;</code> or by:</p>
+<pre><code class="language-cpp">enum var_type {val_1,val_2,val_3};
+enum var_type var;
+</code></pre>
+<p>We can also define our own values using <code>enum var_type {var1 = 1,var_2 = 2};</code>.
+If in between some values are undefined then their value is set as the previous value + 1.</p>
+<ul>
+<li>enum values must be integer constants or characters.</li>
+</ul>
+<h2 id="typecasting"><a class="header" href="#typecasting">Typecasting</a></h2>
+<p>To typecast between two different types we use <code>static_cast&lt;type_to_be_casted_to&gt;(thing to cast)</code>. See <a href="https://en.cppreference.com/w/cpp/language/static_cast">this</a> for examples and when they work.</p>
+<p>To typecast a <code>const</code> pointer to a non-<code>const</code> one use <code>const_cast</code>. Piece of advice, never use it.</p>
+<p>There is another cast that is used to convert a pointer from one type to another. It is <code>dynamic_cast</code>. It performs a runtime check, as opposed to a compile time check in <code>static_cast</code>. It returns a <code>nullptr</code> in case failing to convert the given pointer.</p>
+<h3 id="c-style-casts"><a class="header" href="#c-style-casts">C style casts:</a></h3>
+<p><strong>Explicit:</strong> <code>(type_name) expression</code></p>
+<p><strong>Implicit:</strong> <code>type_name new_var = expression</code></p>
+<p>Implicit typecasting also occurs when we perform an operation between a lower level data type and a higher level data type. Eg. int &amp; float, int and long, float and double etc. </p>
+<p>In all of the above examples, the first one gets typecased to the second.</p>
+<p>C - style casts may add a line of instruction or two, however, they are mostly supposed to be compile time. If you need C - style casts in your code you may use <a href="https://en.cppreference.com/w/cpp/language/reinterpret_cast">reinterpret cast</a></p>
+<div class="epigraph">
+<blockquote><p> Christ, people. Learn C, instead of just stringing random characters together until it compiles (with warnings).</p>
+<footer>Linus Torvalds, <cite>LKM mailing list</cite></footer></blockquote>
+</div>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="strings"><a class="header" href="#strings">Strings</a></h1>
 <p>Strings in C++ are used to store text or sequences of characters. C++ supports both C style strings and strings as a class.</p>
 <pre><code class="language-cpp">#include &lt;iostream&gt;
@@ -819,7 +820,7 @@ string greeeting2(&quot;World&quot;);
 </ul>
 <p>There are issues with <code>std::string</code> as well:</p>
 <ul>
-<li>Two distinct STL string instances can not share the same underlying buffer. So if we pass a string by value you will always get a new copy- there is some performance penalty.</li>
+<li>Two distinct STL string instances can not share the same underlying buffer. So if we pass a string by value you will always get a new copy - there is some performance penalty.</li>
 <li>Slower overall than stack allocated strings.</li>
 </ul>
 <p>However, the benefits are much more:</p>
@@ -831,7 +832,7 @@ string greeeting2(&quot;World&quot;);
 <li>A <code>const</code> qualified string is hardcoded in memory. So it has zero runtime cost. But be aware while using it as it can literally be read through the binary data.</li>
 </ul>
 <pre><code class="language-cpp">//accessing individual characters of a string
-cout &lt;&lt; greeting1[1] &quot;is 'e'&quot; &lt;&lt; endl;
+cout &lt;&lt; greeting1[1] &quot; is 'e'&quot; &lt;&lt; endl;
 
 //Length of the string
 cout &lt;&lt; greeting.length() &lt;&lt; endl;

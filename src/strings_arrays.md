@@ -32,7 +32,7 @@ Pros of using C style strings:
 
 There are issues with `std::string` as well:
 
-- Two distinct STL string instances can not share the same underlying buffer. So if we pass a string by value you will always get a new copy- there is some performance penalty.
+- Two distinct STL string instances can not share the same underlying buffer. So if we pass a string by value you will always get a new copy - there is some performance penalty.
 - Slower overall than stack allocated strings.
 
 However, the benefits are much more:
@@ -46,7 +46,7 @@ However, the benefits are much more:
 
 ```cpp
 //accessing individual characters of a string
-cout << greeting1[1] "is 'e'" << endl;
+cout << greeting1[1] " is 'e'" << endl;
 
 //Length of the string
 cout << greeting.length() << endl;

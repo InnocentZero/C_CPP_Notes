@@ -65,3 +65,55 @@ They have macro constants as well for maximum and minimum values of some fixed s
 
 <div class="epigraph"><blockquote><p> I made up the term 'object-oriented', and I can tell you I didn't have C++ in mind.</p><footer>
 Alan Kay, <cite>OOPSLA '97</cite></footer></blockquote></div>
+
+## Variable Declaration
+
+> Variables declared outside of main are global variables.
+
+`data_type var` when the value is not known.
+
+`data_type var = value` when the value is known.
+
+We can also use `typedef`.
+
+`typedef existing_name alias_name;` 
+
+This is better than `#define` as it allows you typecast.
+
+`enum var_type {val_1,val_2,val_3};` : This declares a new enumeration type. The default values are 0, 1, 2 and so on. We can also define variables of the `var_type` using `enum var_type {...} new_var;` or by:
+
+```cpp
+enum var_type {val_1,val_2,val_3};
+enum var_type var;
+```
+
+We can also define our own values using `enum var_type {var1 = 1,var_2 = 2};`.
+If in between some values are undefined then their value is set as the previous value + 1.
+
+- enum values must be integer constants or characters.
+
+## Typecasting 
+
+To typecast between two different types we use `static_cast<type_to_be_casted_to>(thing to cast)`. See [this](https://en.cppreference.com/w/cpp/language/static_cast) for examples and when they work.
+
+To typecast a `const` pointer to a non-`const` one use `const_cast`. Piece of advice, never use it.
+
+There is another cast that is used to convert a pointer from one type to another. It is `dynamic_cast`. It performs a runtime check, as opposed to a compile time check in `static_cast`. It returns a `nullptr` in case failing to convert the given pointer.
+
+### C style casts:
+
+**Explicit:** `(type_name) expression`
+
+**Implicit:** `type_name new_var = expression`
+
+Implicit typecasting also occurs when we perform an operation between a lower level data type and a higher level data type. Eg. int & float, int and long, float and double etc. 
+
+In all of the above examples, the first one gets typecased to the second.
+
+C - style casts may add a line of instruction or two, however, they are mostly supposed to be compile time. If you need C - style casts in your code you may use [reinterpret cast](https://en.cppreference.com/w/cpp/language/reinterpret_cast)
+
+<div class="epigraph">
+<blockquote><p> Christ, people. Learn C, instead of just stringing random characters together until it compiles (with warnings).</p>
+<footer>Linus Torvalds, <cite>LKM mailing list</cite></footer></blockquote>
+</div>
+
