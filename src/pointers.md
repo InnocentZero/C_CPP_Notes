@@ -1,4 +1,4 @@
-# Pointers, Scoping and References
+# Pointers, Scoping 
 
 A pointer is nothing but a block of memory that stores the address of another block of memory. It can be an array, a class, an integer, or even a function.
 
@@ -81,6 +81,29 @@ a = 60; // doesn't change the value of the a in outer scope
 
 ## Arrays are pointers
 
-Arrays are nothing but pointers with a large range of access.
+Arrays are nothing but pointers with a large range of access. We can also utilise arrays as pointers. 
 
+```cpp
+int main(){
+int array[] = {1, 3, 4, 6};
+cout << *(array + 1) << '\n';
+// prints 3
+}
+```
 
+### Dynamically allocated arrays
+
+For arrays that reside on heap memory, you can allocate the arrays as follows. Note that they are declared using pointers only.
+
+```cpp
+
+int main(){
+
+int *array = new int[10];
+
+for (int i = 0; i < 10; i++) 
+    *(array + i) = 10i; // can also use array[i] here, it will work 
+
+cout << array[9] << '\n';
+}
+```

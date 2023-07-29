@@ -45,8 +45,11 @@ However, the benefits are much more:
 
 
 ```cpp
+// declare greeting 
+string greeting = "aeblablo"
+
 //accessing individual characters of a string
-cout << greeting1[1] " is 'e'" << endl;
+cout << greeting1[1] << " is 'e'" << endl;
 
 //Length of the string
 cout << greeting.length() << endl;
@@ -56,7 +59,7 @@ cout << greeting.length() << endl;
 cout << greeting.substr(1, 3) << endl;
 
 //adding two Strings
-string greeting = greeting1 + greeting2;
+greeting = greeting1 + greeting2;
 cout << greeting << endl;
 //OR 
 string second_greeting = greeting1.append(greeting2);

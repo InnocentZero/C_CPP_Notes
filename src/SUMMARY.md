@@ -5,4 +5,5 @@
     - [IO](./io.md)
     - [Datatypes](./data_types.md)
     - [Strings and Arrays](./strings_arrays.md)
-    - [Pointers, Scoping and References](./pointers.md)
+    - [Stack memory and Heap memory](./memory.md)
+    - [Pointers & Scoping](./pointers.md)
