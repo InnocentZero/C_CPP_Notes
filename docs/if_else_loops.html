@@ -3,7 +3,7 @@
     <head>
         <!-- Book generated using mdBook -->
         <meta charset="UTF-8">
-        <title>IO - My Home</title>
+        <title>If Else and Loops - My Home</title>
 
 
         <!-- Custom HTML head -->
@@ -86,7 +86,7 @@
 
         <nav id="sidebar" class="sidebar" aria-label="Table of contents">
             <div class="sidebar-scrollbox">
-                <ol class="chapter"><li class="chapter-item expanded "><a href="cpp.html"><strong aria-hidden="true">1.</strong> CPP</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item "><a href="basic_preproc.html"><strong aria-hidden="true">1.1.</strong> Basic Structure and Preprocessor Directives</a></li><li class="chapter-item expanded "><a href="io.html" class="active"><strong aria-hidden="true">1.2.</strong> IO</a></li><li class="chapter-item "><a href="cont_struct.html"><strong aria-hidden="true">1.3.</strong> Arithmetic and Comparison</a></li><li class="chapter-item "><a href="data_types.html"><strong aria-hidden="true">1.4.</strong> Datatypes</a></li><li class="chapter-item "><a href="if_else_loops.html"><strong aria-hidden="true">1.5.</strong> If Else and Loops</a></li><li class="chapter-item "><a href="strings_arrays.html"><strong aria-hidden="true">1.6.</strong> Strings and Arrays</a></li><li class="chapter-item "><a href="functions.html"><strong aria-hidden="true">1.7.</strong> Functions</a></li><li class="chapter-item "><a href="memory.html"><strong aria-hidden="true">1.8.</strong> Stack memory and Heap memory</a></li><li class="chapter-item "><a href="pointers.html"><strong aria-hidden="true">1.9.</strong> Pointers & Scoping</a></li></ol></li></ol>
+                <ol class="chapter"><li class="chapter-item expanded "><a href="cpp.html"><strong aria-hidden="true">1.</strong> CPP</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item "><a href="basic_preproc.html"><strong aria-hidden="true">1.1.</strong> Basic Structure and Preprocessor Directives</a></li><li class="chapter-item "><a href="io.html"><strong aria-hidden="true">1.2.</strong> IO</a></li><li class="chapter-item "><a href="cont_struct.html"><strong aria-hidden="true">1.3.</strong> Arithmetic and Comparison</a></li><li class="chapter-item "><a href="data_types.html"><strong aria-hidden="true">1.4.</strong> Datatypes</a></li><li class="chapter-item expanded "><a href="if_else_loops.html" class="active"><strong aria-hidden="true">1.5.</strong> If Else and Loops</a></li><li class="chapter-item "><a href="strings_arrays.html"><strong aria-hidden="true">1.6.</strong> Strings and Arrays</a></li><li class="chapter-item "><a href="functions.html"><strong aria-hidden="true">1.7.</strong> Functions</a></li><li class="chapter-item "><a href="memory.html"><strong aria-hidden="true">1.8.</strong> Stack memory and Heap memory</a></li><li class="chapter-item "><a href="pointers.html"><strong aria-hidden="true">1.9.</strong> Pointers & Scoping</a></li></ol></li></ol>
             </div>
             <div id="sidebar-resize-handle" class="sidebar-resize-handle"></div>
         </nav>
@@ -147,47 +147,116 @@
 
                 <div id="content" class="content">
                     <main>
-                        <h1 id="io"><a class="header" href="#io">IO</a></h1>
-<p><code>iostream</code> is the header file responsible for input and output. <code>std</code> is the namespace for <code>cout</code> object which is <strong>normally</strong> connected to the screen. <code>&lt;&lt;</code> is the <em>stream insertion operator</em>. <code>endl</code> is equivalent to <code>'\n' &lt;&lt; flush</code>. What this basically means is that a newline escape character is inserted into the stream and the output that was buffered in the memory was expelled onto the the screen.</p>
+                        <h2 id="if-else"><a class="header" href="#if-else"><code>if-else</code></a></h2>
+<pre><code class="language-cpp">if(expr){statements}
+else{statements}
+</code></pre>
+<p>Multiple <code>if-else</code> can be chained together. </p>
+<pre><code class="language-cpp">if(expr){statements}
+else if(expr){statements}
+else if(expr){statements}
+</code></pre>
+<p>syntactic sugar for <code>if else</code>:  <code>expr ? output if true : output if false</code></p>
 <blockquote>
-<p>C++ buffers it because printing is an expensive task for memory and CPU. </p>
+<p>short circuiting: if the first statement in an <code>&amp;&amp;</code> structure is false, then the second statement is not evaluated. similarly, if the first statement in an <code>||</code> structure is true, the second statement is not evaluated.</p>
 </blockquote>
-<p>There is another function called <code>getline</code> that takes 1 (optionally 2 or 3) arguments. The basic function signature is as follows. It is a part of the <code>string</code> header, as opposed to the <code>iostream</code> header.</p>
-<pre><code>getline(istream&amp; stream, str&amp; s, char delim);
-</code></pre>
-<p>By default, the stream selected is the default input output stream but it can be a file stream as well.</p>
-<p>A simple example:</p>
-<pre><code class="language-cpp">#include &lt;iostream&gt;
-#include &lt;string&gt;
-
-int main(){
-    string s;
-    getline(cin, s, '$'); 
-    // takes input from cin, saves it in s and stops when `$` is reached
+<blockquote>
+<p>dangling <code>else</code>: an <code>else</code> is related to the closest <code>if</code> unless brackets <code>{}</code> are used.</p>
+</blockquote>
+<h3 id="switch-case"><a class="header" href="#switch-case"><code>switch-case</code></a></h3>
+<p>only for equality and integers\characters (used as ascii values)</p>
+<pre><code class="language-cpp">scanf(&quot;%d&quot;,&amp;isd);
+switch (isd){
+    case 91: printf(&quot;india\n&quot;); break;
+    case 1: printf(&quot;us-canada\n&quot;); break;
+    case 61: printf(&quot;astralia\n&quot;); break;
+    default: printf(&quot;india\n&quot;); 
 }
 </code></pre>
-<p>There exists another variant that is a method for <code>cin</code> (Don’t worry about what a method is rn, it’ll be covered later).</p>
-<pre><code class="language-cpp">#include &lt;iostream&gt;
-#include &lt;string&gt;
-
-int main(){
-    string s;
-    int MAX_LEN = 6;
-    cin.getline(s, MAX_LEN, '$');
-    // by default the delimiter is '\n'
+<blockquote>
+<p>Switch case is primarily used for enum types but since enums can be freely typecasted to int we can use that as well.</p>
+</blockquote>
+<div class="epigraph">
+<blockquote><p> A computer is like air conditioning - it becomes useless when you open Windows.</p>
+<footer>Linus Torvalds</footer></blockquote>
+</div>
+<h2 id="iterators"><a class="header" href="#iterators">Iterators</a></h2>
+<h3 id="for-loops"><a class="header" href="#for-loops">For loops</a></h3>
+<pre><code class="language-cpp">int main(){
+    int count = 1
+    for(int i = 0; i &lt; count; i++){
+        printf(&quot;%d&quot;,i);
+    }
 }
 </code></pre>
-<p>This variant only takes input till the specified length. If the length is crossed the program execution stops. If the length is not specified then the entire input till the delimiter is taken.</p>
+<p>The shortest <code>for</code> loop is <code>for(;;){}</code> which does nothing.</p>
+<p>There can be multiple values and multiple conditions. A for loop can also be written as follows:</p>
+<pre><code class="language-cpp">int main(){
+    int stud = 0, NSTUD = 10;
+    for(;;){
+        if (stud &lt; NSTUD){
+            printf(&quot;%d&quot;,stud);
+            stud++;
+            continue;
+        }
+        break;
+    }
+}
+</code></pre>
+<p>Loops can also be nested as usual.</p>
+<p>We also have the following syntax for a <strong>for</strong> loop.</p>
+<pre><code class="language-cpp">int v[5] = {1,2,3,4,5};
+for (int x: v){ //take x that varies from first value of v to the last value of v
+    cout &lt;&lt; x;
+}
+
+for (int &amp;x: v){ //take them as a reference this time so that values can be modified
+    x++;
+}
+</code></pre>
+<h3 id="while-loops"><a class="header" href="#while-loops">While loops</a></h3>
+<pre><code class="language-cpp">int main(){
+    int iterator;
+    while (iterator = 0; /*some condition*/){
+        //do some shit
+        iterator++;
+    }
+}
+</code></pre>
+<p>This can also be written as</p>
+<pre><code class="language-cpp">int main(){
+    int iterator = 0;
+    while (iterator++ &lt;= 10){
+        //do some shit
+    }
+}
+</code></pre>
+<p>This utilises the properties of postincrement operator.</p>
+<ul>
+<li>iterator cannot be declared inside <code>while</code></li>
+<li><code>for</code> and <code>while</code> are the same in backend</li>
+</ul>
+<h3 id="do-while-loop"><a class="header" href="#do-while-loop">Do-while loop</a></h3>
+<p>It is possible the while doesn’t even execute once. Use do while if the first iteration is known to happen in all scenarios.</p>
+<pre><code class="language-cpp">int main(){
+    int iterator = 0;
+    do{
+        //do some shit
+        iterator++;
+    } while (iterator != 0);
+}
+</code></pre>
+<p>If an equivalent <code>while</code> loop would have been written it would have never executed.</p>
 
                     </main>
 
                     <nav class="nav-wrapper" aria-label="Page navigation">
                         <!-- Mobile navigation buttons -->
-                            <a rel="prev" href="basic_preproc.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                            <a rel="prev" href="data_types.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
                                 <i class="fa fa-angle-left"></i>
                             </a>
 
-                            <a rel="next" href="cont_struct.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                            <a rel="next" href="strings_arrays.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
                                 <i class="fa fa-angle-right"></i>
                             </a>
 
@@ -197,11 +266,11 @@ int main(){
             </div>
 
             <nav class="nav-wide-wrapper" aria-label="Page navigation">
-                    <a rel="prev" href="basic_preproc.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                    <a rel="prev" href="data_types.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
                         <i class="fa fa-angle-left"></i>
                     </a>
 
-                    <a rel="next" href="cont_struct.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                    <a rel="next" href="strings_arrays.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
                         <i class="fa fa-angle-right"></i>
                     </a>
             </nav>

@@ -3,7 +3,7 @@
     <head>
         <!-- Book generated using mdBook -->
         <meta charset="UTF-8">
-        <title>IO - My Home</title>
+        <title>Functions - My Home</title>
 
 
         <!-- Custom HTML head -->
@@ -86,7 +86,7 @@
 
         <nav id="sidebar" class="sidebar" aria-label="Table of contents">
             <div class="sidebar-scrollbox">
-                <ol class="chapter"><li class="chapter-item expanded "><a href="cpp.html"><strong aria-hidden="true">1.</strong> CPP</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item "><a href="basic_preproc.html"><strong aria-hidden="true">1.1.</strong> Basic Structure and Preprocessor Directives</a></li><li class="chapter-item expanded "><a href="io.html" class="active"><strong aria-hidden="true">1.2.</strong> IO</a></li><li class="chapter-item "><a href="cont_struct.html"><strong aria-hidden="true">1.3.</strong> Arithmetic and Comparison</a></li><li class="chapter-item "><a href="data_types.html"><strong aria-hidden="true">1.4.</strong> Datatypes</a></li><li class="chapter-item "><a href="if_else_loops.html"><strong aria-hidden="true">1.5.</strong> If Else and Loops</a></li><li class="chapter-item "><a href="strings_arrays.html"><strong aria-hidden="true">1.6.</strong> Strings and Arrays</a></li><li class="chapter-item "><a href="functions.html"><strong aria-hidden="true">1.7.</strong> Functions</a></li><li class="chapter-item "><a href="memory.html"><strong aria-hidden="true">1.8.</strong> Stack memory and Heap memory</a></li><li class="chapter-item "><a href="pointers.html"><strong aria-hidden="true">1.9.</strong> Pointers & Scoping</a></li></ol></li></ol>
+                <ol class="chapter"><li class="chapter-item expanded "><a href="cpp.html"><strong aria-hidden="true">1.</strong> CPP</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item "><a href="basic_preproc.html"><strong aria-hidden="true">1.1.</strong> Basic Structure and Preprocessor Directives</a></li><li class="chapter-item "><a href="io.html"><strong aria-hidden="true">1.2.</strong> IO</a></li><li class="chapter-item "><a href="cont_struct.html"><strong aria-hidden="true">1.3.</strong> Arithmetic and Comparison</a></li><li class="chapter-item "><a href="data_types.html"><strong aria-hidden="true">1.4.</strong> Datatypes</a></li><li class="chapter-item "><a href="if_else_loops.html"><strong aria-hidden="true">1.5.</strong> If Else and Loops</a></li><li class="chapter-item "><a href="strings_arrays.html"><strong aria-hidden="true">1.6.</strong> Strings and Arrays</a></li><li class="chapter-item expanded "><a href="functions.html" class="active"><strong aria-hidden="true">1.7.</strong> Functions</a></li><li class="chapter-item "><a href="memory.html"><strong aria-hidden="true">1.8.</strong> Stack memory and Heap memory</a></li><li class="chapter-item "><a href="pointers.html"><strong aria-hidden="true">1.9.</strong> Pointers & Scoping</a></li></ol></li></ol>
             </div>
             <div id="sidebar-resize-handle" class="sidebar-resize-handle"></div>
         </nav>
@@ -147,47 +147,47 @@
 
                 <div id="content" class="content">
                     <main>
-                        <h1 id="io"><a class="header" href="#io">IO</a></h1>
-<p><code>iostream</code> is the header file responsible for input and output. <code>std</code> is the namespace for <code>cout</code> object which is <strong>normally</strong> connected to the screen. <code>&lt;&lt;</code> is the <em>stream insertion operator</em>. <code>endl</code> is equivalent to <code>'\n' &lt;&lt; flush</code>. What this basically means is that a newline escape character is inserted into the stream and the output that was buffered in the memory was expelled onto the the screen.</p>
+                        <h1 id="functions"><a class="header" href="#functions">Functions</a></h1>
+<p><code>int myfunc(int x); //function prototype / declaration</code></p>
+<pre><code class="language-cpp">int myfunc(int a){
+    //do some shit
+    return val;
+}
+int main(){
+    //do some shit
+    int c = myfunc(b);
+    //do some shit
+}
+</code></pre>
+<p>Usually it is a good programming practice to have a header file that contains the definitions of functions used along with a comment gitving its function (pun intended), and a separate file containing the function itself (the function is not redefined unless you put a semicolon at its end).</p>
 <blockquote>
-<p>C++ buffers it because printing is an expensive task for memory and CPU. </p>
+<p>Format of a function: <code>return-value-type function-name(parameter-list);</code><br/>Parameter list is a comma separated list of values that have to be taken as input.</p>
 </blockquote>
-<p>There is another function called <code>getline</code> that takes 1 (optionally 2 or 3) arguments. The basic function signature is as follows. It is a part of the <code>string</code> header, as opposed to the <code>iostream</code> header.</p>
-<pre><code>getline(istream&amp; stream, str&amp; s, char delim);
-</code></pre>
-<p>By default, the stream selected is the default input output stream but it can be a file stream as well.</p>
-<p>A simple example:</p>
-<pre><code class="language-cpp">#include &lt;iostream&gt;
-#include &lt;string&gt;
+<p>We can return <code>void</code> from a function that doesn’t have to return a value, but just perform operations.</p>
+<p>Arrays cannot be returned by a function unless the array is declared globally or passed as a heap allocated pointer.</p>
+<p>To take an array as an input, simply pass the pointer to its first element and keep incrementing its pointer to access further elements. However, C performs no checks for illegal access if the pointer crosses the array length. It is a good practice for us to pass pointers to arrays along with their lengths as functions.</p>
+<h2 id="default-arguments-for-functions"><a class="header" href="#default-arguments-for-functions">Default arguments for functions</a></h2>
+<pre><code class="language-cpp">int func(int x = 6){
+    return 2*x;
+}
 
 int main(){
-    string s;
-    getline(cin, s, '$'); 
-    // takes input from cin, saves it in s and stops when `$` is reached
+    int y = func(); //gets value 12
+    int z = func(7); //gets value 14
 }
 </code></pre>
-<p>There exists another variant that is a method for <code>cin</code> (Don’t worry about what a method is rn, it’ll be covered later).</p>
-<pre><code class="language-cpp">#include &lt;iostream&gt;
-#include &lt;string&gt;
-
-int main(){
-    string s;
-    int MAX_LEN = 6;
-    cin.getline(s, MAX_LEN, '$');
-    // by default the delimiter is '\n'
-}
-</code></pre>
-<p>This variant only takes input till the specified length. If the length is crossed the program execution stops. If the length is not specified then the entire input till the delimiter is taken.</p>
+<h2 id="pure-and-impure-functions"><a class="header" href="#pure-and-impure-functions">Pure and Impure functions</a></h2>
+<p>Since C++ supports functions, <em>in theory</em>, it supports functional programming. In functional programming we have the notion of pure and impure functions. Pure functions are those that do not change the value of anything <strong>except</strong> for the parameters that are passed in them. On the other hand, impure functions are changinge values outside of the function’s scope. Do note that passing a pointer and dereferencing it to change its value is also an example of an impure function.</p>
 
                     </main>
 
                     <nav class="nav-wrapper" aria-label="Page navigation">
                         <!-- Mobile navigation buttons -->
-                            <a rel="prev" href="basic_preproc.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                            <a rel="prev" href="strings_arrays.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
                                 <i class="fa fa-angle-left"></i>
                             </a>
 
-                            <a rel="next" href="cont_struct.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                            <a rel="next" href="memory.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
                                 <i class="fa fa-angle-right"></i>
                             </a>
 
@@ -197,11 +197,11 @@ int main(){
             </div>
 
             <nav class="nav-wide-wrapper" aria-label="Page navigation">
-                    <a rel="prev" href="basic_preproc.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                    <a rel="prev" href="strings_arrays.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
                         <i class="fa fa-angle-left"></i>
                     </a>
 
-                    <a rel="next" href="cont_struct.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                    <a rel="next" href="memory.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
                         <i class="fa fa-angle-right"></i>
                     </a>
             </nav>

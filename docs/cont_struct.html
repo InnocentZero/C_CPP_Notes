@@ -3,7 +3,7 @@
     <head>
         <!-- Book generated using mdBook -->
         <meta charset="UTF-8">
-        <title>IO - My Home</title>
+        <title>Arithmetic and Comparison - My Home</title>
 
 
         <!-- Custom HTML head -->
@@ -86,7 +86,7 @@
 
         <nav id="sidebar" class="sidebar" aria-label="Table of contents">
             <div class="sidebar-scrollbox">
-                <ol class="chapter"><li class="chapter-item expanded "><a href="cpp.html"><strong aria-hidden="true">1.</strong> CPP</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item "><a href="basic_preproc.html"><strong aria-hidden="true">1.1.</strong> Basic Structure and Preprocessor Directives</a></li><li class="chapter-item expanded "><a href="io.html" class="active"><strong aria-hidden="true">1.2.</strong> IO</a></li><li class="chapter-item "><a href="cont_struct.html"><strong aria-hidden="true">1.3.</strong> Arithmetic and Comparison</a></li><li class="chapter-item "><a href="data_types.html"><strong aria-hidden="true">1.4.</strong> Datatypes</a></li><li class="chapter-item "><a href="if_else_loops.html"><strong aria-hidden="true">1.5.</strong> If Else and Loops</a></li><li class="chapter-item "><a href="strings_arrays.html"><strong aria-hidden="true">1.6.</strong> Strings and Arrays</a></li><li class="chapter-item "><a href="functions.html"><strong aria-hidden="true">1.7.</strong> Functions</a></li><li class="chapter-item "><a href="memory.html"><strong aria-hidden="true">1.8.</strong> Stack memory and Heap memory</a></li><li class="chapter-item "><a href="pointers.html"><strong aria-hidden="true">1.9.</strong> Pointers & Scoping</a></li></ol></li></ol>
+                <ol class="chapter"><li class="chapter-item expanded "><a href="cpp.html"><strong aria-hidden="true">1.</strong> CPP</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item "><a href="basic_preproc.html"><strong aria-hidden="true">1.1.</strong> Basic Structure and Preprocessor Directives</a></li><li class="chapter-item "><a href="io.html"><strong aria-hidden="true">1.2.</strong> IO</a></li><li class="chapter-item expanded "><a href="cont_struct.html" class="active"><strong aria-hidden="true">1.3.</strong> Arithmetic and Comparison</a></li><li class="chapter-item "><a href="data_types.html"><strong aria-hidden="true">1.4.</strong> Datatypes</a></li><li class="chapter-item "><a href="if_else_loops.html"><strong aria-hidden="true">1.5.</strong> If Else and Loops</a></li><li class="chapter-item "><a href="strings_arrays.html"><strong aria-hidden="true">1.6.</strong> Strings and Arrays</a></li><li class="chapter-item "><a href="functions.html"><strong aria-hidden="true">1.7.</strong> Functions</a></li><li class="chapter-item "><a href="memory.html"><strong aria-hidden="true">1.8.</strong> Stack memory and Heap memory</a></li><li class="chapter-item "><a href="pointers.html"><strong aria-hidden="true">1.9.</strong> Pointers & Scoping</a></li></ol></li></ol>
             </div>
             <div id="sidebar-resize-handle" class="sidebar-resize-handle"></div>
         </nav>
@@ -147,47 +147,92 @@
 
                 <div id="content" class="content">
                     <main>
-                        <h1 id="io"><a class="header" href="#io">IO</a></h1>
-<p><code>iostream</code> is the header file responsible for input and output. <code>std</code> is the namespace for <code>cout</code> object which is <strong>normally</strong> connected to the screen. <code>&lt;&lt;</code> is the <em>stream insertion operator</em>. <code>endl</code> is equivalent to <code>'\n' &lt;&lt; flush</code>. What this basically means is that a newline escape character is inserted into the stream and the output that was buffered in the memory was expelled onto the the screen.</p>
+                        <h2 id="arithmetic-and-comparison"><a class="header" href="#arithmetic-and-comparison">Arithmetic and Comparison</a></h2>
+<h3 id="arithmetic"><a class="header" href="#arithmetic">Arithmetic</a></h3>
+<ul>
+<li>Addition: <code>a + b</code></li>
+<li>Subtraction: <code>a - b</code></li>
+<li>Multiplication: <code>a*b</code></li>
+<li>Division: <code>a/b</code></li>
+<li>Remainder / Modulus: <code>a%b</code></li>
+</ul>
 <blockquote>
-<p>C++ buffers it because printing is an expensive task for memory and CPU. </p>
+<p>Multiplication can easily run out of the bounds of the given datatype. So take care while multiplying numbers. </p>
 </blockquote>
-<p>There is another function called <code>getline</code> that takes 1 (optionally 2 or 3) arguments. The basic function signature is as follows. It is a part of the <code>string</code> header, as opposed to the <code>iostream</code> header.</p>
-<pre><code>getline(istream&amp; stream, str&amp; s, char delim);
-</code></pre>
-<p>By default, the stream selected is the default input output stream but it can be a file stream as well.</p>
-<p>A simple example:</p>
-<pre><code class="language-cpp">#include &lt;iostream&gt;
-#include &lt;string&gt;
-
-int main(){
-    string s;
-    getline(cin, s, '$'); 
-    // takes input from cin, saves it in s and stops when `$` is reached
+<blockquote>
+<p>Division by zero mostly leads to a fatal error. So take care of b being 0 explicitly.</p>
+</blockquote>
+<blockquote>
+<p>Remainder can be negative too if you use the modulus operator. SO take care when you need the remainders according to mathematical logic.</p>
+</blockquote>
+<blockquote>
+<p>Syntactic sugar for assignment: <code>c += 3;</code> and similar for other arithmetic operations as well. </p>
+</blockquote>
+<div class ="epigraph"><blockquote><p> Every good work of software starts by scratching a developer’s personal itch.</p>
+<footer>Eric S. Raymond, <cite>The Cathedral and the Bazaar</cite></footer></bockquote></div>
+<p><span class="texthighlight">An easy method to reverse a number:</span></p>
+<pre><code class="language-cpp">int rev_num(int num){
+    int revnum = 0;
+    while (num != 0){
+        revnum = revnum*10 + num%10;
+        num = num/10;
+    }
 }
 </code></pre>
-<p>There exists another variant that is a method for <code>cin</code> (Don’t worry about what a method is rn, it’ll be covered later).</p>
-<pre><code class="language-cpp">#include &lt;iostream&gt;
-#include &lt;string&gt;
-
-int main(){
-    string s;
-    int MAX_LEN = 6;
-    cin.getline(s, MAX_LEN, '$');
-    // by default the delimiter is '\n'
-}
+<h3 id="logical-operators"><a class="header" href="#logical-operators">Logical Operators</a></h3>
+<p><code>&amp;&amp;</code> logical and</p>
+<p><code>||</code> logical or</p>
+<p><code>!</code> logical not</p>
+<h3 id="bit-operators"><a class="header" href="#bit-operators">Bit operators</a></h3>
+<ul>
+<li>
+<p><code>&amp;</code> : bitwise and, take the logical and of each bit of the number.</p>
+</li>
+<li>
+<p><code>|</code> : bitwise or, take the logical or of each bit of the number.</p>
+</li>
+<li>
+<p><code>^</code> : bitwise xor, take the logical xor of each bit of the number.</p>
+</li>
+<li>
+<p><code>x &lt;&lt; y</code> : shift the bits of x y bits to to the left. Equivalent to multiplication by 2.</p>
+</li>
+<li>
+<p><code>x &gt;&gt; y</code> : same as above except it shifts to the right. Equivalent to floor division by 2.</p>
+</li>
+</ul>
+<blockquote>
+<p>Bit operators are extremely fast. If possible, prefer using them over other arithmetic operators.</p>
+</blockquote>
+<p><span class="texthighlight">An easy method to swap two numbers without additional variables:</span></p>
+<pre><code class="language-cpp">#define swap (x, y) {x = x^y; y = x^y; x = x^y};
 </code></pre>
-<p>This variant only takes input till the specified length. If the length is crossed the program execution stops. If the length is not specified then the entire input till the delimiter is taken.</p>
-
+<h3 id="increment-and-decrement-operators"><a class="header" href="#increment-and-decrement-operators">Increment and Decrement Operators</a></h3>
+<div class="table-wrapper"><table><thead><tr><th style="text-align: center">Operator</th><th style="text-align: center">Explanation</th></tr></thead><tbody>
+<tr><td style="text-align: center"><code>a++</code></td><td style="text-align: center">Use the current value of a in the expression in which it resides, and then increment by 1</td></tr>
+<tr><td style="text-align: center"><code>++a</code></td><td style="text-align: center">First increment and then use value</td></tr>
+<tr><td style="text-align: center"><code>a-\-</code> ; <code>-\-a</code></td><td style="text-align: center">Same as above except for decrementing</td></tr>
+</tbody></table>
+</div>
+<h3 id="comparison-operators"><a class="header" href="#comparison-operators">Comparison Operators</a></h3>
+<div class="table-wrapper"><table><thead><tr><th style="text-align: center">Comparison</th><th style="text-align: center">Purpose</th></tr></thead><tbody>
+<tr><td style="text-align: center"><code>a == b</code></td><td style="text-align: center">If the numbers are equal</td></tr>
+<tr><td style="text-align: center"><code>a != b</code></td><td style="text-align: center">If the numbers are not equal to each other</td></tr>
+<tr><td style="text-align: center"><code>a &lt;= b</code></td><td style="text-align: center">If a is less than or equal to b</td></tr>
+<tr><td style="text-align: center"><code>a &gt;= b</code></td><td style="text-align: center">If a is greater than or equal to b</td></tr>
+<tr><td style="text-align: center"><code>a &gt; b</code></td><td style="text-align: center">If a is greater than b</td></tr>
+<tr><td style="text-align: center"><code>a &lt; b</code></td><td style="text-align: center">If a is less than b</td></tr>
+</tbody></table>
+</div>
                     </main>
 
                     <nav class="nav-wrapper" aria-label="Page navigation">
                         <!-- Mobile navigation buttons -->
-                            <a rel="prev" href="basic_preproc.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                            <a rel="prev" href="io.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
                                 <i class="fa fa-angle-left"></i>
                             </a>
 
-                            <a rel="next" href="cont_struct.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                            <a rel="next" href="data_types.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
                                 <i class="fa fa-angle-right"></i>
                             </a>
 
@@ -197,11 +242,11 @@ int main(){
             </div>
 
             <nav class="nav-wide-wrapper" aria-label="Page navigation">
-                    <a rel="prev" href="basic_preproc.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                    <a rel="prev" href="io.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
                         <i class="fa fa-angle-left"></i>
                     </a>
 
-                    <a rel="next" href="cont_struct.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                    <a rel="next" href="data_types.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
                         <i class="fa fa-angle-right"></i>
                     </a>
             </nav>
