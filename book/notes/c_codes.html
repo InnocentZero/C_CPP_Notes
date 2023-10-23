@@ -1,0 +1,980 @@
+<!DOCTYPE HTML>
+<html lang="en" class="sidebar-visible no-js ayu">
+    <head>
+        <!-- Book generated using mdBook -->
+        <meta charset="UTF-8">
+        <title>c_codes - Notes</title>
+
+
+        <!-- Custom HTML head -->
+        
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="theme-color" content="#ffffff" />
+
+        <link rel="icon" href="../favicon.svg">
+        <link rel="shortcut icon" href="../favicon.png">
+        <link rel="stylesheet" href="../css/variables.css">
+        <link rel="stylesheet" href="../css/general.css">
+        <link rel="stylesheet" href="../css/chrome.css">
+        <link rel="stylesheet" href="../css/print.css" media="print">
+
+        <!-- Fonts -->
+        <link rel="stylesheet" href="../FontAwesome/css/font-awesome.css">
+        <link rel="stylesheet" href="../fonts/fonts.css">
+
+        <!-- Highlight.js Stylesheets -->
+        <link rel="stylesheet" href="../highlight.css">
+        <link rel="stylesheet" href="../tomorrow-night.css">
+        <link rel="stylesheet" href="../ayu-highlight.css">
+
+        <!-- Custom theme stylesheets -->
+        <link rel="stylesheet" href=".././src/notes/custom.css">
+        <link rel="stylesheet" href="../theme/pagetoc.css">
+        <link rel="stylesheet" href=".././src/notes/katex.min.css">
+
+    </head>
+    <body>
+    <div id="body-container">
+        <!-- Provide site root to javascript -->
+        <script>
+            var path_to_root = "../";
+            var default_theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? "navy" : "ayu";
+        </script>
+
+        <!-- Work around some values being stored in localStorage wrapped in quotes -->
+        <script>
+            try {
+                var theme = localStorage.getItem('mdbook-theme');
+                var sidebar = localStorage.getItem('mdbook-sidebar');
+
+                if (theme.startsWith('"') && theme.endsWith('"')) {
+                    localStorage.setItem('mdbook-theme', theme.slice(1, theme.length - 1));
+                }
+
+                if (sidebar.startsWith('"') && sidebar.endsWith('"')) {
+                    localStorage.setItem('mdbook-sidebar', sidebar.slice(1, sidebar.length - 1));
+                }
+            } catch (e) { }
+        </script>
+
+        <!-- Set the theme before any content is loaded, prevents flash -->
+        <script>
+            var theme;
+            try { theme = localStorage.getItem('mdbook-theme'); } catch(e) { }
+            if (theme === null || theme === undefined) { theme = default_theme; }
+            var html = document.querySelector('html');
+            html.classList.remove('no-js')
+            html.classList.remove('ayu')
+            html.classList.add(theme);
+            html.classList.add('js');
+        </script>
+
+        <!-- Hide / unhide sidebar before it is displayed -->
+        <script>
+            var html = document.querySelector('html');
+            var sidebar = null;
+            if (document.body.clientWidth >= 1080) {
+                try { sidebar = localStorage.getItem('mdbook-sidebar'); } catch(e) { }
+                sidebar = sidebar || 'visible';
+            } else {
+                sidebar = 'hidden';
+            }
+            html.classList.remove('sidebar-visible');
+            html.classList.add("sidebar-" + sidebar);
+        </script>
+
+        <nav id="sidebar" class="sidebar" aria-label="Table of contents">
+            <div class="sidebar-scrollbox">
+                <ol class="chapter"><li class="chapter-item "><a href="../notes/rust_notes.html"><strong aria-hidden="true">1.</strong> rust_notes</a></li><li class="chapter-item "><a href="../notes/python.html"><strong aria-hidden="true">2.</strong> python</a></li><li class="chapter-item "><a href="../notes/cmake.html"><strong aria-hidden="true">3.</strong> cmake</a></li><li class="chapter-item "><a href="../notes/project_euler.html"><strong aria-hidden="true">4.</strong> project_euler</a></li><li class="chapter-item expanded "><a href="../notes/c_codes.html" class="active"><strong aria-hidden="true">5.</strong> c_codes</a></li><li class="chapter-item "><a href="../notes/cp_codes.html"><strong aria-hidden="true">6.</strong> cp_codes</a></li><li class="chapter-item "><a href="../notes/regex.html"><strong aria-hidden="true">7.</strong> regex</a></li><li class="chapter-item "><a href="../notes/concurrency.html"><strong aria-hidden="true">8.</strong> concurrency</a></li><li class="chapter-item "><a href="../notes/cpp-guidelines.html"><strong aria-hidden="true">9.</strong> cpp-guidelines</a></li><li class="chapter-item "><a href="../notes/hacking_basics.html"><strong aria-hidden="true">10.</strong> hacking_basics</a></li><li class="chapter-item "><a href="../notes/asm.html"><strong aria-hidden="true">11.</strong> asm</a></li><li class="chapter-item "><a href="../notes/registers.html"><strong aria-hidden="true">12.</strong> registers</a></li><li class="chapter-item "><a href="../notes/network_stack.html"><strong aria-hidden="true">13.</strong> network_stack</a></li><li class="chapter-item "><a href="../notes/traceroute.html"><strong aria-hidden="true">14.</strong> traceroute</a></li><li class="chapter-item "><a href="../notes/icmp.html"><strong aria-hidden="true">15.</strong> icmp</a></li><li class="chapter-item "><a href="../notes/tcp.html"><strong aria-hidden="true">16.</strong> tcp</a></li><li class="chapter-item "><a href="../notes/ipv4.html"><strong aria-hidden="true">17.</strong> ipv4</a></li><li class="chapter-item "><a href="../notes/ipv6.html"><strong aria-hidden="true">18.</strong> ipv6</a></li><li class="chapter-item "><a href="../notes/dhcp.html"><strong aria-hidden="true">19.</strong> dhcp</a></li><li class="chapter-item "><a href="../notes/dhcpv6.html"><strong aria-hidden="true">20.</strong> dhcpv6</a></li><li class="chapter-item "><a href="../notes/natas_levels.html"><strong aria-hidden="true">21.</strong> natas_levels</a></li><li class="chapter-item "><a href="../notes/gdb.html"><strong aria-hidden="true">22.</strong> gdb</a></li><li class="chapter-item "><a href="../notes/linux.html"><strong aria-hidden="true">23.</strong> Kernel Contrib</a></li><li class="chapter-item "><a href="../notes/bash.html"><strong aria-hidden="true">24.</strong> bash</a></li></ol>
+            </div>
+            <div id="sidebar-resize-handle" class="sidebar-resize-handle"></div>
+        </nav>
+
+        <!-- Track and set sidebar scroll position -->
+        <script>
+            var sidebarScrollbox = document.querySelector('#sidebar .sidebar-scrollbox');
+            sidebarScrollbox.addEventListener('click', function(e) {
+                if (e.target.tagName === 'A') {
+                    sessionStorage.setItem('sidebar-scroll', sidebarScrollbox.scrollTop);
+                }
+            }, { passive: true });
+            var sidebarScrollTop = sessionStorage.getItem('sidebar-scroll');
+            sessionStorage.removeItem('sidebar-scroll');
+            if (sidebarScrollTop) {
+                // preserve sidebar scroll position when navigating via links within sidebar
+                sidebarScrollbox.scrollTop = sidebarScrollTop;
+            } else {
+                // scroll sidebar to current active section when navigating via "next/previous chapter" buttons
+                var activeSection = document.querySelector('#sidebar .active');
+                if (activeSection) {
+                    activeSection.scrollIntoView({ block: 'center' });
+                }
+            }
+        </script>
+
+        <div id="page-wrapper" class="page-wrapper">
+
+            <div class="page">
+                                <div id="menu-bar-hover-placeholder"></div>
+                <div id="menu-bar" class="menu-bar sticky">
+                    <div class="left-buttons">
+                        <button id="sidebar-toggle" class="icon-button" type="button" title="Toggle Table of Contents" aria-label="Toggle Table of Contents" aria-controls="sidebar">
+                            <i class="fa fa-bars"></i>
+                        </button>
+                        <button id="theme-toggle" class="icon-button" type="button" title="Change theme" aria-label="Change theme" aria-haspopup="true" aria-expanded="false" aria-controls="theme-list">
+                            <i class="fa fa-paint-brush"></i>
+                        </button>
+                        <ul id="theme-list" class="theme-popup" aria-label="Themes" role="menu">
+                            <li role="none"><button role="menuitem" class="theme" id="light">Light</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="rust">Rust</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="coal">Coal</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="navy">Navy</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="ayu">Ayu</button></li>
+                        </ul>
+                        <button id="search-toggle" class="icon-button" type="button" title="Search. (Shortkey: s)" aria-label="Toggle Searchbar" aria-expanded="false" aria-keyshortcuts="S" aria-controls="searchbar">
+                            <i class="fa fa-search"></i>
+                        </button>
+                    </div>
+
+                    <h1 class="menu-title">Notes</h1>
+
+                    <div class="right-buttons">
+                        <a href="../print.html" title="Print this book" aria-label="Print this book">
+                            <i id="print-button" class="fa fa-print"></i>
+                        </a>
+
+                    </div>
+                </div>
+
+                <div id="search-wrapper" class="hidden">
+                    <form id="searchbar-outer" class="searchbar-outer">
+                        <input type="search" id="searchbar" name="searchbar" placeholder="Search this book ..." aria-controls="searchresults-outer" aria-describedby="searchresults-header">
+                    </form>
+                    <div id="searchresults-outer" class="searchresults-outer hidden">
+                        <div id="searchresults-header" class="searchresults-header"></div>
+                        <ul id="searchresults">
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Apply ARIA attributes after the sidebar and the sidebar toggle button are added to the DOM -->
+                <script>
+                    document.getElementById('sidebar-toggle').setAttribute('aria-expanded', sidebar === 'visible');
+                    document.getElementById('sidebar').setAttribute('aria-hidden', sidebar !== 'visible');
+                    Array.from(document.querySelectorAll('#sidebar a')).forEach(function(link) {
+                        link.setAttribute('tabIndex', sidebar === 'visible' ? 0 : -1);
+                    });
+                </script>
+
+                <div id="content" class="content">
+                    <main><div class="sidetoc"><nav class="pagetoc"></nav></div>
+                        <h1 id="c_codes"><a class="header" href="#c_codes">c_codes</a></h1>
+<p>This is a 3 column calendar written in C.</p>
+<pre><code class="language-c">//in the name of god
+
+#include &lt;stdio.h&gt;
+
+//defining the spacing of the individual cells and gap in between columns
+#define col_gap_val 2
+#define row_gap_val 2
+#define tabsize 3
+
+//defining the vertical separator of length 3 and blank of length 3
+
+#define line printf(&quot;%*s&quot;,tabsize ,&quot;---&quot;)
+#define blank printf(&quot;%*s&quot;,tabsize ,&quot;&quot;)
+
+//newline 'cause I can't keep typing it
+
+#define endl puts(&quot;&quot;)
+
+void col_gap(){
+    for (int j = 0; j &lt; col_gap_val; j++){
+        blank;
+    }
+}
+
+void row_gap(){
+    for (int j = 0; j &lt; row_gap_val; j++){
+        endl;
+    }
+}
+
+
+int main(){
+
+    //take the year as an input
+    unsigned long long year;
+
+    puts(&quot;Please enter an year:&quot;);
+    scanf(&quot;%llu&quot;, &amp;year);
+
+    //Array for names of days
+    char *day[7] = {&quot;Mo&quot;, &quot;Tu&quot;, &quot;We&quot;, &quot;Th&quot;, &quot;Fr&quot;, &quot;Sa&quot;, &quot;Su&quot;};
+
+    //Array for names of months
+    char *month_name[12] = {&quot;Jan&quot;, &quot;Feb&quot;, &quot;Mar&quot;, &quot;Apr&quot;, &quot;May&quot;, &quot;Jun&quot;, &quot;Jul&quot;, &quot;Aug&quot;, &quot;Sep&quot;, &quot;Oct&quot;, &quot;Nov&quot;, &quot;Dec&quot;};
+
+    //Hold number of days in a month
+    unsigned short days_in_month[12];
+
+    //Often feel like just hardcoding it would have been easier
+    for (int i = 1; i &lt; 13; i++){        
+        switch(i){
+            case 1:
+            case 3:
+            case 5:
+            case 7:
+            case 8:
+            case 10:
+            case 12: days_in_month[i-1] = 31; break;
+            case 2: days_in_month[i-1] = (year%4 == 0 &amp;&amp; year%100 != 0)||(year%400 == 0)?29:28; break;
+            case 4:
+            case 6:
+            case 9:
+            case 11: days_in_month[i-1] = 30; break;
+        }
+        
+    }
+
+    //Remainder of each month to be used as an offset from Monday
+    unsigned short month_offset[12];
+
+    //Offset of Jan depends on the year taken
+    month_offset[0] = ((((year-1)%400)/100)*5 + ((year-1)%100)*365 + ((year-1)%100)/4)%7;
+
+    //Offset of other months depend on the previous months
+    for (unsigned short i = 1; i &lt; 12; i++){
+        month_offset[i] = (month_offset[i-1] + days_in_month[i-1])%7;
+    }
+
+    row_gap();
+    for (int i = 0; i &lt; 10; i++){
+        blank;
+    } col_gap();
+    printf(&quot;%0*llu&quot;, tabsize, year);
+    row_gap(); 
+
+    //Four iterations for four rows
+    for (unsigned short row_iterator = 0; row_iterator &lt; 4; row_iterator++){
+
+        //Month Headers
+        printf(&quot;%*s%*s%*s&quot;, 4*tabsize, month_name[3*row_iterator], (7 + col_gap_val)*tabsize, month_name[3*row_iterator + 1], (7 + col_gap_val)*tabsize, month_name[3*row_iterator + 2]);
+
+        row_gap();
+
+        //Day Headers
+        for (unsigned short month_iterator = 0; month_iterator &lt; 3; month_iterator++){
+            for (unsigned short day_iterator = 0; day_iterator &lt; 7; day_iterator++){
+                printf(&quot;%*s&quot;, tabsize, day[day_iterator]);
+            }
+            col_gap();
+        }
+    
+        endl;
+
+        //Divider under day header
+        for (unsigned short month_iterator = 0; month_iterator &lt; 3; month_iterator++){
+            for (unsigned short day_iterator = 0; day_iterator &lt; 7; day_iterator++){
+                line;
+            }
+            col_gap();
+        }
+    
+        endl;
+
+        //to store the last printed number of each month in each line
+        unsigned short flag[3] = {0};
+
+        //First row(week) of each month in the calendar
+        for (unsigned short month_iterator = 0; month_iterator &lt; 3; month_iterator++){
+            //to leave blanks corresponding to the previous month / according to the Jan of that year
+            for (unsigned short day_iterator = 0; day_iterator &lt; month_offset[3*row_iterator + month_iterator]; day_iterator++){
+                blank;
+            }
+            //print the days till Sunday
+            for (unsigned short day_iterator =  0; day_iterator + month_offset[3*row_iterator + month_iterator] &lt; 7; day_iterator++){
+                printf(&quot;%*d&quot;, tabsize, day_iterator + 1);
+                flag[month_iterator] = day_iterator + 1;
+            }
+            col_gap();
+        }
+    
+        endl;
+
+        //Print the next three weeks
+        for (unsigned short week_iterator = 0; week_iterator &lt; 3; week_iterator++){
+            for (unsigned short month_iterator = 0; month_iterator &lt; 3; month_iterator++){
+                for (unsigned short day_iterator = 0; day_iterator &lt; 7; day_iterator++){
+                    printf(&quot;%*d&quot;, tabsize, day_iterator + flag[month_iterator] + 1);
+                }
+                flag[month_iterator] += 7;
+                col_gap();
+            }
+            endl;
+        }
+
+        //Stores if a sixth line is required for any month or not
+        unsigned short sixlines[3] = {0};
+
+        //Print the last/second-last row of each month
+        for (int month_iterator = 0; month_iterator &lt; 3; month_iterator++){
+            int day_iterator =  0;
+            for (; day_iterator + flag[month_iterator] &lt; days_in_month[3*row_iterator + month_iterator]; day_iterator++){
+                printf(&quot;%*d&quot;, tabsize, day_iterator + flag[month_iterator] + 1);
+                //check if sixth line is reqd for any month
+                if (day_iterator == 6) {
+                    sixlines[month_iterator] = 1;
+                    flag[month_iterator] += 7;
+                    break;
+                }
+            }
+
+            //printing necessary blanks if sixth line isnt required
+            if (sixlines[month_iterator] == 0){
+                for (int k = 0; k &lt;= 6 - day_iterator; k++){
+                    blank;
+                }
+            }
+            col_gap();
+        }
+        endl;
+
+        for (int month_iterator = 0; month_iterator &lt; 3; month_iterator++){
+            if (sixlines[month_iterator] != 0){
+                for (int day_iterator = 0; day_iterator + flag[month_iterator] &lt; days_in_month[3*row_iterator + month_iterator]; day_iterator++){
+                    printf(&quot;%*d&quot;, tabsize, day_iterator + flag[month_iterator] + 1);
+                }
+                for (int day_iterator = 0; (day_iterator + days_in_month[3*row_iterator + month_iterator])%7 != 0; day_iterator++){
+                    blank;
+                }
+            } else {
+                for (int day_iterator = 0; day_iterator &lt; 7; day_iterator++){
+                    blank;
+                }
+            }
+            col_gap();
+        }
+        
+        row_gap();
+    
+    }    
+}
+</code></pre>
+<p>This is a simpler (in code) 1 column version.</p>
+<pre><code class="language-c">//in the name of god
+
+#include &lt;stdio.h&gt;
+
+//defining the spacing of the individual cells
+
+#define tabsize 4
+
+//defining the vertical separator of length 4 and blank of length 4
+
+#define line printf(&quot;%*s&quot;,tabsize ,&quot;----&quot;)
+#define blank printf(&quot;%*s&quot;,tabsize ,&quot;&quot;)
+
+//newline 'cause I can't keep typing it
+
+#define endl printf(&quot;\n&quot;)
+
+int main(){
+
+    //the year to be taken as input
+    
+    int year;
+    
+    //prompt to enter the year
+    
+    printf(&quot;\nPlease enter the required year: &quot;);
+    
+    //take the current year as input
+    
+    scanf(&quot;%d&quot;, &amp;year);
+    
+    //setting offset for January of the year; every 400 years the calendar repeats; every 100 years an offset of 5 days is added; the rest is calculated manually
+    
+    int start = ((((year-1)%400)/100)*5 + ((year-1)%100)*365 + ((year-1)%100)/4)%7;
+
+    //The below comment was a test to check the offset for each year. Fuck the julian calendar.
+
+    // //printf(&quot;%d&quot;,start%7);
+    
+    //blank space for neatness
+    
+    endl; endl;
+
+    //initialize an array to hold days of the month
+    
+    int month[12];
+
+    //Array to hold the days
+    
+    char* day[7] = {&quot;Mon&quot;,&quot;Tue&quot;,&quot;Wed&quot;,&quot;Thu&quot;,&quot;Fri&quot;,&quot;Sat&quot;,&quot;Sun&quot;};
+    char* month_name[12] = {&quot;Jan&quot;,&quot;Feb&quot;,&quot;Mar&quot;,&quot;Apr&quot;,&quot;May&quot;,&quot;Jun&quot;,&quot;Jul&quot;,&quot;Aug&quot;,&quot;Sep&quot;,&quot;Oct&quot;,&quot;Nov&quot;,&quot;Dec&quot;};
+
+    //Initialising the no. of days in a month; if it is a year divisible by 400 or it is divisible by 4 but not by 100, then feb has 29 days
+    
+    for (int i = 1; i &lt; 13; i++){
+    
+        switch(i){
+            case 1:
+            case 3:
+            case 5:
+            case 7:
+            case 8:
+            case 10:
+            case 12: month[i-1] = 31; break;
+            case 2: month[i-1] = (year%4 == 0 &amp;&amp; year%100 != 0)||(year%400 == 0)?29:28; break;
+            case 4:
+            case 6:
+            case 9:
+            case 11: month[i-1] = 30; break;
+        }
+        
+    }
+    //print the month name
+
+    printf(&quot;%*s&quot;, 16, month_name[0]);
+
+    endl; endl;
+    
+    //print the first line of days
+
+    for (int l = 0; l &lt; 7; l++){
+       printf(&quot;%*s&quot;, tabsize, day[l]);
+    }
+
+    endl;
+
+    //print a vertical continuous vertical line below it. Note that the continuity is created 
+    //by the terminal and font glyphs. Not all terminals support this.
+    
+    for (int i = 0; i &lt; 7; i++){
+            line;
+    }
+    
+    endl;
+
+    //At the very beginning this was an array, later I realised that this wasn't required 
+    //and that the offset can be calculated within the loop printing the numbers
+    
+    // //int rem = start;
+
+    //Print offset for jan
+    
+    for (int k = 0; k &lt; start%7; k++){
+        blank;        
+    }
+
+    // start the loop for all the months
+    
+    for (int i = 0; i &lt; 12; i++){
+
+        //start loop for days in each month
+        
+        for (int j = 1; j &lt;= month[i]; j++){
+            printf(&quot;%*d&quot;, tabsize, j);
+
+            
+            
+            if((j+start)%7 == 0){
+                
+                endl;
+            }
+        }
+
+        //set the offset for the next month right now
+        
+        start =  (start + month[i])%7;
+
+        //neatness
+        
+        endl; endl;
+
+        //only do all this if the month is not dec; otherwise there would be stray spaces and an extra header of days at the very last.
+        
+        if (i &lt; 11){
+            printf(&quot;%*s&quot;, 16, month_name[i+1]);
+
+            endl; endl;
+            
+            for (int k = 0; k &lt; 7; k++){
+                printf(&quot;%*s&quot;, tabsize, day[k]);
+            }
+
+            endl;
+
+        for (int l = 0; l &lt; 7; l++){
+            line;
+        }
+        
+            endl;
+            
+        }
+
+        for (int m = 0; m &lt; start; m++){
+            blank;
+        }            
+
+    }
+    
+    endl;
+
+}
+
+</code></pre>
+<p>Binary Search Tree template</p>
+<pre><code class="language-cpp">#include &lt;bits/stdc++.h&gt;
+
+template &lt;typename key_, typename value_&gt; struct Data {
+    key_ key;
+    value_ value;
+    Data(key_ key__, value_ value__) : key(key__), value(value__) {}
+    bool operator&gt;(Data&lt;key_, value_&gt; D) { return key &gt; D-&gt;key; }
+    bool operator&lt;(Data&lt;key_, value_&gt; D) { return key &lt; D-&gt;key; }
+    bool operator&gt;=(Data&lt;key_, value_&gt; D) { return key &gt;= D-&gt;key; }
+    bool operator&lt;=(Data&lt;key_, value_&gt; D) { return key &lt;= D-&gt;key; }
+    bool operator==(Data&lt;key_, value_&gt; D) { return key == D-&gt;key; }
+    bool operator!=(Data&lt;key_, value_&gt; D) { return key != D-&gt;key; }
+};
+
+template &lt;typename key_, typename value_&gt; class BSTNode {
+    Data&lt;key_, value_&gt; dat;
+    BSTNode *parent;
+    BSTNode *left;
+    BSTNode *right;
+    BSTNode(key_ key__, value_ value__)
+        : dat(Data&lt;key_, value_&gt;(key__, value__)) {
+        parent = nullptr;
+        left = nullptr;
+        right = nullptr;
+    };
+    BSTNode(Data&lt;key_, value_&gt; dat_) : dat(dat_) {
+        parent = nullptr;
+        left = nullptr;
+        right = nullptr;
+    };
+    template &lt;typename&gt; friend class BST;
+};
+
+template &lt;typename key_, typename value_&gt; class BST {
+  private:
+    typedef BSTNode&lt;key_, value_&gt; data_;
+    data_ *root;
+    void remove_(key_ key, data_ *&amp;ptr) {
+        if (ptr == nullptr) {
+            return;
+        } else if (ptr-&gt;dat.key &gt; key) {
+            remove_(key, ptr-&gt;left);
+        } else if (ptr-&gt;dat.key &lt; key) {
+            remove_(key, ptr-&gt;right);
+        } else if (ptr-&gt;right != nullptr &amp;&amp; ptr-&gt;left != nullptr) {
+            data_ *min = min_(ptr-&gt;right);
+            ptr-&gt;dat = min-&gt;dat;
+            remove_(ptr-&gt;dat.key, ptr-&gt;right);
+        } else {
+            data_ *oldNode = ptr;
+            ptr-&gt;left != nullptr ? ptr = ptr-&gt;left : ptr-&gt;right;
+            if (ptr != nullptr) {
+                ptr-&gt;parent = ptr-&gt;parent-&gt;parent;
+            }
+            delete oldNode;
+        }
+    }
+    data_ *max_(data_ *ptr) {
+        if (ptr == nullptr) {
+            return nullptr;
+        }
+        while (ptr-&gt;right != nullptr) {
+            ptr = ptr-&gt;right;
+        }
+        return ptr;
+    }
+    data_ *min_(data_ *ptr) {
+        if (ptr == nullptr) {
+            return nullptr;
+        }
+        while (ptr-&gt;left != nullptr) {
+            ptr = ptr-&gt;left;
+        }
+        return ptr;
+    }
+
+  public:
+    BST() { root = nullptr; }
+    void insert(key_ key, value_ value) {
+        if (root == nullptr) {
+            root = new data_(key, value);
+            return;
+        }
+        data_ *node = root;
+        data_ *ins = new data_(key, value);
+        while (node != nullptr) {
+            if (node-&gt;dat &gt; ins-&gt;dat &amp;&amp; node-&gt;left == nullptr) {
+                node-&gt;left = ins;
+                ins-&gt;parent = node;
+                return;
+            } else if (node-&gt;dat &lt; ins-&gt;dat &amp;&amp; node-&gt;right == nullptr) {
+                node-&gt;right = ins;
+                ins-&gt;parent = node;
+                return;
+            } else if (node-&gt;dat &gt; ins-&gt;dat) {
+                node = node-&gt;left;
+            } else if (node-&gt;dat &lt; ins-&gt;dat) {
+                node = node-&gt;right;
+            } else {
+                return;
+            }
+        }
+    }
+    void insert(Data&lt;key_, value_&gt; dat) {
+        if (root == nullptr) {
+            root = new data_(dat);
+            return;
+        }
+        data_ *node = root;
+        data_ *ins = new data_(dat);
+        while (node != nullptr) {
+            if (node-&gt;dat &gt; ins-&gt;dat &amp;&amp; node-&gt;left == nullptr) {
+                node-&gt;left = ins;
+                ins-&gt;parent = node;
+                return;
+            } else if (node-&gt;dat &lt; ins-&gt;dat &amp;&amp; node-&gt;right == nullptr) {
+                node-&gt;right = ins;
+                ins-&gt;parent = node;
+                return;
+            } else if (node-&gt;dat &gt; ins-&gt;dat) {
+                node = node-&gt;left;
+            } else if (node-&gt;dat &lt; ins-&gt;dat) {
+                node = node-&gt;right;
+            } else {
+                return;
+            }
+        }
+    }
+    data_ *search(key_ key) {
+        data_ *search_ = root;
+        while (search_ != nullptr) {
+            if (search_-&gt;dat.key &gt; key) {
+                search_ = search_-&gt;left;
+            } else if (search_-&gt;dat.key &lt; key) {
+                search_ = search_-&gt;right;
+            } else if (search_-&gt;dat.key == key) {
+                return search_;
+            }
+        }
+        return nullptr;
+    }
+    void remove(key_ key) { remove_(key, root); }
+    data_ *max() { return max_(root); }
+    data_ *min() { return min_(root); }
+    data_ *closest(data_ num) {
+        data_ *search_ = root;
+        while (search_ != nullptr) {
+            if (search_ == num) {
+                return search_;
+            } else if (search_ &gt; num) {
+                if (search_-&gt;left != nullptr) {
+                    search_ = search_-&gt;left;
+                } else if (search_-&gt;parent == nullptr) {
+                    return search_;
+                } else {
+                    return (abs(search_-&gt;key - num-&gt;key) &gt;
+                                    abs(search_-&gt;parent-&gt;key - num-&gt;key)
+                                ? search_-&gt;parent
+                                : search_);
+                }
+            } else {
+                if (search_-&gt;right != nullptr) {
+                    search_ = search_-&gt;right;
+                } else if (search_-&gt;parent == nullptr) {
+                    return search_;
+                } else {
+                    return (abs(search_-&gt;key - num-&gt;key) &gt;
+                                    abs(search_-&gt;parent-&gt;key - num-&gt;key)
+                                ? search_-&gt;parent
+                                : search_);
+                }
+            }
+        }
+    }
+};
+
+int main(int argc, char *argv[]) {
+    BST&lt;int, int&gt; B;
+    return 0;
+}
+</code></pre>
+<p>Balanced Binary Search Tree template</p>
+<pre><code class="language-cpp">#include &lt;bits/stdc++.h&gt;
+#include &lt;cstdint&gt;
+
+template &lt;typename key_, typename value_&gt; struct Data {
+    key_ key;
+    value_ value;
+    Data(key_ key__, value_ value__) : key(key__), value(value__) {}
+    bool operator&gt;(Data&lt;key_, value_&gt; D) { return key &gt; D-&gt;key; }
+    bool operator&lt;(Data&lt;key_, value_&gt; D) { return key &lt; D-&gt;key; }
+    bool operator&gt;=(Data&lt;key_, value_&gt; D) { return key &gt;= D-&gt;key; }
+    bool operator&lt;=(Data&lt;key_, value_&gt; D) { return key &lt;= D-&gt;key; }
+    bool operator==(Data&lt;key_, value_&gt; D) { return key == D-&gt;key; }
+    bool operator!=(Data&lt;key_, value_&gt; D) { return key != D-&gt;key; }
+};
+
+template &lt;typename key_, typename value_&gt; class BSTNode {
+    Data&lt;key_, value_&gt; dat;
+    BSTNode *parent;
+    BSTNode *left;
+    BSTNode *right;
+    int64_t height;
+    BSTNode(key_ key__, value_ value__)
+        : dat(Data&lt;key_, value_&gt;(key__, value__)) {
+        parent = nullptr;
+        left = nullptr;
+        right = nullptr;
+        height = 0;
+    };
+    BSTNode(Data&lt;key_, value_&gt; dat_) : dat(dat_) {
+        parent = nullptr;
+        left = nullptr;
+        right = nullptr;
+        height = 0;
+    };
+    template &lt;typename&gt; friend class BST;
+};
+
+template &lt;typename key_, typename value_&gt; class BST {
+  private:
+    typedef BSTNode&lt;key_, value_&gt; data_;
+    data_ *root;
+    void remove_(key_ key, data_ *&amp;ptr) {
+        if (ptr == nullptr) {
+            return;
+        } else if (ptr-&gt;dat.key &gt; key) {
+            remove_(key, ptr-&gt;left);
+        } else if (ptr-&gt;dat.key &lt; key) {
+            remove_(key, ptr-&gt;right);
+        } else if (ptr-&gt;right != nullptr &amp;&amp; ptr-&gt;left != nullptr) {
+            data_ *min = min_(ptr-&gt;right);
+            ptr-&gt;dat = min-&gt;dat;
+            remove_(ptr-&gt;dat.key, ptr-&gt;right);
+        } else {
+            data_ *oldNode = ptr;
+            ptr-&gt;left != nullptr ? ptr = ptr-&gt;left : ptr-&gt;right;
+            if (ptr != nullptr) {
+                ptr-&gt;parent = ptr-&gt;parent-&gt;parent;
+            }
+            delete oldNode;
+        }
+        balance(ptr);
+    }
+    data_ *max_(data_ *ptr) {
+        if (ptr == nullptr) {
+            return nullptr;
+        }
+        while (ptr-&gt;right != nullptr) {
+            ptr = ptr-&gt;right;
+        }
+        return ptr;
+    }
+    data_ *min_(data_ *ptr) {
+        if (ptr == nullptr) {
+            return nullptr;
+        }
+        while (ptr-&gt;left != nullptr) {
+            ptr = ptr-&gt;left;
+        }
+        return ptr;
+    }
+    void right_rot(data_ *&amp;ptr) {
+        data_ *right_child = ptr-&gt;right;
+        ptr-&gt;right = right_child-&gt;left;
+        right_child-&gt;left = ptr;
+        right_child-&gt;parent = ptr-&gt;parent;
+        ptr-&gt;parent = right_child;
+        ptr-&gt;height = max(height(ptr-&gt;left), height(ptr-&gt;right)) + 1;
+        right_child-&gt;height = max(height(right_child-&gt;right), ptr-&gt;height) + 1;
+        ptr = right_child;
+    }
+    void left_rot(data_ *&amp;ptr) {
+        data_ *left_child = ptr-&gt;left;
+        ptr-&gt;left = left_child-&gt;right;
+        left_child-&gt;right = ptr;
+        left_child-&gt;parent = ptr-&gt;parent;
+        ptr-&gt;parent = left_child;
+        ptr-&gt;height = max(height(ptr-&gt;left), height(ptr-&gt;right)) + 1;
+        left_child-&gt;height = max(height(left_child-&gt;left), ptr-&gt;height) + 1;
+        ptr = left_child;
+    }
+    int64_t height(data_ *ptr) const {
+        return ptr == nullptr ? -1 : ptr-&gt;height;
+    }
+    void balance(data_ *&amp;ptr) {
+        if (ptr == nullptr)
+            return;
+
+        if (height(ptr-&gt;left) - height(ptr-&gt;right) &gt; 1) {
+            if (height(ptr-&gt;left-&gt;left) &gt;= height(ptr-&gt;left-&gt;right)) {
+                left_rot(ptr);
+            } else {
+                right_rot(ptr-&gt;left);
+                left_rot(ptr);
+            }
+        } else if (height(ptr-&gt;right) - height(ptr-&gt;left) &gt; 1) {
+            if (height(ptr-&gt;right-&gt;right) &gt;= height(ptr-&gt;right-&gt;left)) {
+                right_rot(ptr);
+            } else {
+                left_rot(ptr-&gt;right);
+                right_rot(ptr);
+            }
+        }
+    }
+
+  public:
+    BST() { root = nullptr; }
+    void insert(key_ key, value_ value) {
+        if (root == nullptr) {
+            root = new data_(key, value);
+            return;
+        }
+        data_ *node = root;
+        data_ *ins = new data_(key, value);
+        while (node != nullptr) {
+            if (node-&gt;dat &gt; ins-&gt;dat &amp;&amp; node-&gt;left == nullptr) {
+                node-&gt;left = ins;
+                ins-&gt;parent = node;
+                return;
+            } else if (node-&gt;dat &lt; ins-&gt;dat &amp;&amp; node-&gt;right == nullptr) {
+                node-&gt;right = ins;
+                ins-&gt;parent = node;
+                return;
+            } else if (node-&gt;dat &gt; ins-&gt;dat) {
+                node = node-&gt;left;
+            } else if (node-&gt;dat &lt; ins-&gt;dat) {
+                node = node-&gt;right;
+            } else {
+                return;
+            }
+        }
+    }
+    void insert(Data&lt;key_, value_&gt; dat) {
+        if (root == nullptr) {
+            root = new data_(dat);
+            return;
+        }
+        data_ *node = root;
+        data_ *ins = new data_(dat);
+        while (node != nullptr) {
+            if (node-&gt;dat &gt; ins-&gt;dat &amp;&amp; node-&gt;left == nullptr) {
+                node-&gt;left = ins;
+                ins-&gt;parent = node;
+                return;
+            } else if (node-&gt;dat &lt; ins-&gt;dat &amp;&amp; node-&gt;right == nullptr) {
+                node-&gt;right = ins;
+                ins-&gt;parent = node;
+                return;
+            } else if (node-&gt;dat &gt; ins-&gt;dat) {
+                node = node-&gt;left;
+            } else if (node-&gt;dat &lt; ins-&gt;dat) {
+                node = node-&gt;right;
+            } else {
+                return;
+            }
+        }
+        balance(node);
+    }
+    data_ *search(key_ key) {
+        data_ *search_ = root;
+        while (search_ != nullptr) {
+            if (search_-&gt;dat.key &gt; key) {
+                search_ = search_-&gt;left;
+            } else if (search_-&gt;dat.key &lt; key) {
+                search_ = search_-&gt;right;
+            } else if (search_-&gt;dat.key == key) {
+                return search_;
+            }
+        }
+        return nullptr;
+    }
+    void remove(key_ key) { remove_(key, root); }
+    data_ *max() { return max_(root); }
+    data_ *min() { return min_(root); }
+};
+
+int main(int argc, char *argv[]) {
+    BST&lt;int, int&gt; B;
+    return 0;
+}
+</code></pre>
+
+                    </main>
+
+                    <nav class="nav-wrapper" aria-label="Page navigation">
+                        <!-- Mobile navigation buttons -->
+                            <a rel="prev" href="../notes/project_euler.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                                <i class="fa fa-angle-left"></i>
+                            </a>
+
+                            <a rel="next" href="../notes/cp_codes.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                                <i class="fa fa-angle-right"></i>
+                            </a>
+
+                        <div style="clear: both"></div>
+                    </nav>
+                </div>
+            </div>
+
+            <nav class="nav-wide-wrapper" aria-label="Page navigation">
+                    <a rel="prev" href="../notes/project_euler.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                        <i class="fa fa-angle-left"></i>
+                    </a>
+
+                    <a rel="next" href="../notes/cp_codes.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                        <i class="fa fa-angle-right"></i>
+                    </a>
+            </nav>
+
+        </div>
+
+        <!-- Livereload script (if served using the cli tool) -->
+        <script>
+            const wsProtocol = location.protocol === 'https:' ? 'wss:' : 'ws:';
+            const wsAddress = wsProtocol + "//" + location.host + "/" + "__livereload";
+            const socket = new WebSocket(wsAddress);
+            socket.onmessage = function (event) {
+                if (event.data === "reload") {
+                    socket.close();
+                    location.reload();
+                }
+            };
+
+            window.onbeforeunload = function() {
+                socket.close();
+            }
+        </script>
+
+
+
+        <script>
+            window.playground_copyable = true;
+        </script>
+
+
+        <script src="../elasticlunr.min.js"></script>
+        <script src="../mark.min.js"></script>
+        <script src="../searcher.js"></script>
+
+        <script src="../clipboard.min.js"></script>
+        <script src="../highlight.js"></script>
+        <script src="../book.js"></script>
+
+        <!-- Custom JS scripts -->
+        <script src="../theme/pagetoc.js"></script>
+
+
+    </div>
+    </body>
+</html>

@@ -1,0 +1,410 @@
+<!DOCTYPE HTML>
+<html lang="en" class="sidebar-visible no-js ayu">
+    <head>
+        <!-- Book generated using mdBook -->
+        <meta charset="UTF-8">
+        <title>gdb - Notes</title>
+
+
+        <!-- Custom HTML head -->
+        
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="theme-color" content="#ffffff" />
+
+        <link rel="icon" href="../favicon.svg">
+        <link rel="shortcut icon" href="../favicon.png">
+        <link rel="stylesheet" href="../css/variables.css">
+        <link rel="stylesheet" href="../css/general.css">
+        <link rel="stylesheet" href="../css/chrome.css">
+        <link rel="stylesheet" href="../css/print.css" media="print">
+
+        <!-- Fonts -->
+        <link rel="stylesheet" href="../FontAwesome/css/font-awesome.css">
+        <link rel="stylesheet" href="../fonts/fonts.css">
+
+        <!-- Highlight.js Stylesheets -->
+        <link rel="stylesheet" href="../highlight.css">
+        <link rel="stylesheet" href="../tomorrow-night.css">
+        <link rel="stylesheet" href="../ayu-highlight.css">
+
+        <!-- Custom theme stylesheets -->
+        <link rel="stylesheet" href=".././src/notes/custom.css">
+        <link rel="stylesheet" href="../theme/pagetoc.css">
+        <link rel="stylesheet" href=".././src/notes/katex.min.css">
+
+    </head>
+    <body>
+    <div id="body-container">
+        <!-- Provide site root to javascript -->
+        <script>
+            var path_to_root = "../";
+            var default_theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? "navy" : "ayu";
+        </script>
+
+        <!-- Work around some values being stored in localStorage wrapped in quotes -->
+        <script>
+            try {
+                var theme = localStorage.getItem('mdbook-theme');
+                var sidebar = localStorage.getItem('mdbook-sidebar');
+
+                if (theme.startsWith('"') && theme.endsWith('"')) {
+                    localStorage.setItem('mdbook-theme', theme.slice(1, theme.length - 1));
+                }
+
+                if (sidebar.startsWith('"') && sidebar.endsWith('"')) {
+                    localStorage.setItem('mdbook-sidebar', sidebar.slice(1, sidebar.length - 1));
+                }
+            } catch (e) { }
+        </script>
+
+        <!-- Set the theme before any content is loaded, prevents flash -->
+        <script>
+            var theme;
+            try { theme = localStorage.getItem('mdbook-theme'); } catch(e) { }
+            if (theme === null || theme === undefined) { theme = default_theme; }
+            var html = document.querySelector('html');
+            html.classList.remove('no-js')
+            html.classList.remove('ayu')
+            html.classList.add(theme);
+            html.classList.add('js');
+        </script>
+
+        <!-- Hide / unhide sidebar before it is displayed -->
+        <script>
+            var html = document.querySelector('html');
+            var sidebar = null;
+            if (document.body.clientWidth >= 1080) {
+                try { sidebar = localStorage.getItem('mdbook-sidebar'); } catch(e) { }
+                sidebar = sidebar || 'visible';
+            } else {
+                sidebar = 'hidden';
+            }
+            html.classList.remove('sidebar-visible');
+            html.classList.add("sidebar-" + sidebar);
+        </script>
+
+        <nav id="sidebar" class="sidebar" aria-label="Table of contents">
+            <div class="sidebar-scrollbox">
+                <ol class="chapter"><li class="chapter-item "><a href="../notes/rust_notes.html"><strong aria-hidden="true">1.</strong> rust_notes</a></li><li class="chapter-item "><a href="../notes/python.html"><strong aria-hidden="true">2.</strong> python</a></li><li class="chapter-item "><a href="../notes/cmake.html"><strong aria-hidden="true">3.</strong> cmake</a></li><li class="chapter-item "><a href="../notes/project_euler.html"><strong aria-hidden="true">4.</strong> project_euler</a></li><li class="chapter-item "><a href="../notes/c_codes.html"><strong aria-hidden="true">5.</strong> c_codes</a></li><li class="chapter-item "><a href="../notes/cp_codes.html"><strong aria-hidden="true">6.</strong> cp_codes</a></li><li class="chapter-item "><a href="../notes/regex.html"><strong aria-hidden="true">7.</strong> regex</a></li><li class="chapter-item "><a href="../notes/concurrency.html"><strong aria-hidden="true">8.</strong> concurrency</a></li><li class="chapter-item "><a href="../notes/cpp-guidelines.html"><strong aria-hidden="true">9.</strong> cpp-guidelines</a></li><li class="chapter-item "><a href="../notes/hacking_basics.html"><strong aria-hidden="true">10.</strong> hacking_basics</a></li><li class="chapter-item "><a href="../notes/asm.html"><strong aria-hidden="true">11.</strong> asm</a></li><li class="chapter-item "><a href="../notes/registers.html"><strong aria-hidden="true">12.</strong> registers</a></li><li class="chapter-item "><a href="../notes/network_stack.html"><strong aria-hidden="true">13.</strong> network_stack</a></li><li class="chapter-item "><a href="../notes/traceroute.html"><strong aria-hidden="true">14.</strong> traceroute</a></li><li class="chapter-item "><a href="../notes/icmp.html"><strong aria-hidden="true">15.</strong> icmp</a></li><li class="chapter-item "><a href="../notes/tcp.html"><strong aria-hidden="true">16.</strong> tcp</a></li><li class="chapter-item "><a href="../notes/ipv4.html"><strong aria-hidden="true">17.</strong> ipv4</a></li><li class="chapter-item "><a href="../notes/ipv6.html"><strong aria-hidden="true">18.</strong> ipv6</a></li><li class="chapter-item "><a href="../notes/dhcp.html"><strong aria-hidden="true">19.</strong> dhcp</a></li><li class="chapter-item "><a href="../notes/dhcpv6.html"><strong aria-hidden="true">20.</strong> dhcpv6</a></li><li class="chapter-item "><a href="../notes/natas_levels.html"><strong aria-hidden="true">21.</strong> natas_levels</a></li><li class="chapter-item expanded "><a href="../notes/gdb.html" class="active"><strong aria-hidden="true">22.</strong> gdb</a></li><li class="chapter-item "><a href="../notes/linux.html"><strong aria-hidden="true">23.</strong> Kernel Contrib</a></li><li class="chapter-item "><a href="../notes/bash.html"><strong aria-hidden="true">24.</strong> bash</a></li></ol>
+            </div>
+            <div id="sidebar-resize-handle" class="sidebar-resize-handle"></div>
+        </nav>
+
+        <!-- Track and set sidebar scroll position -->
+        <script>
+            var sidebarScrollbox = document.querySelector('#sidebar .sidebar-scrollbox');
+            sidebarScrollbox.addEventListener('click', function(e) {
+                if (e.target.tagName === 'A') {
+                    sessionStorage.setItem('sidebar-scroll', sidebarScrollbox.scrollTop);
+                }
+            }, { passive: true });
+            var sidebarScrollTop = sessionStorage.getItem('sidebar-scroll');
+            sessionStorage.removeItem('sidebar-scroll');
+            if (sidebarScrollTop) {
+                // preserve sidebar scroll position when navigating via links within sidebar
+                sidebarScrollbox.scrollTop = sidebarScrollTop;
+            } else {
+                // scroll sidebar to current active section when navigating via "next/previous chapter" buttons
+                var activeSection = document.querySelector('#sidebar .active');
+                if (activeSection) {
+                    activeSection.scrollIntoView({ block: 'center' });
+                }
+            }
+        </script>
+
+        <div id="page-wrapper" class="page-wrapper">
+
+            <div class="page">
+                                <div id="menu-bar-hover-placeholder"></div>
+                <div id="menu-bar" class="menu-bar sticky">
+                    <div class="left-buttons">
+                        <button id="sidebar-toggle" class="icon-button" type="button" title="Toggle Table of Contents" aria-label="Toggle Table of Contents" aria-controls="sidebar">
+                            <i class="fa fa-bars"></i>
+                        </button>
+                        <button id="theme-toggle" class="icon-button" type="button" title="Change theme" aria-label="Change theme" aria-haspopup="true" aria-expanded="false" aria-controls="theme-list">
+                            <i class="fa fa-paint-brush"></i>
+                        </button>
+                        <ul id="theme-list" class="theme-popup" aria-label="Themes" role="menu">
+                            <li role="none"><button role="menuitem" class="theme" id="light">Light</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="rust">Rust</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="coal">Coal</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="navy">Navy</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="ayu">Ayu</button></li>
+                        </ul>
+                        <button id="search-toggle" class="icon-button" type="button" title="Search. (Shortkey: s)" aria-label="Toggle Searchbar" aria-expanded="false" aria-keyshortcuts="S" aria-controls="searchbar">
+                            <i class="fa fa-search"></i>
+                        </button>
+                    </div>
+
+                    <h1 class="menu-title">Notes</h1>
+
+                    <div class="right-buttons">
+                        <a href="../print.html" title="Print this book" aria-label="Print this book">
+                            <i id="print-button" class="fa fa-print"></i>
+                        </a>
+
+                    </div>
+                </div>
+
+                <div id="search-wrapper" class="hidden">
+                    <form id="searchbar-outer" class="searchbar-outer">
+                        <input type="search" id="searchbar" name="searchbar" placeholder="Search this book ..." aria-controls="searchresults-outer" aria-describedby="searchresults-header">
+                    </form>
+                    <div id="searchresults-outer" class="searchresults-outer hidden">
+                        <div id="searchresults-header" class="searchresults-header"></div>
+                        <ul id="searchresults">
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Apply ARIA attributes after the sidebar and the sidebar toggle button are added to the DOM -->
+                <script>
+                    document.getElementById('sidebar-toggle').setAttribute('aria-expanded', sidebar === 'visible');
+                    document.getElementById('sidebar').setAttribute('aria-hidden', sidebar !== 'visible');
+                    Array.from(document.querySelectorAll('#sidebar a')).forEach(function(link) {
+                        link.setAttribute('tabIndex', sidebar === 'visible' ? 0 : -1);
+                    });
+                </script>
+
+                <div id="content" class="content">
+                    <main><div class="sidetoc"><nav class="pagetoc"></nav></div>
+                        <h1 id="gdb"><a class="header" href="#gdb">gdb</a></h1>
+<p>More important commands have a (*) by them.</p>
+<h2 id="startup"><a class="header" href="#startup">Startup</a></h2>
+<pre><code class="language-*% gdb object       normal debug">*% gdb object core 	core debug (must specify core file)
+</code></pre>
+<h2 id="help"><a class="header" href="#help">Help</a></h2>
+<pre><code>*(gdb) help        	list command classes
+</code></pre>
+<h2 id="breakpoints"><a class="header" href="#breakpoints">Breakpoints</a></h2>
+<pre><code>*(gdb) break main       set a breakpoint on a function
+*(gdb) break 101        set a breakpoint on a line number
+*(gdb) break basic.c:101        set breakpoint at file and line (or function)
+*(gdb) info breakpoints        show breakpoints
+*(gdb) delete 1         delete a breakpoint by number
+</code></pre>
+<h2 id="running-the-program"><a class="header" href="#running-the-program">Running the program</a></h2>
+<pre><code>*(gdb) run        	run the program with current arguments
+*(gdb) run args redirection        run with args and redirection
+*(gdb) cont            continue the program
+*(gdb) step            single step the program; step into functions
+*(gdb) next            step but step over functions 
+*(gdb) CTRL-C          actually SIGINT, stop execution of current program 
+*(gdb) attach process-id        attach to running program
+*(gdb) detach        detach from running program
+*(gdb) finish        finish current function's execution
+</code></pre>
+<h3 id="stack-backtrace"><a class="header" href="#stack-backtrace">Stack backtrace</a></h3>
+<pre><code>*(gdb) bt        	print stack backtrace
+*(gdb) info locals      print automatic variables in frame
+</code></pre>
+<h2 id="browsing-source"><a class="header" href="#browsing-source">Browsing source</a></h2>
+<pre><code>*(gdb) list 101        	list 10 lines around line 101
+*(gdb) list 1,10        list lines 1 to 10
+*(gdb) list main  	list lines around function 
+*(gdb) list basic.c:main        list from another file basic.c
+*(gdb) list -        	list previous 10 lines
+</code></pre>
+<h2 id="browsing-data"><a class="header" href="#browsing-data">Browsing Data</a></h2>
+<pre><code>*(gdb) print expression        print expression, added to value history
+*(gdb) print/x expressionR        print in hex
+*(gdb) info locals      print local automatics only
+*(gdb) ptype name        print type definition
+*(gdb) set variable = expression        assign value
+</code></pre>
+<h2 id="miscellaneous"><a class="header" href="#miscellaneous">Miscellaneous</a></h2>
+<pre><code>(gdb) define command ... end        define user command
+*(gdb) RETURN        		repeat last command
+*(gdb) shell command args       execute shell command 
+*(gdb) source file        	load gdb commands from file
+*(gdb) quit        		quit gdb
+</code></pre>
+<hr />
+<h3 id="startup-1"><a class="header" href="#startup-1">Startup</a></h3>
+<pre><code>% gdb -help         	print startup help, show switches
+%% gdb object pid  	attach to running process
+% gdb        		use file command to load object 
+</code></pre>
+<h3 id="help-1"><a class="header" href="#help-1">Help</a></h3>
+<pre><code>(gdb) help running      list commands in one command class
+(gdb) help run        	bottom-level help for a command &quot;run&quot; 
+(gdb) help info         list info commands (running program state)
+(gdb) help info line    help for a particular info command
+(gdb) help show         list show commands (gdb state)
+(gdb) help show commands        specific help for a show command
+</code></pre>
+<h3 id="breakpoints-1"><a class="header" href="#breakpoints-1">Breakpoints</a></h3>
+<pre><code>(gdb) delete        	delete all breakpoints (prompted)
+(gdb) clear             delete breakpoints at current line
+(gdb) clear function    delete breakpoints at function
+(gdb) clear line        delete breakpoints at line
+(gdb) disable 2         turn a breakpoint off, but don't remove it
+(gdb) enable 2          turn disabled breakpoint back on
+(gdb) tbreak function|line        set a temporary breakpoint
+(gdb) commands break-no ... end   set gdb commands with breakpoint
+(gdb) ignore break-no count       ignore bpt N-1 times before activation
+(gdb) condition break-no expression         break only if condition is true
+(gdb) condition 2 i == 20         example: break on breakpoint 2 if i equals 20
+(gdb) watch expression        set software watchpoint on variable
+(gdb) info watchpoints        show current watchpoints
+</code></pre>
+<h3 id="running-the-program-1"><a class="header" href="#running-the-program-1">Running the program</a></h3>
+<pre><code>(gdb) set args args...        set arguments for run 
+(gdb) show args        show current arguments to run
+(gdb) step count       singlestep \fIcount\fR times
+(gdb) next count       next \fIcount\fR times
+(gdb) kill           kill current executing program 
+</code></pre>
+<h3 id="stack-backtrace-1"><a class="header" href="#stack-backtrace-1">Stack Backtrace</a></h3>
+<pre><code>(gdb) frame        	show current execution position
+(gdb) up        	move up stack trace  (towards main)
+(gdb) down        	move down stack trace (away from main)
+(gdb) info args         print function parameters 
+</code></pre>
+<h3 id="browsing-source-1"><a class="header" href="#browsing-source-1">Browsing source</a></h3>
+<pre><code>(gdb) list *0x22e4      list source at address
+(gdb) cd dir        	change current directory to \fIdir\fR
+(gdb) pwd          	print working directory
+(gdb) search regexpr    forward current for regular expression
+(gdb) reverse-search regexpr        backward search for regular expression
+(gdb) dir dirname       add directory to source path
+(gdb) dir        	reset source path to nothing
+(gdb) show directories        show source path
+</code></pre>
+<h3 id="browsing-data-1"><a class="header" href="#browsing-data-1">Browsing Data</a></h3>
+<pre><code>(gdb) print array[i]@count        artificial array - print array range
+(gdb) print $        	print last value
+(gdb) print *$-&gt;next    print thru list
+(gdb) print $1        	print value 1 from value history
+(gdb) print ::gx        force scope to be global
+(gdb) print 'basic.c'::gx        global scope in named file (&gt;=4.6)
+(gdb) print/x &amp;main     print address of function
+(gdb) x/countFormatSize address        low-level examine command
+(gdb) x/x &amp;gx        	print gx in hex
+(gdb) x/4wx &amp;main       print 4 longs at start of \fImain\fR in hex
+(gdb) x/gf &amp;gd1         print double
+(gdb) help x        	show formats for x
+(gdb) info functions regexp         print function names
+(gdb) info variables  regexp        print global variable names
+(gdb) whatis expression       print type of expression
+(gdb) display expression        display expression result at stop
+(gdb) undisplay        delete displays
+(gdb) info display     show displays
+(gdb) show values      print value history (&gt;= gdb 4.0)
+(gdb) info history     print value history (gdb 3.5)
+</code></pre>
+<h3 id="object-file-manipulation"><a class="header" href="#object-file-manipulation">Object File manipulation</a></h3>
+<pre><code>(gdb) file object      		load new file for debug (sym+exec)
+(gdb) file             		discard sym+exec file info
+(gdb) symbol-file object        load only symbol table
+(gdb) exec-file object 		specify object to run (not sym-file)
+(gdb) core-file core   		post-mortem debugging
+</code></pre>
+<h3 id="signal-control"><a class="header" href="#signal-control">Signal Control</a></h3>
+<pre><code>(gdb) info signals        	print signal setup
+(gdb) handle signo actions      set debugger actions for signal
+(gdb) handle INT print          print message when signal occurs
+(gdb) handle INT noprint        don't print message
+(gdb) handle INT stop        	stop program when signal occurs
+(gdb) handle INT nostop         don't stop program
+(gdb) handle INT pass        	allow program to receive signal
+(gdb) handle INT nopass         debugger catches signal; program doesn't
+(gdb) signal signo        	continue and send signal to program
+(gdb) signal 0        		continue and send no signal to program
+</code></pre>
+<h3 id="machine-level-debug"><a class="header" href="#machine-level-debug">Machine-level Debug</a></h3>
+<pre><code>(gdb) info registers        	print registers sans floats
+(gdb) info all-registers        print all registers
+(gdb) print/x $pc        	print one register
+(gdb) stepi        		single step at machine level
+(gdb) si        		single step at machine level
+(gdb) nexti        		single step (over functions) at machine level
+(gdb) ni        		single step (over functions) at machine level
+(gdb) display/i $pc        	print current instruction in display
+(gdb) x/x &amp;gx        		print variable gx in hex
+(gdb) info line 22        	print addresses for object code for line 22
+(gdb) info line *0x2c4e         print line number of object code at address
+(gdb) x/10i main        	disassemble first 10 instructions in \fImain\fR
+(gdb) disassemble addr          dissassemble code for function around addr
+</code></pre>
+<h3 id="history-display"><a class="header" href="#history-display">History Display</a></h3>
+<pre><code>(gdb) show commands        	print command history (&gt;= gdb 4.0)
+(gdb) info editing       	print command history (gdb 3.5)
+(gdb) ESC-CTRL-J        	switch to vi edit mode from emacs edit mode
+(gdb) set history expansion on       turn on c-shell like history
+(gdb) break class::member       set breakpoint on class member. may get menu
+(gdb) list class::member        list member in class
+(gdb) ptype class               print class members
+(gdb) print *this        	print contents of this pointer
+(gdb) rbreak regexpr     	useful for breakpoint on overloaded member name
+</code></pre>
+
+                    </main>
+
+                    <nav class="nav-wrapper" aria-label="Page navigation">
+                        <!-- Mobile navigation buttons -->
+                            <a rel="prev" href="../notes/natas_levels.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                                <i class="fa fa-angle-left"></i>
+                            </a>
+
+                            <a rel="next" href="../notes/linux.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                                <i class="fa fa-angle-right"></i>
+                            </a>
+
+                        <div style="clear: both"></div>
+                    </nav>
+                </div>
+            </div>
+
+            <nav class="nav-wide-wrapper" aria-label="Page navigation">
+                    <a rel="prev" href="../notes/natas_levels.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                        <i class="fa fa-angle-left"></i>
+                    </a>
+
+                    <a rel="next" href="../notes/linux.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                        <i class="fa fa-angle-right"></i>
+                    </a>
+            </nav>
+
+        </div>
+
+        <!-- Livereload script (if served using the cli tool) -->
+        <script>
+            const wsProtocol = location.protocol === 'https:' ? 'wss:' : 'ws:';
+            const wsAddress = wsProtocol + "//" + location.host + "/" + "__livereload";
+            const socket = new WebSocket(wsAddress);
+            socket.onmessage = function (event) {
+                if (event.data === "reload") {
+                    socket.close();
+                    location.reload();
+                }
+            };
+
+            window.onbeforeunload = function() {
+                socket.close();
+            }
+        </script>
+
+
+
+        <script>
+            window.playground_copyable = true;
+        </script>
+
+
+        <script src="../elasticlunr.min.js"></script>
+        <script src="../mark.min.js"></script>
+        <script src="../searcher.js"></script>
+
+        <script src="../clipboard.min.js"></script>
+        <script src="../highlight.js"></script>
+        <script src="../book.js"></script>
+
+        <!-- Custom JS scripts -->
+        <script src="../theme/pagetoc.js"></script>
+
+
+    </div>
+    </body>
+</html>

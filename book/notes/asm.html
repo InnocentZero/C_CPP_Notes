@@ -1,0 +1,472 @@
+<!DOCTYPE HTML>
+<html lang="en" class="sidebar-visible no-js ayu">
+    <head>
+        <!-- Book generated using mdBook -->
+        <meta charset="UTF-8">
+        <title>asm - Notes</title>
+
+
+        <!-- Custom HTML head -->
+        
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="theme-color" content="#ffffff" />
+
+        <link rel="icon" href="../favicon.svg">
+        <link rel="shortcut icon" href="../favicon.png">
+        <link rel="stylesheet" href="../css/variables.css">
+        <link rel="stylesheet" href="../css/general.css">
+        <link rel="stylesheet" href="../css/chrome.css">
+        <link rel="stylesheet" href="../css/print.css" media="print">
+
+        <!-- Fonts -->
+        <link rel="stylesheet" href="../FontAwesome/css/font-awesome.css">
+        <link rel="stylesheet" href="../fonts/fonts.css">
+
+        <!-- Highlight.js Stylesheets -->
+        <link rel="stylesheet" href="../highlight.css">
+        <link rel="stylesheet" href="../tomorrow-night.css">
+        <link rel="stylesheet" href="../ayu-highlight.css">
+
+        <!-- Custom theme stylesheets -->
+        <link rel="stylesheet" href=".././src/notes/custom.css">
+        <link rel="stylesheet" href="../theme/pagetoc.css">
+        <link rel="stylesheet" href=".././src/notes/katex.min.css">
+
+    </head>
+    <body>
+    <div id="body-container">
+        <!-- Provide site root to javascript -->
+        <script>
+            var path_to_root = "../";
+            var default_theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? "navy" : "ayu";
+        </script>
+
+        <!-- Work around some values being stored in localStorage wrapped in quotes -->
+        <script>
+            try {
+                var theme = localStorage.getItem('mdbook-theme');
+                var sidebar = localStorage.getItem('mdbook-sidebar');
+
+                if (theme.startsWith('"') && theme.endsWith('"')) {
+                    localStorage.setItem('mdbook-theme', theme.slice(1, theme.length - 1));
+                }
+
+                if (sidebar.startsWith('"') && sidebar.endsWith('"')) {
+                    localStorage.setItem('mdbook-sidebar', sidebar.slice(1, sidebar.length - 1));
+                }
+            } catch (e) { }
+        </script>
+
+        <!-- Set the theme before any content is loaded, prevents flash -->
+        <script>
+            var theme;
+            try { theme = localStorage.getItem('mdbook-theme'); } catch(e) { }
+            if (theme === null || theme === undefined) { theme = default_theme; }
+            var html = document.querySelector('html');
+            html.classList.remove('no-js')
+            html.classList.remove('ayu')
+            html.classList.add(theme);
+            html.classList.add('js');
+        </script>
+
+        <!-- Hide / unhide sidebar before it is displayed -->
+        <script>
+            var html = document.querySelector('html');
+            var sidebar = null;
+            if (document.body.clientWidth >= 1080) {
+                try { sidebar = localStorage.getItem('mdbook-sidebar'); } catch(e) { }
+                sidebar = sidebar || 'visible';
+            } else {
+                sidebar = 'hidden';
+            }
+            html.classList.remove('sidebar-visible');
+            html.classList.add("sidebar-" + sidebar);
+        </script>
+
+        <nav id="sidebar" class="sidebar" aria-label="Table of contents">
+            <div class="sidebar-scrollbox">
+                <ol class="chapter"><li class="chapter-item "><a href="../notes/rust_notes.html"><strong aria-hidden="true">1.</strong> rust_notes</a></li><li class="chapter-item "><a href="../notes/python.html"><strong aria-hidden="true">2.</strong> python</a></li><li class="chapter-item "><a href="../notes/cmake.html"><strong aria-hidden="true">3.</strong> cmake</a></li><li class="chapter-item "><a href="../notes/project_euler.html"><strong aria-hidden="true">4.</strong> project_euler</a></li><li class="chapter-item "><a href="../notes/c_codes.html"><strong aria-hidden="true">5.</strong> c_codes</a></li><li class="chapter-item "><a href="../notes/cp_codes.html"><strong aria-hidden="true">6.</strong> cp_codes</a></li><li class="chapter-item "><a href="../notes/regex.html"><strong aria-hidden="true">7.</strong> regex</a></li><li class="chapter-item "><a href="../notes/concurrency.html"><strong aria-hidden="true">8.</strong> concurrency</a></li><li class="chapter-item "><a href="../notes/cpp-guidelines.html"><strong aria-hidden="true">9.</strong> cpp-guidelines</a></li><li class="chapter-item "><a href="../notes/hacking_basics.html"><strong aria-hidden="true">10.</strong> hacking_basics</a></li><li class="chapter-item expanded "><a href="../notes/asm.html" class="active"><strong aria-hidden="true">11.</strong> asm</a></li><li class="chapter-item "><a href="../notes/registers.html"><strong aria-hidden="true">12.</strong> registers</a></li><li class="chapter-item "><a href="../notes/network_stack.html"><strong aria-hidden="true">13.</strong> network_stack</a></li><li class="chapter-item "><a href="../notes/traceroute.html"><strong aria-hidden="true">14.</strong> traceroute</a></li><li class="chapter-item "><a href="../notes/icmp.html"><strong aria-hidden="true">15.</strong> icmp</a></li><li class="chapter-item "><a href="../notes/tcp.html"><strong aria-hidden="true">16.</strong> tcp</a></li><li class="chapter-item "><a href="../notes/ipv4.html"><strong aria-hidden="true">17.</strong> ipv4</a></li><li class="chapter-item "><a href="../notes/ipv6.html"><strong aria-hidden="true">18.</strong> ipv6</a></li><li class="chapter-item "><a href="../notes/dhcp.html"><strong aria-hidden="true">19.</strong> dhcp</a></li><li class="chapter-item "><a href="../notes/dhcpv6.html"><strong aria-hidden="true">20.</strong> dhcpv6</a></li><li class="chapter-item "><a href="../notes/natas_levels.html"><strong aria-hidden="true">21.</strong> natas_levels</a></li><li class="chapter-item "><a href="../notes/gdb.html"><strong aria-hidden="true">22.</strong> gdb</a></li><li class="chapter-item "><a href="../notes/linux.html"><strong aria-hidden="true">23.</strong> Kernel Contrib</a></li><li class="chapter-item "><a href="../notes/bash.html"><strong aria-hidden="true">24.</strong> bash</a></li></ol>
+            </div>
+            <div id="sidebar-resize-handle" class="sidebar-resize-handle"></div>
+        </nav>
+
+        <!-- Track and set sidebar scroll position -->
+        <script>
+            var sidebarScrollbox = document.querySelector('#sidebar .sidebar-scrollbox');
+            sidebarScrollbox.addEventListener('click', function(e) {
+                if (e.target.tagName === 'A') {
+                    sessionStorage.setItem('sidebar-scroll', sidebarScrollbox.scrollTop);
+                }
+            }, { passive: true });
+            var sidebarScrollTop = sessionStorage.getItem('sidebar-scroll');
+            sessionStorage.removeItem('sidebar-scroll');
+            if (sidebarScrollTop) {
+                // preserve sidebar scroll position when navigating via links within sidebar
+                sidebarScrollbox.scrollTop = sidebarScrollTop;
+            } else {
+                // scroll sidebar to current active section when navigating via "next/previous chapter" buttons
+                var activeSection = document.querySelector('#sidebar .active');
+                if (activeSection) {
+                    activeSection.scrollIntoView({ block: 'center' });
+                }
+            }
+        </script>
+
+        <div id="page-wrapper" class="page-wrapper">
+
+            <div class="page">
+                                <div id="menu-bar-hover-placeholder"></div>
+                <div id="menu-bar" class="menu-bar sticky">
+                    <div class="left-buttons">
+                        <button id="sidebar-toggle" class="icon-button" type="button" title="Toggle Table of Contents" aria-label="Toggle Table of Contents" aria-controls="sidebar">
+                            <i class="fa fa-bars"></i>
+                        </button>
+                        <button id="theme-toggle" class="icon-button" type="button" title="Change theme" aria-label="Change theme" aria-haspopup="true" aria-expanded="false" aria-controls="theme-list">
+                            <i class="fa fa-paint-brush"></i>
+                        </button>
+                        <ul id="theme-list" class="theme-popup" aria-label="Themes" role="menu">
+                            <li role="none"><button role="menuitem" class="theme" id="light">Light</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="rust">Rust</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="coal">Coal</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="navy">Navy</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="ayu">Ayu</button></li>
+                        </ul>
+                        <button id="search-toggle" class="icon-button" type="button" title="Search. (Shortkey: s)" aria-label="Toggle Searchbar" aria-expanded="false" aria-keyshortcuts="S" aria-controls="searchbar">
+                            <i class="fa fa-search"></i>
+                        </button>
+                    </div>
+
+                    <h1 class="menu-title">Notes</h1>
+
+                    <div class="right-buttons">
+                        <a href="../print.html" title="Print this book" aria-label="Print this book">
+                            <i id="print-button" class="fa fa-print"></i>
+                        </a>
+
+                    </div>
+                </div>
+
+                <div id="search-wrapper" class="hidden">
+                    <form id="searchbar-outer" class="searchbar-outer">
+                        <input type="search" id="searchbar" name="searchbar" placeholder="Search this book ..." aria-controls="searchresults-outer" aria-describedby="searchresults-header">
+                    </form>
+                    <div id="searchresults-outer" class="searchresults-outer hidden">
+                        <div id="searchresults-header" class="searchresults-header"></div>
+                        <ul id="searchresults">
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Apply ARIA attributes after the sidebar and the sidebar toggle button are added to the DOM -->
+                <script>
+                    document.getElementById('sidebar-toggle').setAttribute('aria-expanded', sidebar === 'visible');
+                    document.getElementById('sidebar').setAttribute('aria-hidden', sidebar !== 'visible');
+                    Array.from(document.querySelectorAll('#sidebar a')).forEach(function(link) {
+                        link.setAttribute('tabIndex', sidebar === 'visible' ? 0 : -1);
+                    });
+                </script>
+
+                <div id="content" class="content">
+                    <main><div class="sidetoc"><nav class="pagetoc"></nav></div>
+                        <h1 id="asm"><a class="header" href="#asm">asm</a></h1>
+<p><a href="https://www.intel.com/content/dam/develop/external/us/en/documents/introduction-to-x64-assembly-181178.pdf">Intel assembly 64 bit intro</a></p>
+<p>The processor supports the following data types:</p>
+<ul>
+<li><code>Word</code>: 2 byte structure</li>
+<li><code>Doubleword</code>: 4 byte structure</li>
+<li><code>Quadword</code>: 8 byte structure</li>
+<li><code>Paragraph</code>: 16 byte structure</li>
+</ul>
+<h2 id="addressing-data-in-memory"><a class="header" href="#addressing-data-in-memory">Addressing Data in Memory</a></h2>
+<p>The process through which the processor controls the execution of instructions is referred as the fetch-decode-execute cycle or the execution cycle. It consists of three continuous steps −</p>
+<ul>
+<li>Fetching the instruction from memory</li>
+<li>Decoding or identifying the instruction</li>
+<li>Executing the instruction</li>
+</ul>
+<h2 id="some-assembly-commands-and-syntax"><a class="header" href="#some-assembly-commands-and-syntax">Some Assembly commands and syntax</a></h2>
+<blockquote>
+<p>Unless stated otherwise, instructions are written in intel assembly flavour.</p>
+</blockquote>
+<ul>
+<li>
+<p>DX:AX notation means that the upper half bits are in DX and lower half in AX.</p>
+</li>
+<li>
+<p><code>adc</code> Add with carry. Differs from <code>add</code> in the sense that carry flag is also added.</p>
+<ul>
+<li><code>adc %b %a</code> : addition into <code>%b</code> depending on the size <code>%b</code> can hold.</li>
+<li><code>%a</code> always has to be smaller than <code>%b</code></li>
+</ul>
+</li>
+<li>
+<p><code>add</code> Add without carry. Rest is same as above.</p>
+</li>
+<li>
+<p><code>bsf %a %b</code> : bit scan forward. Finds and stores the index of the least significant bit of <code>%b</code> into <code>%a</code>. If <code>%b</code> is 0, <code>%a</code> is undefined. ZF flag is set to 0 if bit is found or 1 otherwise.</p>
+</li>
+<li>
+<p><code>bsr</code> : bit scan reverse. Same as above for most significant bit.</p>
+</li>
+<li>
+<p><code>bswap</code>: reverse the bits of the register.</p>
+</li>
+<li>
+<p><code>bt %a %b</code> checks for bit at address <code>%a</code> and offset <code>%b</code>. Value is stored in carry flag.</p>
+</li>
+<li>
+<p><code>btc</code>: do the same as above but complement the bit you fetched later on.</p>
+</li>
+<li>
+<p><code>btr</code>: do the same as <code>bt</code> but set the position to 0.</p>
+</li>
+<li>
+<p><code>bts</code>: do the same as <code>bt</code> but set the position to 1.</p>
+</li>
+<li>
+<p><code>and/or/xor %a %b</code> Bitwise <strong>and/or/xor</strong> of the two arguments, stored in the first location. First has to be larger.</p>
+</li>
+<li>
+<p><code>mov %a, %b</code> In GAS (AT&amp;T), moves the value of <code>%a</code> (or <code>$a</code>) to <code>%b</code> (must be an address). In intel flavor, moves value of <code>%b</code> (or <code>$b</code>) to <code>%a</code> (must be an address).</p>
+</li>
+<li>
+<p><code>imul %a, %b</code> multiplies the contents of <code>%a</code> with <code>%b</code> and stores them in <code>%a</code>.</p>
+<ul>
+<li><code>imul</code> is signed multiply. <code>mul</code> is the unsigned variant.</li>
+<li><code>imul %a, %b, $1234</code> does <code>%a</code> = <code>%b</code>*1234. Size is extended for the last two operands as and when needed.</li>
+<li><code>imul %a</code> simply multiplies <code>%a</code> with the contents of AX register and stores it in DX:AX.</li>
+</ul>
+</li>
+<li>
+<p><code>idiv</code> is signed divide. <code>div</code> is the unsigned variant.</p>
+<ul>
+<li><code>idiv %a</code> where a is 8bit. In this case, AL stores quotient and AH stores remainder.</li>
+<li><code>idiv %a</code> where a is 16bit. In this case, AX stores quotient and DX stores remainder.</li>
+</ul>
+</li>
+<li>
+<p><code>enter</code>: create a stack frame for a procedure.</p>
+</li>
+<li>
+<p><code>call</code>: calls a procedure.</p>
+</li>
+</ul>
+<!---TODO: Figure out call--->
+<ul>
+<li>
+<p><code>cbw/cwde/cdqe</code>: Convert byte to word, word to doubleword, doubleword to quadword. Acts on AX reg.</p>
+</li>
+<li>
+<p><code>clc</code>: Clear carry flag.</p>
+</li>
+<li>
+<p><code>cmc</code>: complement carry flag.</p>
+</li>
+<li>
+<p><code>cld</code>: Clear direction flag.</p>
+</li>
+<li>
+<p><code>cli</code>: clear interrupt flag.</p>
+</li>
+<li>
+<p><code>fclex</code>: clear floating point exceptions.</p>
+</li>
+<li>
+<p><code>cmove</code>: Conditional moves. Find the list <a href="https://github.com/HJLebbink/asm-dude/wiki/CMOVcc">here</a></p>
+</li>
+<li>
+<p><code>cmp</code> compare two values and store the result accordingly.</p>
+</li>
+<li>
+<p><code>cmps</code> takes tow arguments for size of string, reads the size from DS:SI to ES:DI and changes flags accordingly.</p>
+<ul>
+<li>has suffixes b,w,d,q for size suffixes.</li>
+</ul>
+</li>
+<li>
+<p><code>cmpxchg %a %b</code>: compare and exchange. If AX is equal to <code>%a</code> then <code>%b</code> is loaded to <code>%a</code>. Otherwise <code>%a</code> is loaded into AX. ZF is set to 1 if they are equal or 0 otherwise.</p>
+<ul>
+<li>Also has another variant dealing with 64 and 128 bit values. Except <code>%b</code> is implicitly taken to be CX:BX.</li>
+</ul>
+</li>
+</ul>
+<!---TODO: CRC32 instruction--->
+<ul>
+<li>
+<p><code>dec %a</code> decrement <code>%a</code> by 1.</p>
+</li>
+<li>
+<p><code>inc %a</code> increment by 1.</p>
+</li>
+<li>
+<p><code>f2xm1</code>: replace ST[0] with 2^ST[0] - 1.</p>
+</li>
+<li>
+<p><code>fabs</code>: replace ST[0] with its mod.</p>
+</li>
+<li>
+<p><code>fbld %a</code>: load a binary coded decimal from <code>%a</code> and push it to the top of FPU stack.</p>
+</li>
+<li>
+<p><code>fbstp %a</code>: do the exact opposite of <code>fbld</code>.</p>
+</li>
+<li>
+<p><code>fchs</code>: change sign of ST[0].</p>
+</li>
+<li>
+<p><code>fcmov ST[0], ST[i]</code>: dependent on the condition on CF, ZF and PF.</p>
+</li>
+<li>
+<p><code>fincstp</code>: increment stack top field. Effectively rotates the stack. <strong>NOT</strong> equivalent to popping.</p>
+</li>
+<li>
+<p><code>fcom/fcomp</code> the syntax is same as <code>comp</code> but it compares the two floating points and modifies the flags instead.</p>
+</li>
+<li>
+<p><code>ficom/ficomp %a</code> compares a floating point and a register. Works the same as <code>fcom</code>.</p>
+<!---TODO: wtf is register stack--->
+</li>
+<li>
+<p><code>fadd/faddp/fiadd</code> floating point addition (followed by popping the register stack.)</p>
+<ul>
+<li><code>fadd %a</code> adds to ST[0] and stores it there.</li>
+<li><code>fadd ST[0] ST[i]</code> add ST[i] to ST[0] and store the result in ST[0].</li>
+<li><code>fadd ST[i] ST[0]</code> add ST[i] to ST[0] and store the result in ST[i].</li>
+<li>If p in the end of the instruction, pop the register stack.</li>
+<li><code>fiadd</code> is the same as <code>fadd</code>’s first variant but take an int argument instead.</li>
+</ul>
+</li>
+<li>
+<p><code>fsub/fsubp/fisub</code>: same as <code>fadd</code> variants but subtract instead.</p>
+</li>
+<li>
+<p><code>fsubr/fsubrp/fisubr</code>: do reverse subtraction.</p>
+</li>
+<li>
+<p><code>fdiv/fdivp/fidiv</code> same as <code>fadd</code> but divide.</p>
+</li>
+<li>
+<p><code>fmul/fmulp/fimul</code>: same as <code>fdiv</code> but multiply instead.</p>
+</li>
+<li>
+<p><code>fdivr/fdivrp/fidivr</code> same as <code>fdiv</code> but in reverse.</p>
+</li>
+<li>
+<p><code>fild %a</code> load %a onto the register stack.</p>
+</li>
+<li>
+<p><code>fprem</code>: replace ST[0] with ST[0]%ST[1].</p>
+</li>
+<li>
+<p><code>fld %a</code> same as <code>fild</code> but loads a floating point instead.</p>
+<ul>
+<li>has some specialized variants for pushing common constants.</li>
+</ul>
+</li>
+<li>
+<p><code>fist/fistp %a</code> take ST[0] and store it in the memory location given. ST[0] is converted to a signed integer. The other one is a pop variant.</p>
+</li>
+<li>
+<p><code>fst/fstp</code>: store ST[0] floating point into memory location.</p>
+</li>
+<li>
+<p><code>fisttp %a</code> Do the same as above but truncate if it’s floating point.</p>
+</li>
+<li>
+<p><code>frndint</code>: round ST[0] to integer.</p>
+</li>
+<li>
+<p><code>fcos</code>: replace ST[0] with its approximate cosine.</p>
+</li>
+<li>
+<p><code>fsin</code>: replace ST[0] with its sine.</p>
+</li>
+<li>
+<p><code>fsincos</code>: compute sine and cosine of ST[0]. Replace ST[0] with the sine and push cosine.</p>
+</li>
+<li>
+<p><code>fptan</code>: Same as <code>fcos</code> but tangent.</p>
+</li>
+<li>
+<p><code>fsqrt</code>: take sqrt of ST[0] and store the result in ST[0].</p>
+</li>
+<li>
+<p><code>ftst</code>: Compare ST[0] with 0 and change C3 C2 C0 flags accodingly.</p>
+</li>
+<li>
+<p><code>fxch</code>: exchange ST[i] with ST[0] if ST[i] is given, otherwise exchange ST[1] with ST[0].</p>
+</li>
+<li>
+<p><code>fnop</code>: no floating point operation.</p>
+</li>
+</ul>
+
+                    </main>
+
+                    <nav class="nav-wrapper" aria-label="Page navigation">
+                        <!-- Mobile navigation buttons -->
+                            <a rel="prev" href="../notes/hacking_basics.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                                <i class="fa fa-angle-left"></i>
+                            </a>
+
+                            <a rel="next" href="../notes/registers.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                                <i class="fa fa-angle-right"></i>
+                            </a>
+
+                        <div style="clear: both"></div>
+                    </nav>
+                </div>
+            </div>
+
+            <nav class="nav-wide-wrapper" aria-label="Page navigation">
+                    <a rel="prev" href="../notes/hacking_basics.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                        <i class="fa fa-angle-left"></i>
+                    </a>
+
+                    <a rel="next" href="../notes/registers.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                        <i class="fa fa-angle-right"></i>
+                    </a>
+            </nav>
+
+        </div>
+
+        <!-- Livereload script (if served using the cli tool) -->
+        <script>
+            const wsProtocol = location.protocol === 'https:' ? 'wss:' : 'ws:';
+            const wsAddress = wsProtocol + "//" + location.host + "/" + "__livereload";
+            const socket = new WebSocket(wsAddress);
+            socket.onmessage = function (event) {
+                if (event.data === "reload") {
+                    socket.close();
+                    location.reload();
+                }
+            };
+
+            window.onbeforeunload = function() {
+                socket.close();
+            }
+        </script>
+
+
+
+        <script>
+            window.playground_copyable = true;
+        </script>
+
+
+        <script src="../elasticlunr.min.js"></script>
+        <script src="../mark.min.js"></script>
+        <script src="../searcher.js"></script>
+
+        <script src="../clipboard.min.js"></script>
+        <script src="../highlight.js"></script>
+        <script src="../book.js"></script>
+
+        <!-- Custom JS scripts -->
+        <script src="../theme/pagetoc.js"></script>
+
+
+    </div>
+    </body>
+</html>

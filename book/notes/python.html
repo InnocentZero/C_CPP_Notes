@@ -1,0 +1,2379 @@
+<!DOCTYPE HTML>
+<html lang="en" class="sidebar-visible no-js ayu">
+    <head>
+        <!-- Book generated using mdBook -->
+        <meta charset="UTF-8">
+        <title>python - Notes</title>
+
+
+        <!-- Custom HTML head -->
+        
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="theme-color" content="#ffffff" />
+
+        <link rel="icon" href="../favicon.svg">
+        <link rel="shortcut icon" href="../favicon.png">
+        <link rel="stylesheet" href="../css/variables.css">
+        <link rel="stylesheet" href="../css/general.css">
+        <link rel="stylesheet" href="../css/chrome.css">
+        <link rel="stylesheet" href="../css/print.css" media="print">
+
+        <!-- Fonts -->
+        <link rel="stylesheet" href="../FontAwesome/css/font-awesome.css">
+        <link rel="stylesheet" href="../fonts/fonts.css">
+
+        <!-- Highlight.js Stylesheets -->
+        <link rel="stylesheet" href="../highlight.css">
+        <link rel="stylesheet" href="../tomorrow-night.css">
+        <link rel="stylesheet" href="../ayu-highlight.css">
+
+        <!-- Custom theme stylesheets -->
+        <link rel="stylesheet" href=".././src/notes/custom.css">
+        <link rel="stylesheet" href="../theme/pagetoc.css">
+        <link rel="stylesheet" href=".././src/notes/katex.min.css">
+
+    </head>
+    <body>
+    <div id="body-container">
+        <!-- Provide site root to javascript -->
+        <script>
+            var path_to_root = "../";
+            var default_theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? "navy" : "ayu";
+        </script>
+
+        <!-- Work around some values being stored in localStorage wrapped in quotes -->
+        <script>
+            try {
+                var theme = localStorage.getItem('mdbook-theme');
+                var sidebar = localStorage.getItem('mdbook-sidebar');
+
+                if (theme.startsWith('"') && theme.endsWith('"')) {
+                    localStorage.setItem('mdbook-theme', theme.slice(1, theme.length - 1));
+                }
+
+                if (sidebar.startsWith('"') && sidebar.endsWith('"')) {
+                    localStorage.setItem('mdbook-sidebar', sidebar.slice(1, sidebar.length - 1));
+                }
+            } catch (e) { }
+        </script>
+
+        <!-- Set the theme before any content is loaded, prevents flash -->
+        <script>
+            var theme;
+            try { theme = localStorage.getItem('mdbook-theme'); } catch(e) { }
+            if (theme === null || theme === undefined) { theme = default_theme; }
+            var html = document.querySelector('html');
+            html.classList.remove('no-js')
+            html.classList.remove('ayu')
+            html.classList.add(theme);
+            html.classList.add('js');
+        </script>
+
+        <!-- Hide / unhide sidebar before it is displayed -->
+        <script>
+            var html = document.querySelector('html');
+            var sidebar = null;
+            if (document.body.clientWidth >= 1080) {
+                try { sidebar = localStorage.getItem('mdbook-sidebar'); } catch(e) { }
+                sidebar = sidebar || 'visible';
+            } else {
+                sidebar = 'hidden';
+            }
+            html.classList.remove('sidebar-visible');
+            html.classList.add("sidebar-" + sidebar);
+        </script>
+
+        <nav id="sidebar" class="sidebar" aria-label="Table of contents">
+            <div class="sidebar-scrollbox">
+                <ol class="chapter"><li class="chapter-item "><a href="../notes/rust_notes.html"><strong aria-hidden="true">1.</strong> rust_notes</a></li><li class="chapter-item expanded "><a href="../notes/python.html" class="active"><strong aria-hidden="true">2.</strong> python</a></li><li class="chapter-item "><a href="../notes/cmake.html"><strong aria-hidden="true">3.</strong> cmake</a></li><li class="chapter-item "><a href="../notes/project_euler.html"><strong aria-hidden="true">4.</strong> project_euler</a></li><li class="chapter-item "><a href="../notes/c_codes.html"><strong aria-hidden="true">5.</strong> c_codes</a></li><li class="chapter-item "><a href="../notes/cp_codes.html"><strong aria-hidden="true">6.</strong> cp_codes</a></li><li class="chapter-item "><a href="../notes/regex.html"><strong aria-hidden="true">7.</strong> regex</a></li><li class="chapter-item "><a href="../notes/concurrency.html"><strong aria-hidden="true">8.</strong> concurrency</a></li><li class="chapter-item "><a href="../notes/cpp-guidelines.html"><strong aria-hidden="true">9.</strong> cpp-guidelines</a></li><li class="chapter-item "><a href="../notes/hacking_basics.html"><strong aria-hidden="true">10.</strong> hacking_basics</a></li><li class="chapter-item "><a href="../notes/asm.html"><strong aria-hidden="true">11.</strong> asm</a></li><li class="chapter-item "><a href="../notes/registers.html"><strong aria-hidden="true">12.</strong> registers</a></li><li class="chapter-item "><a href="../notes/network_stack.html"><strong aria-hidden="true">13.</strong> network_stack</a></li><li class="chapter-item "><a href="../notes/traceroute.html"><strong aria-hidden="true">14.</strong> traceroute</a></li><li class="chapter-item "><a href="../notes/icmp.html"><strong aria-hidden="true">15.</strong> icmp</a></li><li class="chapter-item "><a href="../notes/tcp.html"><strong aria-hidden="true">16.</strong> tcp</a></li><li class="chapter-item "><a href="../notes/ipv4.html"><strong aria-hidden="true">17.</strong> ipv4</a></li><li class="chapter-item "><a href="../notes/ipv6.html"><strong aria-hidden="true">18.</strong> ipv6</a></li><li class="chapter-item "><a href="../notes/dhcp.html"><strong aria-hidden="true">19.</strong> dhcp</a></li><li class="chapter-item "><a href="../notes/dhcpv6.html"><strong aria-hidden="true">20.</strong> dhcpv6</a></li><li class="chapter-item "><a href="../notes/natas_levels.html"><strong aria-hidden="true">21.</strong> natas_levels</a></li><li class="chapter-item "><a href="../notes/gdb.html"><strong aria-hidden="true">22.</strong> gdb</a></li><li class="chapter-item "><a href="../notes/linux.html"><strong aria-hidden="true">23.</strong> Kernel Contrib</a></li><li class="chapter-item "><a href="../notes/bash.html"><strong aria-hidden="true">24.</strong> bash</a></li></ol>
+            </div>
+            <div id="sidebar-resize-handle" class="sidebar-resize-handle"></div>
+        </nav>
+
+        <!-- Track and set sidebar scroll position -->
+        <script>
+            var sidebarScrollbox = document.querySelector('#sidebar .sidebar-scrollbox');
+            sidebarScrollbox.addEventListener('click', function(e) {
+                if (e.target.tagName === 'A') {
+                    sessionStorage.setItem('sidebar-scroll', sidebarScrollbox.scrollTop);
+                }
+            }, { passive: true });
+            var sidebarScrollTop = sessionStorage.getItem('sidebar-scroll');
+            sessionStorage.removeItem('sidebar-scroll');
+            if (sidebarScrollTop) {
+                // preserve sidebar scroll position when navigating via links within sidebar
+                sidebarScrollbox.scrollTop = sidebarScrollTop;
+            } else {
+                // scroll sidebar to current active section when navigating via "next/previous chapter" buttons
+                var activeSection = document.querySelector('#sidebar .active');
+                if (activeSection) {
+                    activeSection.scrollIntoView({ block: 'center' });
+                }
+            }
+        </script>
+
+        <div id="page-wrapper" class="page-wrapper">
+
+            <div class="page">
+                                <div id="menu-bar-hover-placeholder"></div>
+                <div id="menu-bar" class="menu-bar sticky">
+                    <div class="left-buttons">
+                        <button id="sidebar-toggle" class="icon-button" type="button" title="Toggle Table of Contents" aria-label="Toggle Table of Contents" aria-controls="sidebar">
+                            <i class="fa fa-bars"></i>
+                        </button>
+                        <button id="theme-toggle" class="icon-button" type="button" title="Change theme" aria-label="Change theme" aria-haspopup="true" aria-expanded="false" aria-controls="theme-list">
+                            <i class="fa fa-paint-brush"></i>
+                        </button>
+                        <ul id="theme-list" class="theme-popup" aria-label="Themes" role="menu">
+                            <li role="none"><button role="menuitem" class="theme" id="light">Light</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="rust">Rust</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="coal">Coal</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="navy">Navy</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="ayu">Ayu</button></li>
+                        </ul>
+                        <button id="search-toggle" class="icon-button" type="button" title="Search. (Shortkey: s)" aria-label="Toggle Searchbar" aria-expanded="false" aria-keyshortcuts="S" aria-controls="searchbar">
+                            <i class="fa fa-search"></i>
+                        </button>
+                    </div>
+
+                    <h1 class="menu-title">Notes</h1>
+
+                    <div class="right-buttons">
+                        <a href="../print.html" title="Print this book" aria-label="Print this book">
+                            <i id="print-button" class="fa fa-print"></i>
+                        </a>
+
+                    </div>
+                </div>
+
+                <div id="search-wrapper" class="hidden">
+                    <form id="searchbar-outer" class="searchbar-outer">
+                        <input type="search" id="searchbar" name="searchbar" placeholder="Search this book ..." aria-controls="searchresults-outer" aria-describedby="searchresults-header">
+                    </form>
+                    <div id="searchresults-outer" class="searchresults-outer hidden">
+                        <div id="searchresults-header" class="searchresults-header"></div>
+                        <ul id="searchresults">
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Apply ARIA attributes after the sidebar and the sidebar toggle button are added to the DOM -->
+                <script>
+                    document.getElementById('sidebar-toggle').setAttribute('aria-expanded', sidebar === 'visible');
+                    document.getElementById('sidebar').setAttribute('aria-hidden', sidebar !== 'visible');
+                    Array.from(document.querySelectorAll('#sidebar a')).forEach(function(link) {
+                        link.setAttribute('tabIndex', sidebar === 'visible' ? 0 : -1);
+                    });
+                </script>
+
+                <div id="content" class="content">
+                    <main><div class="sidetoc"><nav class="pagetoc"></nav></div>
+                        <h1 id="python"><a class="header" href="#python">python</a></h1>
+<h2 id="simple-operations"><a class="header" href="#simple-operations">Simple Operations</a></h2>
+<p>Python has the capability of carrying out calculations. Enter a
+calculation directly into a print statement:</p>
+<pre><code class="language-py">print(2 + 2)
+print(5 + 4 -3)
+</code></pre>
+<blockquote>
+<p>The spaces around the plus and the minus signs here are <strong>optional</strong>
+(the code would work without them) but they make it easier to read.</p>
+</blockquote>
+<p>Python also carries out multiplication and division, using an <strong>asterisk
+*</strong> to indicate multiplication and a <strong>forward slash /</strong> to indicate
+division.</p>
+<p>Use <strong>parentheses</strong> to determine which operations are performed first.</p>
+<pre><code class="language-py">print(2*(3+4))
+print(10/2)
+</code></pre>
+<blockquote>
+<p>Using a single slash to divide numbers produces a decimal (or
+<em><strong>float</strong></em>, as it is called in programming). We’ll learn more about
+<strong>floats</strong> later.</p>
+</blockquote>
+<p>Dividing by zero produces an <strong>error</strong> in python, as no answer can be
+calculated.</p>
+<pre><code class="language-py"> print(11/0)
+
+ Traceback(most recent call last):
+  File&quot;\&lt;stdin\&gt;&quot;, line 1, in \&lt;module\&gt;
+ ZeroDivisionError: division by zero
+</code></pre>
+<blockquote>
+<p>In python, the last line of an error message indicates the error’s
+type. Read error messages carefully, as they often tell you how to fix
+a program!</p>
+</blockquote>
+<hr />
+<h3 id="floats"><a class="header" href="#floats">Floats</a></h3>
+<p><strong>Floats</strong> are used in python to represent numbers that <strong>aren’t
+integers</strong> (whole numbers). Some examples of numbers that are
+represented as floats are 0.5 and -7.8538953. They can be created
+directly by entering a number with a decimal point, or by using
+operations such as division on integers.</p>
+<pre><code class="language-py">print(3/4)
+</code></pre>
+<blockquote>
+<p>Computers can’t store floats perfectly accurately, in the same way we
+can’t write down the complete decimal expansion of 1/3
+(0.333333333…). Keep this in mind, because it often leads to
+infuriating bugs!</p>
+</blockquote>
+<p>A float is also produced by running an operation on two floats, or on a
+float and an integer.</p>
+<blockquote>
+<p>A float can be added to an integer, because Python silently converts
+the ineger to a float.</p>
+</blockquote>
+<hr />
+<h3 id="exponentiation"><a class="header" href="#exponentiation">Exponentiation</a></h3>
+<p>Besides addition, subtraction, multiplication, and division, Python also
+supports exponentiation, which is raising of one number to the power of
+another. This operation is performed using two asterisks.</p>
+<pre><code class="language-py">print(2**5)
+print(9**(1/2))
+</code></pre>
+<blockquote>
+<p>You can chain exponentiation together. In other words, you can raise a
+number to multiple powers. Eg. 2**3**2</p>
+</blockquote>
+<hr />
+<h3 id="quotient"><a class="header" href="#quotient">Quotient</a></h3>
+<p><strong>Floor division</strong> is done using two forward slashes and is used to
+determine the <strong>quotient</strong> of a division (the quantity produced by the
+division of two numbers).</p>
+<p><strong>For example:</strong></p>
+<pre><code class="language-py">print(20//6)
+</code></pre>
+<p>The code above will output 3. &gt;You can also use floor division on
+floats</p>
+<hr />
+<h3 id="remainder"><a class="header" href="#remainder">Remainder</a></h3>
+<p>The <strong>modulo operator</strong> is carried out with a percent symbol (%) and is
+used to get the <strong>remainder</strong> of a division.</p>
+<p><strong>For example:</strong></p>
+<pre><code class="language-py">print(20%6)
+print(1.25%0.5)
+</code></pre>
+<blockquote>
+<p>All numerical operators can also be used with floats.</p>
+</blockquote>
+<hr />
+<h2 id="strings"><a class="header" href="#strings">Strings</a></h2>
+<p>If you want to use text in python, you have to use a <em>string</em>. A
+<em>string</em> is created by entering text between <strong>two single or double
+quotation marks.</strong></p>
+<pre><code class="language-py">print(&quot;Python is fun!&quot;)
+print(&quot;Always look on the bright side&quot;)
+</code></pre>
+<blockquote>
+<p>The delimiter (“ or ’) used for a string doesn’t affect how it behaves
+in any way.</p>
+</blockquote>
+<hr />
+<h3 id="backslash"><a class="header" href="#backslash">Backslash</a></h3>
+<p>Some characters cant be directly included in a <em>string</em>. For instance,
+double quotes can’t be directly included in a double quote <em>string</em>;
+this would cause it to end prematurely.</p>
+<p>Characters like double quotes must be escaped by placing a <strong>backslash</strong>
+before them. Double quotes need to be escaped in double quotes strings
+only, and the same is true for single quotes strings. <strong>For Example:</strong></p>
+<pre><code class="language-py">print('Brian\'s mother: He\'s not an angel. He\'s a naughty boy!')
+</code></pre>
+<blockquote>
+<p>Backslashes can also be used to escape tabs, arbitrary Unicode
+characters, and various other things that can’t be reliably printed.</p>
+</blockquote>
+<hr />
+<h3 id="newlines"><a class="header" href="#newlines">Newlines</a></h3>
+<p>*** represents a new line. It can be used in strings to create
+multi-line output.</p>
+<pre><code class="language-py">print('One **\n** Two **\n** Three')
+</code></pre>
+<p>Newlines will automatically be added for strings that are created using
+three quotes.</p>
+<pre><code class="language-py">print(&quot;&quot;&quot;This
+is a
+multiline
+text&quot;&quot;&quot;)
+</code></pre>
+<blockquote>
+<p>Similarly, ** represents a tab.</p>
+</blockquote>
+<hr />
+<h3 id="concatenation"><a class="header" href="#concatenation">Concatenation</a></h3>
+<p>As with integers and floats, strings in Python can be added, using a
+process called <em>concatenation</em>, which can be done on any two strings.</p>
+<pre><code class="language-py">print(&quot;Spam&quot; + 'eggs')
+</code></pre>
+<blockquote>
+<p>When concatenating strings, it doesn’t matter whether they have been
+created with single or double quotes, as seen above</p>
+</blockquote>
+<blockquote>
+<p>Adding a string to a number produces an error, as even though they
+might look similar, they are two different entities</p>
+</blockquote>
+<hr />
+<h3 id="string-operations"><a class="header" href="#string-operations">String Operations</a></h3>
+<p>Strings can also be <strong>multiplied</strong> with integers. This produces a
+repeated version of that <em>string</em>. The order of the <em>string</em> and the
+<em>integer</em> doesn’t matter, but the <em>string</em> usually comes first.</p>
+<pre><code class="language-py">print(&quot;spam&quot;*3)
+
+print(4*'2')
+</code></pre>
+<blockquote>
+<p>Strings can’t be multiplied with other strings. Strings also can’t be
+multiplied by floats, even if the floats are whole numbers.</p>
+</blockquote>
+<hr />
+<h2 id="variables"><a class="header" href="#variables">Variables</a></h2>
+<p>A <em>variable</em> allows you to store a value by assigning it to a name,
+which can be used to refer to the value later in the program. For
+example, in game development, you would use a <em>variable</em> to to store the
+points of the player.</p>
+<p>To assign a <em>variable</em>, use <strong>one equals sign</strong>.</p>
+<pre><code class="language-py">user = &quot;James&quot;
+</code></pre>
+<p>You can use variables to perform corresponding operations, just as you
+did with numbers and strings:</p>
+<pre><code class="language-py">x = 7
+print(x)
+
+print(x + 3)
+print(x)
+</code></pre>
+<blockquote>
+<p>The <em>variable</em> stores its value throughout the program.</p>
+</blockquote>
+<p>Variables can be assigned as many times as you want, in order to change
+their value. In python, variables don’t have specific types, so you can
+assign a <em>string</em> to a <em>variable</em>, and later assign an <em>integer</em> to the
+same <em>variable</em>.</p>
+<pre><code class="language-py">x = 123.456
+print(x)
+
+x = &quot;This is a string&quot;
+print(x+&quot;!&quot;)
+</code></pre>
+<blockquote>
+<p>However, this is not a good practice. To avoid mistakes, try to avoid
+overwriting the same <em>variable</em> with different data types.</p>
+</blockquote>
+<hr />
+<h3 id="variable-names"><a class="header" href="#variable-names">Variable Names</a></h3>
+<p>Certain restrictions apply in regard to the characters that may be used
+in python <em>variable</em> names. The only characters that are allowed are
+<strong>letters, numbers and underscore</strong>. Also, they can’t start with
+numbers. Not following these rules results in errors.</p>
+<pre><code class="language-py">this_is_a_normal_name = 7
+
+123abc = 7
+SyntaxError: invalid syntax
+</code></pre>
+<blockquote>
+<p>Python is a case sensitive programming language. Thus, <strong>lastname</strong>
+and <strong>Lastname</strong> are two different <em>variable</em> names in python.</p>
+</blockquote>
+<hr />
+<p>You can use the <strong>del</strong> statement to remove a <em>variable</em>, which means
+the reference from the name to the value is deleted, and trying to use
+the <em>variable</em> causes an error.</p>
+<pre><code class="language-py">foo = 3
+del foo
+print(foo)
+</code></pre>
+<p>Deleted variables can also e reassigned to later as normal.</p>
+<pre><code class="language-py">foo = 2
+bar = 3
+del bar
+bar = 8
+print(foo + bar)
+</code></pre>
+<blockquote>
+<p>The variables <strong>foo</strong> and <strong>bar</strong> are called <strong>metasyntactic</strong>
+variables, meaning they are used as placeholder names in example code
+to demonstrate something.</p>
+</blockquote>
+<hr />
+<h2 id="input"><a class="header" href="#input">Input</a></h2>
+<p>To get input from the user in python, you can use the intuitively named
+<strong>input</strong> <em>function</em>. For example, a game can ask for a user’s name and
+age as input and use them in the game.</p>
+<p>The input <em>function</em> prompts the user for input, and returns what they
+enter as a <em>string</em> (with the contents automatically escaped).</p>
+<pre><code class="language-py">x = input()
+print(x)
+</code></pre>
+<blockquote>
+<p>Even if the user enters a number as an input, it is processed as a
+<strong>string</strong>.</p>
+</blockquote>
+<p>The <strong>input</strong> statement needs to be followed by parentheses. You can
+provide a <em>string</em> to <strong>input()</strong> between the parentheses, producing a
+prompt message.</p>
+<pre><code class="language-py">name = input(&quot;Enter your name: &quot;)
+print(&quot;Hello&quot;+name)
+</code></pre>
+<blockquote>
+<p>The prompt message helps clarify what the input is asking for.</p>
+</blockquote>
+<p>To convert the string to a number, we can use the <strong>int()</strong> <em>function</em>:</p>
+<pre><code class="language-py">age =int(input())
+print(age)
+</code></pre>
+<p>Similarly, in order to convert a number to a <em>string</em>, the str()
+<em>function</em> is used. This can be useful if you need to use a number in
+<em>string concatenation</em>. <strong>For example:</strong></p>
+<pre><code class="language-py">age = 42
+print(&quot;His age is&quot; + str(age))
+</code></pre>
+<blockquote>
+<p>You can convert to float using the float() function.</p>
+</blockquote>
+<p>You can take input multiple times to take multiple user input. <strong>For
+example:</strong></p>
+<pre><code class="language-py">name = input()
+age = input()
+
+print(name + &quot;is&quot; + age)
+</code></pre>
+<blockquote>
+<p>When input function executes, program flow stops until the user enters
+some value.</p>
+</blockquote>
+<hr />
+<h2 id="in-place-operators"><a class="header" href="#in-place-operators">In Place Operators</a></h2>
+<p><strong>In-place operators</strong> allow you to write code like <code>x = x + 3</code> more
+concisely as <code>x +=3</code> . The same thing is possible with other operators
+such as <strong>-,*, /, and %</strong> as well.</p>
+<pre><code class="language-py">x = 2
+print(x)
+
+x += 3
+print(x)
+</code></pre>
+<p>These operators can be used on types other than numbers, as well, such
+as <strong>strings.</strong></p>
+<pre><code class="language-py">x= &quot;spam&quot;
+print(x)
+
+x += &quot;eggs&quot;
+print(x)
+</code></pre>
+<blockquote>
+<p>In-place operators can be used for any numerical operation
+(+,-,*,/,%,**,//).</p>
+</blockquote>
+<hr />
+<h2 id="booleans"><a class="header" href="#booleans">Booleans</a></h2>
+<p>Another type in python is the <em>Boolean</em> type. There are two <em>Boolean</em>
+values: <strong>True</strong> and <strong>False</strong>. They can be created by comparing values,
+for instance by using the equal to ==.</p>
+<pre><code class="language-py">my_boolean = True
+print(my_boolean)
+True
+
+print(2 == 3)
+False
+
+print(&quot;hello&quot; == 'hello')
+True
+</code></pre>
+<blockquote>
+<p><em>Be careful not to confuse <strong>assignment</strong> (one equal sign) with
+<strong>comparison</strong> (two equal signs).</em></p>
+</blockquote>
+<hr />
+<h3 id="comparison"><a class="header" href="#comparison">Comparison</a></h3>
+<p>Another comparison operator, the <strong>not equal</strong> operator (!=), evaluates
+to <strong>True</strong> if the items being compared aren’t equal, and <strong>False</strong> if
+they are.</p>
+<pre><code class="language-py">print(1 != 1)
+False
+
+print(&quot;eleven&quot; != &quot;seven&quot;)
+True
+
+print(2 != 10)
+True
+</code></pre>
+<blockquote>
+<p><em>Comparison operators are also called <strong>relational operators</strong>.</em></p>
+</blockquote>
+<p>Python also has operators that determine whether one number (float or
+integer) is greater than or smaller than another. These operators are &gt;
+and &lt; respectively.</p>
+<pre><code class="language-py">print(7 &gt; 5)
+True
+
+print(10 &lt; 10)
+False
+</code></pre>
+<blockquote>
+<p><em>Different numeric types can also be compared, for example, integer
+and float.</em></p>
+</blockquote>
+<p>The greater than or equal to, and the smaller than or equal to operators
+are &gt;= and &lt;=. They are the same as the strict greater than and
+smaller than operators, except that they return <strong>True</strong> when comparing
+equal numbers.</p>
+<pre><code class="language-py">print(7&lt;= 8)
+True
+
+print(9&gt;=9.0)
+True
+</code></pre>
+<p>Greater than and smaller than operators can also be used to compare
+strings <strong>lexicographically</strong>. <strong>For Example:</strong></p>
+<pre><code class="language-py">print(&quot;Annie&quot; &gt; &quot;Andy&quot;)
+True
+</code></pre>
+<hr />
+<h3 id="if-statements"><a class="header" href="#if-statements">If statements</a></h3>
+<p>You can use <strong>if</strong> statements to run code if a certain condition holds.
+If the expression evaluates to <strong>True</strong>, some statements are carried
+out.Otherwise they aren’t carried out. An if statement looks like this:</p>
+<pre><code class="language-py">if expression:
+    statements
+</code></pre>
+<blockquote>
+<p><em>Python uses <strong>indentation</strong>, (white spaces at the beginning of a
+line) to delimit blocks of code. Depending on the program’s logic,
+indentation can be mandatory. As you can see, the statements in the
+<strong>if</strong> should be indented.</em></p>
+</blockquote>
+<p>Here is an example of <strong>if</strong> statement:</p>
+<pre><code class="language-py">if 10 &gt; 5:
+    print(&quot;10 is greater than 5&quot;)
+
+print(&quot;The program ended&quot;)
+</code></pre>
+<p>The expression determines whether 10 is greater than 5. Since it is, the
+indented statement runs, and “10 is greater than 5” is output. Then, the
+unindented statement, which is not a part of the <strong>if</strong> statement, is
+run, and “Program ended” is displayed.</p>
+<blockquote>
+<p><em>Notice the <strong>colon</strong> at the end of the expression in the if
+statement.</em></p>
+</blockquote>
+<p>To perform more complex checks, <strong>if</strong> statements can be nested, one
+inside the other. This means that the inner <strong>if</strong> statement is the
+statement part of the outer one. This is one way to see whether multiple
+conditions are satisfied.</p>
+<p><strong>For example:</strong></p>
+<pre><code class="language-py">num = 12
+if num &gt; 5:
+    print(&quot;Bigger than 5&quot;)
+    if num &lt;= 47:
+        print(&quot;between 5 and 47&quot;)
+</code></pre>
+<blockquote>
+<p><em><strong>Indentation</strong> is used to define the level of nesting.</em></p>
+</blockquote>
+<hr />
+<h4 id="else-statements"><a class="header" href="#else-statements">else Statements</a></h4>
+<p>The <strong>if</strong> statement allows you to check a condition and run some
+statements, if the condition is <strong>True</strong>. The <strong>else</strong> statement can be
+used to run some statements when the condition of the <strong>if</strong> statement
+is <strong>False</strong>.</p>
+<p>As with <strong>if</strong> statements, the code inside the block should be indented.</p>
+<pre><code class="language-py">x = 4
+if x == 5:
+    print(&quot;Yes&quot;)
+else:
+    print(&quot;No&quot;)
+</code></pre>
+<blockquote>
+<p><em>Notice the colon after the else keyword.</em></p>
+</blockquote>
+<p>Every <strong>if</strong> condition block can have only one <strong>else</strong> statement. In
+order to make multiple checks, you can chain <strong>if</strong> and <strong>else</strong>
+statements.</p>
+<p>For example, the following program checks and outputs the <strong>num</strong>
+variable’s value as text:</p>
+<pre><code class="language-py">num = 3
+if num == 1:
+    print(&quot;One&quot;)
+else:
+    if num == 2:
+        print(&quot;Two&quot;)
+    else:
+        if num == 3:
+            print(&quot;Three&quot;)
+</code></pre>
+<blockquote>
+<p><em>Indentation determines which <strong>if/else</strong> statements the code blocks
+belong to.</em></p>
+</blockquote>
+<hr />
+<h4 id="elif-statements"><a class="header" href="#elif-statements">elif Statements</a></h4>
+<p>Multiple <strong>if/else</strong> statements make the code long and not very
+readable. The <strong>elif</strong> (short for else if) statement is a shortcut to
+use when chaining <strong>if</strong> and <strong>else</strong> statements, making the code
+shorter.</p>
+<p>The same example from the previous part can be rewritten using <strong>elif</strong>
+statements:</p>
+<pre><code class="language-py">num = 3:
+if num == 1:
+    print(&quot;One&quot;)
+elif num == 2:
+    print(&quot;Two&quot;)
+elif num == 3:
+    print(&quot;Three&quot;)
+else:
+    print(&quot;None are true&quot;)
+</code></pre>
+<p>As you can see in the example above, a series of <strong>if elif</strong> statements
+can have a final <strong>else</strong> block, which is called if none of the <strong>if</strong>
+or <strong>elif</strong> expressions is <strong>True</strong>. </p>
+<blockquote>
+<p>The <strong>elif</strong> statement is
+equivalent to an <strong>else/if</strong> statement. It is used to make the code
+shorter, more readable, and avoid indentation increase.</p>
+</blockquote>
+<hr />
+<h3 id="boolean-logic"><a class="header" href="#boolean-logic">Boolean Logic</a></h3>
+<p><strong>Boolean logic</strong> is used to make more complicated conditions for <strong>if</strong>
+statements that rely on more than one condition. Python’s Boolean
+operators are <strong>and</strong>, <strong>or</strong>, and <strong>not</strong>. The <strong>and</strong> operator takes
+two arguments, and evaluates as <strong>True</strong> if, and only if, both of its
+arguments are <strong>True</strong>. Otherwise, it evaluates to <strong>False</strong>.</p>
+<pre><code class="language-py">print( 1 == 1 and 2 == 2)
+True
+
+print(1 == 1 and 2 == 3)
+False
+
+print( 1 != 1 and 2 &gt; 3)
+False
+
+print( 2 &lt; 3 and 3 &gt; 6)
+False
+</code></pre>
+<blockquote>
+<p>Boolean operators can be used in expression as many times as needed.</p>
+</blockquote>
+<p>The <strong>or</strong> operator also takes two arguments. It evaluates to <strong>True</strong>
+if either (or both) of its arguments are <strong>True</strong>, and <strong>False</strong> if both
+arguments are <strong>False</strong>.</p>
+<pre><code class="language-py">print( 1 == 1 or 2 == 2)
+True
+
+print(1 == 1 or 2 == 3)
+True
+
+print( 1 != 1 or 2 &gt; 3)
+False
+
+print( 2 &lt; 3 or 3 &gt; 6)
+True
+</code></pre>
+<blockquote>
+<p>Besides values, you can also compare variables.</p>
+</blockquote>
+<p>Unlike other operators we’ve seen so far, <strong>not</strong> only takes one
+argument, and inverts it. The result of <strong>not True</strong> is <strong>False</strong>, and
+<strong>not False</strong> goes to <strong>True</strong></p>
+<pre><code class="language-py">print( not 1 == 1)
+False
+
+print( not 1 &gt; 7)
+True
+</code></pre>
+<blockquote>
+<p>You can chain multiple conditional statements in an <strong>if</strong> statement
+using the Boolean operators.</p>
+</blockquote>
+<hr />
+<h4 id="operator-precedence"><a class="header" href="#operator-precedence">Operator Precedence</a></h4>
+<p><strong>Operator precedence</strong> is a very important concept in programming. It
+is an extension of the mathematical idea of order of operations
+(multiplication being performed before addition, etc.) to include other
+operators, such as those in Boolean logic.</p>
+<p>The below code shows that <strong>==</strong> has a higher precedence than <strong>or</strong></p>
+<pre><code class="language-py">print(False == False or True)
+True
+
+print(False == (False or True))
+False
+
+print((False == False) or True)
+True
+</code></pre>
+<blockquote>
+<p>Python’s order of operations is the same as that of normal
+mathematics: parentheses first, then exponentiation, then
+multiplication/division, and then addition/subtraction.</p>
+</blockquote>
+<hr />
+<h4 id="chaining-multiple-conditions"><a class="header" href="#chaining-multiple-conditions">Chaining Multiple Conditions</a></h4>
+<p>You can chain multiple conditional statements in an <strong>if</strong> statement
+using the Boolean operators.</p>
+<p>For example, we can check if the value of a <strong>grade</strong> is between 70 and
+100:</p>
+<pre><code class="language-py">grade = 88
+if (grade &gt;= 70 and grade &lt;= 100):
+    print(&quot;Passed!&quot;)
+</code></pre>
+<blockquote>
+<p>You can use multiple <strong>and</strong>, <strong>or</strong>, <strong>not</strong> operators to chain
+multiple conditions together.</p>
+</blockquote>
+<hr />
+<h2 id="none"><a class="header" href="#none">None</a></h2>
+<p>The <strong>None</strong> object is used to represent the absence of a value. It is
+similar to <strong>null</strong> in other programming languages. Like other “empty”
+values, such as 0, [] and the empty string, it is <strong>False</strong> when
+converted to a Boolean variable. When entered at the Python console, it
+is displayed as the empty string.</p>
+<pre><code class="language-py">print(None)
+</code></pre>
+<blockquote>
+<p>Run the code and see how it works!</p>
+</blockquote>
+<p>The <strong>None</strong> object is returned by any function that doesn’t explicitly
+return anything else.</p>
+<pre><code class="language-py">def some_func():
+print(&quot;Hi!&quot;)
+var = some_func()
+print(var)
+</code></pre>
+<hr />
+<h2 id="lists"><a class="header" href="#lists">Lists</a></h2>
+<p><strong>Lists</strong> are used to store items. A list is created using <strong>square
+brackets</strong> with <strong>commas</strong> separating items.</p>
+<pre><code class="language-py">words = [&quot;Hello&quot;, &quot;world&quot;, &quot;!&quot;]
+</code></pre>
+<p>In the example above the words list contains three string items.</p>
+<p>A certain item in the list can be accessed by using its index in square
+brackets.</p>
+<p><strong>For example:</strong></p>
+<pre><code class="language-py">words = [&quot;Hello&quot;, &quot;world&quot;, &quot;!&quot;]
+print(words[0])
+print(words[1])
+print(words[2])
+</code></pre>
+<blockquote>
+<p>The first list item’s index is <strong>0</strong>, rather than 1, as might be
+expected.</p>
+</blockquote>
+<p>Sometimes you need to create an empty list and populate it later during
+the program. For example, if you are creating a queue management
+program, the queue is going to be empty in the beginning and get
+populated with people data later.</p>
+<p>An empty list is created with an empty pair of square brackets.</p>
+<pre><code class="language-py">empty_list = []
+print(empty_list)
+</code></pre>
+<blockquote>
+<p>In some code samples you might see a comma after the last item in the
+list. It’s not mandatory, but perfectly valid.</p>
+</blockquote>
+<p>Typically, a list will contain items of a single item type, but it is
+also possible to include several different types. Lists can also be
+nested within other lists.</p>
+<pre><code class="language-py">number = 3
+things = [&quot;string&quot;,  0,  [1,  2, number],  4.56]
+print(things[1])
+print(things[2])
+print(things[2][2])
+</code></pre>
+<p>Nested lists can be used to represent 2D grids, such as matrices. <strong>For
+example:</strong></p>
+<pre><code class="language-py">m = [[0,1,2],[4,5,6]]
+print(list([1][2])
+</code></pre>
+<p>A matrix-like structure can be used in cases where you need to store
+data in row-column format. For example, when creating a ticketing
+program, the seat numbers can be stored in a matrix, with their
+corresponding rows and numbers. &gt;The code above outputs the 3rd item of
+the 2nd row.</p>
+<p>Some types, such as <strong>strings</strong>, can be indexed like lists. Indexing
+<strong>strings</strong> behaves as though you are indexing a list containing each
+character in the string.</p>
+<p><strong>For example:</strong></p>
+<pre><code class="language-py">string = &quot;Hello world&quot;
+print(string[6])
+</code></pre>
+<p>Space (“ “) is also a symbol and has an index.</p>
+<blockquote>
+<p>Trying to access a non existing index will lead to an error.</p>
+</blockquote>
+<hr />
+<h3 id="list-operations"><a class="header" href="#list-operations">List Operations</a></h3>
+<p>The item at a certain index in a list can be reassigned. <strong>For
+example:</strong></p>
+<pre><code class="language-py">list = [0,1,2,3,4]
+list[2] = 5
+print(list)
+</code></pre>
+<blockquote>
+<p>You can replace the item with an item of a different type.</p>
+</blockquote>
+<p>Lists can be added and multiplied in the same way as strings. <strong>For
+example:</strong></p>
+<pre><code class="language-py">nums = [0,1,2]
+print(nums + [3,4,5])
+print(nums*3)
+</code></pre>
+<p>Lists and strings are similar in many ways - strings can be thought of
+as lists of characters that can’t be changed.</p>
+<blockquote>
+<p>For example, the string “Hello” can be thought of as a list, where
+each character is an item in the list. The first item is “H”, the
+second item is “e”, and so on.</p>
+</blockquote>
+<p>To check if an item is in a list, the <strong>in</strong> operator can be used. It
+returns <strong>True</strong> if the item occurs one or more times in the list, and
+<strong>False</strong> if it doesn’t.</p>
+<pre><code class="language-py">words = [&quot;spam&quot;,  &quot;egg&quot;,  &quot;spam&quot;,  &quot;sausage&quot;]
+print(&quot;spam&quot;  in words)
+print(&quot;egg&quot;  in words)
+print(&quot;tomato&quot;  in words)
+</code></pre>
+<blockquote>
+<p>The <strong>in</strong> operator is also used to determine whether or not a string
+is a substring of another string.</p>
+</blockquote>
+<p>To check if an item is not in a list, you can use the <strong>not</strong> operator
+in one of the following ways:</p>
+<pre><code class="language-py">nums = [1,  2,  3]
+print(not  4  in nums)
+print(4  not  in nums)
+print(not  3  in nums)
+print(3  not  in nums)
+</code></pre>
+<hr />
+<h3 id="list-functions"><a class="header" href="#list-functions">List Functions</a></h3>
+<p>The <strong>append</strong> method adds an item to the end of an existing list. <strong>For
+example:</strong></p>
+<pre><code class="language-py">nums = [1,2,3]
+nums.append[4]
+print(nums)
+</code></pre>
+<blockquote>
+<p>The <strong>dot</strong> before append is there because it is a <strong>method</strong> of the
+list class. Methods will be explained in later.</p>
+</blockquote>
+<p>To get the number of items in a list, you can use the <strong>len</strong> function.</p>
+<pre><code class="language-py">list = [0,1,2,3,4]
+print(len(list))
+</code></pre>
+<p>Unlike the index of the items, <strong>len</strong> does not start with 0. So, the
+list above contains 5 items, meaning <strong>len</strong> will return 5.</p>
+<blockquote>
+<p><strong>len</strong> is written before the list it is being called on, without a
+dot.</p>
+</blockquote>
+<p>The <strong>insert</strong> method is similar to <strong>append</strong>, except that it allows
+you to insert a new item at any position in the list, as opposed to just
+at the end.</p>
+<pre><code class="language-py">words = [&quot;Python&quot;,  &quot;fun&quot;]
+index = 1
+words.insert(index,  &quot;is&quot;)
+print(words)
+</code></pre>
+<blockquote>
+<p>Elements, that are after the inserted item, are shifted to the right.</p>
+</blockquote>
+<p>The <strong>index</strong> method finds the first occurrence of a list item and
+returns its index. If the item isn’t in the list, it raises a
+<code>ValueError</code>.</p>
+<pre><code class="language-py">letters = ['p',  'q',  'r',  's',  'p',  'u']
+print(letters.index('r'))
+print(letters.index('p'))
+print(letters.index('z'))
+</code></pre>
+<p>There are a few more useful functions and methods for lists.</p>
+<p><strong>max</strong>(list): Returns the list item with the maximum value</p>
+<p><strong>min</strong>(list): Returns the list item with minimum value</p>
+<p>list.<strong>count</strong>(item): Returns a count of how many times an item occurs
+in a list.</p>
+<p>list.<strong>remove</strong>(item): Removes an object from a list</p>
+<p>list.<strong>reverse</strong>(): Reverses items in a list.</p>
+<blockquote>
+<p>For example, you can count how many 42s are there in the list using:
+<strong>items.count(42)</strong> where <strong>items</strong> is the name of our list.</p>
+</blockquote>
+<hr />
+<h2 id="while-loops"><a class="header" href="#while-loops">while Loops</a></h2>
+<p>A <strong>while</strong> loop is used to repeat a block of code multiple times. For
+example, let’s say we need to process multiple user inputs, so that each
+time the user inputs something, the same block of code needs to execute.</p>
+<p>Below is a <strong>while</strong> loop containing a variable that counts up from 1 to
+5, at which point the loop terminates.</p>
+<pre><code class="language-py">i = 1
+while i &lt;=5:
+    print(i)
+    i += 1
+print(&quot;Finished!&quot;)
+</code></pre>
+<p>During each loop iteration, the i variable will get incremented by one,
+until it reaches 5. So, the loop will execute the print statement 5
+times.</p>
+<blockquote>
+<p>The code in the body of a <strong>while</strong> loop is executed repeatedly. This
+is called <strong>iteration</strong>.</p>
+</blockquote>
+<p>You can use multiple statements in the while loop.</p>
+<p>For example, you can use an <strong>if</strong> statement to make decisions. This can
+be useful, if you are making a game and need to loop through a number of
+player actions and add or remove points of the player.</p>
+<p>The code below uses an if/else statement inside a while loop to separate
+the even and odd numbers in the range of 1 to 10:</p>
+<pre><code class="language-py">x = 1
+while x &lt;= 10:
+    if x%2 == 0:
+        print(str(x) + &quot;is even&quot;)
+    else:
+        print(str(x) + &quot;is odd&quot;)
+    x += 1
+</code></pre>
+<p><strong>str(x)</strong> is used to convert the number x to a string, so that it can
+be used for concatenation.</p>
+<blockquote>
+<p>In console, you can stop the program’s execution by using the Ctrl-C
+shortcut or by closing the program.</p>
+</blockquote>
+<hr />
+<h3 id="break"><a class="header" href="#break">break</a></h3>
+<p>To end a <strong>while</strong> loop prematurely, the <strong>break</strong> statement can be
+used. For example, we can break an infinite loop if some condition is
+met:</p>
+<pre><code class="language-py">i = 0
+while  1==1:
+    print(i)
+    i = i + 1
+    if i &gt;= 5:
+        print(&quot;Breaking&quot;)
+        break
+print(&quot;Finished&quot;)
+</code></pre>
+<p><strong>while True</strong> is a short and easy way to make an infinite loop.</p>
+<p><strong>An example use case of break:</strong> An infinite while loop can be used to
+continuously take user input. For example, you are making a calculator
+and need to take numbers from the user to add and stop, when the user
+enters <strong>“stop”</strong>. In this case, the <strong>break</strong> statement can be used to
+end the infinite loop when the user input equals “stop”.</p>
+<blockquote>
+<p>Using the <strong>break</strong> statement outside of a loop causes an error.</p>
+</blockquote>
+<hr />
+<h3 id="continue"><a class="header" href="#continue">continue</a></h3>
+<p>Another statement that can be used within loops is <strong>continue</strong>. Unlike
+<strong>break</strong>, <strong>continue</strong> jumps back to the top of the loop, rather than
+stopping it. Basically, the <strong>continue</strong> statement stops the current
+iteration and continues with the next one.</p>
+<p><strong>For example:</strong></p>
+<pre><code class="language-py">i = 0
+while i&lt;5:
+    i += 1
+    if i==3:
+        print(&quot;Skipping 3&quot;)
+        continue
+    print(i)
+</code></pre>
+<p><strong>An example use case of continue:</strong> An airline ticketing system needs
+to calculate the total cost for all tickets purchased. The tickets for
+children under the age of 1 are free. We can use a while loop to iterate
+through the list of passengers and calculate the total cost of their
+tickets. Here, the <strong>continue</strong> statement can be used to skip the
+children.</p>
+<blockquote>
+<p>Using the <strong>continue</strong> statement outside of a loop causes an error.</p>
+</blockquote>
+<hr />
+<h2 id="for-loop"><a class="header" href="#for-loop">for Loop</a></h2>
+<p>The for loop is used to iterate over a given sequence, such as lists or
+strings.</p>
+<p>The code below outputs each item in the list and adds an exclamation
+mark at the end:</p>
+<pre><code class="language-py">words = ['hello', 'world']
+for word in words:
+    print(word + '!')
+</code></pre>
+<blockquote>
+<p>In the code above, the word variable represents the corresponding item
+of the list in each iteration of the loop. During the 1st iteration,
+word is equal to “hello”, and during the 2nd iteration it’s equal to
+“world”.</p>
+</blockquote>
+<p>The <strong>for</strong> loop can be used to iterate over strings.</p>
+<p><strong>For example:</strong></p>
+<pre><code class="language-py">str = &quot;testing for loops&quot;
+count = 0
+for x in  str:
+    if(x == 't'):
+        count += 1
+print(count)
+</code></pre>
+<p>The code above defines a <strong>count</strong> variable, iterates over the string
+and calculates the count of ‘t’ letters in it. During each iteration,
+the <strong>x</strong> variable represents the current letter of the string. The
+<strong>count</strong> variable is incremented each time the letter ‘t’ is found,
+thus, at the end of the loop it represents the number of ‘t’ letters in
+the string. &gt;Similar to <strong>while</strong> loops, the <strong>break</strong> and <strong>continue</strong>
+statements can be used in <strong>for</strong> loops, to stop the loop or jump to the
+next iteration.</p>
+<hr />
+<h3 id="for-vs-while"><a class="header" href="#for-vs-while">for vs while</a></h3>
+<p>Both, <strong>for</strong> and <strong>while</strong> loops can be used to execute a block of code
+for multiple times.</p>
+<p>It is common to use the <strong>for</strong> loop when the number of iterations is
+fixed. For example, iterating over a fixed list of items in a shopping
+list.</p>
+<p>The <strong>while</strong> loop is used in cases when the number of iterations is not
+known and depends on some calculations and conditions in the code block
+of the loop. For example, ending the loop when the user enters a
+specific input in a calculator program.</p>
+<blockquote>
+<p>Both, <strong>for</strong> and <strong>while</strong> loops can be used to achieve the same
+results, however, the <strong>for</strong> loop has cleaner and shorter syntax,
+making it a better choice in most cases.</p>
+</blockquote>
+<hr />
+<h2 id="range"><a class="header" href="#range">Range</a></h2>
+<p>The <strong>range()</strong> function returns a sequence of numbers. By default, it
+starts from 0, increments by 1 and stops <strong>before the specified
+number</strong>.</p>
+<p>The code below generates a list containing all of the integers, up to
+10.</p>
+<pre><code class="language-py">nums = list(range(10))
+print(nums)
+</code></pre>
+<blockquote>
+<p>In order to output the range as a list, we need to explicitly convert
+it to a list, using the <strong>list()</strong> function.</p>
+</blockquote>
+<p>If <strong>range</strong> is called with one argument, it produces an object with
+values from 0 to that argument. If it is called with two arguments, it
+produces values from the first to the second. <strong>For example:</strong></p>
+<pre><code class="language-py">nums = list(range(3,10))
+print(numbers)
+
+print(range(20) == range(0,20))
+</code></pre>
+<blockquote>
+<p>Remember, the second argument is not included in the range, so
+<strong>range(3, 8)</strong> will not include the number 8.</p>
+</blockquote>
+<p><strong>range</strong> can have a third argument, which determines the interval of
+the sequence produced, also called the <strong>step</strong>.</p>
+<pre><code class="language-py">numbers = list(range(5,20,2))
+print(numbers)
+</code></pre>
+<blockquote>
+<p>We can also create list of decreasing numbers, using a negative number
+as the third argument, for example <strong>list(range(20, 5, -2))</strong>.</p>
+</blockquote>
+<hr />
+<h3 id="for-loops"><a class="header" href="#for-loops">for Loops</a></h3>
+<p>The <strong>for</strong> loop is commonly used to repeat some code a certain number
+of times. This is done by combining for loops with <strong>range</strong> objects.</p>
+<pre><code class="language-py">for i in range(5):
+    print(&quot;hello world!&quot;)
+</code></pre>
+<blockquote>
+<p>You don’t need to call <strong>list</strong> on the <strong>range</strong> object when it is
+used in a <strong>for</strong> loop, because it isn’t being indexed, so a list
+isn’t required.</p>
+</blockquote>
+<hr />
+<h2 id="reusing-code"><a class="header" href="#reusing-code">Reusing Code</a></h2>
+<p><strong>Code reuse</strong> is a very important part of programming in any language.
+Increasing code size makes it harder to maintain. For a large
+programming project to be successful, it is essential to abide by the
+<strong>Don’t Repeat Yourself</strong>, or <strong>DRY</strong>, principle. We’ve already looked
+at one way of doing this: by using loops. In this module, we will
+explore two more: functions and modules. &gt;Bad, repetitive code is said
+to abide by the <strong>WET</strong> principle, which stands for <strong>Write Everything
+Twice</strong>, or <strong>We Enjoy Typing</strong>.</p>
+<hr />
+<h2 id="functions"><a class="header" href="#functions">Functions</a></h2>
+<p>You’ve already used <strong>functions</strong> previously. Any statement that
+consists of a word followed by information in <strong>parentheses</strong> is a
+function call. Here are some examples that you’ve already seen:</p>
+<pre><code class="language-py">print(&quot;Hello world&quot;)
+range(2,20)
+str(12)
+range(10,20,3)
+</code></pre>
+<blockquote>
+<p>The words in front of the parentheses are function <strong>names</strong>, and the
+comma-separated values inside the parentheses are function
+<strong>arguments</strong>.</p>
+</blockquote>
+<p>In addition to using pre-defined functions, you can create your own
+functions by using the <strong>def</strong> statement. Here is an example of a
+function named <code>my_func</code>. It takes no arguments, and prints “spam”
+three times. It is defined, and then called. The statements in the
+function are executed only when the function is called.</p>
+<pre><code class="language-py">def my_func():
+    print(&quot;spam&quot;)
+    print(&quot;spam&quot;)
+    print(&quot;spam&quot;)
+my_func()
+</code></pre>
+<blockquote>
+<p>The code block within every function starts with a colon (:) and is
+<strong>indented</strong>.</p>
+</blockquote>
+<p>You must define functions before they are called, in the same way that
+you must assign variables before using them.</p>
+<pre><code class="language-py">hello()
+
+def hello():
+    print('Hello world')
+</code></pre>
+<hr />
+<h3 id="arguments"><a class="header" href="#arguments">Arguments</a></h3>
+<p>All the function definitions we’ve looked at so far have been functions
+of zero arguments, which are called with empty parentheses. However,
+most functions take arguments. The example below defines a function that
+takes one argument:</p>
+<pre><code class="language-py">def print_with_exclamation(word):
+    print(word + &quot;!&quot;)
+print_with_exclamation(&quot;spam&quot;)
+print_with_exclamation(&quot;eggs&quot;)
+print_with_exclamation(&quot;python&quot;)
+</code></pre>
+<blockquote>
+<p>As you can see, the argument is defined inside the parentheses.</p>
+</blockquote>
+<p>You can also define functions with more than one argument; separate them
+with commas.</p>
+<pre><code class="language-py">def print_sum_twice(x, y):
+    print(x+y)
+    print(x+y)
+
+print_sum_twice(5, 20)
+</code></pre>
+<p>Function arguments can be used as variables inside the function
+definition. However, they cannot be referenced outside of the function’s
+definition. This also applies to other variables created inside a
+function.</p>
+<pre><code class="language-py">def function(variable):
+    variable += 1
+    print(variable)
+function(7)
+print(variable)
+</code></pre>
+<p>This code will throw an <strong>error</strong> because the variable is defined inside
+the function and can be referenced only there. &gt;Technically,
+<strong>parameters</strong> are the variables in a function definition, and
+<strong>arguments</strong> are the values put into parameters when functions are
+called.</p>
+<hr />
+<h3 id="returning-from-functions"><a class="header" href="#returning-from-functions">Returning from Functions</a></h3>
+<p>Certain functions, such as <code>int</code> or <code>str</code> return a value that can
+be used later. To do this for your defined functions, you can use the
+<strong>return</strong> statement.</p>
+<p><strong>For example:</strong></p>
+<pre><code class="language-py">def  max(x, y):
+    if x &gt;=y:
+        return x
+    else:
+        return y
+print(max(4,  7))
+z = max(8,  5)
+print(z)
+</code></pre>
+<blockquote>
+<p>The <strong>return</strong> statement cannot be used outside of a function
+definition.</p>
+</blockquote>
+<p>Once you return a value from a function, it immediately stops being
+executed. Any code after the <strong>return</strong> statement will never happen.
+<strong>For example:</strong></p>
+<pre><code class="language-py">def add_numbers(x, y):
+    total = x + y
+    return total
+    print(&quot;This won't be printed&quot;)
+print(add_numbers(4,  5))
+</code></pre>
+<hr />
+<h2 id="comments"><a class="header" href="#comments">Comments</a></h2>
+<p><strong>Comments</strong> are annotations to code used to make it easier to
+understand. They don’t affect how code is run. In Python, a comment is
+created by inserting an <strong>octothorpe</strong> (otherwise known as a number sign
+or hash symbol: #). All text after it on that line is ignored. <strong>For
+example:</strong></p>
+<pre><code class="language-py">x = 365
+y = 7
+# this is a comment
+print(x % y)  # find the remainder
+# print (x // y)
+# another comment
+</code></pre>
+<blockquote>
+<p>Python doesn’t have general purpose multiline comments, as do
+programming languages such as C.</p>
+</blockquote>
+<hr />
+<h3 id="docstrings"><a class="header" href="#docstrings">Docstrings</a></h3>
+<p><strong>Docstrings</strong> (documentation strings) serve a similar purpose to
+comments, as they are designed to explain code. However, they are more
+specific and have a different syntax. They are created by putting a
+multiline string containing an explanation of the function below the
+<strong>function’s first line</strong>.</p>
+<pre><code class="language-py">def shout(word):
+&quot;&quot;&quot;
+Print a word with an
+exclamation mark following it.
+&quot;&quot;&quot;
+print(word + &quot;!&quot;)
+shout(&quot;spam&quot;)
+</code></pre>
+<blockquote>
+<p>Unlike conventional comments, <strong>docstrings</strong> are retained throughout
+the runtime of the program. This allows the programmer to inspect
+these comments at run time.</p>
+</blockquote>
+<hr />
+<p>Although they are created differently from normal variables,
+<strong>functions</strong> are just like any other kind of value. They can be
+assigned and reassigned to variables, and later referenced by those
+names.</p>
+<pre><code class="language-py">def multiply(x, y):
+    return x * y
+a = 4
+b = 7
+operation = multiply
+print(operation(a, b))
+</code></pre>
+<blockquote>
+<p>The example above assigned the function <strong>multiply</strong> to a variable
+<strong>operation</strong>. Now, the name <strong>operation</strong> can also be used to call
+the function.</p>
+</blockquote>
+<p>Functions can also be used as <strong>arguments</strong> of other functions.</p>
+<pre><code class="language-py">def add(x, y):
+    return x + y
+def do_twice(func, x, y):
+return func(func(x, y), func(x, y))
+a = 5
+b = 10
+print(do_twice(add, a, b))
+</code></pre>
+<hr />
+<h2 id="modules"><a class="header" href="#modules">Modules</a></h2>
+<p><strong>Modules</strong> are pieces of code that other people have written to fulfill
+common tasks, such as generating random numbers, performing mathematical
+operations, etc.</p>
+<p>The basic way to use a module is to add <strong>import module_name</strong> at the
+top of your code, and then using <strong>module_name.var</strong> to access functions
+and values with the name <strong>var</strong> in the module. For example, the
+following example uses the <strong>random</strong> module to generate random numbers:</p>
+<pre><code class="language-py">import random
+for i in  range(5):
+    value = random.randint(1,  6)
+    print(value)
+</code></pre>
+<blockquote>
+<p>The code uses the <strong>randint</strong> function defined in the <strong>random</strong>
+module to print 5 random numbers in the range 1 to 6.</p>
+</blockquote>
+<p>There is another kind of <strong>import</strong> that can be used if you only need
+certain functions from a module. These take the form <strong>from module_name
+import var</strong>, and then <strong>var</strong> can be used as if it were defined
+normally in your code. For example, to import only the <strong>pi</strong> constant
+from the <strong>math</strong> module:</p>
+<pre><code class="language-py">from math import pi
+    print(pi)
+</code></pre>
+<p>Use a comma separated list to import multiple objects. For example:</p>
+<p>from math import pi, sqrt</p>
+<blockquote>
+<p>* imports all objects from a module. For example: <strong>from math
+import</strong> *. This is generally discouraged, as it confuses variables
+in your code with variables in the external module.</p>
+</blockquote>
+<p>Trying to import a module that isn’t available causes an ImportError.</p>
+<pre><code class="language-py">import some_module
+</code></pre>
+<p>You can import a module or object under a different name using the
+<strong>as</strong> keyword. This is mainly used when a module or object has a long
+or confusing name. <strong>For example:</strong></p>
+<pre><code class="language-py">from math import sqrt as square_root
+print(sqruare_root(100))
+</code></pre>
+<hr />
+<h3 id="the-standard-library"><a class="header" href="#the-standard-library">The standard library</a></h3>
+<p>There are three main types of modules in Python, those you write
+yourself, those you install from external sources, and those that are
+pre-installed with Python. The last type is called the <strong>standard
+library</strong>, and contains many useful modules. Some of the standard
+library’s useful modules include <code>string</code>, <code>re</code>, <code>datetime</code>, <code>math</code>, <code>random</code>, <code>os</code>, <code>multiprocessing</code>, <code>subprocess</code>, <code>socket</code>, <code>email</code>, <code>json</code>, <code>doctest</code>, <code>unittest</code>, <code>pdb</code>, <code>argparse</code> and <code>sys</code>.</p>
+<p>Tasks that can be done by the standard library include string parsing,
+data serialization, testing, debugging and manipulating dates, emails,
+command line arguments, and much more!</p>
+<blockquote>
+<p>Python’s extensive standard library is one of its main strengths as a
+language.</p>
+</blockquote>
+<p>Some of the modules in the standard library are written in Python, and
+some are written in C. Most are available on all platforms, but some are
+Windows or Unix specific.</p>
+<blockquote>
+<p>We won’t cover all of the modules in the standard library; there are
+simply too many. The complete documentation for the standard library
+is available online at www.python.org.</p>
+</blockquote>
+<p>Many third-party Python modules are stored on the <strong>Python Package Index
+(PyPI)</strong>. The best way to install these is using a program called
+<strong>pip</strong>. This comes installed by default with modern distributions of
+Python. If you don’t have it, it is easy to install online. Once you
+have it, installing libraries from PyPI is easy. Look up the name of the
+library you want to install, go to the command line (for Windows it will
+be the Command Prompt), and enter <strong>pip install library_name</strong>. Once
+you’ve done this, import the library and use it in your code.</p>
+<p>Using <strong>pip</strong> is the standard way of installing libraries on most
+operating systems, but some libraries have prebuilt binaries for
+Windows. These are normal executable files that let you install
+libraries with a GUI the same way you would install other programs.</p>
+<blockquote>
+<p>It’s important to enter <strong>pip</strong> commands at the command line, not the
+Python interpreter.</p>
+</blockquote>
+<hr />
+<h2 id="exceptions"><a class="header" href="#exceptions">Exceptions</a></h2>
+<p>You have already seen <strong>exceptions</strong> in previous code. They occur when
+something goes wrong, due to incorrect code or input. When an exception
+occurs, the program immediately stops. The following code produces the
+<code>ZeroDivisionError</code> exception by trying to divide 7 by 0.</p>
+<pre><code class="language-py">print(7//0)
+</code></pre>
+<p>Different exceptions are raised for different reasons. Common
+exceptions: <code>ImportError</code>: an import fails; <code>IndexError</code>: a list is
+indexed with an out-of-range number; <code>NameError</code>: an unknown variable
+is used; <code>SyntaxError</code>: the code can’t be parsed properly;
+<code>TypeError</code>: a function is called on a value of an inappropriate type;
+<code>ValueError</code>: a function is called on a value of the correct type, but
+with an inappropriate value.</p>
+<blockquote>
+<p>Python has several other built-in exceptions, such as
+<code>ZeroDivisionError</code> and <code>OSError</code>. Third-party libraries also often define
+their own exceptions.</p>
+</blockquote>
+<hr />
+<h3 id="exception-handling"><a class="header" href="#exception-handling">Exception Handling</a></h3>
+<p>To handle exceptions, and to call code when an exception occurs, you can
+use a <strong>try/except</strong> statement. The <strong>try</strong> block contains code that
+might throw an exception. If that exception occurs, the code in the
+<strong>try</strong> block stops being executed, and the code in the <strong>except</strong> block
+is run. If no error occurs, the code in the <strong>except</strong> block doesn’t
+run. <strong>For example:</strong></p>
+<pre><code class="language-py">try:
+    num1 = 7
+    num2 = 0
+    print  (num1 / num2)
+    print(&quot;Done calculation&quot;)
+except ZeroDivisionError:
+    print(&quot;An error occurred&quot;)
+    print(&quot;due to zero division&quot;)
+</code></pre>
+<blockquote>
+<p>In the code above, the except statement defines the type of exception
+to handle (in our case, the <code>ZeroDivisionError</code>.</p>
+</blockquote>
+<p>A <strong>try</strong> statement can have multiple different <strong>except</strong> blocks to
+handle different exceptions. Multiple exceptions can also be put into a
+single <strong>except</strong> block using parentheses, to have the <strong>except</strong> block
+handle all of them.</p>
+<pre><code class="language-py">try:
+    variable = 10
+    print(variable + &quot;hello&quot;)
+    print(variable / 2)
+except ZeroDivisionError:
+    print(&quot;Divided by zero&quot;)
+except  (ValueError, TypeError):
+    print(&quot;Error occurred&quot;)
+</code></pre>
+<p>An <strong>except</strong> statement without any exception specified will catch all
+errors. These should be used sparingly, as they can catch unexpected
+errors and hide programming mistakes. <strong>For example:</strong></p>
+<pre><code class="language-py">try:
+    word =&quot;spam&quot;
+    print(word/0)
+except:
+    print(&quot;An error occured&quot;)
+</code></pre>
+<blockquote>
+<p>Exception handling is particularly useful when dealing with user
+input.</p>
+</blockquote>
+<p>To ensure some code runs no matter what errors occur, you can use a
+<strong>finally</strong> statement. The <strong>finally</strong> statement is placed at the bottom
+of a <strong>try/except</strong> statement. Code within a <strong>finally</strong> statement
+always runs after execution of the code in the <strong>try</strong>, and possibly in
+the <strong>except</strong>, blocks.</p>
+<pre><code class="language-py">try:
+    print(&quot;Hello&quot;)
+    print(1 / 0)
+except ZeroDivisionError:
+    print(&quot;Divided by zero&quot;)
+finally:
+    print(&quot;This code will run no matter what&quot;)
+</code></pre>
+<blockquote>
+<p>Run the code and see how it works!</p>
+</blockquote>
+<p>Code in a <strong>finally</strong> statement even runs if an uncaught exception
+occurs in one of the preceding blocks.</p>
+<pre><code class="language-py">try:
+    print(1)
+    print(10 / 0)
+except ZeroDivisionError:
+    print(unknown_var)
+finally:
+    print(&quot;This is executed last&quot;)
+</code></pre>
+<hr />
+<h3 id="raising-exceptions"><a class="header" href="#raising-exceptions">Raising exceptions</a></h3>
+<p>You can raise exceptions by using the <strong>raise</strong> statement.</p>
+<pre><code class="language-py">print(1)
+raise ValueError
+print(2)
+</code></pre>
+<blockquote>
+<p>You need to specify the <strong>type</strong> of the exception raised.</p>
+</blockquote>
+<p>Exceptions can be raised with arguments that give detail about them.
+<strong>For example:</strong></p>
+<pre><code class="language-py">name = &quot;123&quot;
+raise NameError(&quot;Invalid Name: &quot;)
+</code></pre>
+<p>In <strong>except</strong> blocks, the <strong>raise</strong> statement can be used without
+arguments to re-raise whatever exception occurred. <strong>For example:</strong></p>
+<pre><code class="language-py">try:
+    num = 5 / 0
+except:
+    print(&quot;An error occurred&quot;)
+    raise
+</code></pre>
+<hr />
+<h2 id="assertions"><a class="header" href="#assertions">Assertions</a></h2>
+<p>An <strong>assertion</strong> is a sanity-check that you can turn on or turn off when
+you have finished testing the program. An expression is tested, and if
+the result comes up false, an exception is raised. Assertions are
+carried out through use of the <strong>assert</strong> statement.</p>
+<pre><code class="language-py">print(1)
+assert  2 + 2 == 4
+print(2)
+assert  1 + 1 == 3
+print(3)
+</code></pre>
+<blockquote>
+<p>Programmers often place assertions at the start of a function to check
+for valid input, and after a function call to check for valid output.</p>
+</blockquote>
+<p>The <strong>assert</strong> can take a second argument that is passed to the
+<code>AssertionError</code> raised if the assertion fails.</p>
+<pre><code class="language-py">temp = -10
+assert (temp &gt;=0), &quot;Colder than absolute zero!&quot;
+</code></pre>
+<blockquote>
+<p>AssertionError exceptions can be caught and handled like any other
+exception using the <strong>try-except</strong> statement, but if not handled, this
+type of exception will terminate the program.</p>
+</blockquote>
+<hr />
+<h2 id="files"><a class="header" href="#files">Files</a></h2>
+<p>You can use Python to read and write the contents of <strong>files</strong>. Text
+files are the easiest to manipulate. Before a file can be edited, it
+must be opened, using the <strong>open</strong> function.</p>
+<pre><code class="language-py">myfile = open(&quot;filename.txt&quot;)
+</code></pre>
+<blockquote>
+<p>The argument of the <strong>open</strong> function is the <strong>path</strong> to the file. If
+the file is in the current working directory of the program, you can
+specify only its name.</p>
+</blockquote>
+<p>You can specify the <strong>mode</strong> used to open a file by applying a second
+argument to the <strong>open</strong> function. Sending “r” means open in read mode,
+which is the default. Sending “w” means write mode, for rewriting the
+contents of a file. Sending “a” means append mode, for adding new
+content to the end of the file.</p>
+<p>Adding “b” to a mode opens it in <strong>binary</strong> mode, which is used for
+non-text files (such as image and sound files). <strong>For example:</strong></p>
+<pre><code class="language-py"># write mode
+open(&quot;filename.txt&quot;, &quot;w&quot;)
+
+# read mode
+open(&quot;filename.txt&quot;, &quot;r&quot;)
+open(&quot;filename.txt&quot;)
+
+# binary write mode
+open(&quot;filename.txt&quot;, &quot;wb&quot;)
+</code></pre>
+<blockquote>
+<p>You can use the + sign with each of the modes above to give them extra
+access to files. For example, r+ opens the file for both reading and
+writing.</p>
+</blockquote>
+<p>Once a file has been opened and used, you should close it. This is done
+with the <strong>close</strong> method of the file object.</p>
+<pre><code class="language-py">file = open(&quot;filename.txt&quot;, &quot;w&quot;)
+# do stuff to the file
+file.close()
+</code></pre>
+<hr />
+<p>The contents of a file that has been opened in text mode can be read
+using the <strong>read</strong> method.</p>
+<pre><code class="language-py">file = open(&quot;filename.txt&quot;, &quot;r&quot;)
+cont = file.read()
+print(cont)
+file.close()
+</code></pre>
+<blockquote>
+<p>This will print all of the contents of the file “filename.txt”.</p>
+</blockquote>
+<p>To read only a certain amount of a file, you can provide a number as an
+argument to the <strong>read</strong> function. This determines the number of
+<strong>bytes</strong> that should be read. You can make more calls to <strong>read</strong> on
+the same file object to read more of the file byte by byte. With no
+argument, <strong>read</strong> returns the rest of the file.</p>
+<pre><code class="language-py">file = open(&quot;filename.txt&quot;, &quot;r&quot;)
+print(file.read(16))
+print(file.read(4))
+print(file.read(4))
+print(file.read())
+file.close()
+</code></pre>
+<blockquote>
+<p>Just like passing no arguments, negative values will return the entire
+contents.</p>
+</blockquote>
+<p>After all contents in a file have been read, any attempts to read
+further from that file will return an empty string, because you are
+trying to read from the end of the file.</p>
+<pre><code class="language-py">file = open(&quot;filename.txt&quot;, &quot;r&quot;)
+file.read()
+print(&quot;Re-reading&quot;)
+print(file.read())
+print(&quot;Finished&quot;)
+file.close()
+</code></pre>
+<p><strong>Result:</strong></p>
+<pre><code class="language-py">&gt;&gt;&gt;
+Re-reading
+
+Finished
+&gt;&gt;&gt;
+</code></pre>
+<p>To retrieve each line in a file, you can use the <strong>readlines</strong> method to
+return a list in which each element is a line in the file. <strong>For
+example:</strong></p>
+<p>file = open(“filename.txt”, “r”) print(file.readlines()) file.close()</p>
+<p><strong>Result:</strong></p>
+<pre><code class="language-py">&gt;&gt;&gt;
+['Line 1 text \n', 'Line 2 text \n', 'Line 3 text']
+&gt;&gt;&gt;
+</code></pre>
+<p>You can also use a <strong>for</strong> loop to iterate through the lines in the
+file:</p>
+<pre><code class="language-py">file = open(&quot;filename.txt&quot;, &quot;r&quot;)
+
+for line in file:
+print(line)
+
+file.close()
+</code></pre>
+<p><strong>Result:</strong></p>
+<pre><code class="language-py">&gt;&gt;&gt;
+Line 1 text
+
+Line 2 text
+
+Line 3 text
+&gt;&gt;&gt;
+</code></pre>
+<blockquote>
+<p>In the output, the lines are separated by blank lines, as the
+<strong>print</strong> function automatically adds a new line at the end of its
+output.</p>
+</blockquote>
+<hr />
+<p>To write to files you use the <strong>write</strong> method, which writes a string to
+the file. <strong>For example:</strong></p>
+<pre><code class="language-py">file = open(&quot;newfile.txt&quot;,  &quot;w&quot;)
+file.write(&quot;This has been written to a file&quot;)
+file.close()
+file = open(&quot;newfile.txt&quot;,  &quot;r&quot;)
+print(file.read())
+file.close()
+</code></pre>
+<blockquote>
+<p>The “w” mode will create a file, if it does not already exist.</p>
+</blockquote>
+<p>When a file is opened in write mode, the file’s existing content is
+deleted.</p>
+<pre><code class="language-py">file = open(&quot;newfile.txt&quot;,  &quot;w&quot;)
+file.write(&quot;Some new text&quot;)
+file.close()
+file = open(&quot;newfile.txt&quot;,  &quot;r&quot;)
+print(&quot;Reading new contents&quot;)
+print(file.read())
+print(&quot;Finished&quot;)
+file.close()
+</code></pre>
+<blockquote>
+<p>As you can see, the content of the file has been overwritten.</p>
+</blockquote>
+<p>The <strong>write</strong> method returns the number of <strong>bytes</strong> written to a file,
+if successful.</p>
+<pre><code class="language-py">msg = &quot;Hello world!&quot;
+file = open(&quot;newfile.txt&quot;,  &quot;w&quot;)
+amount_written = file.write(msg)
+print(amount_written)
+file.close()
+</code></pre>
+<blockquote>
+<p>To write something other than a string, it needs to be converted to a
+string first.</p>
+</blockquote>
+<hr />
+<p>It is good practice to avoid wasting resources by making sure that files
+are always closed after they have been used. One way of doing this is to
+use <strong>try</strong> and <strong>finally</strong></p>
+<pre><code class="language-py">try:
+    f = open(&quot;filename.txt&quot;)
+    print(f.read())
+finally:
+    f.close()
+</code></pre>
+<blockquote>
+<p>This ensures that the file is always closed, even if an error occurs.</p>
+</blockquote>
+<p>An alternative way of doing this is using <strong>with</strong> statements. This
+creates a temporary variable (often called <strong>f</strong>), which is only
+accessible in the indented block of the <strong>with</strong> statement.</p>
+<pre><code class="language-py">with open(&quot;filename.txt&quot;)  as f:
+print(f.read())
+</code></pre>
+<blockquote>
+<p>The file is automatically closed at the end of the <strong>with</strong> statement,
+even if exceptions occur within it.</p>
+</blockquote>
+<hr />
+<h2 id="dictionaries"><a class="header" href="#dictionaries">Dictionaries</a></h2>
+<p><strong>Dictionaries</strong> are data structures used to map arbitrary keys to
+values. Lists can be thought of as dictionaries with integer keys within
+a certain range. Dictionaries can be indexed in the same way as lists,
+using <strong>square brackets</strong> containing keys. <strong>Example:</strong></p>
+<pre><code class="language-py">ages = {&quot;Dave&quot;:  24,  &quot;Mary&quot;:  42,  &quot;John&quot;:  58}
+print(ages[&quot;Dave&quot;])
+print(ages[&quot;Mary&quot;])
+</code></pre>
+<blockquote>
+<p>Each element in a dictionary is represented by a <strong>key:value</strong> pair.</p>
+</blockquote>
+<p>Trying to index a key that isn’t part of the dictionary returns a
+<strong>KeyError</strong>. <strong>Example:</strong></p>
+<pre><code class="language-py">primary = {
+&quot;red&quot;:  [255,  0,  0],
+&quot;green&quot;:  [0,  255,  0],
+&quot;blue&quot;:  [0,  0,  255],
+}
+print(primary[&quot;red&quot;])
+print(primary[&quot;yellow&quot;])
+</code></pre>
+<p>As you can see, a dictionary can store any types of data as values. &gt;An
+empty dictionary is defined as <strong>{}</strong>.</p>
+<p>Only <strong>immutable</strong> objects can be used as keys to dictionaries.
+<strong>Immutable</strong> objects are those that can’t be changed. So far, the only
+mutable objects you’ve come across are <strong>lists</strong> and <strong>dictionaries</strong>.
+Trying to use a mutable object as a dictionary key causes a
+<strong>TypeError</strong>.</p>
+<pre><code class="language-py">bad_dict = {
+
+[1,  2,  3]:  &quot;one two three&quot;,
+
+}
+</code></pre>
+<blockquote>
+<p>Run the code and see how it works!</p>
+</blockquote>
+<p>Just like lists, dictionary keys can be assigned to different values.
+However, unlike lists, a new dictionary key can also be assigned a
+value, not just ones that already exist.</p>
+<pre><code class="language-py">squares = {1:  1,  2:  4,  3:  &quot;error&quot;,  4:  16,}
+squares[8] = 64
+squares[3] = 9
+print(squares)
+</code></pre>
+<p>To determine whether a key is in a dictionary, you can use <strong>in</strong> and
+<strong>not in</strong>, just as you can for a list. <strong>Example:</strong></p>
+<pre><code class="language-py">nums = {
+1:  &quot;one&quot;,
+2:  &quot;two&quot;,
+3:  &quot;three&quot;,
+}
+print(1  in nums)
+print(&quot;three&quot;  in nums)
+print(4  not  in nums)
+</code></pre>
+<p>A useful dictionary method is <strong>get</strong>. It does the same thing as
+indexing, but if the key is not found in the dictionary it returns
+another specified value instead (‘None’, by default). <strong>Example:</strong></p>
+<pre><code class="language-py">pairs = {1:  &quot;apple&quot;,
+&quot;orange&quot;:  [2,  3,  4],
+True:  False,
+None:  &quot;True&quot;,
+}
+
+print(pairs.get(&quot;orange&quot;))
+print(pairs.get(7))
+print(pairs.get(12345,  &quot;not in dictionary&quot;))
+</code></pre>
+<hr />
+<h2 id="tuples"><a class="header" href="#tuples">Tuples</a></h2>
+<p><strong>Tuples</strong> are very similar to lists, except that they are immutable
+(they cannot be changed). Also, they are created using <strong>parentheses</strong>,
+rather than square brackets. <strong>Example:</strong></p>
+<pre><code class="language-py">words = (&quot;spam&quot;, &quot;eggs&quot;, &quot;sausages&quot;,)
+</code></pre>
+<p>You can access the values in the tuple with their index, just as you did
+with lists:</p>
+<pre><code class="language-py">print(words[0])
+</code></pre>
+<p>Trying to reassign a value causes a TypeError.</p>
+<pre><code class="language-py">words[1] = &quot;cheese&quot;
+</code></pre>
+<blockquote>
+<p>You can access the values in the tuple with their index, just as you
+did with lists.</p>
+</blockquote>
+<p>Tuples can be created without the parentheses, by just separating the
+values with commas. <strong>Example:</strong></p>
+<pre><code class="language-py">my_tuple = &quot;one&quot;, &quot;two&quot;, &quot;three&quot;
+print(my_tuple[0])
+</code></pre>
+<p>An empty tuple is created using an empty parenthesis pair.</p>
+<pre><code class="language-py">tpl = ()
+</code></pre>
+<blockquote>
+<p>Tuples are faster than lists, but they cannot be changed.</p>
+</blockquote>
+<hr />
+<h2 id="list-slices"><a class="header" href="#list-slices">List Slices</a></h2>
+<p><strong>List slices</strong> provide a more advanced way of retrieving values from a
+list. Basic list slicing involves indexing a list with <strong>two
+colon-separated integers</strong>. This returns a new list containing all the
+values in the old list between the indices. <strong>Example:</strong></p>
+<pre><code class="language-py">squares = [0,  1,  4,  9,  16,  25,  36,  49,  64,  81]
+print(squares[2:6])
+print(squares[3:8])
+print(squares[0:1])
+</code></pre>
+<blockquote>
+<p>Like the arguments to <strong>range</strong>, the first index provided in a slice
+is included in the result, but the second isn’t.</p>
+</blockquote>
+<p>If the first number in a slice is omitted, it is taken to be the start
+of the list. If the second number is omitted, it is taken to be the end.
+<strong>Example:</strong></p>
+<pre><code class="language-py">squares = [0,  1,  4,  9,  16,  25,  36,  49,  64,  81]
+print(squares[:7])
+print(squares[7:])
+</code></pre>
+<blockquote>
+<p>Slicing can also be done on tuples.</p>
+</blockquote>
+<p>List slices can also have a third number, representing the step, to
+include only alternate values in the slice.</p>
+<pre><code class="language-py">squares = [0,  1,  4,  9,  16,  25,  36,  49,  64,  81]
+print(squares[::2])
+print(squares[2:8:3])
+</code></pre>
+<blockquote>
+<p>[2:8:3] will include elements starting from the 2nd index up to the
+8th with a step of 3.</p>
+</blockquote>
+<p><strong>Negative</strong> values can be used in list slicing (and normal list
+indexing). When negative values are used for the first and second values
+in a slice (or a normal index), they count from the end of the list.</p>
+<pre><code class="language-py">squares = [0,  1,  4,  9,  16,  25,  36,  49,  64,  81]
+print(squares[1::-1])
+</code></pre>
+<blockquote>
+<p>If a negative value is used for the step, the slice is done backwards.
+Using <strong>[::-1]</strong> as a slice is a common and idiomatic way to reverse
+a list.</p>
+</blockquote>
+<hr />
+<h2 id="list-comprehensions"><a class="header" href="#list-comprehensions">List Comprehensions</a></h2>
+<p><strong>List comprehensions</strong> are a useful way of quickly creating lists whose
+contents obey a simple rule. For example, we can do the following:</p>
+<pre><code class="language-py"># a list comprehension
+cubes = [i**3  for i in  range(5)]
+print(cubes)
+</code></pre>
+<blockquote>
+<p>List comprehensions are inspired by set-builder notation in
+mathematics.</p>
+</blockquote>
+<p>A list comprehension can also contain an <strong>if</strong> statement to enforce a
+condition on values in the list. <strong>Example:</strong></p>
+<pre><code class="language-py">evens=[i**2  for i in  range(10)  if i**2 % 2 == 0]
+print(evens)
+</code></pre>
+<p>Trying to create a list in a very extensive range will result in a
+<strong>MemoryError</strong>. This code shows an example where the list comprehension
+runs out of memory.</p>
+<pre><code class="language-py">even = [2*i for i in  range(10**100)]
+</code></pre>
+<blockquote>
+<p>This issue is solved by <strong>generators</strong>, which are covered later.</p>
+</blockquote>
+<hr />
+<h2 id="string-formatting"><a class="header" href="#string-formatting">String Formatting</a></h2>
+<p>So far, to combine strings and non-strings, you’ve converted the
+non-strings to strings and added them. String formatting provides a more
+powerful way to embed non-strings within strings. String formatting uses
+a string’s <strong>format</strong> method to substitute a number of arguments in the
+string. <strong>Example:</strong></p>
+<pre><code class="language-py"># string formatting
+nums = [4,  5,  6]
+msg = &quot;Numbers: {0} {1} {2}&quot;. format(nums[0], nums[1], nums[2])
+print(msg)
+</code></pre>
+<blockquote>
+<p>Each argument of the format function is placed in the string at the
+corresponding position, which is determined using the curly braces {
+}.</p>
+</blockquote>
+<p>String formatting can also be done with named arguments. <strong>Example:</strong></p>
+<pre><code class="language-py">a= &quot;{x}, {y}&quot;.format(x = 5, y = 12)
+print(a)
+</code></pre>
+<hr />
+<h2 id="string-functions"><a class="header" href="#string-functions">String Functions</a></h2>
+<p>Python contains many useful built-in functions and methods to accomplish
+common tasks. <strong>join</strong> - joins a list of strings with another string as
+a separator. <strong>replace</strong> - replaces one substring in a string with
+another. <strong>startswith</strong> and <strong>endswith -</strong> determine if there is a
+substring at the start and end of a string, respectively. To change the
+case of a string, you can use <strong>lower</strong> and <strong>upper</strong>. The method
+<strong>split</strong> is the opposite of <strong>join</strong> turning a string with a certain
+separator into a list. <strong>Some examples:</strong></p>
+<pre><code class="language-py">print(&quot;, &quot;.join([&quot;spam&quot;,  &quot;eggs&quot;,  &quot;ham&quot;]))
+#prints &quot;spam, eggs, ham&quot;
+
+print(&quot;Hello ME&quot;.replace(&quot;ME&quot;,  &quot;world&quot;))
+#prints &quot;Hello world&quot;
+
+print(&quot;This is a sentence.&quot;.startswith(&quot;This&quot;))
+# prints &quot;True&quot;
+
+print(&quot;This is a sentence.&quot;.endswith(&quot;sentence.&quot;))
+# prints &quot;True&quot;
+
+print(&quot;This is a sentence.&quot;.upper())
+# prints &quot;THIS IS A SENTENCE.&quot;
+
+print(&quot;AN ALL CAPS SENTENCE&quot;.lower())
+#prints &quot;an all caps sentence&quot;
+
+print(&quot;spam, eggs, ham&quot;.split(&quot;, &quot;))
+#prints &quot;['spam', 'eggs', 'ham']&quot;
+</code></pre>
+<hr />
+<h2 id="numeric-functions"><a class="header" href="#numeric-functions">Numeric Functions</a></h2>
+<p>To find the maximum or minimum of some numbers or a list, you can use
+<strong>max</strong> or <strong>min</strong>. To find the distance of a number from zero (its
+absolute value), use <strong>abs</strong>. To round a number to a certain number of
+decimal places, use <strong>round</strong>. To find the total of a list, use <strong>sum</strong>.
+<strong>Some examples:</strong></p>
+<pre><code class="language-py">print(min(1,  2,  3,  4,  0,  2,  1))
+print(max([1,  4,  9,  2,  5,  6,  8]))
+print(abs(-99))
+print(abs(42))
+print(sum([1,  2,  3,  4,  5]))
+</code></pre>
+<hr />
+<h2 id="list-functions-1"><a class="header" href="#list-functions-1">List Functions</a></h2>
+<p>Often used in conditional statements, <strong>all</strong> and <strong>any</strong> take a list as
+an argument, and return <strong>True</strong> if all or any (respectively) of their
+arguments evaluate to <strong>True</strong> (and <strong>False</strong> otherwise). The function
+<strong>enumerate</strong> can be used to iterate through the values and indices of a
+list simultaneously. <strong>Example:</strong></p>
+<pre><code class="language-py">nums = [55,  44,  33,  22,  11]
+if  all([i &gt; 5  for i in nums]):
+    print(&quot;All larger than 5&quot;)
+
+if  any([i % 2 == 0  for i in nums]):
+    print(&quot;At least one is even&quot;)
+
+for v in  enumerate(nums):
+    print(v)
+</code></pre>
+<hr />
+<h2 id="functional-programming"><a class="header" href="#functional-programming">Functional Programming</a></h2>
+<p><strong>Functional programming</strong> is a style of programming that (as the name
+suggests) is based around functions. A key part of functional
+programming is <strong>higher-order functions</strong>. We have seen this idea
+briefly in the previous lesson on functions as objects. Higher-order
+functions take other functions as arguments, or return them as results.
+<strong>Example:</strong></p>
+<pre><code class="language-py">def apply_twice(func, arg):
+    return func(func(arg))
+
+def add_five(x):
+    return x + 5
+
+print(apply_twice(add_five,  10))
+</code></pre>
+<blockquote>
+<p>The function <strong>apply_twice</strong> takes another function as its argument,
+and calls it twice inside its body.</p>
+</blockquote>
+<hr />
+<h3 id="pure-functions"><a class="header" href="#pure-functions">Pure Functions</a></h3>
+<p>Functional programming seeks to use <strong>pure functions</strong>. Pure functions
+have no side effects, and return a value that depends <strong>only</strong> on their
+arguments. This is how functions in math work: for example, The cos(x)
+will, for the same value of x, always return the same result. Below are
+examples of pure and impure functions. <strong>Pure function:</strong></p>
+<pre><code class="language-py">def pure_function(x, y):
+    temp = x + 2*y
+    return temp / (2*x + y)
+</code></pre>
+<p><strong>Impure function:</strong></p>
+<pre><code class="language-py">some_list = []
+def impure(arg):
+    some_list.append(arg)
+</code></pre>
+<blockquote>
+<p>The function above is not pure, because it changed the state of
+<strong>some_list</strong>.</p>
+</blockquote>
+<p>Using pure functions has both advantages and disadvantages. Pure
+functions are: - easier to reason about and test. - more efficient. Once
+the function has been evaluated for an input, the result can be stored
+and referred to the next time the function of that input is needed,
+reducing the number of times the function is called. This is called
+<strong>memoization</strong>. - easier to run in parallel.</p>
+<blockquote>
+<p>The main disadvantage of using only pure functions is that they
+majorly complicate the otherwise simple task of I/O, since this
+appears to inherently require side effects. They can also be more
+difficult to write in some situations.</p>
+</blockquote>
+<hr />
+<h3 id="lambdas"><a class="header" href="#lambdas">Lambdas</a></h3>
+<p>Creating a function normally (using <strong>def</strong>) assigns it to a variable
+automatically. This is different from the creation of other objects -
+such as strings and integers - which can be created on the fly, without
+assigning them to a variable. The same is possible with functions,
+provided that they are created using <strong>lambda</strong> syntax. Functions
+created this way are known as <strong>anonymous</strong>. This approach is most
+commonly used when passing a simple function as an argument to another
+function. The syntax is shown in the next example and consists of the
+<strong>lambda</strong> keyword followed by a list of arguments, a colon, and the
+expression to evaluate and return.</p>
+<pre><code class="language-py">def my_func(f, arg):
+return f(arg)
+
+my_func(lambda x: 2*x*x, 5)
+</code></pre>
+<blockquote>
+<p>Lambda functions get their name from <strong>lambda calculus</strong>, which is a
+model of computation invented by Alonzo Church.</p>
+</blockquote>
+<p>Lambda functions aren’t as powerful as named functions. They can only do
+things that require a single expression - usually equivalent to a single
+line of code. <strong>Example:</strong></p>
+<pre><code class="language-py">#named function
+def polynomial(x):
+return x**2 + 5*x + 4
+print(polynomial(-4))
+
+#lambda
+print((lambda x: x**2 + 5*x + 4)  (-4))
+</code></pre>
+<blockquote>
+<p>In the code above, we created an anonymous function on the fly and
+called it with an argument.</p>
+</blockquote>
+<p>Lambda functions can be assigned to variables, and used like normal
+functions. <strong>Example:</strong></p>
+<pre><code class="language-py">double = lambda x: x * 2
+print(double(7))
+</code></pre>
+<blockquote>
+<p>However, there is rarely a good reason to do this - it is usually
+better to define a function with <strong>def</strong> instead.</p>
+</blockquote>
+<hr />
+<h3 id="map"><a class="header" href="#map">map</a></h3>
+<p>The function <strong>map</strong> takes a function and an iterable as arguments, and
+returns a new iterable with the function applied to each argument.
+<strong>Example:</strong></p>
+<pre><code class="language-py">def add_five(x):
+return x + 5
+
+nums = [11,  22,  33,  44,  55]
+result = list(map(add_five, nums))
+print(result)
+</code></pre>
+<p>We could have achieved the same result more easily by using <strong>lambda</strong>
+syntax.</p>
+<pre><code class="language-py">nums = [11,  22,  33,  44,  55]
+
+result = list(map(lambda x: x+5, nums))
+print(result)
+</code></pre>
+<hr />
+<h3 id="filter"><a class="header" href="#filter">filter</a></h3>
+<p>The function <strong>filter</strong> filters an iterable by removing items that don’t
+match a predicate (a function that returns a Boolean). <strong>Example:</strong></p>
+<pre><code class="language-py">nums = [11,  22,  33,  44,  55]
+res = list(filter(lambda x: x%2==0, nums))
+print(res)
+</code></pre>
+<blockquote>
+<p>Like <strong>map</strong>, the result has to be explicitly converted to a list if
+you want to print it.</p>
+</blockquote>
+<hr />
+<h2 id="generators"><a class="header" href="#generators">Generators</a></h2>
+<p><strong>Generators</strong> are a type of iterable, like lists or tuples. Unlike
+lists, they don’t allow indexing with arbitrary indices, but they can
+still be iterated through with <strong>for</strong> loops. They can be created using
+functions and the <strong>yield</strong> statement. <strong>Example:</strong></p>
+<pre><code class="language-py">def countdown():
+    i=5
+    while i &gt; 0:
+        yield i
+        i -= 1
+
+
+
+for i in countdown():
+    print(i)
+</code></pre>
+<blockquote>
+<p>The <strong>yield</strong> statement is used to define a generator, replacing the
+return of a function to provide a result to its caller without
+destroying local variables.</p>
+</blockquote>
+<p>Due to the fact that they <strong>yield</strong> one item at a time, generators don’t
+have the memory restrictions of lists. In fact, they can be
+<strong>infinite!</strong></p>
+<pre><code class="language-py">def infinite_sevens():
+    while True:
+        yield 7
+
+for i in infinite_sevens():
+    print(i)
+</code></pre>
+<p><strong>Result:</strong></p>
+<pre><code class="language-py">&gt;&gt;&gt;
+7
+7
+7
+7
+7
+7
+7
+...
+</code></pre>
+<blockquote>
+<p>In short, <strong>generators</strong> allow you to declare a function that behaves
+like an iterator, i.e. it can be used in a <strong>for</strong> loop.</p>
+</blockquote>
+<p>Finite generators can be converted into lists by passing them as
+arguments to the <strong>list</strong> function.</p>
+<pre><code class="language-py">def numbers(x):
+    for i in  range(x):
+        if i % 2 == 0:
+            yield i
+
+print(list(numbers(11)))
+</code></pre>
+<blockquote>
+<p>Using <strong>generators</strong> results in improved performance, which is the
+result of the lazy (on demand) generation of values, which translates
+to lower memory usage. Furthermore, we do not need to wait until all
+the elements have been generated before we start to use them.</p>
+</blockquote>
+<hr />
+<h3 id="decorators"><a class="header" href="#decorators">Decorators</a></h3>
+<p><strong>Decorators</strong> provide a way to modify functions using other functions.
+This is ideal when you need to extend the functionality of functions
+that you don’t want to modify. <strong>Example:</strong></p>
+<pre><code class="language-py">def decor(func):
+    def wrap():
+        print(&quot;============&quot;)
+        func()
+        print(&quot;============&quot;)
+    return wrap
+
+def print_text():
+print(&quot;Hello world!&quot;)
+
+decorated = decor(print_text)
+decorated()
+</code></pre>
+<p>We defined a function named <strong>decor</strong> that has a single parameter
+<strong>func</strong>. Inside <strong>decor</strong>, we defined a nested function named <strong>wrap</strong>.
+The <strong>wrap</strong> function will print a string, then call <strong>func()</strong>, and
+print another string. The <strong>decor</strong> function returns the <strong>wrap</strong>
+function as its result. We could say that the variable <strong>decorated</strong> is
+a decorated version of <strong>print_text</strong> - it’s <strong>print_text</strong> plus
+something. In fact, if we wrote a useful decorator we might want to
+replace <strong>print_text</strong> with the decorated version altogether so we
+always got our “plus something” version of <strong>print_text</strong>. This is done
+by re-assigning the variable that contains our function:</p>
+<pre><code class="language-py">def decor(func):
+    def wrap():
+        print(&quot;============&quot;)
+        func()
+        print(&quot;============&quot;)
+    return wrap
+
+def print_text():
+print(&quot;Hello world!&quot;)
+
+print_text = decor(print_text)
+print_text()
+</code></pre>
+<blockquote>
+<p>Now <strong>print_text</strong> corresponds to our decorated version.</p>
+</blockquote>
+<p>This pattern can be used at any time, to wrap any function. Python
+provides support to wrap a function in a decorator by pre-pending the
+function definition with a decorator name and the @ symbol. If we are
+defining a function we can “decorate” it with the @ symbol like:</p>
+<pre><code class="language-py">@decor
+def print_text():
+    print(&quot;Hello world!&quot;)
+
+print_text();
+</code></pre>
+<p>This will have the same result as the above code.</p>
+<blockquote>
+<p>A single function can have multiple decorators.</p>
+</blockquote>
+<hr />
+<h2 id="recursion"><a class="header" href="#recursion">Recursion</a></h2>
+<p><strong>Recursion</strong> is a very important concept in functional programming. The
+fundamental part of recursion is self-reference - functions calling
+themselves. It is used to solve problems that can be broken up into
+easier sub-problems of the same type.</p>
+<p>A classic example of a function that is implemented recursively is the
+<strong>factorial</strong> function, which finds the product of all positive integers
+below a specified number. For example, 5! (5 factorial) is 5 * 4 * 3
+* 2 * 1 (120). To implement this recursively, notice that 5! = 5 *
+4!, 4! = 4 * 3!, 3! = 3 * 2!, and so on. Generally, n! = n * (n-1)!.
+Furthermore, 1! = 1. This is known as the <strong>base case</strong>, as it can be
+calculated without performing any more factorials. Below is a recursive
+implementation of the factorial function.</p>
+<pre><code class="language-py">def factorial(x):
+    if x == 1:
+        return  1
+    else:
+        return x * factorial(x-1)
+
+print(factorial(5))
+</code></pre>
+<blockquote>
+<p>The <strong>base case</strong> acts as the exit condition of the recursion.</p>
+</blockquote>
+<p>Recursive functions can be infinite, just like infinite <strong>while</strong> loops.
+These often occur when you forget to implement the base case. Below is
+an incorrect version of the factorial function. It has no base case, so
+it runs until the interpreter runs out of memory and crashes.</p>
+<pre><code class="language-py">def factorial(x):
+    return x * factorial(x-1)
+
+print(factorial(5))
+</code></pre>
+<p>Recursion can also be indirect. One function can call a second, which
+calls the first, which calls the second, and so on. This can occur with
+any number of functions. <strong>Example:</strong></p>
+<pre><code class="language-py">def is_even(x):
+    if x == 0:
+        return  True
+    else:
+        return is_odd(x-1)
+
+def is_odd(x):
+    return  not is_even(x)
+
+print(is_odd(17))
+print(is_even(23))
+</code></pre>
+<hr />
+<h3 id="sets"><a class="header" href="#sets">Sets</a></h3>
+<p><strong>Sets</strong> are data structures, similar to lists or dictionaries. They are
+created using curly braces, or the <strong>set</strong> function. They share some
+functionality with lists, such as the use of <strong>in</strong> to check whether
+they contain a particular item.</p>
+<pre><code class="language-py">num_set = {1,  2,  3,  4,  5}
+word_set = set([&quot;spam&quot;,  &quot;eggs&quot;,  &quot;sausage&quot;])
+
+print(3  in num_set)
+print(&quot;spam&quot;  not  in word_set)
+</code></pre>
+<blockquote>
+<p>To create an empty set, you must use <strong>set()</strong>, as <strong>{}</strong> creates an
+empty dictionary.</p>
+</blockquote>
+<p>Sets differ from lists in several ways, but share several list
+operations such as <strong>len</strong>. They are unordered, which means that they
+can’t be indexed. They <strong>cannot</strong> contain duplicate elements. Due to the
+way they’re stored, it’s <strong>faster</strong> to check whether an item is part of
+a set, rather than part of a list. Instead of using <strong>append</strong> to add to
+a set, use <strong>add</strong>. The method <strong>remove</strong> removes a specific element
+from a set; <strong>pop</strong> removes an arbitrary element.</p>
+<pre><code class="language-py">nums = {1,  2,  1,  3,  1,  4,  5,  6}
+print(nums)
+nums.add(-7)
+nums.remove(3)
+print(nums)
+</code></pre>
+<blockquote>
+<p>Basic uses of <strong>sets</strong> include membership testing and the elimination
+of duplicate entries.</p>
+</blockquote>
+<p>Sets can be combined using mathematical operations. The <strong>union</strong>
+operator <strong>|</strong> combines two sets to form a new one containing items in
+either. The <strong>intersection</strong> operator <strong>&amp;</strong> gets items only in both. The
+<strong>difference</strong> operator <strong>-</strong> gets items in the first set but not in the
+second. The <strong>symmetric difference</strong> operator <strong>^</strong> gets items in
+either set, but not both.</p>
+<pre><code class="language-py">first = {1,  2,  3,  4,  5,  6}
+second = {4,  5,  6,  7,  8,  9}
+
+print(first | second)
+print(first &amp; second)
+print(first - second)
+print(second - first)
+print(first ^ second)
+</code></pre>
+<hr />
+<h3 id="data-structures"><a class="header" href="#data-structures">Data Structures</a></h3>
+<p>As we have seen in the previous lessons, Python supports the following
+data structures: <strong>lists</strong>, <strong>dictionaries</strong>, <strong>tuples</strong>, <strong>sets</strong>.</p>
+<p><strong>When to use a dictionary:</strong> - When you need a logical association
+between a <strong>key:value</strong> pair. - When you need fast lookup for your data,
+based on a custom key. - When your data is being constantly modified.
+Remember, dictionaries are mutable.</p>
+<p><strong>When to use the other types:</strong> - Use <strong>lists</strong> if you have a
+collection of data that does not need random access. Try to choose lists
+when you need a simple, iterable collection that is modified
+frequently. - Use a <strong>set</strong> if you need uniqueness for the elements. -
+Use <strong>tuples</strong> when your data cannot change.</p>
+<blockquote>
+<p>Many times, a <strong>tuple</strong> is used in combination with a <strong>dictionary</strong>,
+for example, a <strong>tuple</strong> might represent a key, because it’s
+immutable.</p>
+</blockquote>
+<hr />
+<h3 id="itertools"><a class="header" href="#itertools">itertools</a></h3>
+<p>The module <strong>itertools</strong> is a standard library that contains several
+functions that are useful in functional programming. One type of
+function it produces is infinite iterators. The function <strong>count</strong>
+counts up infinitely from a value. The function <strong>cycle</strong> infinitely
+iterates through an iterable (for instance a list or string). The
+function <strong>repeat</strong> repeats an object, either infinitely or a specific
+number of times. <strong>Example:</strong></p>
+<pre><code class="language-py">from itertools import count
+for i in count(3):
+    print(i)
+    if i &gt;=11:
+        break
+</code></pre>
+<p>There are many functions in <strong>itertools</strong> that operate on iterables, in
+a similar way to <strong>map</strong> and <strong>filter</strong>. Some examples: <strong>takewhile -</strong>
+takes items from an iterable while a predicate function remains true;
+<strong>chain -</strong> combines several iterables into one long one; <strong>accumulate
+-</strong> returns a running total of values in an iterable.</p>
+<pre><code class="language-py">from itertools import accumulate, takewhile
+nums = list(accumulate(range(8)))
+print(nums)
+print(list(takewhile(lambda x: x&lt;= 6, nums)))
+</code></pre>
+<p>There are also several combinatoric functions in <strong>itertool</strong>, such as
+<strong>product</strong> and <strong>permutation</strong>. These are used when you want to
+accomplish a task with all possible combinations of some items.
+<strong>Example:</strong></p>
+<pre><code class="language-py">from itertools import product, permutations
+letters = (&quot;A&quot;,  &quot;B&quot;)
+print(list(product(letters,  range(2))))
+print(list(permutations(letters)))
+</code></pre>
+
+                    </main>
+
+                    <nav class="nav-wrapper" aria-label="Page navigation">
+                        <!-- Mobile navigation buttons -->
+                            <a rel="prev" href="../notes/rust_notes.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                                <i class="fa fa-angle-left"></i>
+                            </a>
+
+                            <a rel="next" href="../notes/cmake.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                                <i class="fa fa-angle-right"></i>
+                            </a>
+
+                        <div style="clear: both"></div>
+                    </nav>
+                </div>
+            </div>
+
+            <nav class="nav-wide-wrapper" aria-label="Page navigation">
+                    <a rel="prev" href="../notes/rust_notes.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                        <i class="fa fa-angle-left"></i>
+                    </a>
+
+                    <a rel="next" href="../notes/cmake.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                        <i class="fa fa-angle-right"></i>
+                    </a>
+            </nav>
+
+        </div>
+
+        <!-- Livereload script (if served using the cli tool) -->
+        <script>
+            const wsProtocol = location.protocol === 'https:' ? 'wss:' : 'ws:';
+            const wsAddress = wsProtocol + "//" + location.host + "/" + "__livereload";
+            const socket = new WebSocket(wsAddress);
+            socket.onmessage = function (event) {
+                if (event.data === "reload") {
+                    socket.close();
+                    location.reload();
+                }
+            };
+
+            window.onbeforeunload = function() {
+                socket.close();
+            }
+        </script>
+
+
+
+        <script>
+            window.playground_copyable = true;
+        </script>
+
+
+        <script src="../elasticlunr.min.js"></script>
+        <script src="../mark.min.js"></script>
+        <script src="../searcher.js"></script>
+
+        <script src="../clipboard.min.js"></script>
+        <script src="../highlight.js"></script>
+        <script src="../book.js"></script>
+
+        <!-- Custom JS scripts -->
+        <script src="../theme/pagetoc.js"></script>
+
+
+    </div>
+    </body>
+</html>
