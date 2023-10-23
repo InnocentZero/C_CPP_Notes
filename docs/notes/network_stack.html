@@ -3,7 +3,7 @@
     <head>
         <!-- Book generated using mdBook -->
         <meta charset="UTF-8">
-        <title>cpp-guidelines - Notes</title>
+        <title>network_stack - Notes</title>
 
 
         <!-- Custom HTML head -->
@@ -86,7 +86,7 @@
 
         <nav id="sidebar" class="sidebar" aria-label="Table of contents">
             <div class="sidebar-scrollbox">
-                <ol class="chapter"><li class="chapter-item "><a href="../notes/rust_notes.html"><strong aria-hidden="true">1.</strong> rust_notes</a></li><li class="chapter-item "><a href="../notes/python.html"><strong aria-hidden="true">2.</strong> python</a></li><li class="chapter-item "><a href="../notes/cmake.html"><strong aria-hidden="true">3.</strong> cmake</a></li><li class="chapter-item "><a href="../notes/project_euler.html"><strong aria-hidden="true">4.</strong> project_euler</a></li><li class="chapter-item "><a href="../notes/c_codes.html"><strong aria-hidden="true">5.</strong> c_codes</a></li><li class="chapter-item "><a href="../notes/cp_codes.html"><strong aria-hidden="true">6.</strong> cp_codes</a></li><li class="chapter-item "><a href="../notes/regex.html"><strong aria-hidden="true">7.</strong> regex</a></li><li class="chapter-item "><a href="../notes/concurrency.html"><strong aria-hidden="true">8.</strong> concurrency</a></li><li class="chapter-item expanded "><a href="../notes/cpp-guidelines.html" class="active"><strong aria-hidden="true">9.</strong> cpp-guidelines</a></li><li class="chapter-item "><a href="../notes/hacking_basics.html"><strong aria-hidden="true">10.</strong> hacking_basics</a></li><li class="chapter-item "><a href="../notes/asm.html"><strong aria-hidden="true">11.</strong> asm</a></li><li class="chapter-item "><a href="../notes/registers.html"><strong aria-hidden="true">12.</strong> registers</a></li><li class="chapter-item "><a href="../notes/network_stack.html"><strong aria-hidden="true">13.</strong> network_stack</a></li><li class="chapter-item "><a href="../notes/traceroute.html"><strong aria-hidden="true">14.</strong> traceroute</a></li><li class="chapter-item "><a href="../notes/icmp.html"><strong aria-hidden="true">15.</strong> icmp</a></li><li class="chapter-item "><a href="../notes/tcp.html"><strong aria-hidden="true">16.</strong> tcp</a></li><li class="chapter-item "><a href="../notes/ipv4.html"><strong aria-hidden="true">17.</strong> ipv4</a></li><li class="chapter-item "><a href="../notes/ipv6.html"><strong aria-hidden="true">18.</strong> ipv6</a></li><li class="chapter-item "><a href="../notes/dhcp.html"><strong aria-hidden="true">19.</strong> dhcp</a></li><li class="chapter-item "><a href="../notes/dhcpv6.html"><strong aria-hidden="true">20.</strong> dhcpv6</a></li><li class="chapter-item "><a href="../notes/natas_levels.html"><strong aria-hidden="true">21.</strong> natas_levels</a></li><li class="chapter-item "><a href="../notes/gdb.html"><strong aria-hidden="true">22.</strong> gdb</a></li><li class="chapter-item "><a href="../notes/linux.html"><strong aria-hidden="true">23.</strong> Kernel Contrib</a></li><li class="chapter-item "><a href="../notes/bash.html"><strong aria-hidden="true">24.</strong> bash</a></li></ol>
+                <ol class="chapter"><li class="chapter-item "><a href="../notes/rust_notes.html"><strong aria-hidden="true">1.</strong> rust_notes</a></li><li class="chapter-item "><a href="../notes/python.html"><strong aria-hidden="true">2.</strong> python</a></li><li class="chapter-item "><a href="../notes/cmake.html"><strong aria-hidden="true">3.</strong> cmake</a></li><li class="chapter-item "><a href="../notes/project_euler.html"><strong aria-hidden="true">4.</strong> project_euler</a></li><li class="chapter-item "><a href="../notes/c_codes.html"><strong aria-hidden="true">5.</strong> c_codes</a></li><li class="chapter-item "><a href="../notes/cp_codes.html"><strong aria-hidden="true">6.</strong> cp_codes</a></li><li class="chapter-item "><a href="../notes/regex.html"><strong aria-hidden="true">7.</strong> regex</a></li><li class="chapter-item "><a href="../notes/concurrency.html"><strong aria-hidden="true">8.</strong> concurrency</a></li><li class="chapter-item "><a href="../notes/cpp-guidelines.html"><strong aria-hidden="true">9.</strong> cpp-guidelines</a></li><li class="chapter-item "><a href="../notes/hacking_basics.html"><strong aria-hidden="true">10.</strong> hacking_basics</a></li><li class="chapter-item "><a href="../notes/asm.html"><strong aria-hidden="true">11.</strong> asm</a></li><li class="chapter-item "><a href="../notes/registers.html"><strong aria-hidden="true">12.</strong> registers</a></li><li class="chapter-item expanded "><a href="../notes/network_stack.html" class="active"><strong aria-hidden="true">13.</strong> network_stack</a></li><li class="chapter-item "><a href="../notes/traceroute.html"><strong aria-hidden="true">14.</strong> traceroute</a></li><li class="chapter-item "><a href="../notes/icmp.html"><strong aria-hidden="true">15.</strong> icmp</a></li><li class="chapter-item "><a href="../notes/tcp.html"><strong aria-hidden="true">16.</strong> tcp</a></li><li class="chapter-item "><a href="../notes/ipv4.html"><strong aria-hidden="true">17.</strong> ipv4</a></li><li class="chapter-item "><a href="../notes/ipv6.html"><strong aria-hidden="true">18.</strong> ipv6</a></li><li class="chapter-item "><a href="../notes/dhcp.html"><strong aria-hidden="true">19.</strong> dhcp</a></li><li class="chapter-item "><a href="../notes/dhcpv6.html"><strong aria-hidden="true">20.</strong> dhcpv6</a></li><li class="chapter-item "><a href="../notes/natas_levels.html"><strong aria-hidden="true">21.</strong> natas_levels</a></li><li class="chapter-item "><a href="../notes/gdb.html"><strong aria-hidden="true">22.</strong> gdb</a></li><li class="chapter-item "><a href="../notes/linux.html"><strong aria-hidden="true">23.</strong> Kernel Contrib</a></li><li class="chapter-item "><a href="../notes/bash.html"><strong aria-hidden="true">24.</strong> bash</a></li></ol>
             </div>
             <div id="sidebar-resize-handle" class="sidebar-resize-handle"></div>
         </nav>
@@ -169,50 +169,43 @@
 
                 <div id="content" class="content">
                     <main><div class="sidetoc"><nav class="pagetoc"></nav></div>
-                        <h1 id="cpp-guidelines"><a class="header" href="#cpp-guidelines">cpp-guidelines</a></h1>
-<h2 id="commenting"><a class="header" href="#commenting">Commenting</a></h2>
-<p>When writing comments, write them as English prose, using proper capitalization, punctuation, etc. Aim to describe what the code is trying to do and why, not how it does it at a micro level.</p>
-<h3 id="file-headers"><a class="header" href="#file-headers">File Headers</a></h3>
-<pre><code class="language-cpp">//===-- llvm/Instruction.h - Instruction class definition -------*- C++ -*-===//
-//
-// Part of the LLVM Project, under the Apache License v2.0 with LLVM Exceptions.
-// See https://llvm.org/LICENSE.txt for license information.
-// SPDX-License-Identifier: Apache-2.0 WITH LLVM-exception
-//
-//===----------------------------------------------------------------------===//
-///
-/// \file
-/// This file contains the declaration of the Instruction class, which is the
-/// base class for all of the VM instructions.
-///
-//===----------------------------------------------------------------------===//
-</code></pre>
-<p>The <code>-*- C++ -*-</code> string on the first line is there to tell Emacs that the source file is a C++ file, not a C file (Emacs assumes .h files are C files by default).</p>
-<p>Next line license.</p>
-<p>The <code>///</code> are doxygen comments describing the purpose of the files. </p>
-<p>Abstract for the file: first sentence or a paragraph beginning with <code>\brief</code>.</p>
-<h3 id="header-guard"><a class="header" href="#header-guard">Header Guard</a></h3>
-<p>Combination of <code>#ifndef</code> and <code>#define</code>. This is meant for protecting the linker against including the same function / class / whatever multiple times as it causes error during linking.</p>
-<blockquote>
-<p>Linker cannot determine which declaration to choose from the multiple definitions present, even if they are the same.</p>
-</blockquote>
-<p>The header file’s guard should be the all-caps path that a user of this header would #include, using ‘_’ instead of path separator and extension marker. For example, the header file llvm/include/llvm/Analysis/Utils/Local.h would be #include-ed as #include <code>llvm/Analysis/Utils/Local.h</code>, so its guard is <code>LLVM_ANALYSIS_UTILS_LOCAL_H</code>.</p>
-<h4 id="classes-methods-and-global-functions"><a class="header" href="#classes-methods-and-global-functions">Classes, methods and global functions</a></h4>
-<p>Single line comment explaining the purpose. If non-trivial, use Doxygen comment blocks.</p>
-<p>For functions and methods, single line about what it does and a description of edge cases. </p>
-<h4 id="commenting-1"><a class="header" href="#commenting-1">Commenting</a></h4>
-<p>In general, C++ style comments. (//, ///). C style comments are useful if the comment strictly needs to be inline. Eg. <code>Object.emitName(/*Prefix=*/nullptr);</code></p>
-<p>Don’t comment out large blocks of code. If extremely necessary, (for instance, to give a debugging example), use <code>#if 0</code> and <code>#endif</code>. Better than C style comments.</p>
+                        <h1 id="network_stack"><a class="header" href="#network_stack">network_stack</a></h1>
+<ul>
+<li>Just a list of protocols that you need to satisfy in order to be able to use connections.</li>
+</ul>
+<h2 id="ip"><a class="header" href="#ip">IP</a></h2>
+<ul>
+<li>Has a header that contains source IP, destination IP, and other metadata that tells the next protocol as to where to send the data to.</li>
+<li>The payload contains the actual meaningful message for the next protocol.</li>
+<li>Has two categories- IPv4 and IPv6.</li>
+<li><a href="ipv4.html">ipv4</a> is a legacy mapping system. Has 32 bit addresses. Got exhausted lol.</li>
+<li><a href="ipv6.html">ipv6</a> is the new network system. Hasn’t been completely destroyed.</li>
+</ul>
+<h2 id="bgp"><a class="header" href="#bgp">BGP</a></h2>
+<ul>
+<li>BGP stands for Border Gateway Protocol. It is a routing protocol used by Internet Service Providers (ISPs) to exchange information about the paths that data packets should take to reach their destination on the internet.</li>
+<li>Has underlying TLS for communication.</li>
+<li>Used to communicate between two autonomous systems.</li>
+<li>Keeps sending 19 byte keep-alive messages to peers every 30 seconds (changeable) from port 179.</li>
+<li>The peers are pre-configured in the router.</li>
+</ul>
+<h2 id="udp-unsolicited-dick-pics"><a class="header" href="#udp-unsolicited-dick-pics">UDP (Unsolicited Dick Pics)</a></h2>
+<ul>
+<li>Used for real time communication like VoIP and online gaming.</li>
+<li>Header contains Source port number (16 bits), destination port number (16 bits), length (16 bits) and the checksum (16 bits).</li>
+<li>The IPv4 pseudo header contains source address (32 bits), destination address (32 bits), zero padding (8 bits), protocol number (17 for UDP), UDP Length of the underlying message, and to this the UDP header is appended.</li>
+<li>The IPv6 pseudo header contains source address (128 bits), destination address (128 bits), UDP length (32 bits), zero padding (24 bits), protocol number (8 bits, 17 for UDP), followed by the appended UDP header.</li>
+</ul>
 
                     </main>
 
                     <nav class="nav-wrapper" aria-label="Page navigation">
                         <!-- Mobile navigation buttons -->
-                            <a rel="prev" href="../notes/concurrency.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                            <a rel="prev" href="../notes/registers.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
                                 <i class="fa fa-angle-left"></i>
                             </a>
 
-                            <a rel="next" href="../notes/hacking_basics.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                            <a rel="next" href="../notes/traceroute.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
                                 <i class="fa fa-angle-right"></i>
                             </a>
 
@@ -222,33 +215,17 @@
             </div>
 
             <nav class="nav-wide-wrapper" aria-label="Page navigation">
-                    <a rel="prev" href="../notes/concurrency.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                    <a rel="prev" href="../notes/registers.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
                         <i class="fa fa-angle-left"></i>
                     </a>
 
-                    <a rel="next" href="../notes/hacking_basics.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                    <a rel="next" href="../notes/traceroute.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
                         <i class="fa fa-angle-right"></i>
                     </a>
             </nav>
 
         </div>
 
-        <!-- Livereload script (if served using the cli tool) -->
-        <script>
-            const wsProtocol = location.protocol === 'https:' ? 'wss:' : 'ws:';
-            const wsAddress = wsProtocol + "//" + location.host + "/" + "__livereload";
-            const socket = new WebSocket(wsAddress);
-            socket.onmessage = function (event) {
-                if (event.data === "reload") {
-                    socket.close();
-                    location.reload();
-                }
-            };
-
-            window.onbeforeunload = function() {
-                socket.close();
-            }
-        </script>
 
 
 

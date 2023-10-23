@@ -3,7 +3,7 @@
     <head>
         <!-- Book generated using mdBook -->
         <meta charset="UTF-8">
-        <title>regex - Notes</title>
+        <title>hacking_basics - Notes</title>
 
 
         <!-- Custom HTML head -->
@@ -86,7 +86,7 @@
 
         <nav id="sidebar" class="sidebar" aria-label="Table of contents">
             <div class="sidebar-scrollbox">
-                <ol class="chapter"><li class="chapter-item "><a href="../notes/rust_notes.html"><strong aria-hidden="true">1.</strong> rust_notes</a></li><li class="chapter-item "><a href="../notes/python.html"><strong aria-hidden="true">2.</strong> python</a></li><li class="chapter-item "><a href="../notes/cmake.html"><strong aria-hidden="true">3.</strong> cmake</a></li><li class="chapter-item "><a href="../notes/project_euler.html"><strong aria-hidden="true">4.</strong> project_euler</a></li><li class="chapter-item "><a href="../notes/c_codes.html"><strong aria-hidden="true">5.</strong> c_codes</a></li><li class="chapter-item "><a href="../notes/cp_codes.html"><strong aria-hidden="true">6.</strong> cp_codes</a></li><li class="chapter-item expanded "><a href="../notes/regex.html" class="active"><strong aria-hidden="true">7.</strong> regex</a></li><li class="chapter-item "><a href="../notes/concurrency.html"><strong aria-hidden="true">8.</strong> concurrency</a></li><li class="chapter-item "><a href="../notes/cpp-guidelines.html"><strong aria-hidden="true">9.</strong> cpp-guidelines</a></li><li class="chapter-item "><a href="../notes/hacking_basics.html"><strong aria-hidden="true">10.</strong> hacking_basics</a></li><li class="chapter-item "><a href="../notes/asm.html"><strong aria-hidden="true">11.</strong> asm</a></li><li class="chapter-item "><a href="../notes/registers.html"><strong aria-hidden="true">12.</strong> registers</a></li><li class="chapter-item "><a href="../notes/network_stack.html"><strong aria-hidden="true">13.</strong> network_stack</a></li><li class="chapter-item "><a href="../notes/traceroute.html"><strong aria-hidden="true">14.</strong> traceroute</a></li><li class="chapter-item "><a href="../notes/icmp.html"><strong aria-hidden="true">15.</strong> icmp</a></li><li class="chapter-item "><a href="../notes/tcp.html"><strong aria-hidden="true">16.</strong> tcp</a></li><li class="chapter-item "><a href="../notes/ipv4.html"><strong aria-hidden="true">17.</strong> ipv4</a></li><li class="chapter-item "><a href="../notes/ipv6.html"><strong aria-hidden="true">18.</strong> ipv6</a></li><li class="chapter-item "><a href="../notes/dhcp.html"><strong aria-hidden="true">19.</strong> dhcp</a></li><li class="chapter-item "><a href="../notes/dhcpv6.html"><strong aria-hidden="true">20.</strong> dhcpv6</a></li><li class="chapter-item "><a href="../notes/natas_levels.html"><strong aria-hidden="true">21.</strong> natas_levels</a></li><li class="chapter-item "><a href="../notes/gdb.html"><strong aria-hidden="true">22.</strong> gdb</a></li><li class="chapter-item "><a href="../notes/linux.html"><strong aria-hidden="true">23.</strong> Kernel Contrib</a></li><li class="chapter-item "><a href="../notes/bash.html"><strong aria-hidden="true">24.</strong> bash</a></li></ol>
+                <ol class="chapter"><li class="chapter-item "><a href="../notes/rust_notes.html"><strong aria-hidden="true">1.</strong> rust_notes</a></li><li class="chapter-item "><a href="../notes/python.html"><strong aria-hidden="true">2.</strong> python</a></li><li class="chapter-item "><a href="../notes/cmake.html"><strong aria-hidden="true">3.</strong> cmake</a></li><li class="chapter-item "><a href="../notes/project_euler.html"><strong aria-hidden="true">4.</strong> project_euler</a></li><li class="chapter-item "><a href="../notes/c_codes.html"><strong aria-hidden="true">5.</strong> c_codes</a></li><li class="chapter-item "><a href="../notes/cp_codes.html"><strong aria-hidden="true">6.</strong> cp_codes</a></li><li class="chapter-item "><a href="../notes/regex.html"><strong aria-hidden="true">7.</strong> regex</a></li><li class="chapter-item "><a href="../notes/concurrency.html"><strong aria-hidden="true">8.</strong> concurrency</a></li><li class="chapter-item "><a href="../notes/cpp-guidelines.html"><strong aria-hidden="true">9.</strong> cpp-guidelines</a></li><li class="chapter-item expanded "><a href="../notes/hacking_basics.html" class="active"><strong aria-hidden="true">10.</strong> hacking_basics</a></li><li class="chapter-item "><a href="../notes/asm.html"><strong aria-hidden="true">11.</strong> asm</a></li><li class="chapter-item "><a href="../notes/registers.html"><strong aria-hidden="true">12.</strong> registers</a></li><li class="chapter-item "><a href="../notes/network_stack.html"><strong aria-hidden="true">13.</strong> network_stack</a></li><li class="chapter-item "><a href="../notes/traceroute.html"><strong aria-hidden="true">14.</strong> traceroute</a></li><li class="chapter-item "><a href="../notes/icmp.html"><strong aria-hidden="true">15.</strong> icmp</a></li><li class="chapter-item "><a href="../notes/tcp.html"><strong aria-hidden="true">16.</strong> tcp</a></li><li class="chapter-item "><a href="../notes/ipv4.html"><strong aria-hidden="true">17.</strong> ipv4</a></li><li class="chapter-item "><a href="../notes/ipv6.html"><strong aria-hidden="true">18.</strong> ipv6</a></li><li class="chapter-item "><a href="../notes/dhcp.html"><strong aria-hidden="true">19.</strong> dhcp</a></li><li class="chapter-item "><a href="../notes/dhcpv6.html"><strong aria-hidden="true">20.</strong> dhcpv6</a></li><li class="chapter-item "><a href="../notes/natas_levels.html"><strong aria-hidden="true">21.</strong> natas_levels</a></li><li class="chapter-item "><a href="../notes/gdb.html"><strong aria-hidden="true">22.</strong> gdb</a></li><li class="chapter-item "><a href="../notes/linux.html"><strong aria-hidden="true">23.</strong> Kernel Contrib</a></li><li class="chapter-item "><a href="../notes/bash.html"><strong aria-hidden="true">24.</strong> bash</a></li></ol>
             </div>
             <div id="sidebar-resize-handle" class="sidebar-resize-handle"></div>
         </nav>
@@ -169,62 +169,55 @@
 
                 <div id="content" class="content">
                     <main><div class="sidetoc"><nav class="pagetoc"></nav></div>
-                        <h1 id="regex"><a class="header" href="#regex">regex</a></h1>
-<p>General format:</p>
-<p><code>/character-set/flags</code></p>
-<h2 id="character-classes"><a class="header" href="#character-classes">Character classes</a></h2>
-<blockquote>
-<p>Use brackets to create capture groups, helpful for logical operator <code>|</code>. <code>&amp;</code> is implicit.</p>
-</blockquote>
-<p><code>.</code> : Match all characters except newlines. Also see the <code>/s</code> flag.</p>
-<p><code>\w</code> : Any word. Same as <code>[A-Za-z0-9_]</code>.</p>
-<p><code>\W</code> : Opposite of <code>\w</code>.</p>
-<p><code>\d</code> : Any digit. Same as <code>[0-9]</code>.</p>
-<p><code>\D</code> : Opposite of <code>\d</code>.</p>
-<p><code>\s</code> : Matches a witespace.</p>
-<p><code>\S</code> : Match anything that is not a whitespace. Used in conjunction with <code>\s</code> to match anything, inculding line breaks.</p>
-<p><code>[]</code> : Character set. Used to choose any of the characters in the bracket. A range can be specified with a <code>-</code> in between two characters. Eg: <code>[A-Z]</code></p>
-<p><code>[^]</code> : Negated character set. <em>DO NOT</em> match any of the letters inside.</p>
-<p><code>()</code> : Capture group. </p>
-<h2 id="anchors-and-quantifiers"><a class="header" href="#anchors-and-quantifiers">Anchors and Quantifiers</a></h2>
-<p><code>^</code> : Beginning of the text. See also the <code>/m</code> flag.</p>
-<p><code>$</code> : Matches the end of the text.</p>
-<p><code>*</code> : Match 0 or more of the preceding token.</p>
-<p><code>+</code> : Match 1 or more of the preceding token.</p>
-<p><code>?</code> : Make the previous token optional.</p>
-<p><code>+?</code>/<code>*?</code> : Make the search lazy. This matches as few characters as possible. </p>
-<p><code>|</code> : Boolean <code>OR</code>. Match the expression before or after.</p>
-<h2 id="flags"><a class="header" href="#flags">Flags</a></h2>
-<p>Flags can be one of the following:</p>
+                        <h1 id="hacking_basics"><a class="header" href="#hacking_basics">hacking_basics</a></h1>
+<h2 id="how-the-internet-works"><a class="header" href="#how-the-internet-works">How the Internet Works</a></h2>
+<p><a href="https://github.com/InternetHealthReport/gsoc/blob/main/ihr-contributor-handbook.md">Internet Health Report</a></p>
+<h2 id="code-execution-important-details"><a class="header" href="#code-execution-important-details">Code Execution Important Details</a></h2>
+<p><img src="./hacking/memory-organization.jpg" alt="Memory Organisation" /></p>
 <ul>
-<li>global - <code>/g</code></li>
-<li>case insensitive - <code>/i</code></li>
-<li>multiline <code>/m</code></li>
+<li>On the top of the memory space is the <code>kernel</code>, the literal system of the computer and also the place where environment variables and command line arguements are stored.</li>
+<li>At the bottommost we have the <code>code segment</code>, the raw bits and bytes of the program which is read-only. Write in it and boom, memory violation.</li>
+<li>Above the code segments are the <code>Data</code> and the <code>BSS</code> segments. They contain initialized and unintialized global variables respectively.</li>
+<li>Above that is the <code>heap</code> used for dynamic memory allocation. Values stored in <code>heap</code> grow upwards.</li>
+<li>After that comes the stack. It starts from the top and moves towards the bottom. Most buffer overflows happen in this region. The top of the stack (which is at the bottom of the memory space in stack) is tracked by the stack pointer. The bottom of the stack is where the interesting stuff happens.</li>
 </ul>
-<p>Multiline makes the anchors catch all lines instead of the string beginning and ending.</p>
+<h2 id="how-a-main-function-is-executed"><a class="header" href="#how-a-main-function-is-executed">How a main function is executed:</a></h2>
+<ol>
+<li>Base Pointer is pushed to the stack.</li>
+<li>Stack pointer value is copied to the base pointer.</li>
+<li>Rn both base pointer and stack pointer point to the top of the stack.</li>
+<li>The stack pointer is subtracted from and sent into a lower memory location if there are function calls.</li>
+<li>The variables are added to a value offset from the last variable (initially from the base pointer) according to their size.</li>
+</ol>
+<h2 id="assembly-basics"><a class="header" href="#assembly-basics">Assembly Basics</a></h2>
+<p>The processor supports the following data types:</p>
 <ul>
-<li>unicode <code>/u</code></li>
+<li><code>Word</code>: 2 byte structure</li>
+<li><code>Doubleword</code>: 4 byte structure</li>
+<li><code>Quadword</code>: 8 byte structure</li>
+<li><code>Paragraph</code>: 16 byte structure</li>
 </ul>
-<p>When the unicode flag is enabled, you can use extended unicode escapes in the form <code>\x{FFFFF}</code>.</p>
+<h3 id="operation-suffixes"><a class="header" href="#operation-suffixes">Operation Suffixes</a></h3>
+<p>GAS assembly instructions are generally suffixed with the letters “b”, “s”, “w”, “l”, “q” or “t” to determine what size operand is being manipulated.</p>
 <ul>
-<li>sticky <code>/y</code></li>
+<li><code>b</code> = byte (8 bit).</li>
+<li><code>s</code> = single (32-bit floating point).</li>
+<li><code>w</code> = word (16 bit).</li>
+<li><code>l</code> = long (32 bit integer or 64-bit floating point).</li>
+<li><code>q</code> = quad (64 bit).</li>
+<li><code>t</code> = ten bytes (80-bit floating point).</li>
 </ul>
-<p>Undo the global flag.</p>
-<ul>
-<li>dotall <code>/s</code></li>
-</ul>
-<p>Dot (<code>.</code>) will match newlines as well.</p>
-<p>The flags can be combined. Eg: <code>/ms</code></p>
+<p>If the suffix is not specified, and there are no memory operands for the instruction, GAS infers the operand size from the size of the destination register operand (the final operand).</p>
 
                     </main>
 
                     <nav class="nav-wrapper" aria-label="Page navigation">
                         <!-- Mobile navigation buttons -->
-                            <a rel="prev" href="../notes/cp_codes.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                            <a rel="prev" href="../notes/cpp-guidelines.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
                                 <i class="fa fa-angle-left"></i>
                             </a>
 
-                            <a rel="next" href="../notes/concurrency.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                            <a rel="next" href="../notes/asm.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
                                 <i class="fa fa-angle-right"></i>
                             </a>
 
@@ -234,33 +227,17 @@
             </div>
 
             <nav class="nav-wide-wrapper" aria-label="Page navigation">
-                    <a rel="prev" href="../notes/cp_codes.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                    <a rel="prev" href="../notes/cpp-guidelines.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
                         <i class="fa fa-angle-left"></i>
                     </a>
 
-                    <a rel="next" href="../notes/concurrency.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                    <a rel="next" href="../notes/asm.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
                         <i class="fa fa-angle-right"></i>
                     </a>
             </nav>
 
         </div>
 
-        <!-- Livereload script (if served using the cli tool) -->
-        <script>
-            const wsProtocol = location.protocol === 'https:' ? 'wss:' : 'ws:';
-            const wsAddress = wsProtocol + "//" + location.host + "/" + "__livereload";
-            const socket = new WebSocket(wsAddress);
-            socket.onmessage = function (event) {
-                if (event.data === "reload") {
-                    socket.close();
-                    location.reload();
-                }
-            };
-
-            window.onbeforeunload = function() {
-                socket.close();
-            }
-        </script>
 
 
 

