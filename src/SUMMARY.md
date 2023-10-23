@@ -1,6 +1,7 @@
 # SUMMARY
 - [notes/asm.md](notes/asm.md)
 - [notes/basic_preproc.md](notes/basic_preproc.md)
+- [notes/boost_asio.md](notes/boost_asio.md)
 - [notes/c_codes.md](notes/c_codes.md)
 - [notes/cmake.md](notes/cmake.md)
 - [notes/concurrency.md](notes/concurrency.md)
@@ -19,6 +20,7 @@
 - [notes/io.md](notes/io.md)
 - [notes/ipv4.md](notes/ipv4.md)
 - [notes/ipv6.md](notes/ipv6.md)
+- [notes/jpeg.md](notes/jpeg.md)
 - [notes/memory.md](notes/memory.md)
 - [notes/natas_levels.md](notes/natas_levels.md)
 - [notes/network_stack.md](notes/network_stack.md)
