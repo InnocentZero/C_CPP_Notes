@@ -37,6 +37,17 @@ Returns the number of handlers that were executed.
 
 If `run()` has nothing left to execute, it will return.
 
+## `asio::ip::address`
+
+This class contains stuff to deal with IP addresses. It has interfaces to specifically deal with [IPv4](./ipv4.md) and [IPv6](./ipv6.md)
+Most important functions:
+
+- `ip::address::from_string()`: Takes a string and returns an `ip::address` object.
+- `ip::address::to_string()`: Takes an `ip::address` object and returns a string.
+- `ip::address_v4::loopback()`: Returns the loopback address for IPv4. Similar is there for v6.
+- `ip::address_v4::broadcast(addr, mask)`: Returns the broadcast address for the given address and mask.
+- `ip::host_name()`: Returns the host name of the machine.
+
 ## `asio::ip::tcp`
 
 This class is necessary for creation of TCP sockets.

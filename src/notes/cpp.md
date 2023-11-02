@@ -5,7 +5,6 @@
 <footer>Robin Sloane</footer></blockquote>
 </div>
 
-
 > Any valid C code is for most part also a valid C++ code. Some differences exist and they can be found by comparing [this](https://devdocs.io/cpp/) and [this](https://devdocs.io/c/).
 
 <div class="epigraph">
@@ -13,27 +12,9 @@
 <footer>Linus Torvalds, <cite>Message to gmane.comp.version-control.git mailing list</cite></footer></blockquote>
 </div>
 
-
-
-
-
-
-
-
-
-
-> TODO: add references and lvalue, rvalue, xvalue etc.
-
-
-
-
-
-
 ## Compiler Process
 
-gcc
-: GNU C Compiler
-
+gcc: GNU C Compiler
 
     c => preprocessed file => IR => Assembly Language(.s) => .o => Machine Code (0&1)
 
@@ -45,19 +26,6 @@ gcc
 
     $gcc -c file.c #This gives the machine code
 
-
-
 `gcc hello.c` compiles the code.
 
 `a.out` or `./a.out` executes the code.
-
-
-
-
-
-
-
-
-
-
-

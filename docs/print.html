@@ -461,6 +461,16 @@ void connect_handler(const boost::system::error_code &amp; ec) {
 <p>The <code>run()</code> function blocks until all work has finished and there are no more handlers to be dispatched, or until the <code>io_context</code> has been stopped.</p>
 <p>Returns the number of handlers that were executed.</p>
 <p>If <code>run()</code> has nothing left to execute, it will return.</p>
+<h2 id="asioipaddress"><a class="header" href="#asioipaddress"><code>asio::ip::address</code></a></h2>
+<p>This class contains stuff to deal with IP addresses. It has interfaces to specifically deal with <a href="notes/./ipv4.html">IPv4</a> and <a href="notes/./ipv6.html">IPv6</a>
+Most important functions:</p>
+<ul>
+<li><code>ip::address::from_string()</code>: Takes a string and returns an <code>ip::address</code> object.</li>
+<li><code>ip::address::to_string()</code>: Takes an <code>ip::address</code> object and returns a string.</li>
+<li><code>ip::address_v4::loopback()</code>: Returns the loopback address for IPv4. Similar is there for v6.</li>
+<li><code>ip::address_v4::broadcast(addr, mask)</code>: Returns the broadcast address for the given address and mask.</li>
+<li><code>ip::host_name()</code>: Returns the host name of the machine.</li>
+</ul>
 <h2 id="asioiptcp"><a class="header" href="#asioiptcp"><code>asio::ip::tcp</code></a></h2>
 <p>This class is necessary for creation of TCP sockets.</p>
 <h3 id="tcpacceptor"><a class="header" href="#tcpacceptor"><code>tcp::acceptor</code></a></h3>
@@ -1704,12 +1714,8 @@ int trash = 1;
 <blockquote><p>C++ is a horrible language. It's made more horrible by the fact that a lot of substandard programmers use it, to the point where it's much much easier to generate total and utter crap with it. </p>
 <footer>Linus Torvalds, <cite>Message to gmane.comp.version-control.git mailing list</cite></footer></blockquote>
 </div>
-<blockquote>
-<p>TODO: add references and lvalue, rvalue, xvalue etc.</p>
-</blockquote>
 <h2 id="compiler-process"><a class="header" href="#compiler-process">Compiler Process</a></h2>
-<p>gcc
-: GNU C Compiler</p>
+<p>gcc: GNU C Compiler</p>
 <pre><code>c =&gt; preprocessed file =&gt; IR =&gt; Assembly Language(.s) =&gt; .o =&gt; Machine Code (0&amp;1)
 
 
