@@ -169,7 +169,7 @@
 
                 <div id="content" class="content">
                     <main><div class="sidetoc"><nav class="pagetoc"></nav></div>
-                        <h2 id="basic-structure"><a class="header" href="#basic-structure">Basic Structure</a></h2>
+                        <h1 id="basic-structure"><a class="header" href="#basic-structure">Basic Structure</a></h1>
 <blockquote>
 <p><code>#include &lt;iostream&gt;</code>: searches only in the main directory.</p>
 </blockquote>
@@ -188,9 +188,33 @@ int main(void){
 }
 </code></pre>
 <p>The above code will print 11 and not 25 because the compiler interprets it as <code>2 + 3*2 + 3</code> instead of <code>(2+3)*(2+3)</code>. To solve this use <code>#define SQ(x) (x)*(x)</code> or use <code>SQ((2+3))</code>.</p>
+<h2 id="macros"><a class="header" href="#macros">Macros</a></h2>
+<p>As stated above, literal string replacements. They can be of 3 types:</p>
+<ol>
+<li>Chain Macros: <code>#define CONCAT(a,b) a##b</code></li>
+</ol>
+<p>Basically combines the two strings into one. Can also be used to make something into a string. For example:</p>
+<pre><code class="language-cpp">#define ASSERT(x) printf(#x)
+
+//use as
+ASSERT(x == y);
+
+//will be converted to
+printf(&quot;x==y&quot;);
+</code></pre>
+<ol start="2">
+<li>
+<p>Object-like Macros: Literal substitutions.</p>
+</li>
+<li>
+<p>Function like macros: Kind of like <code>#define SQUARE(c) ((c)*(c))</code></p>
+</li>
+</ol>
+<h3 id="undefining-a-macro"><a class="header" href="#undefining-a-macro">Undefining a macro</a></h3>
+<p>Keep in mind that macros substitute everything once they are declared and do not respect scoping rules. To remove a macro after a certain point use <code>#undef MACRO_NAME</code></p>
 <p><code>#include &lt;climits&gt;</code> is for including all the limits in the compiler.</p>
 <pre><code class="language-cpp">int main(arguments){
-    cout &lt;&lt; “Hello World!” &lt;&lt; endl; 	
+    cout &lt;&lt; “Hello World!” &lt;&lt; endl;
 }
 </code></pre>
 <p><code>main</code> function is the first one to be called, regardless of the order in which the functions are written. This can be overridden by <code>#pragma</code>, another preprocessor directive that works as instructions to the compiler. Some compilers only allow <code>main</code> to return an <code>int</code>.</p>

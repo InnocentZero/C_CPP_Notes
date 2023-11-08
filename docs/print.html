@@ -249,10 +249,10 @@ for (int i = 0; i &lt; 8; i++){
 <p><code>bts</code>: do the same as <code>bt</code> but set the position to 1.</p>
 </li>
 <li>
-<p><code>and/or/xor %a %b</code> Bitwise <strong>and/or/xor</strong> of the two arguments, stored in the first location. First has to be larger.</p>
+<p><code>and/or/xor %a %b</code> Bitwise <strong>and/or/xor</strong> of the two arguments, stored in the first location. First has to be larger in bitwidth.</p>
 </li>
 <li>
-<p><code>mov %a, %b</code> In GAS (AT&amp;T), moves the value of <code>%a</code> (or <code>$a</code>) to <code>%b</code> (must be an address). In intel flavor, moves value of <code>%b</code> (or <code>$b</code>) to <code>%a</code> (must be an address).</p>
+<p><code>mov %a, %b</code> In GAS (AT&amp;T), moves the value of <code>%a</code> (or <code>$a</code>) to <code>%b</code> (must be an address or a register). In intel flavor, moves value of <code>%b</code> (or <code>$b</code>) to <code>%a</code> (must be an address).</p>
 </li>
 <li>
 <p><code>imul %a, %b</code> multiplies the contents of <code>%a</code> with <code>%b</code> and stores them in <code>%a</code>.</p>
@@ -274,10 +274,13 @@ for (int i = 0; i &lt; 8; i++){
 </li>
 <li>
 <p><code>call</code>: calls a procedure.</p>
-</li>
-</ul>
-<!---TODO: Figure out call--->
 <ul>
+<li><code>call</code> pushes the address of the next instruction on the stack.</li>
+<li>When the procedure encounters a <code>ret</code> (at the end of the procedure), it pops the stack into the instruction pointer. - This way, the next instruction the instruction pointer continues off from where the program left initially.</li>
+</ul>
+<!---TODO: Figure out enter--->
+<!---TODO: Figure out branch and link--->
+</li>
 <li>
 <p><code>cbw/cwde/cdqe</code>: Convert byte to word, word to doubleword, doubleword to quadword. Acts on AX reg.</p>
 </li>
@@ -300,10 +303,10 @@ for (int i = 0; i &lt; 8; i++){
 <p><code>cmove</code>: Conditional moves. Find the list <a href="https://github.com/HJLebbink/asm-dude/wiki/CMOVcc">here</a></p>
 </li>
 <li>
-<p><code>cmp</code> compare two values and store the result accordingly.</p>
+<p><code>cmp</code> compare two values and store the result accordingly (stores the <code>zero</code> flag to be one).</p>
 </li>
 <li>
-<p><code>cmps</code> takes tow arguments for size of string, reads the size from DS:SI to ES:DI and changes flags accordingly.</p>
+<p><code>cmps</code> takes two for size of string, reads the size from DS:SI to ES:DI and changes flags accordingly.</p>
 <ul>
 <li>has suffixes b,w,d,q for size suffixes.</li>
 </ul>
@@ -425,7 +428,7 @@ for (int i = 0; i &lt; 8; i++){
 <p><code>fnop</code>: no floating point operation.</p>
 </li>
 </ul>
-<div style="break-before: page; page-break-before: always;"></div><h2 id="basic-structure"><a class="header" href="#basic-structure">Basic Structure</a></h2>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="basic-structure"><a class="header" href="#basic-structure">Basic Structure</a></h1>
 <blockquote>
 <p><code>#include &lt;iostream&gt;</code>: searches only in the main directory.</p>
 </blockquote>
@@ -444,9 +447,33 @@ int main(void){
 }
 </code></pre>
 <p>The above code will print 11 and not 25 because the compiler interprets it as <code>2 + 3*2 + 3</code> instead of <code>(2+3)*(2+3)</code>. To solve this use <code>#define SQ(x) (x)*(x)</code> or use <code>SQ((2+3))</code>.</p>
+<h2 id="macros"><a class="header" href="#macros">Macros</a></h2>
+<p>As stated above, literal string replacements. They can be of 3 types:</p>
+<ol>
+<li>Chain Macros: <code>#define CONCAT(a,b) a##b</code></li>
+</ol>
+<p>Basically combines the two strings into one. Can also be used to make something into a string. For example:</p>
+<pre><code class="language-cpp">#define ASSERT(x) printf(#x)
+
+//use as
+ASSERT(x == y);
+
+//will be converted to
+printf(&quot;x==y&quot;);
+</code></pre>
+<ol start="2">
+<li>
+<p>Object-like Macros: Literal substitutions.</p>
+</li>
+<li>
+<p>Function like macros: Kind of like <code>#define SQUARE(c) ((c)*(c))</code></p>
+</li>
+</ol>
+<h3 id="undefining-a-macro"><a class="header" href="#undefining-a-macro">Undefining a macro</a></h3>
+<p>Keep in mind that macros substitute everything once they are declared and do not respect scoping rules. To remove a macro after a certain point use <code>#undef MACRO_NAME</code></p>
 <p><code>#include &lt;climits&gt;</code> is for including all the limits in the compiler.</p>
 <pre><code class="language-cpp">int main(arguments){
-    cout &lt;&lt; “Hello World!” &lt;&lt; endl; 	
+    cout &lt;&lt; “Hello World!” &lt;&lt; endl;
 }
 </code></pre>
 <p><code>main</code> function is the first one to be called, regardless of the order in which the functions are written. This can be overridden by <code>#pragma</code>, another preprocessor directive that works as instructions to the compiler. Some compilers only allow <code>main</code> to return an <code>int</code>.</p>
@@ -1158,8 +1185,9 @@ template &lt;typename key_, typename value_&gt; class BST {
         return ptr == nullptr ? -1 : ptr-&gt;height;
     }
     void balance(data_ *&amp;ptr) {
-        if (ptr == nullptr)
+        if (ptr == nullptr) {
             return;
+        }
 
         if (height(ptr-&gt;left) - height(ptr-&gt;right) &gt; 1) {
             if (height(ptr-&gt;left-&gt;left) &gt;= height(ptr-&gt;left-&gt;right)) {
@@ -1204,6 +1232,7 @@ template &lt;typename key_, typename value_&gt; class BST {
                 return;
             }
         }
+        balance(node);
     }
     void insert(Data&lt;key_, value_&gt; dat) {
         if (root == nullptr) {
@@ -1829,31 +1858,31 @@ $gcc -c file.c #This gives the machine code
 <p>If searching in the probing method, you get a cell that is deleted, then keep proceeding for the search. If you get a cell that is empty, however, the search should stop there because if the searched element was in the table, it would have occupied that one. Use an enum to keep track of full, empty and deleted.</p>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="data-types"><a class="header" href="#data-types">Data Types</a></h1>
 <ul>
-<li><code>int</code>: Integer. At least as large as <code>short</code>.  Usually 32 bits.</li>
+<li><code>int</code>: Integer. At least as large as <code>short</code>. Usually 32 bits.</li>
 <li><code>short</code>: Short integer. Usually 16 bits.</li>
-<li><code>long</code>: Long integer. At least as large as <code>int</code>.  Usually 32 bits.</li>
-<li><code>long long</code>: Very long integer. At least as large as <code>long</code>.  Usually 64 bits.</li>
+<li><code>long</code>: Long integer. At least as large as <code>int</code>. Usually 32 bits.</li>
+<li><code>long long</code>: Very long integer. At least as large as <code>long</code>. Usually 64 bits.</li>
 </ul>
 <blockquote>
 <p>All these use <a href="https://en.wikipedia.org/wiki/Two%27s_complement">two’s complement</a>.</p>
 </blockquote>
 <ul>
-<li><code>unsigned int</code>: Unsigned integer. At least as large as <code>unsigned short</code>.  Usually 32 bits.</li>
+<li><code>unsigned int</code>: Unsigned integer. At least as large as <code>unsigned short</code>. Usually 32 bits.</li>
 <li><code>unsigned short</code>: Unsigned short integer. Usually 16 bits.</li>
-<li><code>unsigned long</code>: Unsigned long integer. At least as large as <code>unsigned int</code>.  Usually 32 bits.</li>
-<li><code>unsigned long long</code>: Unsigned very long integer. At least as large as <code>unsigned long</code>.  Usually 64 bits.</li>
+<li><code>unsigned long</code>: Unsigned long integer. At least as large as <code>unsigned int</code>. Usually 32 bits.</li>
+<li><code>unsigned long long</code>: Unsigned very long integer. At least as large as <code>unsigned long</code>. Usually 64 bits.</li>
 </ul>
 <blockquote>
 <p>Same sizes as above; only that the ranges are modified and 2’s complement is absent.</p>
 </blockquote>
 <ul>
-<li><code>signed char</code>: -128 to 127. ASCII characters only. Can actually store upto 32 bits. </li>
-<li><code>unsigned char</code>: 0 to 255. ASCII characters only. Can actually store upto 32 bits. </li>
+<li><code>signed char</code>: -128 to 127. ASCII characters only. Can actually store upto 32 bits.</li>
+<li><code>unsigned char</code>: 0 to 255. ASCII characters only. Can actually store upto 32 bits.</li>
 </ul>
 <div class="table-wrapper"><table><thead><tr><th style="text-align: center">Escape Sequence</th><th style="text-align: center">Description</th></tr></thead><tbody>
 <tr><td style="text-align: center">\n</td><td style="text-align: center">moves the cursor to the beginning of the next line</td></tr>
 <tr><td style="text-align: center">\t</td><td style="text-align: center">tab</td></tr>
-<tr><td style="text-align: center">\r</td><td style="text-align: center">Carraige return. Moves the cursor to the beginning of the line.</td></tr>
+<tr><td style="text-align: center">\r</td><td style="text-align: center">Carriage return. Moves the cursor to the beginning of the line.</td></tr>
 <tr><td style="text-align: center">\a</td><td style="text-align: center">Alerts the system bell</td></tr>
 <tr><td style="text-align: center">\\</td><td style="text-align: center">Prints backslash</td></tr>
 <tr><td style="text-align: center">\&quot;</td><td style="text-align: center">Prints double quotes</td></tr>
@@ -1880,10 +1909,10 @@ $gcc -c file.c #This gives the machine code
 </li>
 </ul>
 <blockquote>
-<p><code>%d</code> for a <code>char</code> prints its ASCII value. If a <code>char</code> is defined as ‘ABC’, <code>%d</code> prints (ASCII_A)·256^2^ + (ASCII_B)·256 + (ASCII_C) where ASCII_ is the ascii value for that character. <code>%c</code> only accesses the last (or first, depending on whether the processor is little Endian or big Endian) valid byte (i.e. <code>'C'</code> in this case). If the char is defined as <code>'ABCDE'</code>, only the last (or first, again depending on the processor) valid byte is processed and stored, and <code>%d</code> accesses all 4 bytes including the 3 following it, while <code>%c</code> works the same.</p>
+<p><code>%d</code> for a <code>char</code> prints its ASCII value. If a <code>char</code> is defined as ‘ABC’, <code>%d</code> prints (ASCII<em>A)·256^2^ + (ASCII_B)·256 + (ASCII_C) where ASCII</em> is the ascii value for that character. <code>%c</code> only accesses the last (or first, depending on whether the processor is little Endian or big Endian) valid byte (i.e. <code>'C'</code> in this case). If the char is defined as <code>'ABCDE'</code>, only the last (or first, again depending on the processor) valid byte is processed and stored, and <code>%d</code> accesses all 4 bytes including the 3 following it, while <code>%c</code> works the same.</p>
 </blockquote>
 <p>However, there are fixed width integer types as well. All of them are included in <code>&lt;cstdint&gt;</code> header file.</p>
-<p>They can be annotated using <code>uintN_t</code>, where <code>N</code> is the size of the integer. It must be a multiple of 8 to fit exact bytes. </p>
+<p>They can be annotated using <code>uintN_t</code>, where <code>N</code> is the size of the integer. It must be a multiple of 8 to fit exact bytes.</p>
 <p>Examples:</p>
 <ul>
 <li><code>uint64_t</code></li>
@@ -1906,8 +1935,8 @@ Alan Kay, <cite>OOPSLA '97</cite></footer></blockquote></div>
 <p><code>data_type var</code> when the value is not known.</p>
 <p><code>data_type var = value</code> when the value is known.</p>
 <p>We can also use <code>typedef</code>.</p>
-<p><code>typedef existing_name alias_name;</code> </p>
-<p>This is better than <code>#define</code> as it allows you typecast.</p>
+<p><code>typedef existing_name alias_name;</code></p>
+<p>This is better than <code>#define</code> as it allows you typecast. Also, it acts as an object type rather than a simple macro and can be debugged.</p>
 <p><code>enum var_type {val_1,val_2,val_3};</code> : This declares a new enumeration type. The default values are 0, 1, 2 and so on. We can also define variables of the <code>var_type</code> using <code>enum var_type {...} new_var;</code> or by:</p>
 <pre><code class="language-cpp">enum var_type {val_1,val_2,val_3};
 enum var_type var;
@@ -1924,9 +1953,14 @@ If in between some values are undefined then their value is set as the previous 
 <h3 id="c-style-casts"><a class="header" href="#c-style-casts">C style casts:</a></h3>
 <p><strong>Explicit:</strong> <code>(type_name) expression</code></p>
 <p><strong>Implicit:</strong> <code>type_name new_var = expression</code></p>
-<p>Implicit typecasting also occurs when we perform an operation between a lower level data type and a higher level data type. Eg. int &amp; float, int and long, float and double etc. </p>
-<p>In all of the above examples, the first one gets typecased to the second.</p>
+<p>Implicit typecasting also occurs when we perform an operation between a lower level data type and a higher level data type. Eg. int &amp; float, int and long, float and double etc.</p>
+<p>In all of the above examples, the first one gets typecasted to the second.</p>
 <p>C - style casts may add a line of instruction or two, however, they are mostly supposed to be compile time. If you need C - style casts in your code you may use <a href="https://en.cppreference.com/w/cpp/language/reinterpret_cast">reinterpret cast</a></p>
+<h2 id="external-variables"><a class="header" href="#external-variables">External Variables</a></h2>
+<p><code>extern</code> is used for declaring a variable without defining it. It is basically tells the compiler there is something called that variable and it need not worry about it not being in scope. Also used to use <code>static global</code> vars in other files (<code>static</code> vars are file linked by default).</p>
+<blockquote>
+<p>Don’t use <code>extern</code>. Bad practice.</p>
+</blockquote>
 <div class="epigraph">
 <blockquote><p> Christ, people. Learn C, instead of just stringing random characters together until it compiles (with warnings).</p>
 <footer>Linus Torvalds, <cite>LKM mailing list</cite></footer></blockquote>
@@ -5500,13 +5534,13 @@ int main(){
 <p>There are 3 types of General-purpose data registers they are:</p>
 <h3 id="data-registers"><a class="header" href="#data-registers">Data registers</a></h3>
 <p>Data registers consists of four 32-bit data registers, which are used for arithmetic, logical and other operations.</p>
-<p>They are mostly used for storing temporary variables during instruction execution.</p>
+<p>They are mostly used for storing temporary variables during instruction execution. They are mostly meant to do arithmetic manipulation.</p>
 <p>Data registers are again classified into 4 types they are:</p>
 <ul>
-<li>AX: This is known as the accumulator register. Its 16 bits are split into two 8-bit registers, AH and AL, allowing it to execute 8-bit instructions as well. In 8086 microprocessors, it is used in the arithmetic, logic, and data transfer instructions. One of the numbers involved in manipulation and division must be in AX or AL.</li>
-<li>BX: This is called a Base register. It has 16 bits and is split into two registers with 8 bits each, BH and BL. An address register is the BX register. It typically includes a data pointer for indirect addressing that is based, based indexed, or register-based.</li>
-<li>CX: This is known as the Count register. Its 16 bits are split into two 8-bit registers, CH and CL, allowing it to execute 8-bit instructions as well. This acts as a counter for loops. It facilitates the development of program loops. Shift/rotate instructions and string manipulation both allow the use of the count register as a counter.</li>
-<li>DX: This is known as the Data register. Its 16 bits are split into two 8-bit registers, DH and DL so that it can execute 8-bit instructions as well. In I/O operations, the data register can be used as a port number. It is also applied to division and multiplication.</li>
+<li>AX: Accumulator register. Its bits are split into two registers, AH and AL, allowing it to execute half bit-width instructions as well.</li>
+<li>BX: Base register. Split into BH and BL.</li>
+<li>CX: Count register. This acts as a counter for loops.</li>
+<li>DX: This is known as the Data register. In I/O operations, the data register can be used as a port number.</li>
 </ul>
 <h3 id="pointer-registers"><a class="header" href="#pointer-registers">Pointer registers</a></h3>
 <p>The pointer registers consist of 16-bit left sections (SP, and BP) and 32-bit ESP and EBP registers.</p>
@@ -5529,7 +5563,7 @@ int main(){
 <li>DS (Data Segment register): A 64KB segment of program data is addressed using a 16-bit register called the data segment. The processor by default believes that the data segment contains all information referred to by the general registers (AX, BX, CX, and DX) and index registers (SI, DI). POP and LDS commands can be used to directly alter the DS register.</li>
 <li>SS (Stack Segment register): A 16-bit register called a stack segment holds the address of a 64KB segment with a software stack. The CPU by default believes that the stack segment contains all information referred to by the stack pointer (SP) and base pointer (BP) registers. POP instruction allows for direct modification of the SS register.</li>
 <li>ES (Extra Segment register): A 16-bit register called extra segment holds the address of a 64KB segment, typically holding program data. In string manipulation instructions, the CPU defaults to assuming that the DI register refers to the ES segment. POP and LES commands can be used to directly update the ES register.</li>
-<li>FS (File Segment register): FS registers don’t have a purpose that is predetermined by the CPU; instead, the OS that runs them gives them a purpose. On Windows processes, FS is used to point to the thread information block (TIB).</li>
+<li>FS (File Segment register): FS registers don’t have a purpose that is predetermined by the CPU; instead, the OS that runs them gives them a purpose. On Windows processes, FS is used to point to the thread information block (TIB). On 64 bit unix systems, they are always 0.</li>
 <li>GS (Graphics Segment register): The GS register is used in Windows 64-bit to point to operating system-defined structures. OS kernels frequently use GS to access thread-specific memory. The GS register is employed by Windows to control thread-specific memory. In order to access CPU-specific memory, the Linux kernel employs GS. A pointer to a thread local storage, or TLS, is frequently used as GS.</li>
 <li>IP (Instruction Pointer register): The registers CS and IP are used by the 8086 to access instructions. The segment number of the following instruction is stored in the CS register, while the offset is stored in the IP register. Every time an instruction is executed, IP is modified to point to the upcoming instruction. The IP cannot be directly modified by an instruction, unlike other registers; an instruction may not have the IP as its operand.</li>
 </ul>

@@ -171,31 +171,31 @@
                     <main><div class="sidetoc"><nav class="pagetoc"></nav></div>
                         <h1 id="data-types"><a class="header" href="#data-types">Data Types</a></h1>
 <ul>
-<li><code>int</code>: Integer. At least as large as <code>short</code>.  Usually 32 bits.</li>
+<li><code>int</code>: Integer. At least as large as <code>short</code>. Usually 32 bits.</li>
 <li><code>short</code>: Short integer. Usually 16 bits.</li>
-<li><code>long</code>: Long integer. At least as large as <code>int</code>.  Usually 32 bits.</li>
-<li><code>long long</code>: Very long integer. At least as large as <code>long</code>.  Usually 64 bits.</li>
+<li><code>long</code>: Long integer. At least as large as <code>int</code>. Usually 32 bits.</li>
+<li><code>long long</code>: Very long integer. At least as large as <code>long</code>. Usually 64 bits.</li>
 </ul>
 <blockquote>
 <p>All these use <a href="https://en.wikipedia.org/wiki/Two%27s_complement">two’s complement</a>.</p>
 </blockquote>
 <ul>
-<li><code>unsigned int</code>: Unsigned integer. At least as large as <code>unsigned short</code>.  Usually 32 bits.</li>
+<li><code>unsigned int</code>: Unsigned integer. At least as large as <code>unsigned short</code>. Usually 32 bits.</li>
 <li><code>unsigned short</code>: Unsigned short integer. Usually 16 bits.</li>
-<li><code>unsigned long</code>: Unsigned long integer. At least as large as <code>unsigned int</code>.  Usually 32 bits.</li>
-<li><code>unsigned long long</code>: Unsigned very long integer. At least as large as <code>unsigned long</code>.  Usually 64 bits.</li>
+<li><code>unsigned long</code>: Unsigned long integer. At least as large as <code>unsigned int</code>. Usually 32 bits.</li>
+<li><code>unsigned long long</code>: Unsigned very long integer. At least as large as <code>unsigned long</code>. Usually 64 bits.</li>
 </ul>
 <blockquote>
 <p>Same sizes as above; only that the ranges are modified and 2’s complement is absent.</p>
 </blockquote>
 <ul>
-<li><code>signed char</code>: -128 to 127. ASCII characters only. Can actually store upto 32 bits. </li>
-<li><code>unsigned char</code>: 0 to 255. ASCII characters only. Can actually store upto 32 bits. </li>
+<li><code>signed char</code>: -128 to 127. ASCII characters only. Can actually store upto 32 bits.</li>
+<li><code>unsigned char</code>: 0 to 255. ASCII characters only. Can actually store upto 32 bits.</li>
 </ul>
 <div class="table-wrapper"><table><thead><tr><th style="text-align: center">Escape Sequence</th><th style="text-align: center">Description</th></tr></thead><tbody>
 <tr><td style="text-align: center">\n</td><td style="text-align: center">moves the cursor to the beginning of the next line</td></tr>
 <tr><td style="text-align: center">\t</td><td style="text-align: center">tab</td></tr>
-<tr><td style="text-align: center">\r</td><td style="text-align: center">Carraige return. Moves the cursor to the beginning of the line.</td></tr>
+<tr><td style="text-align: center">\r</td><td style="text-align: center">Carriage return. Moves the cursor to the beginning of the line.</td></tr>
 <tr><td style="text-align: center">\a</td><td style="text-align: center">Alerts the system bell</td></tr>
 <tr><td style="text-align: center">\\</td><td style="text-align: center">Prints backslash</td></tr>
 <tr><td style="text-align: center">\&quot;</td><td style="text-align: center">Prints double quotes</td></tr>
@@ -222,10 +222,10 @@
 </li>
 </ul>
 <blockquote>
-<p><code>%d</code> for a <code>char</code> prints its ASCII value. If a <code>char</code> is defined as ‘ABC’, <code>%d</code> prints (ASCII_A)·256^2^ + (ASCII_B)·256 + (ASCII_C) where ASCII_ is the ascii value for that character. <code>%c</code> only accesses the last (or first, depending on whether the processor is little Endian or big Endian) valid byte (i.e. <code>'C'</code> in this case). If the char is defined as <code>'ABCDE'</code>, only the last (or first, again depending on the processor) valid byte is processed and stored, and <code>%d</code> accesses all 4 bytes including the 3 following it, while <code>%c</code> works the same.</p>
+<p><code>%d</code> for a <code>char</code> prints its ASCII value. If a <code>char</code> is defined as ‘ABC’, <code>%d</code> prints (ASCII<em>A)·256^2^ + (ASCII_B)·256 + (ASCII_C) where ASCII</em> is the ascii value for that character. <code>%c</code> only accesses the last (or first, depending on whether the processor is little Endian or big Endian) valid byte (i.e. <code>'C'</code> in this case). If the char is defined as <code>'ABCDE'</code>, only the last (or first, again depending on the processor) valid byte is processed and stored, and <code>%d</code> accesses all 4 bytes including the 3 following it, while <code>%c</code> works the same.</p>
 </blockquote>
 <p>However, there are fixed width integer types as well. All of them are included in <code>&lt;cstdint&gt;</code> header file.</p>
-<p>They can be annotated using <code>uintN_t</code>, where <code>N</code> is the size of the integer. It must be a multiple of 8 to fit exact bytes. </p>
+<p>They can be annotated using <code>uintN_t</code>, where <code>N</code> is the size of the integer. It must be a multiple of 8 to fit exact bytes.</p>
 <p>Examples:</p>
 <ul>
 <li><code>uint64_t</code></li>
@@ -248,8 +248,8 @@ Alan Kay, <cite>OOPSLA '97</cite></footer></blockquote></div>
 <p><code>data_type var</code> when the value is not known.</p>
 <p><code>data_type var = value</code> when the value is known.</p>
 <p>We can also use <code>typedef</code>.</p>
-<p><code>typedef existing_name alias_name;</code> </p>
-<p>This is better than <code>#define</code> as it allows you typecast.</p>
+<p><code>typedef existing_name alias_name;</code></p>
+<p>This is better than <code>#define</code> as it allows you typecast. Also, it acts as an object type rather than a simple macro and can be debugged.</p>
 <p><code>enum var_type {val_1,val_2,val_3};</code> : This declares a new enumeration type. The default values are 0, 1, 2 and so on. We can also define variables of the <code>var_type</code> using <code>enum var_type {...} new_var;</code> or by:</p>
 <pre><code class="language-cpp">enum var_type {val_1,val_2,val_3};
 enum var_type var;
@@ -266,9 +266,14 @@ If in between some values are undefined then their value is set as the previous 
 <h3 id="c-style-casts"><a class="header" href="#c-style-casts">C style casts:</a></h3>
 <p><strong>Explicit:</strong> <code>(type_name) expression</code></p>
 <p><strong>Implicit:</strong> <code>type_name new_var = expression</code></p>
-<p>Implicit typecasting also occurs when we perform an operation between a lower level data type and a higher level data type. Eg. int &amp; float, int and long, float and double etc. </p>
-<p>In all of the above examples, the first one gets typecased to the second.</p>
+<p>Implicit typecasting also occurs when we perform an operation between a lower level data type and a higher level data type. Eg. int &amp; float, int and long, float and double etc.</p>
+<p>In all of the above examples, the first one gets typecasted to the second.</p>
 <p>C - style casts may add a line of instruction or two, however, they are mostly supposed to be compile time. If you need C - style casts in your code you may use <a href="https://en.cppreference.com/w/cpp/language/reinterpret_cast">reinterpret cast</a></p>
+<h2 id="external-variables"><a class="header" href="#external-variables">External Variables</a></h2>
+<p><code>extern</code> is used for declaring a variable without defining it. It is basically tells the compiler there is something called that variable and it need not worry about it not being in scope. Also used to use <code>static global</code> vars in other files (<code>static</code> vars are file linked by default).</p>
+<blockquote>
+<p>Don’t use <code>extern</code>. Bad practice.</p>
+</blockquote>
 <div class="epigraph">
 <blockquote><p> Christ, people. Learn C, instead of just stringing random characters together until it compiles (with warnings).</p>
 <footer>Linus Torvalds, <cite>LKM mailing list</cite></footer></blockquote>

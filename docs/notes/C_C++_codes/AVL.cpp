@@ -102,8 +102,9 @@ template <typename key_, typename value_> class BST {
         return ptr == nullptr ? -1 : ptr->height;
     }
     void balance(data_ *&ptr) {
-        if (ptr == nullptr)
+        if (ptr == nullptr) {
             return;
+        }
 
         if (height(ptr->left) - height(ptr->right) > 1) {
             if (height(ptr->left->left) >= height(ptr->left->right)) {
@@ -148,6 +149,7 @@ template <typename key_, typename value_> class BST {
                 return;
             }
         }
+        balance(node);
     }
     void insert(Data<key_, value_> dat) {
         if (root == nullptr) {

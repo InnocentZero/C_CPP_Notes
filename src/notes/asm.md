@@ -38,9 +38,9 @@ The process through which the processor controls the execution of instructions i
 - `btr`: do the same as `bt` but set the position to 0.
 - `bts`: do the same as `bt` but set the position to 1.
 
-- `and/or/xor %a %b` Bitwise **and/or/xor** of the two arguments, stored in the first location. First has to be larger.
+- `and/or/xor %a %b` Bitwise **and/or/xor** of the two arguments, stored in the first location. First has to be larger in bitwidth.
 
-- `mov %a, %b` In GAS (AT&T), moves the value of `%a` (or `$a`) to `%b` (must be an address). In intel flavor, moves value of `%b` (or `$b`) to `%a` (must be an address).
+- `mov %a, %b` In GAS (AT&T), moves the value of `%a` (or `$a`) to `%b` (must be an address or a register). In intel flavor, moves value of `%b` (or `$b`) to `%a` (must be an address).
 
 - `imul %a, %b` multiplies the contents of `%a` with `%b` and stores them in `%a`.
 
@@ -55,7 +55,12 @@ The process through which the processor controls the execution of instructions i
 
 - `enter`: create a stack frame for a procedure.
 - `call`: calls a procedure.
-<!---TODO: Figure out call--->
+
+  - `call` pushes the address of the next instruction on the stack.
+  - When the procedure encounters a `ret` (at the end of the procedure), it pops the stack into the instruction pointer. - This way, the next instruction the instruction pointer continues off from where the program left initially.
+
+  <!---TODO: Figure out enter--->
+  <!---TODO: Figure out branch and link--->
 
 - `cbw/cwde/cdqe`: Convert byte to word, word to doubleword, doubleword to quadword. Acts on AX reg.
 
@@ -66,8 +71,8 @@ The process through which the processor controls the execution of instructions i
 - `fclex`: clear floating point exceptions.
 
 - `cmove`: Conditional moves. Find the list [here](https://github.com/HJLebbink/asm-dude/wiki/CMOVcc)
-- `cmp` compare two values and store the result accordingly.
-- `cmps` takes tow arguments for size of string, reads the size from DS:SI to ES:DI and changes flags accordingly.
+- `cmp` compare two values and store the result accordingly (stores the `zero` flag to be one).
+- `cmps` takes two for size of string, reads the size from DS:SI to ES:DI and changes flags accordingly.
   - has suffixes b,w,d,q for size suffixes.
 - `cmpxchg %a %b`: compare and exchange. If AX is equal to `%a` then `%b` is loaded to `%a`. Otherwise `%a` is loaded into AX. ZF is set to 1 if they are equal or 0 otherwise.
   - Also has another variant dealing with 64 and 128 bit values. Except `%b` is implicitly taken to be CX:BX.

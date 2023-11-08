@@ -8,14 +8,14 @@ There are 3 types of General-purpose data registers they are:
 
 Data registers consists of four 32-bit data registers, which are used for arithmetic, logical and other operations.
 
-They are mostly used for storing temporary variables during instruction execution.
+They are mostly used for storing temporary variables during instruction execution. They are mostly meant to do arithmetic manipulation.
 
 Data registers are again classified into 4 types they are:
 
-- AX: This is known as the accumulator register. Its 16 bits are split into two 8-bit registers, AH and AL, allowing it to execute 8-bit instructions as well. In 8086 microprocessors, it is used in the arithmetic, logic, and data transfer instructions. One of the numbers involved in manipulation and division must be in AX or AL.
-- BX: This is called a Base register. It has 16 bits and is split into two registers with 8 bits each, BH and BL. An address register is the BX register. It typically includes a data pointer for indirect addressing that is based, based indexed, or register-based.
-- CX: This is known as the Count register. Its 16 bits are split into two 8-bit registers, CH and CL, allowing it to execute 8-bit instructions as well. This acts as a counter for loops. It facilitates the development of program loops. Shift/rotate instructions and string manipulation both allow the use of the count register as a counter.
-- DX: This is known as the Data register. Its 16 bits are split into two 8-bit registers, DH and DL so that it can execute 8-bit instructions as well. In I/O operations, the data register can be used as a port number. It is also applied to division and multiplication.
+- AX: Accumulator register. Its bits are split into two registers, AH and AL, allowing it to execute half bit-width instructions as well.
+- BX: Base register. Split into BH and BL.
+- CX: Count register. This acts as a counter for loops.
+- DX: This is known as the Data register. In I/O operations, the data register can be used as a port number.
 
 ### Pointer registers
 
@@ -43,6 +43,6 @@ To store machine state data and change state configuration, special purpose regi
 - DS (Data Segment register): A 64KB segment of program data is addressed using a 16-bit register called the data segment. The processor by default believes that the data segment contains all information referred to by the general registers (AX, BX, CX, and DX) and index registers (SI, DI). POP and LDS commands can be used to directly alter the DS register.
 - SS (Stack Segment register): A 16-bit register called a stack segment holds the address of a 64KB segment with a software stack. The CPU by default believes that the stack segment contains all information referred to by the stack pointer (SP) and base pointer (BP) registers. POP instruction allows for direct modification of the SS register.
 - ES (Extra Segment register): A 16-bit register called extra segment holds the address of a 64KB segment, typically holding program data. In string manipulation instructions, the CPU defaults to assuming that the DI register refers to the ES segment. POP and LES commands can be used to directly update the ES register.
-- FS (File Segment register): FS registers don’t have a purpose that is predetermined by the CPU; instead, the OS that runs them gives them a purpose. On Windows processes, FS is used to point to the thread information block (TIB).
+- FS (File Segment register): FS registers don’t have a purpose that is predetermined by the CPU; instead, the OS that runs them gives them a purpose. On Windows processes, FS is used to point to the thread information block (TIB). On 64 bit unix systems, they are always 0.
 - GS (Graphics Segment register): The GS register is used in Windows 64-bit to point to operating system-defined structures. OS kernels frequently use GS to access thread-specific memory. The GS register is employed by Windows to control thread-specific memory. In order to access CPU-specific memory, the Linux kernel employs GS. A pointer to a thread local storage, or TLS, is frequently used as GS.
 - IP (Instruction Pointer register): The registers CS and IP are used by the 8086 to access instructions. The segment number of the following instruction is stored in the CS register, while the offset is stored in the IP register. Every time an instruction is executed, IP is modified to point to the upcoming instruction. The IP cannot be directly modified by an instruction, unlike other registers; an instruction may not have the IP as its operand.

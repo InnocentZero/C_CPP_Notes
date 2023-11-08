@@ -225,10 +225,10 @@
 <p><code>bts</code>: do the same as <code>bt</code> but set the position to 1.</p>
 </li>
 <li>
-<p><code>and/or/xor %a %b</code> Bitwise <strong>and/or/xor</strong> of the two arguments, stored in the first location. First has to be larger.</p>
+<p><code>and/or/xor %a %b</code> Bitwise <strong>and/or/xor</strong> of the two arguments, stored in the first location. First has to be larger in bitwidth.</p>
 </li>
 <li>
-<p><code>mov %a, %b</code> In GAS (AT&amp;T), moves the value of <code>%a</code> (or <code>$a</code>) to <code>%b</code> (must be an address). In intel flavor, moves value of <code>%b</code> (or <code>$b</code>) to <code>%a</code> (must be an address).</p>
+<p><code>mov %a, %b</code> In GAS (AT&amp;T), moves the value of <code>%a</code> (or <code>$a</code>) to <code>%b</code> (must be an address or a register). In intel flavor, moves value of <code>%b</code> (or <code>$b</code>) to <code>%a</code> (must be an address).</p>
 </li>
 <li>
 <p><code>imul %a, %b</code> multiplies the contents of <code>%a</code> with <code>%b</code> and stores them in <code>%a</code>.</p>
@@ -250,10 +250,13 @@
 </li>
 <li>
 <p><code>call</code>: calls a procedure.</p>
-</li>
-</ul>
-<!---TODO: Figure out call--->
 <ul>
+<li><code>call</code> pushes the address of the next instruction on the stack.</li>
+<li>When the procedure encounters a <code>ret</code> (at the end of the procedure), it pops the stack into the instruction pointer. - This way, the next instruction the instruction pointer continues off from where the program left initially.</li>
+</ul>
+<!---TODO: Figure out enter--->
+<!---TODO: Figure out branch and link--->
+</li>
 <li>
 <p><code>cbw/cwde/cdqe</code>: Convert byte to word, word to doubleword, doubleword to quadword. Acts on AX reg.</p>
 </li>
@@ -276,10 +279,10 @@
 <p><code>cmove</code>: Conditional moves. Find the list <a href="https://github.com/HJLebbink/asm-dude/wiki/CMOVcc">here</a></p>
 </li>
 <li>
-<p><code>cmp</code> compare two values and store the result accordingly.</p>
+<p><code>cmp</code> compare two values and store the result accordingly (stores the <code>zero</code> flag to be one).</p>
 </li>
 <li>
-<p><code>cmps</code> takes tow arguments for size of string, reads the size from DS:SI to ES:DI and changes flags accordingly.</p>
+<p><code>cmps</code> takes two for size of string, reads the size from DS:SI to ES:DI and changes flags accordingly.</p>
 <ul>
 <li>has suffixes b,w,d,q for size suffixes.</li>
 </ul>
