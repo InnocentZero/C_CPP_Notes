@@ -1,0 +1,503 @@
+<!DOCTYPE HTML>
+<html lang="en" class="sidebar-visible no-js ayu">
+    <head>
+        <!-- Book generated using mdBook -->
+        <meta charset="UTF-8">
+        <title>notes/poe.md - Notes</title>
+
+
+        <!-- Custom HTML head -->
+        
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="theme-color" content="#ffffff" />
+
+        <link rel="icon" href="../favicon.svg">
+        <link rel="shortcut icon" href="../favicon.png">
+        <link rel="stylesheet" href="../css/variables.css">
+        <link rel="stylesheet" href="../css/general.css">
+        <link rel="stylesheet" href="../css/chrome.css">
+        <link rel="stylesheet" href="../css/print.css" media="print">
+
+        <!-- Fonts -->
+        <link rel="stylesheet" href="../FontAwesome/css/font-awesome.css">
+        <link rel="stylesheet" href="../fonts/fonts.css">
+
+        <!-- Highlight.js Stylesheets -->
+        <link rel="stylesheet" href="../highlight.css">
+        <link rel="stylesheet" href="../tomorrow-night.css">
+        <link rel="stylesheet" href="../ayu-highlight.css">
+
+        <!-- Custom theme stylesheets -->
+        <link rel="stylesheet" href=".././src/notes/custom.css">
+        <link rel="stylesheet" href="../theme/pagetoc.css">
+        <link rel="stylesheet" href=".././src/notes/katex.min.css">
+
+    </head>
+    <body>
+    <div id="body-container">
+        <!-- Provide site root to javascript -->
+        <script>
+            var path_to_root = "../";
+            var default_theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? "navy" : "ayu";
+        </script>
+
+        <!-- Work around some values being stored in localStorage wrapped in quotes -->
+        <script>
+            try {
+                var theme = localStorage.getItem('mdbook-theme');
+                var sidebar = localStorage.getItem('mdbook-sidebar');
+
+                if (theme.startsWith('"') && theme.endsWith('"')) {
+                    localStorage.setItem('mdbook-theme', theme.slice(1, theme.length - 1));
+                }
+
+                if (sidebar.startsWith('"') && sidebar.endsWith('"')) {
+                    localStorage.setItem('mdbook-sidebar', sidebar.slice(1, sidebar.length - 1));
+                }
+            } catch (e) { }
+        </script>
+
+        <!-- Set the theme before any content is loaded, prevents flash -->
+        <script>
+            var theme;
+            try { theme = localStorage.getItem('mdbook-theme'); } catch(e) { }
+            if (theme === null || theme === undefined) { theme = default_theme; }
+            var html = document.querySelector('html');
+            html.classList.remove('no-js')
+            html.classList.remove('ayu')
+            html.classList.add(theme);
+            html.classList.add('js');
+        </script>
+
+        <!-- Hide / unhide sidebar before it is displayed -->
+        <script>
+            var html = document.querySelector('html');
+            var sidebar = null;
+            if (document.body.clientWidth >= 1080) {
+                try { sidebar = localStorage.getItem('mdbook-sidebar'); } catch(e) { }
+                sidebar = sidebar || 'visible';
+            } else {
+                sidebar = 'hidden';
+            }
+            html.classList.remove('sidebar-visible');
+            html.classList.add("sidebar-" + sidebar);
+        </script>
+
+        <nav id="sidebar" class="sidebar" aria-label="Table of contents">
+            <div class="sidebar-scrollbox">
+                <ol class="chapter"><li class="chapter-item "><a href="../notes/algorithms.html"><strong aria-hidden="true">1.</strong> notes/algorithms.md</a></li><li class="chapter-item "><a href="../notes/arp.html"><strong aria-hidden="true">2.</strong> notes/arp.md</a></li><li class="chapter-item "><a href="../notes/asm.html"><strong aria-hidden="true">3.</strong> notes/asm.md</a></li><li class="chapter-item "><a href="../notes/basic_preproc.html"><strong aria-hidden="true">4.</strong> notes/basic_preproc.md</a></li><li class="chapter-item "><a href="../notes/boost_asio.html"><strong aria-hidden="true">5.</strong> notes/boost_asio.md</a></li><li class="chapter-item "><a href="../notes/c_codes.html"><strong aria-hidden="true">6.</strong> notes/c_codes.md</a></li><li class="chapter-item "><a href="../notes/cmake.html"><strong aria-hidden="true">7.</strong> notes/cmake.md</a></li><li class="chapter-item "><a href="../notes/concurrency.html"><strong aria-hidden="true">8.</strong> notes/concurrency.md</a></li><li class="chapter-item "><a href="../notes/cont_struct.html"><strong aria-hidden="true">9.</strong> notes/cont_struct.md</a></li><li class="chapter-item "><a href="../notes/cp_codes.html"><strong aria-hidden="true">10.</strong> notes/cp_codes.md</a></li><li class="chapter-item "><a href="../notes/cpp-guidelines.html"><strong aria-hidden="true">11.</strong> notes/cpp-guidelines.md</a></li><li class="chapter-item "><a href="../notes/cpp.html"><strong aria-hidden="true">12.</strong> notes/cpp.md</a></li><li class="chapter-item "><a href="../notes/cp_qs_models.html"><strong aria-hidden="true">13.</strong> notes/cp_qs_models.md</a></li><li class="chapter-item "><a href="../notes/cp_qs_reading.html"><strong aria-hidden="true">14.</strong> notes/cp_qs_reading.md</a></li><li class="chapter-item "><a href="../notes/cv_qualifiers.html"><strong aria-hidden="true">15.</strong> notes/cv_qualifiers.md</a></li><li class="chapter-item "><a href="../notes/data_structures.html"><strong aria-hidden="true">16.</strong> notes/data_structures.md</a></li><li class="chapter-item "><a href="../notes/data_types.html"><strong aria-hidden="true">17.</strong> notes/data_types.md</a></li><li class="chapter-item "><a href="../notes/dhcp.html"><strong aria-hidden="true">18.</strong> notes/dhcp.md</a></li><li class="chapter-item "><a href="../notes/dhcpv6.html"><strong aria-hidden="true">19.</strong> notes/dhcpv6.md</a></li><li class="chapter-item "><a href="../notes/enum_classes.html"><strong aria-hidden="true">20.</strong> notes/enum_classes.md</a></li><li class="chapter-item "><a href="../notes/functions.html"><strong aria-hidden="true">21.</strong> notes/functions.md</a></li><li class="chapter-item "><a href="../notes/gdb.html"><strong aria-hidden="true">22.</strong> notes/gdb.md</a></li><li class="chapter-item "><a href="../notes/hacking_basics.html"><strong aria-hidden="true">23.</strong> notes/hacking_basics.md</a></li><li class="chapter-item "><a href="../notes/icmp.html"><strong aria-hidden="true">24.</strong> notes/icmp.md</a></li><li class="chapter-item "><a href="../notes/if_else_loops.html"><strong aria-hidden="true">25.</strong> notes/if_else_loops.md</a></li><li class="chapter-item "><a href="../notes/io.html"><strong aria-hidden="true">26.</strong> notes/io.md</a></li><li class="chapter-item "><a href="../notes/ipv4.html"><strong aria-hidden="true">27.</strong> notes/ipv4.md</a></li><li class="chapter-item "><a href="../notes/ipv6.html"><strong aria-hidden="true">28.</strong> notes/ipv6.md</a></li><li class="chapter-item "><a href="../notes/jpeg.html"><strong aria-hidden="true">29.</strong> notes/jpeg.md</a></li><li class="chapter-item "><a href="../notes/memory.html"><strong aria-hidden="true">30.</strong> notes/memory.md</a></li><li class="chapter-item "><a href="../notes/natas_levels.html"><strong aria-hidden="true">31.</strong> notes/natas_levels.md</a></li><li class="chapter-item "><a href="../notes/network_stack.html"><strong aria-hidden="true">32.</strong> notes/network_stack.md</a></li><li class="chapter-item expanded "><a href="../notes/poe.html" class="active"><strong aria-hidden="true">33.</strong> notes/poe.md</a></li><li class="chapter-item "><a href="../notes/pointers.html"><strong aria-hidden="true">34.</strong> notes/pointers.md</a></li><li class="chapter-item "><a href="../notes/project_euler.html"><strong aria-hidden="true">35.</strong> notes/project_euler.md</a></li><li class="chapter-item "><a href="../notes/python.html"><strong aria-hidden="true">36.</strong> notes/python.md</a></li><li class="chapter-item "><a href="../notes/references.html"><strong aria-hidden="true">37.</strong> notes/references.md</a></li><li class="chapter-item "><a href="../notes/regex.html"><strong aria-hidden="true">38.</strong> notes/regex.md</a></li><li class="chapter-item "><a href="../notes/registers.html"><strong aria-hidden="true">39.</strong> notes/registers.md</a></li><li class="chapter-item "><a href="../notes/rust_notes.html"><strong aria-hidden="true">40.</strong> notes/rust_notes.md</a></li><li class="chapter-item "><a href="../notes/rvalue_refs.html"><strong aria-hidden="true">41.</strong> notes/rvalue_refs.md</a></li><li class="chapter-item "><a href="../notes/static_variables.html"><strong aria-hidden="true">42.</strong> notes/static_variables.md</a></li><li class="chapter-item "><a href="../notes/std_forward.html"><strong aria-hidden="true">43.</strong> notes/std_forward.md</a></li><li class="chapter-item "><a href="../notes/strings_arrays.html"><strong aria-hidden="true">44.</strong> notes/strings_arrays.md</a></li><li class="chapter-item "><a href="../notes/tcp.html"><strong aria-hidden="true">45.</strong> notes/tcp.md</a></li><li class="chapter-item "><a href="../notes/traceroute.html"><strong aria-hidden="true">46.</strong> notes/traceroute.md</a></li></ol>
+            </div>
+            <div id="sidebar-resize-handle" class="sidebar-resize-handle"></div>
+        </nav>
+
+        <!-- Track and set sidebar scroll position -->
+        <script>
+            var sidebarScrollbox = document.querySelector('#sidebar .sidebar-scrollbox');
+            sidebarScrollbox.addEventListener('click', function(e) {
+                if (e.target.tagName === 'A') {
+                    sessionStorage.setItem('sidebar-scroll', sidebarScrollbox.scrollTop);
+                }
+            }, { passive: true });
+            var sidebarScrollTop = sessionStorage.getItem('sidebar-scroll');
+            sessionStorage.removeItem('sidebar-scroll');
+            if (sidebarScrollTop) {
+                // preserve sidebar scroll position when navigating via links within sidebar
+                sidebarScrollbox.scrollTop = sidebarScrollTop;
+            } else {
+                // scroll sidebar to current active section when navigating via "next/previous chapter" buttons
+                var activeSection = document.querySelector('#sidebar .active');
+                if (activeSection) {
+                    activeSection.scrollIntoView({ block: 'center' });
+                }
+            }
+        </script>
+
+        <div id="page-wrapper" class="page-wrapper">
+
+            <div class="page">
+                                <div id="menu-bar-hover-placeholder"></div>
+                <div id="menu-bar" class="menu-bar sticky">
+                    <div class="left-buttons">
+                        <button id="sidebar-toggle" class="icon-button" type="button" title="Toggle Table of Contents" aria-label="Toggle Table of Contents" aria-controls="sidebar">
+                            <i class="fa fa-bars"></i>
+                        </button>
+                        <button id="theme-toggle" class="icon-button" type="button" title="Change theme" aria-label="Change theme" aria-haspopup="true" aria-expanded="false" aria-controls="theme-list">
+                            <i class="fa fa-paint-brush"></i>
+                        </button>
+                        <ul id="theme-list" class="theme-popup" aria-label="Themes" role="menu">
+                            <li role="none"><button role="menuitem" class="theme" id="light">Light</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="rust">Rust</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="coal">Coal</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="navy">Navy</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="ayu">Ayu</button></li>
+                        </ul>
+                        <button id="search-toggle" class="icon-button" type="button" title="Search. (Shortkey: s)" aria-label="Toggle Searchbar" aria-expanded="false" aria-keyshortcuts="S" aria-controls="searchbar">
+                            <i class="fa fa-search"></i>
+                        </button>
+                    </div>
+
+                    <h1 class="menu-title">Notes</h1>
+
+                    <div class="right-buttons">
+                        <a href="../print.html" title="Print this book" aria-label="Print this book">
+                            <i id="print-button" class="fa fa-print"></i>
+                        </a>
+
+                    </div>
+                </div>
+
+                <div id="search-wrapper" class="hidden">
+                    <form id="searchbar-outer" class="searchbar-outer">
+                        <input type="search" id="searchbar" name="searchbar" placeholder="Search this book ..." aria-controls="searchresults-outer" aria-describedby="searchresults-header">
+                    </form>
+                    <div id="searchresults-outer" class="searchresults-outer hidden">
+                        <div id="searchresults-header" class="searchresults-header"></div>
+                        <ul id="searchresults">
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Apply ARIA attributes after the sidebar and the sidebar toggle button are added to the DOM -->
+                <script>
+                    document.getElementById('sidebar-toggle').setAttribute('aria-expanded', sidebar === 'visible');
+                    document.getElementById('sidebar').setAttribute('aria-hidden', sidebar !== 'visible');
+                    Array.from(document.querySelectorAll('#sidebar a')).forEach(function(link) {
+                        link.setAttribute('tabIndex', sidebar === 'visible' ? 0 : -1);
+                    });
+                </script>
+
+                <div id="content" class="content">
+                    <main><div class="sidetoc"><nav class="pagetoc"></nav></div>
+                        <h1 id="ch-1-ten-principles-of-economics"><a class="header" href="#ch-1-ten-principles-of-economics">Ch 1: Ten Principles of Economics</a></h1>
+<ul>
+<li>Scarcity: Limited Nature of society’s resources.</li>
+<li>Economics: The study of how society manages its scarce resources</li>
+</ul>
+<h2 id="what-do-economists-study-about"><a class="header" href="#what-do-economists-study-about">What do Economists study about?</a></h2>
+<ol>
+<li>How people make decisions: how much they work, what they buy, how much they save,
+and how they invest their savings.</li>
+<li>How people interact with one another</li>
+<li>Analyze the forces and trends that affect the economy as a whole, including the growth in average income, the fraction of the population that cannot find work, and the rate at which prices are rising.</li>
+</ol>
+<p>There are 10 principles of economics, out of which first 4 are about individual decision-making.</p>
+<h3 id="how-people-make-decisions"><a class="header" href="#how-people-make-decisions">How People Make Decisions</a></h3>
+<ol>
+<li>People face Trade-offs
+To get something that we like we must give up something else that we also like, making decisions requires trading off one goal against another. When people are grouped into societies, they face trade-offs there too.</li>
+</ol>
+<p>Imp example: </p>
+<ul>
+<li>“guns and butter”</li>
+<li>Clean Environment vs Level of Income</li>
+<li>Efficiency vs Equality: 
+<ul>
+<li>Efficiency: The property of society getting the most it can from its scarce resources.</li>
+<li>Equality: The property of distributing economic prosperity uniformly among the members of society.</li>
+</ul>
+</li>
+</ul>
+<ol start="2">
+<li>The cost of something is what you give up to get it. Thus while making decisions people must compare costs and benefits.</li>
+</ol>
+<p>Opportunity Cost: Whatever must be given up to obtain some item.</p>
+<ol start="3">
+<li>Rational People think at the Margin</li>
+</ol>
+<ul>
+<li>Rational People: people who systematically and purposefully do the best they can to achieve their objectives, given the available opportunities.</li>
+<li>Marginal Change: a small incremental adjustment to a plan of action.</li>
+</ul>
+<p>Rational people often make decisions by comparing marginal benefits and marginal costs. We shouldn’t consider average costs but marginal costs.</p>
+<ol start="4">
+<li>People respond to incentives</li>
+</ol>
+<ul>
+<li>Incentive: Something that induces a person to act.</li>
+<li>Incentives are the key to analysing how markets work.</li>
+<li>Higher prices is an incentive for buyers to buy less and producers to produce more.</li>
+<li>Public policymakers need to consider how their policies affect incentives.</li>
+<li>The US congress introduced a seat-belt law, but that just gave incentive to people to drive rashly.</li>
+</ul>
+<p>The next 3 decisions are about how people interact with one another.</p>
+<h3 id="how-people-interact"><a class="header" href="#how-people-interact">How People Interact</a></h3>
+<ol start="5">
+<li>Trade can make everyone better off</li>
+</ol>
+<ul>
+<li>Trade between two countries can make each of those countries better off.</li>
+<li>Trade allows each person to specialize in the activities she does best.</li>
+<li>By trading with others, people can buy a greater variety of goods and services at lower
+cost.</li>
+</ul>
+<ol start="6">
+<li>Markets are usually a good way to Organize Economic Activity</li>
+</ol>
+<ul>
+<li>Centrally Planned Economies: The government decides what goods and services are produced, how much is produced and who produces and consumes these goods and services. The idea behind central planning is that the government can organize economic activity in a way that it promotes economic well-being for the country as a whole.</li>
+<li>Most countries that were centrally planned economies have abandoned the system.</li>
+<li>Many countries are developing market economies.</li>
+<li>Market Economy: An economy that allocates resources through the decentralized decisions of many firms and households as they interact in markets for goods and services.</li>
+<li>Firms decide who to hire and what to make</li>
+<li>Households decide which firms to work for and what to buy with their incomes</li>
+<li>Firms and households interact in the marketplace, where prices and self-interest guide their decisions.</li>
+<li>Central planners lacked the necessary information about consumer’s tastes and producers costs which in a market economy reflects in prices.</li>
+</ul>
+<ol start="7">
+<li>Governments can sometimes improve market outcomes</li>
+</ol>
+<p>Why do we need the government when we have the invisible hand of the market?</p>
+<p>Cause the government needs to enforce rules and maintain the institutions that are key to the market economy.</p>
+<ul>
+<li>
+<p>Property Rights: The ability of an individual to own and exercise control over scarce resources.</p>
+</li>
+<li>
+<p>Property rights are enforced by the government, they let individuals to own and control their own scare resources.</p>
+</li>
+<li>
+<p>The government needs to enforce our rights over things we produce and the invisible hand relies on our ability to enforce those rights.</p>
+</li>
+<li>
+<p>The government generally intervenes only when it is to promote efficiency or promote equality</p>
+</li>
+<li>
+<p>Market Failure: The situation where a market left on its own fails to allocate resources efficiently.</p>
+</li>
+<li>
+<p>Externality: The impact of one person’s actions on the well-being of a bystander.</p>
+</li>
+<li>
+<p>Externality example: Pollution</p>
+</li>
+<li>
+<p>Market Power: The ability of a single person or firm (economic actor) to have unduly influence on market prices.</p>
+</li>
+</ul>
+<p>Market Failure can happen due to market powers and externalities. In such a situation a well-designed public policy can enhance economic efficiency. The invisible hand does not ensure equality, this requires government intervention.</p>
+<h3 id="how-the-economy-as-a-whole-works"><a class="header" href="#how-the-economy-as-a-whole-works">How the Economy as a Whole Works</a></h3>
+<ol start="8">
+<li>A country’s standard of living depends on its ability to produce goods and services.</li>
+</ol>
+<ul>
+<li>Productivity: The quantity of goods and services produced from each unit of labor input.
+Standard of living (avg income) <data class="katex-src" value=" \propto "><span class="katex"><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.4306em;"></span><span class="mrel">∝</span></span></span></span></data> Productivity</li>
+</ul>
+<ol start="9">
+<li>Prices Rise when the government prints too much money</li>
+</ol>
+<ul>
+<li>Inflation: An increase in the overall level of prices in the economy.</li>
+<li>Keeping inflation at a low level is a goal of economic policymakers around the world.</li>
+<li>Most cases of large or persistent inflation is due to the growth in quantity of money.</li>
+<li>When the govt prints a lot of money the value of money falls.</li>
+</ul>
+<ol start="10">
+<li>Society Faces a Short-Run Trade-off between Inflation and
+Unemployment</li>
+</ol>
+<p>Short Run Effects of Monetary Injections:</p>
+<ul>
+<li>Increase in overall spending and demand for goods and services.</li>
+<li>Higher demand may encourage firms to hire more workers and produce larger
+quantities.</li>
+<li>More hiring means lower unemployment</li>
+<li>Business Cycle: Fluctuations in economic activity such as employment and production.</li>
+</ul>
+<h1 id="ch2-thinking-like-an-economist"><a class="header" href="#ch2-thinking-like-an-economist">Ch2: Thinking like an Economist</a></h1>
+<h2 id="terms-that-economists-use"><a class="header" href="#terms-that-economists-use">Terms that economists use:</a></h2>
+<p>Supply, demand, elasticity, comparative advantage, consumer surplus, deadweight loss, etc.</p>
+<h2 id="the-economist-as-scientist"><a class="header" href="#the-economist-as-scientist">The Economist as Scientist:</a></h2>
+<p>Economists devise theories, collect data and analyse the data in an attempt to verify or refute
+theories.</p>
+<ol>
+<li>The Scientific Method: Observation, Theory and more Observation</li>
+</ol>
+<ul>
+<li>Economist’s use theory and observation like other scientists, but conducting experiments in economics is often impractical.</li>
+<li>We have to thus make do with whatever data is available. Natural experiments are offered by history. Eg: depressions, wars, etc</li>
+</ul>
+<ol start="2">
+<li>The Role of Assumptions</li>
+</ol>
+<ul>
+<li>Assumptions simplify the complex world, make it easier to understand.</li>
+<li>Different assumptions are made based on the field of study.</li>
+<li>Assumptions should not affect the answers too much</li>
+</ul>
+<ol start="3">
+<li>Economic Models
+Economist’s use models to learn about the world. These models mostly consist of diagrams and equations.
+Economic models omit many details to allow us to see what is truly important.</li>
+</ol>
+<ul>
+<li>
+<p>Our First Model: The Circular-Flow Diagram</p>
+<ul>
+<li>In this world, millions of people are engaged in so many activities</li>
+<li>To understand this we need a model that explains how the economy is organized and how participants in the economy interact with one another.</li>
+<li>Circular Flow Diagram: A visual model of the economy that shows how money flow through markets among households and firms.</li>
+<li>In this model the economy is simplified to include only two types of decision makers: Firms and Households</li>
+</ul>
+<p><img src="./poe/ps_20231108095849.png" alt="Circular Flow Model" /></p>
+<ul>
+<li>Factors of Production: Inputs such as labor, land and capital (buildings and machines).</li>
+<li>Firms produce goods and services using the factors of production. Households own the factors of production and consume the goods and services that firms produce. </li>
+<li>Households and Firms interact in two types of markets:
+<ol>
+<li>Markets for Goods and Services: households are buyers and firms are sellers</li>
+<li>Markets for Factors of Production: households are sellers and firm buyers</li>
+</ol>
+</li>
+<li>There are two loops in the circular flow diagram, these are distinct but related:
+<ol>
+<li>The inner loop represents the flow of inputs and outputs</li>
+<li>The outer loop of the diagram represents the flow of the corresponding money</li>
+</ol>
+</li>
+</ul>
+</li>
+<li>
+<p>Second Model: The Production Possibilities Frontier</p>
+<ul>
+<li>Most economic models use mathematics unlike the circular flow model.</li>
+<li>Let us consider an economy that only produces two goods, cars and computers.</li>
+<li>Thus the car and computer industry use up all the available factors of production.</li>
+<li>Production Possibilities Frontier (PPF): A graph that shows the combinations of the output that the economy can possibly produce given the available factors of production and the available technology.
+<img src="./poe/ps_20231108101335.png" alt="Production Possibilities Frontier" /></li>
+<li>Extreme possibilities: end points of the PPF</li>
+<li>Because the resources are scarce, not every conceivable outcome is feasible</li>
+<li>The economy can produce any combinations inside or on the frontier. Any point outside is not feasible given the economy’s resources.</li>
+<li>The outcome is said to be efficient if the economy is getting all it can from the scarce resources it has available. Points on the PPF represent efficient levels of production.</li>
+<li>Once we have reached an efficient point on the frontier, the only way to produce more of a good is to produce less of another: Face Trade-Offs.</li>
+<li>The opportunity cost of a car is the slope of the PPF.</li>
+<li>When an economy grows, society can move production from a point on the old frontier to a point on the new frontier.</li>
+</ul>
+<p><img src="./poe/ps_20231108101722.png" alt="Shifting Frontiers" /></p>
+<ul>
+<li>Ideas put forward by PPF: scarcity, efficiency, trade-offs, opportunity cost, economic growth.</li>
+</ul>
+</li>
+</ul>
+<ol start="4">
+<li>Microeconomics and Macroeconomics</li>
+</ol>
+<ul>
+<li>Microeconomics: The study of how households and firms make decisions and how they interact in markets.</li>
+<li>Macroeconomics: The study of economy-wide phenomena including inflations, unemployment and economic growth.</li>
+<li>Changes in the overall economy arise from the decisions of millions of individuals,thus we need to consider associated microeconomic decisions to understand macroeconomic developments.</li>
+</ul>
+<h2 id="the-economist-as-policy-advisor"><a class="header" href="#the-economist-as-policy-advisor">The Economist as Policy Advisor</a></h2>
+<p>Economists are scientists when they are trying to explain the world. When they are trying to improve the world, they are policy advisors.</p>
+<h3 id="positive-versus-normative-analysis"><a class="header" href="#positive-versus-normative-analysis">Positive versus Normative Analysis</a></h3>
+<ul>
+<li>Positive Statements: They are descriptive, they make a claim about how the world is.</li>
+<li>Normative Statements: They are prescriptive, they make a claim about how the world ought to be.</li>
+<li>We can confirm positive statements by examining evidence and analysing data alone.</li>
+<li>Normative statements cannot be judged using data alone, we need to look into ethics, religion and political philosophy.</li>
+<li>Positive views affect normative views.</li>
+</ul>
+<h3 id="economists-in-washington"><a class="header" href="#economists-in-washington">Economists in Washington</a></h3>
+<ul>
+<li>The presidents of US have a Council of Economic Advisers.</li>
+<li>They write an annual economic report of the president</li>
+</ul>
+<h3 id="why-economists-advice-is-not-always-followed"><a class="header" href="#why-economists-advice-is-not-always-followed">Why Economists’ advice is not always followed</a></h3>
+<ul>
+<li>Economists put forward the best policy in their perspective, but the president has other advisers for input also.</li>
+</ul>
+<h3 id="why-economists-disagree"><a class="header" href="#why-economists-disagree">Why Economists Disagree</a></h3>
+<p>Economists often disagree, this could be because:</p>
+<ul>
+<li>They may disagree about the positive theories.</li>
+<li>They may have different values,therefore different normative views about policies.
+<ul>
+<li>Differences in Scientific Judgements. Economists may disagree about the validity of alternative theories or about the size of imp parameters that measure how economic variables are related. Eg : Tax on income or spending</li>
+<li>Difference in Values. Normative analysis cannot be done on scientific grounds only, economists who have different values may give conflicting advice.</li>
+<li>Perception versus Reality. Many economic policies aren’t executed due to political obstacles.</li>
+</ul>
+</li>
+</ul>
+<h1 id="ch3-interdependence-and-the-gains-from-trade"><a class="header" href="#ch3-interdependence-and-the-gains-from-trade">Ch3: Interdependence and the Gains from Trade</a></h1>
+<p>What exactly do people gain from trade? Why do people choose to be interdependent?</p>
+<h2 id="a-parable-for-the-modern-economy"><a class="header" href="#a-parable-for-the-modern-economy">A Parable for the Modern Economy</a></h2>
+<ol>
+<li>Production Possibilities
+There is also a consumption possibilities frontier, this production possibilities frontier.</li>
+<li>Specialization and Trade
+Trade allows everyone to pursue what they specialize in and thus makes everyone better off.</li>
+<li>Comparative Advantage: The driving force of specialization.
+<ol>
+<li>Absolute Advantage
+The ability to produce a good using fewer inputs than another producer.</li>
+<li>Opportunity Cost and Comparative Advantage
+The ability to produce a good at a lower opportunity cost than another producer. A producer who gives up less of other goods to produce a good X has a smaller opportunity cost of producing Good X and is said to have a comparative advantage producing it. It is possible for one person to have absolute advantage in both goods. It is impossible for one person to have comparative advantage in both goods, because the opportunity cost of one good is the inverse of the other, so if a person’s opportunity cause for one good is relatively high, it will be relatively low for the other good. So one person will have a comparative advantage producing one good, the other will in producing the other good.</li>
+<li>Comparative Advantage and Trade
+Gains from trade are based on comparative advantage. When each person specializes in producing the good for which he or she has a comparative advantage, total production in the economy rises. Increase in size of economic pie. Trade benefits all parties as they obtain a good at a price lower than their opportunity cost. Trade can benefit everyone in society because it allows people to specialize in activities in which they have a comparative advantage.</li>
+<li>The Price of the Trade
+For both parties to gain from trade, the price at which they trade must be in between the two opportunity costs.</li>
+</ol>
+</li>
+<li>Applications of Comparative Advantage
+Populations of countries can also benefit from trade and specialization.
+<ul>
+<li>Imports: Goods produced abroad and sold domestically</li>
+<li>Exports: Goods produced domestically and sold abroad
+International trade can make individuals worse off even if it makes the country as a whole better off.</li>
+</ul>
+</li>
+</ol>
+
+                    </main>
+
+                    <nav class="nav-wrapper" aria-label="Page navigation">
+                        <!-- Mobile navigation buttons -->
+                            <a rel="prev" href="../notes/network_stack.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                                <i class="fa fa-angle-left"></i>
+                            </a>
+
+                            <a rel="next" href="../notes/pointers.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                                <i class="fa fa-angle-right"></i>
+                            </a>
+
+                        <div style="clear: both"></div>
+                    </nav>
+                </div>
+            </div>
+
+            <nav class="nav-wide-wrapper" aria-label="Page navigation">
+                    <a rel="prev" href="../notes/network_stack.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                        <i class="fa fa-angle-left"></i>
+                    </a>
+
+                    <a rel="next" href="../notes/pointers.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                        <i class="fa fa-angle-right"></i>
+                    </a>
+            </nav>
+
+        </div>
+
+
+
+
+        <script>
+            window.playground_copyable = true;
+        </script>
+
+
+        <script src="../elasticlunr.min.js"></script>
+        <script src="../mark.min.js"></script>
+        <script src="../searcher.js"></script>
+
+        <script src="../clipboard.min.js"></script>
+        <script src="../highlight.js"></script>
+        <script src="../book.js"></script>
+
+        <!-- Custom JS scripts -->
+        <script src="../theme/pagetoc.js"></script>
+
+
+    </div>
+    </body>
+</html>
