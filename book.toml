@@ -14,11 +14,11 @@ mathjax-support = false
 no-section-label = false
 additional-css = [
     "./src/notes/custom.css",
-    "theme/pagetoc.css",
+    "./src/pagetoc.css",
     "./src/notes/katex.min.css",
 ]
 #input-404 = "not-found.md"
-additional-js = ["theme/pagetoc.js"]
+additional-js = ["./src/pagetoc.js"]
 
 [output.html.fold]
 enable = true # whether or not to enable section folding
@@ -34,7 +34,7 @@ runnable = false    # displays a run button for rust code
 [rust]
 edition = "2021"
 
-[preprocessor.pagetoc]
+# [preprocessor.pagetoc]
 
 [preprocessor.katex]
 after = ["links"]
