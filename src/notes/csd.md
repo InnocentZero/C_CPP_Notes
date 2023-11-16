@@ -131,10 +131,10 @@ For subtraction of two numbers, just add the 1's complement of the number that i
 
 ## Sequential circuits
 
-- Latches and flip-flops have 10+ transistors per bit.
-- SRAM has 6 mosfets/transistors per bit.
-- DRAM has 1 transistor + 1 capacitor per cell.
-- Non-volatile storage: no transistors. Yay!
+> Latches and flip-flops have 10+ transistors per bit.
+> SRAM has 6 mosfets/transistors per bit.
+> DRAM has 1 transistor + 1 capacitor per cell.
+> Non-volatile storage: no transistors. Yay!
 
 ### R-S Latches
 
