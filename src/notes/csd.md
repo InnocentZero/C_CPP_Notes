@@ -127,12 +127,14 @@ For 4 bits,
   - Sum = A^B^C
   - pass the carry out from the i'th bit to the carry in of the (i+1)'th bit.
 
+For subtraction of two numbers, just add the 1's complement of the number that is to be subtracted and add 1.
+
 ## Sequential circuits
 
-> Latches and flip-flops have 10+ transistors per bit.
-> SRAM has 6 mosfets/transistors per bit.
-> DRAM has 1 transistor + 1 capacitor per cell.
-> Non-volatile storage: no transistors. Yay!
+- Latches and flip-flops have 10+ transistors per bit.
+- SRAM has 6 mosfets/transistors per bit.
+- DRAM has 1 transistor + 1 capacitor per cell.
+- Non-volatile storage: no transistors. Yay!
 
 ### R-S Latches
 
@@ -149,3 +151,91 @@ For 4 bits,
 ![Gated D latch](./csd/4.png)
 
 When `write-enable` is zero, it holds the previous value. When it is 1, it sets the value of Q equal to D.
+
+### D flip-flops
+
+Latches are retarded because they are level triggered. We want stuff to be edge triggered. Hence flip-flops. They are edge triggered enough to be suitable for most purposes and gives a singular time point (for all practical purposes it is a time point) when the flip flop does its action.
+
+![the NOT gate has extremely slight delay](./csd/5.png)
+
+There is a slight delay in the NOT gate that is achieved with an RC circuit.
+
+The rest of the circuit is the same as gated D latch. In both cases write-enable is connected to the clock with the only difference being in the triggering patterns and the extra circuitry involved in it.
+
+### JK flip-flops
+
+Pretty much the same as a R-S latch except with a write-enable feature and edge triggering.
+
+![JK Flip Flop](./csd/6.png)
+
+There are 4 modes :
+
+- JK == 00, hold the state
+- JK == 01, set Q to 0
+- JK == 10, set Q to 1
+- JK == 11, toggle the current value
+
+Unlike RS latch there will be on problem with toggling here because the clock pulse is too small for a race condition.
+
+Excitation table: like truth table but tells you what the current JK / D configuration should be to obtain the desired next value.
+
+- For a D flip-flop, the current D should be the next desired Q.
+- For an RS latch
+  - if you want a 0 in the next state while current is 0, J should be 0. K can be anything.
+  - if you want next to be 1 while current is 0, J should be 1. K can be anything.
+  - if you want next to be 0 while current is 1, set K to 1. J can be anything.
+  - if you want next to be 1 while current is 1, set K to 0. J can be anything.
+
+### Counters and frequency dividers
+
+- Down Counter: Does what you think it does
+
+![Down counter](./csd/7.png)
+
+- Frequency divider: for powers of 2, for other numbers use a mod counter
+
+![frequency divider](./csd/8.png)
+
+- Ring Counter: one hot encoded
+
+![ring counter states](./csd/9.png)
+
+![ring counter structure](./csd/10.png)
+
+- Johnson counter: [Gray Code](https://en.wikipedia.org/wiki/Gray_code)
+
+![Johnson counter pattern](./csd/11.png)
+
+Same as ring counter except $\bar{Q}$ is fed as input to the first one.
+
+### Registers
+
+Multiple flip-flops with the same write enable. Can hold multibit values.
+
+A variant called shift register is used for bit shift operations within the register.
+
+![parallel access shift register](./csd/12.png)
+
+## Finite State Machines
+
+Five components:
+
+- states
+- external inputs
+- external outputs
+- how all state transitions are determined
+- how all outputs are determined
+
+If there are 2<sup>k</sup> states, map them to k flip-flops and use the inputs to determine how the states and outputs change.
+
+Two types:
+
+- Moore: outputs depend only on the current state
+- Mealy: outputs depend only on the current state and the inputs
+
+## Final Computer architecture
+
+![Gajendra 1 layout](./csd/13.png)
+
+8 bit instruction architecture. First 4 bits are instructions and last 4 are data.
+The first bit is always zero. Hence we have 2<sup>3</sup> instructions in total.
