@@ -238,4 +238,65 @@ Two types:
 ![Gajendra 1 layout](./csd/13.png)
 
 8 bit instruction architecture. First 4 bits are instructions and last 4 are data.
-The first bit is always zero. Hence we have 2<sup>3</sup> instructions in total.
+
+| Assembly | Machine Code |
+| -------- | ------------ |
+| NOP      | 0x0          |
+| LDA      | 0x1          |
+| STA      | 0x2          |
+| ADD      | 0x3          |
+| SUB      | 0x4          |
+| LDI      | 0x5          |
+| JMP      | 0x6          |
+| OUT      | 0x7          |
+| JNZ      | 0x8          |
+| SWAP     | 0x9          |
+| HALT     | 0xF          |
+
+### Basic structure of all commands
+
+#### LDA: Load from address into reg A
+
+4 T-States
+
+First T-State takes the output of program counter and gives to the memory address register.
+
+`1 << PC_OUT | 1 << MAR_IN`
+
+Second takes the output of memory register and sends it to the instruction register. This is possible because MAR output is always connected to Memory input and as soon as MAR receives an input the memory starts pointing to the location saved in the MAR. Program counter is also incremented at this point to get the next instruction from memory.
+
+`1 << PC_INC | 1 << MEM_OUT | 1 << IR_IN`
+
+These two T-States together constitute the fetch and mem-lookup cycle and are present for every control word.
+
+The next two T-States are specific to LDA. The first takes the output of IR which has the memory address and sends it to MAR. The second one takes the output from memory and sends it to reg A.
+
+`1 << IR_OUT | 1 << MAR_IN`
+
+`1 << MEM_OUT | 1 << RA_IN`
+
+#### ADD and SUB: Load into reg B from address and add/subtract and store the result in reg A
+
+First two T-States are the same.
+Third is also same as LDA.
+In the fourth one, the value is loaded to B instead of A.
+
+At the end of second T-State, the IR has the instruction that is to be executed. That time, the output of IR is directly connected to the **Instruction Decoder**, that checks for the instruction and sends the appropriate action to the ALU.
+
+So the ALU already knows what to do. Once the 4th T-State is over, the ALU has computed the result and just needs to output it.
+
+Fifth T-State ensures that.
+
+`1 << PC_OUT | 1 << MAR_IN`
+
+`1 << PC_INC | 1 << MEM_OUT | 1 << IR_IN`
+
+`1 << IR_OUT | 1 << MAR_IN`
+
+`1 << MEM_OUT | 1 << RB_IN`
+
+`1 << ALU_OUT | 1 << RA_IN`
+
+#### NOP: Does nothing just like the useless piece of shit you are
+
+Only has a fetch + mem_lookup cycle.

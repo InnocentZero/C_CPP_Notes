@@ -2063,8 +2063,46 @@ Non-volatile storage: no transistors. Yay!</p>
 </ul>
 <h2 id="final-computer-architecture"><a class="header" href="#final-computer-architecture">Final Computer architecture</a></h2>
 <p><img src="notes/./csd/13.png" alt="Gajendra 1 layout" /></p>
-<p>8 bit instruction architecture. First 4 bits are instructions and last 4 are data.
-The first bit is always zero. Hence we have 2<sup>3</sup> instructions in total.</p>
+<p>8 bit instruction architecture. First 4 bits are instructions and last 4 are data.</p>
+<div class="table-wrapper"><table><thead><tr><th>Assembly</th><th>Machine Code</th></tr></thead><tbody>
+<tr><td>NOP</td><td>0x0</td></tr>
+<tr><td>LDA</td><td>0x1</td></tr>
+<tr><td>STA</td><td>0x2</td></tr>
+<tr><td>ADD</td><td>0x3</td></tr>
+<tr><td>SUB</td><td>0x4</td></tr>
+<tr><td>LDI</td><td>0x5</td></tr>
+<tr><td>JMP</td><td>0x6</td></tr>
+<tr><td>OUT</td><td>0x7</td></tr>
+<tr><td>JNZ</td><td>0x8</td></tr>
+<tr><td>SWAP</td><td>0x9</td></tr>
+<tr><td>HALT</td><td>0xF</td></tr>
+</tbody></table>
+</div>
+<h3 id="basic-structure-of-all-commands"><a class="header" href="#basic-structure-of-all-commands">Basic structure of all commands</a></h3>
+<h4 id="lda-load-from-address-into-reg-a"><a class="header" href="#lda-load-from-address-into-reg-a">LDA: Load from address into reg A</a></h4>
+<p>4 T-States</p>
+<p>First T-State takes the output of program counter and gives to the memory address register.</p>
+<p><code>1 &lt;&lt; PC_OUT | 1 &lt;&lt; MAR_IN</code></p>
+<p>Second takes the output of memory register and sends it to the instruction register. This is possible because MAR output is always connected to Memory input and as soon as MAR receives an input the memory starts pointing to the location saved in the MAR. Program counter is also incremented at this point to get the next instruction from memory.</p>
+<p><code>1 &lt;&lt; PC_INC | 1 &lt;&lt; MEM_OUT | 1 &lt;&lt; IR_IN</code></p>
+<p>These two T-States together constitute the fetch and mem-lookup cycle and are present for every control word.</p>
+<p>The next two T-States are specific to LDA. The first takes the output of IR which has the memory address and sends it to MAR. The second one takes the output from memory and sends it to reg A.</p>
+<p><code>1 &lt;&lt; IR_OUT | 1 &lt;&lt; MAR_IN</code></p>
+<p><code>1 &lt;&lt; MEM_OUT | 1 &lt;&lt; RA_IN</code></p>
+<h4 id="add-and-sub-load-into-reg-b-from-address-and-addsubtract-and-store-the-result-in-reg-a"><a class="header" href="#add-and-sub-load-into-reg-b-from-address-and-addsubtract-and-store-the-result-in-reg-a">ADD and SUB: Load into reg B from address and add/subtract and store the result in reg A</a></h4>
+<p>First two T-States are the same.
+Third is also same as LDA.
+In the fourth one, the value is loaded to B instead of A.</p>
+<p>At the end of second T-State, the IR has the instruction that is to be executed. That time, the output of IR is directly connected to the <strong>Instruction Decoder</strong>, that checks for the instruction and sends the appropriate action to the ALU.</p>
+<p>So the ALU already knows what to do. Once the 4th T-State is over, the ALU has computed the result and just needs to output it.</p>
+<p>Fifth T-State ensures that.</p>
+<p><code>1 &lt;&lt; PC_OUT | 1 &lt;&lt; MAR_IN</code></p>
+<p><code>1 &lt;&lt; PC_INC | 1 &lt;&lt; MEM_OUT | 1 &lt;&lt; IR_IN</code></p>
+<p><code>1 &lt;&lt; IR_OUT | 1 &lt;&lt; MAR_IN</code></p>
+<p><code>1 &lt;&lt; MEM_OUT | 1 &lt;&lt; RB_IN</code></p>
+<p><code>1 &lt;&lt; ALU_OUT | 1 &lt;&lt; RA_IN</code></p>
+<h4 id="nop-does-nothing-just-like-the-useless-piece-of-shit-you-are"><a class="header" href="#nop-does-nothing-just-like-the-useless-piece-of-shit-you-are">NOP: Does nothing just like the useless piece of shit you are</a></h4>
+<p>Only has a fetch + mem_lookup cycle.</p>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="cv_qualifiers"><a class="header" href="#cv_qualifiers">cv_qualifiers</a></h1>
 <p><strong>cv_qualifiers</strong></p>
 <p>Any thing that is const, or volatile, or both.</p>
