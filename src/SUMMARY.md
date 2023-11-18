@@ -22,6 +22,7 @@
 - [notes/dhcpv6.md](notes/dhcpv6.md)
 - [notes/dns.md](notes/dns.md)
 - [notes/enum_classes.md](notes/enum_classes.md)
+- [notes/file_descriptors.md](notes/file_descriptors.md)
 - [notes/functions.md](notes/functions.md)
 - [notes/gdb.md](notes/gdb.md)
 - [notes/hacking_basics.md](notes/hacking_basics.md)
