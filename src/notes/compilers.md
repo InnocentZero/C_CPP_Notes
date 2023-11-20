@@ -35,3 +35,32 @@ After lexing follows parsing. Generates a tree-like structure that uses the toke
 
 Checks for consistency with the language definition. Also saves type info in the syntax tree for later use in IR generation.
 Also performs type checking and shit. May also do _coercions_ (implicit typecasting) when and where necessary.
+
+## Grammar
+
+- Terminals: Also called tokens. Symbols of the language defined by the grammar.
+- Non-terminals: strings of variables.
+- Productions: Has a Non-terminal, an arrow and a body. Basically tells us how to generate that non-terminal. The body can have terminals and non-terminals.
+- One of the non-terminals is given a designation called the start symbol.
+
+### Derivation
+
+Basically all valid strings that can be generated from that grammar is the _language_ defined by the grammar.
+
+### Parsing
+
+Done using parse trees.
+
+- Root labelled with the start symbol
+- Each leaf if a terminal or $\epsilon$
+- Each interior node is a non-terminal.
+
+![an example of productions](./compilers/productions.png)
+
+![parse tree for the given grammar](./compilers/parse_trees.png)
+
+Ambiguity occurs when more than one parse trees are possible. Eg:
+
+string $rightarrow$ string + string | string - string | 0 | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9
+
+<!---TODO: Figure out Syntax directed translations--->

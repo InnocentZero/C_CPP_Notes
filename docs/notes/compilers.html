@@ -206,6 +206,27 @@
 <h2 id="semantic-analysis"><a class="header" href="#semantic-analysis">Semantic Analysis</a></h2>
 <p>Checks for consistency with the language definition. Also saves type info in the syntax tree for later use in IR generation.
 Also performs type checking and shit. May also do <em>coercions</em> (implicit typecasting) when and where necessary.</p>
+<h2 id="grammar"><a class="header" href="#grammar">Grammar</a></h2>
+<ul>
+<li>Terminals: Also called tokens. Symbols of the language defined by the grammar.</li>
+<li>Non-terminals: strings of variables.</li>
+<li>Productions: Has a Non-terminal, an arrow and a body. Basically tells us how to generate that non-terminal. The body can have terminals and non-terminals.</li>
+<li>One of the non-terminals is given a designation called the start symbol.</li>
+</ul>
+<h3 id="derivation"><a class="header" href="#derivation">Derivation</a></h3>
+<p>Basically all valid strings that can be generated from that grammar is the <em>language</em> defined by the grammar.</p>
+<h3 id="parsing"><a class="header" href="#parsing">Parsing</a></h3>
+<p>Done using parse trees.</p>
+<ul>
+<li>Root labelled with the start symbol</li>
+<li>Each leaf if a terminal or <data class="katex-src" value="\epsilon"><span class="katex"><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.4306em;"></span><span class="mord mathnormal">ϵ</span></span></span></span></data></li>
+<li>Each interior node is a non-terminal.</li>
+</ul>
+<p><img src="./compilers/productions.png" alt="an example of productions" /></p>
+<p><img src="./compilers/parse_trees.png" alt="parse tree for the given grammar" /></p>
+<p>Ambiguity occurs when more than one parse trees are possible. Eg:</p>
+<p>string <data class="katex-src" value="rightarrow"><span class="katex"><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.8889em;vertical-align:-0.1944em;"></span><span class="mord mathnormal" style="margin-right:0.02778em;">r</span><span class="mord mathnormal">i</span><span class="mord mathnormal" style="margin-right:0.03588em;">g</span><span class="mord mathnormal">h</span><span class="mord mathnormal">t</span><span class="mord mathnormal">a</span><span class="mord mathnormal">rro</span><span class="mord mathnormal" style="margin-right:0.02691em;">w</span></span></span></span></data> string + string | string - string | 0 | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9</p>
+<!---TODO: Figure out Syntax directed translations--->
 
                     </main>
 

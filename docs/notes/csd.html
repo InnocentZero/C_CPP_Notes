@@ -435,6 +435,14 @@ In the fourth one, the value is loaded to B instead of A.</p>
 <p><code>1 &lt;&lt; ALU_OUT | 1 &lt;&lt; RA_IN</code></p>
 <h4 id="nop-does-nothing-just-like-the-useless-piece-of-shit-you-are"><a class="header" href="#nop-does-nothing-just-like-the-useless-piece-of-shit-you-are">NOP: Does nothing just like the useless piece of shit you are</a></h4>
 <p>Only has a fetch + mem_lookup cycle.</p>
+<h3 id="software-based-control-logic"><a class="header" href="#software-based-control-logic">Software Based Control Logic</a></h3>
+<p>For every instruction, there is a corresponding address where the T-State’s information is stored. For Gajendra-1 architecture, it is as follows:</p>
+<ul>
+<li>first bit is the flag. Comes from status reg.</li>
+<li>next four bits are the instruction bits.</li>
+<li>next three bits are the current T-State number.</li>
+</ul>
+<p>This gives the address of the control ROM where that T-State is stored.</p>
 
                     </main>
 

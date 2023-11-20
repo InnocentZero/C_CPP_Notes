@@ -300,3 +300,13 @@ Fifth T-State ensures that.
 #### NOP: Does nothing just like the useless piece of shit you are
 
 Only has a fetch + mem_lookup cycle.
+
+### Software Based Control Logic
+
+For every instruction, there is a corresponding address where the T-State's information is stored. For Gajendra-1 architecture, it is as follows:
+
+- first bit is the flag. Comes from status reg.
+- next four bits are the instruction bits.
+- next three bits are the current T-State number.
+
+This gives the address of the control ROM where that T-State is stored.
