@@ -14,7 +14,7 @@ How to represent a bit (What makes a good bit):
 - Real bit using voltage: noise, ranged
 
 - Voltage has a lower limit. 0 V - V<sub>L</sub> is interpreted as a `0`.
-- Higher limit; V<sub>H</sub> to 5 V is considered high
+- Higher limit; V<sub>H</sub> to 5 V is considered as a `1`.
 
 - Between that is a forbidden zone.
 
@@ -36,7 +36,7 @@ Basically two complementary networks for pull-up and pull-down respectively. Pul
 
 To have the n type equivalent of a p type sub network, do the following:
 
-- If A and B are in parallel in p type ($\bar{A} + \bar{B}$), in n type they will be in series ($\bar{A\cdot B}$).
+- If A and B are in parallel in p type ( $\overline{A} + \overline{B}$ ), in n type they will be in series ($\overline{A\cdot B}$).
 
 Also holds the other way.
 
@@ -50,13 +50,13 @@ Also holds the other way.
 
 ### Minterms
 
-- Sum of products of all possible combinations that appear in the input. Eg. $\bar{A}BC + \bar{A}\bar{B}C + AB\bar{C}$
+- Sum of products of all possible combinations that appear in the input. Eg. $\overline{A}BC + \overline{A}\ \overline{B}C + AB\overline{C}$
 - Each minterm is one particular row in the truth table.
 - For any function, find all possible minterms for which the function is true.
 - The function is the sum of all those minterms, This is also called _Sum Of Products_ (SOP).
 - Since the order of truth table is known, we can represent them as numbers alone. Start with all **FALSE**, then binary increment them.
 - A not of any variable is take as a 0, otherwise it is take as a 1. This will give you the row number of that minterm (0 indexed).
-- Finally $f = \sum{m\left(n1,n2,\ellipsis\right)}$
+- Finally $f=\Sigma m\left(n_1,n_2,\dots \right)$
 
 ### Maxterms
 
@@ -93,8 +93,8 @@ For 4 bits,
 - If two bits are equal, their NXOR is 1.
 - So for equality bitwise NXOR the two numbers.
 - If A is greater than B, then there are cases:
-  - The first bit of A is greater than the first bit of B. $A_0\bar{B_0}$ will be 1.
-  - The first bit is equal and the second bit of A is greater than the second bit of B. $\left(A_0B_0 + \bar{A_0}\bar{B_0}\right)\left(A_1\bar{B_1}\right)$
+  - The first bit of A is greater than the first bit of B. $A_0\overline{B_0}$ will be 1.
+  - The first bit is equal and the second bit of A is greater than the second bit of B. $\left(A_0B_0 + \overline{A_0}\ \overline{B_0}\right)\left(A_1\overline{B_1}\right)$
   - The first two bits are equal and the third bit of A is greater than the third bit of B. We can see that the pattern can be easily extended.
 
 ### Decoder
@@ -114,27 +114,27 @@ For 4 bits,
 ### Multiplexer
 
 - Select one of the N inputs using $\log_2{N}$ selection lines.
-- If the inputs are A and B, and the A has to be selected when S is 0, the output is $A\bar{S} + BS$. Logic can similarly be extended for and power of two.
+- If the inputs are A and B, and the A has to be selected when S is 0, the output is $A\overline{S} + BS$. Logic can similarly be extended for and power of two.
 - Treat the selection lines as the bits of the inputs. The first is the least significant and the last is the most significant.
 
 ### Adder
 
 - 1 bit half adder:
-  - Sum = A XOR B
-  - Carry out = A AND B
+  - Sum = $A \oplus B$
+  - Carry out = $AB$
 - bit full adder:
-  - Carry out = AB + BC + AC (C is carry in)
-  - Sum = A^B^C
+  - Carry out = $AB + BC + AC$ (C is carry in)
+  - Sum = $A\oplus B\oplus C$
   - pass the carry out from the i'th bit to the carry in of the (i+1)'th bit.
 
 For subtraction of two numbers, just add the 1's complement of the number that is to be subtracted and add 1.
 
 ## Sequential circuits
 
-> Latches and flip-flops have 10+ transistors per bit.
-> SRAM has 6 mosfets/transistors per bit.
-> DRAM has 1 transistor + 1 capacitor per cell.
-> Non-volatile storage: no transistors. Yay!
+> - Latches and flip-flops have 10+ transistors per bit.
+> - SRAM has 6 mosfets/transistors per bit.
+> - DRAM has 1 transistor + 1 capacitor per cell.
+> - Non-volatile storage: no transistors. Yay!
 
 ### R-S Latches
 
@@ -206,7 +206,7 @@ Excitation table: like truth table but tells you what the current JK / D configu
 
 ![Johnson counter pattern](./csd/11.png)
 
-Same as ring counter except $\bar{Q}$ is fed as input to the first one.
+Same as ring counter except $\overline{Q}$ is fed as input to the first one.
 
 ### Registers
 
