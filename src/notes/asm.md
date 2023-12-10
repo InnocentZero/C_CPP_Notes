@@ -56,9 +56,12 @@ The process through which the processor controls the execution of instructions i
 - `enter`: create a stack frame for a procedure.
 - `call`: calls a procedure.
 
-  - `call` pushes the address of the next instruction on the stack.
-  - When the procedure encounters a `ret` (at the end of the procedure), it pops the stack into the instruction pointer. - This way, the next instruction the instruction pointer continues off from where the program left initially.
-
+  - This is how it exactly happens.
+  - The current  stack pointer and base pointer maintain a **stack frame** in the current stack. The base pointer points to the base of the frame and the stack pointer points to the top (or in this case, the bottom, since the stack is upside down) of the frame.
+  - Whenever the next instruction is a `call`, the *current* base pointer is *push* ed onto the stack. This basically implies having the next 8 bytes of the *current* stack frame written with the *current* base pointer.
+  - After that, the arguments of the function that is called are loaded onto the stack for use by the function.
+  - Then the address from which the instruction pointer should read next, once the current stack frame is over, is loaded onto the new stack frame.
+  - All this while the stack pointer was still maintaining its original value and being incremented. Now when all this is done, the base pointer is set to the stack pointer.
   <!---TODO: Figure out enter--->
   <!---TODO: Figure out branch and link--->
 

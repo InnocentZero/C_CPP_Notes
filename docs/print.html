@@ -280,8 +280,12 @@ for (int i = 0; i &lt; 8; i++){
 <li>
 <p><code>call</code>: calls a procedure.</p>
 <ul>
-<li><code>call</code> pushes the address of the next instruction on the stack.</li>
-<li>When the procedure encounters a <code>ret</code> (at the end of the procedure), it pops the stack into the instruction pointer. - This way, the next instruction the instruction pointer continues off from where the program left initially.</li>
+<li>This is how it exactly happens.</li>
+<li>The current  stack pointer and base pointer maintain a <strong>stack frame</strong> in the current stack. The base pointer points to the base of the frame and the stack pointer points to the top (or in this case, the bottom, since the stack is upside down) of the frame.</li>
+<li>Whenever the next instruction is a <code>call</code>, the <em>current</em> base pointer is <em>push</em> ed onto the stack. This basically implies having the next 8 bytes of the <em>current</em> stack frame written with the <em>current</em> base pointer.</li>
+<li>After that, the arguments of the function that is called are loaded onto the stack for use by the function.</li>
+<li>Then the address from which the instruction pointer should read next, once the current stack frame is over, is loaded onto the new stack frame.</li>
+<li>All this while the stack pointer was still maintaining its original value and being incremented. Now when all this is done, the base pointer is set to the stack pointer.</li>
 </ul>
 <!---TODO: Figure out enter--->
 <!---TODO: Figure out branch and link--->
@@ -1289,6 +1293,10 @@ int main(int argc, char *argv[]) {
 }
 </code></pre>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="classes"><a class="header" href="#classes">classes</a></h1>
+<p>Classes are nothing but a collection of variables and member functions which are also called methods.</p>
+<p>Memory-wise the layout is the same as that of a C struct. Only the variables are stored in the class unless it has virtual member functions.</p>
+<h2 id="access-specifiers"><a class="header" href="#access-specifiers">Access specifiers</a></h2>
+<p>A class has access specifiers such as public, private and protected.</p>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="cmake"><a class="header" href="#cmake">cmake</a></h1>
 <ul>
 <li>Hard link the cmake_commands.json file generated after running <code>cmake -DCMAKE_EXPORT_COMPILE_COMMANDS=1 ..</code> in the build directory.</li>
@@ -1422,7 +1430,7 @@ Also performs type checking and shit. May also do <em>coercions</em> (implicit t
 <p><img src="notes/./compilers/productions.png" alt="an example of productions" /></p>
 <p><img src="notes/./compilers/parse_trees.png" alt="parse tree for the given grammar" /></p>
 <p>Ambiguity occurs when more than one parse trees are possible. Eg:</p>
-<p>string <data class="katex-src" value="rightarrow"><span class="katex"><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.8889em;vertical-align:-0.1944em;"></span><span class="mord mathnormal" style="margin-right:0.02778em;">r</span><span class="mord mathnormal">i</span><span class="mord mathnormal" style="margin-right:0.03588em;">g</span><span class="mord mathnormal">h</span><span class="mord mathnormal">t</span><span class="mord mathnormal">a</span><span class="mord mathnormal">rro</span><span class="mord mathnormal" style="margin-right:0.02691em;">w</span></span></span></span></data> string + string | string - string | 0 | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9</p>
+<p>string <data class="katex-src" value="\rightarrow"><span class="katex"><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.3669em;"></span><span class="mrel">→</span></span></span></span></data> string + string | string - string | 0 | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9</p>
 <!---TODO: Figure out Syntax directed translations--->
 <div style="break-before: page; page-break-before: always;"></div><h1 id="concurrency"><a class="header" href="#concurrency">concurrency</a></h1>
 <p>C++ 11: Threads</p>
