@@ -91,3 +91,12 @@ Basically we don't need sockets unless we are going **really** low level. Which 
 An acceptor is basically an abstraction over the socket. It listens on an endpoint, and needs a new socket for each connection made to to the endpoint. It is the socket that then figures out the communication.
 
 > NOTE: Sockets are not the networking sockets over here. This is because boost ppl had skill issues and actual sockets are actually represented as endpoints over here.
+
+
+## `steady_timer`
+
+Pretty much what you think it is. Acts as a timer, can be blocking (using the `wait()` method) or non-blocking (using the `async_wait()` method).
+
+The `async_wait` method must take a completion handler (a function) whose sole parameter is of the type `const boost::system::error_code &`.
+
+If the async operations are cancelled using the `cancel()` method, the handler is invoked with `boost::asio::error::operation_aborted` as the argument.

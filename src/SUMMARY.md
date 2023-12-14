@@ -7,6 +7,7 @@
 - [notes/c_codes.md](notes/c_codes.md)
 - [notes/classes.md](notes/classes.md)
 - [notes/cmake.md](notes/cmake.md)
+- [notes/C_notes.md](notes/C_notes.md)
 - [notes/compilers.md](notes/compilers.md)
 - [notes/concurrency.md](notes/concurrency.md)
 - [notes/cont_struct.md](notes/cont_struct.md)

@@ -1,0 +1,426 @@
+<!DOCTYPE HTML>
+<html lang="en" class="ayu" dir="ltr">
+    <head>
+        <!-- Book generated using mdBook -->
+        <meta charset="UTF-8">
+        <title>notes/C_notes.md - Notes</title>
+
+
+        <!-- Custom HTML head -->
+        
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="theme-color" content="#ffffff">
+
+        <link rel="icon" href="../favicon.svg">
+        <link rel="shortcut icon" href="../favicon.png">
+        <link rel="stylesheet" href="../css/variables.css">
+        <link rel="stylesheet" href="../css/general.css">
+        <link rel="stylesheet" href="../css/chrome.css">
+        <link rel="stylesheet" href="../css/print.css" media="print">
+
+        <!-- Fonts -->
+        <link rel="stylesheet" href="../FontAwesome/css/font-awesome.css">
+        <link rel="stylesheet" href="../fonts/fonts.css">
+
+        <!-- Highlight.js Stylesheets -->
+        <link rel="stylesheet" href="../highlight.css">
+        <link rel="stylesheet" href="../tomorrow-night.css">
+        <link rel="stylesheet" href="../ayu-highlight.css">
+
+        <!-- Custom theme stylesheets -->
+        <link rel="stylesheet" href=".././src/notes/custom.css">
+        <link rel="stylesheet" href=".././src/pagetoc.css">
+        <link rel="stylesheet" href=".././src/notes/katex.min.css">
+
+    </head>
+    <body class="sidebar-visible no-js">
+    <div id="body-container">
+        <!-- Provide site root to javascript -->
+        <script>
+            var path_to_root = "../";
+            var default_theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? "navy" : "ayu";
+        </script>
+
+        <!-- Work around some values being stored in localStorage wrapped in quotes -->
+        <script>
+            try {
+                var theme = localStorage.getItem('mdbook-theme');
+                var sidebar = localStorage.getItem('mdbook-sidebar');
+
+                if (theme.startsWith('"') && theme.endsWith('"')) {
+                    localStorage.setItem('mdbook-theme', theme.slice(1, theme.length - 1));
+                }
+
+                if (sidebar.startsWith('"') && sidebar.endsWith('"')) {
+                    localStorage.setItem('mdbook-sidebar', sidebar.slice(1, sidebar.length - 1));
+                }
+            } catch (e) { }
+        </script>
+
+        <!-- Set the theme before any content is loaded, prevents flash -->
+        <script>
+            var theme;
+            try { theme = localStorage.getItem('mdbook-theme'); } catch(e) { }
+            if (theme === null || theme === undefined) { theme = default_theme; }
+            var html = document.querySelector('html');
+            html.classList.remove('ayu')
+            html.classList.add(theme);
+            var body = document.querySelector('body');
+            body.classList.remove('no-js')
+            body.classList.add('js');
+        </script>
+
+        <input type="checkbox" id="sidebar-toggle-anchor" class="hidden">
+
+        <!-- Hide / unhide sidebar before it is displayed -->
+        <script>
+            var body = document.querySelector('body');
+            var sidebar = null;
+            var sidebar_toggle = document.getElementById("sidebar-toggle-anchor");
+            if (document.body.clientWidth >= 1080) {
+                try { sidebar = localStorage.getItem('mdbook-sidebar'); } catch(e) { }
+                sidebar = sidebar || 'visible';
+            } else {
+                sidebar = 'hidden';
+            }
+            sidebar_toggle.checked = sidebar === 'visible';
+            body.classList.remove('sidebar-visible');
+            body.classList.add("sidebar-" + sidebar);
+        </script>
+
+        <nav id="sidebar" class="sidebar" aria-label="Table of contents">
+            <div class="sidebar-scrollbox">
+                <ol class="chapter"><li class="chapter-item "><a href="../notes/algorithms.html"><strong aria-hidden="true">1.</strong> notes/algorithms.md</a></li><li class="chapter-item "><a href="../notes/arp.html"><strong aria-hidden="true">2.</strong> notes/arp.md</a></li><li class="chapter-item "><a href="../notes/asm.html"><strong aria-hidden="true">3.</strong> notes/asm.md</a></li><li class="chapter-item "><a href="../notes/basic_preproc.html"><strong aria-hidden="true">4.</strong> notes/basic_preproc.md</a></li><li class="chapter-item "><a href="../notes/boost_asio.html"><strong aria-hidden="true">5.</strong> notes/boost_asio.md</a></li><li class="chapter-item "><a href="../notes/c_codes.html"><strong aria-hidden="true">6.</strong> notes/c_codes.md</a></li><li class="chapter-item "><a href="../notes/classes.html"><strong aria-hidden="true">7.</strong> notes/classes.md</a></li><li class="chapter-item "><a href="../notes/cmake.html"><strong aria-hidden="true">8.</strong> notes/cmake.md</a></li><li class="chapter-item expanded "><a href="../notes/C_notes.html" class="active"><strong aria-hidden="true">9.</strong> notes/C_notes.md</a></li><li class="chapter-item "><a href="../notes/compilers.html"><strong aria-hidden="true">10.</strong> notes/compilers.md</a></li><li class="chapter-item "><a href="../notes/concurrency.html"><strong aria-hidden="true">11.</strong> notes/concurrency.md</a></li><li class="chapter-item "><a href="../notes/cont_struct.html"><strong aria-hidden="true">12.</strong> notes/cont_struct.md</a></li><li class="chapter-item "><a href="../notes/cp_codes.html"><strong aria-hidden="true">13.</strong> notes/cp_codes.md</a></li><li class="chapter-item "><a href="../notes/cpp-guidelines.html"><strong aria-hidden="true">14.</strong> notes/cpp-guidelines.md</a></li><li class="chapter-item "><a href="../notes/cpp.html"><strong aria-hidden="true">15.</strong> notes/cpp.md</a></li><li class="chapter-item "><a href="../notes/cp_qs_models.html"><strong aria-hidden="true">16.</strong> notes/cp_qs_models.md</a></li><li class="chapter-item "><a href="../notes/cp_qs_reading.html"><strong aria-hidden="true">17.</strong> notes/cp_qs_reading.md</a></li><li class="chapter-item "><a href="../notes/csd.html"><strong aria-hidden="true">18.</strong> notes/csd.md</a></li><li class="chapter-item "><a href="../notes/cv_qualifiers.html"><strong aria-hidden="true">19.</strong> notes/cv_qualifiers.md</a></li><li class="chapter-item "><a href="../notes/data_structures.html"><strong aria-hidden="true">20.</strong> notes/data_structures.md</a></li><li class="chapter-item "><a href="../notes/data_types.html"><strong aria-hidden="true">21.</strong> notes/data_types.md</a></li><li class="chapter-item "><a href="../notes/dhcp.html"><strong aria-hidden="true">22.</strong> notes/dhcp.md</a></li><li class="chapter-item "><a href="../notes/dhcpv6.html"><strong aria-hidden="true">23.</strong> notes/dhcpv6.md</a></li><li class="chapter-item "><a href="../notes/dns.html"><strong aria-hidden="true">24.</strong> notes/dns.md</a></li><li class="chapter-item "><a href="../notes/enum_classes.html"><strong aria-hidden="true">25.</strong> notes/enum_classes.md</a></li><li class="chapter-item "><a href="../notes/file_descriptors.html"><strong aria-hidden="true">26.</strong> notes/file_descriptors.md</a></li><li class="chapter-item "><a href="../notes/functions.html"><strong aria-hidden="true">27.</strong> notes/functions.md</a></li><li class="chapter-item "><a href="../notes/gdb.html"><strong aria-hidden="true">28.</strong> notes/gdb.md</a></li><li class="chapter-item "><a href="../notes/hacking_basics.html"><strong aria-hidden="true">29.</strong> notes/hacking_basics.md</a></li><li class="chapter-item "><a href="../notes/icmp.html"><strong aria-hidden="true">30.</strong> notes/icmp.md</a></li><li class="chapter-item "><a href="../notes/if_else_loops.html"><strong aria-hidden="true">31.</strong> notes/if_else_loops.md</a></li><li class="chapter-item "><a href="../notes/io.html"><strong aria-hidden="true">32.</strong> notes/io.md</a></li><li class="chapter-item "><a href="../notes/ipv4.html"><strong aria-hidden="true">33.</strong> notes/ipv4.md</a></li><li class="chapter-item "><a href="../notes/ipv6.html"><strong aria-hidden="true">34.</strong> notes/ipv6.md</a></li><li class="chapter-item "><a href="../notes/jpeg.html"><strong aria-hidden="true">35.</strong> notes/jpeg.md</a></li><li class="chapter-item "><a href="../notes/memory.html"><strong aria-hidden="true">36.</strong> notes/memory.md</a></li><li class="chapter-item "><a href="../notes/natas_levels.html"><strong aria-hidden="true">37.</strong> notes/natas_levels.md</a></li><li class="chapter-item "><a href="../notes/network_stack.html"><strong aria-hidden="true">38.</strong> notes/network_stack.md</a></li><li class="chapter-item "><a href="../notes/poe.html"><strong aria-hidden="true">39.</strong> notes/poe.md</a></li><li class="chapter-item "><a href="../notes/pointers.html"><strong aria-hidden="true">40.</strong> notes/pointers.md</a></li><li class="chapter-item "><a href="../notes/project_euler.html"><strong aria-hidden="true">41.</strong> notes/project_euler.md</a></li><li class="chapter-item "><a href="../notes/python.html"><strong aria-hidden="true">42.</strong> notes/python.md</a></li><li class="chapter-item "><a href="../notes/references.html"><strong aria-hidden="true">43.</strong> notes/references.md</a></li><li class="chapter-item "><a href="../notes/regex.html"><strong aria-hidden="true">44.</strong> notes/regex.md</a></li><li class="chapter-item "><a href="../notes/registers.html"><strong aria-hidden="true">45.</strong> notes/registers.md</a></li><li class="chapter-item "><a href="../notes/rust_notes.html"><strong aria-hidden="true">46.</strong> notes/rust_notes.md</a></li><li class="chapter-item "><a href="../notes/rvalue_refs.html"><strong aria-hidden="true">47.</strong> notes/rvalue_refs.md</a></li><li class="chapter-item "><a href="../notes/static_variables_and_functions.html"><strong aria-hidden="true">48.</strong> notes/static_variables_and_functions.md</a></li><li class="chapter-item "><a href="../notes/static_variables.html"><strong aria-hidden="true">49.</strong> notes/static_variables.md</a></li><li class="chapter-item "><a href="../notes/std_forward.html"><strong aria-hidden="true">50.</strong> notes/std_forward.md</a></li><li class="chapter-item "><a href="../notes/strings_arrays.html"><strong aria-hidden="true">51.</strong> notes/strings_arrays.md</a></li><li class="chapter-item "><a href="../notes/tcp.html"><strong aria-hidden="true">52.</strong> notes/tcp.md</a></li><li class="chapter-item "><a href="../notes/traceroute.html"><strong aria-hidden="true">53.</strong> notes/traceroute.md</a></li></ol>
+            </div>
+            <div id="sidebar-resize-handle" class="sidebar-resize-handle"></div>
+        </nav>
+
+        <!-- Track and set sidebar scroll position -->
+        <script>
+            var sidebarScrollbox = document.querySelector('#sidebar .sidebar-scrollbox');
+            sidebarScrollbox.addEventListener('click', function(e) {
+                if (e.target.tagName === 'A') {
+                    sessionStorage.setItem('sidebar-scroll', sidebarScrollbox.scrollTop);
+                }
+            }, { passive: true });
+            var sidebarScrollTop = sessionStorage.getItem('sidebar-scroll');
+            sessionStorage.removeItem('sidebar-scroll');
+            if (sidebarScrollTop) {
+                // preserve sidebar scroll position when navigating via links within sidebar
+                sidebarScrollbox.scrollTop = sidebarScrollTop;
+            } else {
+                // scroll sidebar to current active section when navigating via "next/previous chapter" buttons
+                var activeSection = document.querySelector('#sidebar .active');
+                if (activeSection) {
+                    activeSection.scrollIntoView({ block: 'center' });
+                }
+            }
+        </script>
+
+        <div id="page-wrapper" class="page-wrapper">
+
+            <div class="page">
+                                <div id="menu-bar-hover-placeholder"></div>
+                <div id="menu-bar" class="menu-bar sticky">
+                    <div class="left-buttons">
+                        <label id="sidebar-toggle" class="icon-button" for="sidebar-toggle-anchor" title="Toggle Table of Contents" aria-label="Toggle Table of Contents" aria-controls="sidebar">
+                            <i class="fa fa-bars"></i>
+                        </label>
+                        <button id="theme-toggle" class="icon-button" type="button" title="Change theme" aria-label="Change theme" aria-haspopup="true" aria-expanded="false" aria-controls="theme-list">
+                            <i class="fa fa-paint-brush"></i>
+                        </button>
+                        <ul id="theme-list" class="theme-popup" aria-label="Themes" role="menu">
+                            <li role="none"><button role="menuitem" class="theme" id="light">Light</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="rust">Rust</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="coal">Coal</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="navy">Navy</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="ayu">Ayu</button></li>
+                        </ul>
+                        <button id="search-toggle" class="icon-button" type="button" title="Search. (Shortkey: s)" aria-label="Toggle Searchbar" aria-expanded="false" aria-keyshortcuts="S" aria-controls="searchbar">
+                            <i class="fa fa-search"></i>
+                        </button>
+                    </div>
+
+                    <h1 class="menu-title">Notes</h1>
+
+                    <div class="right-buttons">
+                        <a href="../print.html" title="Print this book" aria-label="Print this book">
+                            <i id="print-button" class="fa fa-print"></i>
+                        </a>
+
+                    </div>
+                </div>
+
+                <div id="search-wrapper" class="hidden">
+                    <form id="searchbar-outer" class="searchbar-outer">
+                        <input type="search" id="searchbar" name="searchbar" placeholder="Search this book ..." aria-controls="searchresults-outer" aria-describedby="searchresults-header">
+                    </form>
+                    <div id="searchresults-outer" class="searchresults-outer hidden">
+                        <div id="searchresults-header" class="searchresults-header"></div>
+                        <ul id="searchresults">
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Apply ARIA attributes after the sidebar and the sidebar toggle button are added to the DOM -->
+                <script>
+                    document.getElementById('sidebar-toggle').setAttribute('aria-expanded', sidebar === 'visible');
+                    document.getElementById('sidebar').setAttribute('aria-hidden', sidebar !== 'visible');
+                    Array.from(document.querySelectorAll('#sidebar a')).forEach(function(link) {
+                        link.setAttribute('tabIndex', sidebar === 'visible' ? 0 : -1);
+                    });
+                </script>
+
+                <div id="content" class="content">
+                    <main>
+                        <h1 id="c_notes"><a class="header" href="#c_notes">C_notes</a></h1>
+<p>Must read: <a href="https://beej.us/guide/bgc/html/index-wide.html">Brian Jorgensen Hall’s blog</a> </p>
+<div class="epigraph"><blockquote><p> C is not a big language, and it is not well served by a big book.</p><footer>
+Brian W. Kernighan, Dennis M. Ritchie</footer></blockquote></div>
+<pre><code class="language-c">/* Hello World Program */
+#include &lt;stdio.h&gt;
+
+int main(void) { printf(&quot;Hello World!\n&quot;); }
+</code></pre>
+<p><code>#include</code> is a preprocessor directive.</p>
+<blockquote>
+<p>How to know what to include?
+<code>man 3 printf</code></p>
+</blockquote>
+<p><code>main()</code> is the first function to be executed in a C program.</p>
+<p>Compile with <code>gcc -o hello hello.c</code></p>
+<h2 id="variables"><a class="header" href="#variables">Variables</a></h2>
+<p>Placeholders for values. Restrictions on names:</p>
+<ul>
+<li>Names can’t start with numbers.</li>
+<li>Same for two underscores.</li>
+<li>Same for single underscore and capital A-Z.</li>
+</ul>
+<h3 id="variable-types"><a class="header" href="#variable-types">Variable types</a></h3>
+<ul>
+<li><code>int</code>: integer types.</li>
+<li><code>float</code>: floating point types.</li>
+<li><code>char</code>: character type.</li>
+<li><code>string</code>: array of characters.</li>
+</ul>
+<h4 id="booleans"><a class="header" href="#booleans">Booleans</a></h4>
+<p>Traditionally, <code>0</code> is false, and any other value is true. <code>#include &lt;stdbool.h&gt;</code> to include a <code>bool</code> type.</p>
+<h3 id="arithmetic"><a class="header" href="#arithmetic">Arithmetic</a></h3>
+<p>Standard operators. Also, ternary operator. </p>
+<p>Ternary operator is <strong>NOT</strong> flow control. It is an expression that evaluates to something.</p>
+<p>Also, there is pre and post decrement. Stir clear of these unless you know what you are doing.</p>
+<h4 id="weird-ass-comma-operators"><a class="header" href="#weird-ass-comma-operators">Weird Ass comma operators</a></h4>
+<pre><code class="language-c">int x = (1, 2, 3);
+/* x is 3 in this case */
+</code></pre>
+<h4 id="conditional-operators"><a class="header" href="#conditional-operators">Conditional operators</a></h4>
+<p>Standard. <code>==</code> means both should be equal for true. Else, it will be false. <code>!=</code> is the exact opposite.</p>
+<p><code>&lt;</code>, <code>&lt;=</code> and <code>&gt;</code>, <code>&gt;=</code> carry the same meaning as math.</p>
+<h4 id="boolean-ops"><a class="header" href="#boolean-ops">Boolean ops</a></h4>
+<p><code>&amp;&amp;</code> only of both are true. <code>||</code> if atleast one is true. <code>!</code> takes the current value and inverts it. They operate on stuff meant to be boolean kinda.</p>
+<p>The first two have something called short circuiting. If the first one is false, the second one isn’t even evaluated in case of <code>&amp;&amp;</code>. Similarly if the first one is true, second one isn’t even evaluated in case of <code>||</code>.</p>
+<h2 id="special-functions"><a class="header" href="#special-functions">Special functions</a></h2>
+<p><code>printf</code>: Well, prints stuff. Look up manpage for more info.</p>
+<p><code>sizeof</code>: returns the size of anything. It’s return type is an unsigned int called <code>size_t</code>.</p>
+<blockquote>
+<p>NOTE: It is compile time to use sizeof</p>
+</blockquote>
+<h2 id="control-flow"><a class="header" href="#control-flow">Control flow</a></h2>
+<p>Always remember braces!</p>
+<h3 id="if-else"><a class="header" href="#if-else">if-else</a></h3>
+<p>No surprises here, should work the way you expect it to.</p>
+<h3 id="while"><a class="header" href="#while">while</a></h3>
+<p>Yeah, same. Can’t declare variables in the brackets, so there’s that. Else no surprises.</p>
+<p>while (<em>do while this thing is true</em>)</p>
+<h3 id="for"><a class="header" href="#for">for</a></h3>
+<p>The below template works pretty much always.</p>
+<p>for (initialize things; loop if this is true; do this after each loop)</p>
+<h3 id="switch-case"><a class="header" href="#switch-case">Switch case</a></h3>
+<p>Always specify when you need a fallthrough.</p>
+<pre><code class="language-c">#include &lt;stdio.h&gt;
+int x = 0;
+
+int main() {
+  switch (x) {
+  case 1:
+    printf(&quot;1\n&quot;);
+    break;
+  case 2:
+    printf(&quot;2\n&quot;);
+    break;
+  default:
+    printf(&quot;any other value\n&quot;);
+  }
+}
+</code></pre>
+<p>If break isn’t there all the other cases are evaluated unless a break is encountered.</p>
+<h2 id="functions"><a class="header" href="#functions">Functions</a></h2>
+<p>If the parentheses in a C function are empty, it means it can take in any number of arguments. To specify no arguments, use <code>void</code>.</p>
+<p>Arguments are copied. To modify the original thing pass a pointer.</p>
+<p>A prototype is the signature that tells the compiler what the function takes in and spits out. Ends with a semicolon.</p>
+<h2 id="pointers"><a class="header" href="#pointers">Pointers</a></h2>
+<p>Hold memory locations. Really, that’s all there is to it.</p>
+<pre><code class="language-c">#include &lt;stdio.h&gt;
+
+int main(void)
+{
+    int i = 10;
+
+    printf(&quot;The value of i is %d\n&quot;, i);
+    printf(&quot;And its address is %p\n&quot;, (void *)&amp;i);
+
+    // %p expects the argument to be a pointer to void
+    // so we cast it to make the compiler happy.
+}
+</code></pre>
+<p>The address of anything can be obtained with <code>&amp;</code> in front of it. To get the value from the address, use <code>*</code> in front of it.</p>
+<blockquote>
+<p>Note on pointer declaration: <code>int *p, q;</code> over here only p is a pointer, q is a regular int.</p>
+</blockquote>
+<h3 id="null-pointer"><a class="header" href="#null-pointer">NULL pointer</a></h3>
+<p>This means that the pointer does not point to anything. Dereferencing it causes memory error at best and random behaviour at worst.</p>
+<h3 id="pointer-arithmetic"><a class="header" href="#pointer-arithmetic">Pointer arithmetic</a></h3>
+<p>Integers can be added to pointers and the pointers move forward or backward by those many units. C makes sure that the pointer is incremented by <code>sizeof(type)</code> if the pointer is <code>type *</code>.</p>
+<h3 id="void-pointer"><a class="header" href="#void-pointer">void pointer</a></h3>
+<ul>
+<li>Can point to anything.</li>
+<li>Cannot be dereferenced.</li>
+<li>No pointer arithmetic.</li>
+<li>sizeof(void *) will most likely crash.</li>
+</ul>
+<h2 id="arrays"><a class="header" href="#arrays">Arrays</a></h2>
+<p>No surprises here either. You cannot have arrays with variable length, (you technically can), and you need to store the value of the length separately.</p>
+<p>If you declared an array in the same scope you can check its size using <code>sizeof(arr)/size(arr[0])</code>.</p>
+<p>Stuff like this also works:</p>
+<p><code>int a[10] = {0, 11, 22, [5]=55, 66, 77};</code></p>
+<p>Intermediate values and others are set to be 0. We can leave the size to be blank if we specify all values in the constructor initializer.</p>
+<p>Arrays also act as pointers.</p>
+<pre><code class="language-c">int main() {
+  int a[10] = {0};
+  int *p = a;
+  p = &amp;a[0];
+}
+</code></pre>
+<p><em>Always</em> pass the size of the array as a separate variable.</p>
+<p>For multidimensional arrays, you have to pass all the dimensions except for the first one.</p>
+<h3 id="array-and-pointer-equivalence"><a class="header" href="#array-and-pointer-equivalence">Array and pointer equivalence</a></h3>
+<p><code>E1[E2] == (*((E1) + (E2)))</code></p>
+<h3 id="strings"><a class="header" href="#strings">Strings</a></h3>
+<p>Arrays of characters terminated by the null character.</p>
+<pre><code class="language-c">int main() {
+  char *s = &quot;Hello world\n&quot;;
+  char t[] = &quot;Loss pro max\n&quot;;
+}
+</code></pre>
+<p>In the above example, s is <em>immutable</em> because it points to a hardcoded place in memory. On the other hand, the array copies the individual bytes from the hardcoded location and is therefore mutable.</p>
+<p><code>strlen</code> function returns the length of a null-terminated string and its return type is <code>size_t</code>.</p>
+<p><code>strcpy</code> makes a copy of the string byte by byte. Notice that doing <code>t = s</code> does not exactly copy the string as it only changes t to point to the same hardocded string and is not two different memory locations.</p>
+<h2 id="structs"><a class="header" href="#structs">Structs</a></h2>
+<p>Ordered data-type containing various kinds of data fields.</p>
+<pre><code class="language-c">struct car {
+    char *name;
+    float price;
+    int speed;
+};
+
+// Now with an initializer! Same field order as in the struct declaration:
+struct car saturn = {&quot;Saturn SL/2&quot;, 16000.99, 175};
+
+printf(&quot;Name:      %s\n&quot;, saturn.name);
+printf(&quot;Price:     %f\n&quot;, saturn.price);
+printf(&quot;Top Speed: %d km\n&quot;, saturn.speed);
+</code></pre>
+<p><code>struct car saturn = {.speed=175, .name=&quot;Saturn SL/2&quot;};</code> something like this can also be done.</p>
+<p>Whatever isn’t initialized explicitly is initialised to 0 in memory.</p>
+<p>Dot to access fields, arrow to access if it is a pointer to a struct.</p>
+<blockquote>
+<p>Note: Do <strong>NOT</strong> <a href="https://stackoverflow.com/questions/7179174/why-doesnt-c-provide-struct-comparison">compare structs directly</a>. </p>
+</blockquote>
+<h2 id="file-handling"><a class="header" href="#file-handling">File handling</a></h2>
+<p><code>FILE *</code> is a pointer to a file in C. <code>fprintf</code> and <code>fscanf</code> take the first arguments as the file pointer and the rest is the same as <code>printf</code> and <code>scanf</code>.</p>
+<p>To open a file, use <code>fopen(&quot;file_path&quot;, &quot;mode&quot;)</code>. Mode can be r or w (for read or write).</p>
+<blockquote>
+<p>Note: <code>fgetc</code> returns an int. This is because EOF doesn’t fit in char.</p>
+</blockquote>
+<p><code>fscanf</code> and <code>fprintf</code> take the file pointer as the first argument. <code>fputc</code>, <code>fputs</code>, <code>fgetc</code> and <code>fgets</code> take them as the last argument.</p>
+<h3 id="binary-files"><a class="header" href="#binary-files">Binary files</a></h3>
+<p>Use <code>fread</code> and <code>fwrite</code> to read and write from files. While writing structs and stuff, serialize your data because of endianness. Append b after the mode to indicate binary data.</p>
+<p><code>fread</code> returns the number of bytes read so useful to check if something has ben read or not.</p>
+<h2 id="typedef"><a class="header" href="#typedef">typedef</a></h2>
+<p>Basically creates an alias for an existing type. Scoped. Useful for structs and arrays and pointers.</p>
+<pre><code class="language-c">//  Anonymous struct! It has no name!
+//         |
+//         v
+//      |----|
+typedef struct {
+    char *name;
+    int leg_count, speed;
+} animal;                         // &lt;-- new name
+
+//struct animal y;  // ERROR: this no longer works--no such struct!
+animal z;           // This works because &quot;animal&quot; is an alias
+</code></pre>
+<pre><code class="language-c">typedef int *intptr;
+
+int a = 10;
+intptr x = &amp;a, y = &amp;a;  // &quot;intptr&quot; is type &quot;int*&quot;
+</code></pre>
+<pre><code class="language-c">// Make type five_ints an array of 5 ints
+typedef int five_ints[5];
+
+five_ints x = {11, 22, 33, 44, 55};
+</code></pre>
+
+                    </main>
+
+                    <nav class="nav-wrapper" aria-label="Page navigation">
+                        <!-- Mobile navigation buttons -->
+                            <a rel="prev" href="../notes/cmake.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                                <i class="fa fa-angle-left"></i>
+                            </a>
+
+                            <a rel="next prefetch" href="../notes/compilers.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                                <i class="fa fa-angle-right"></i>
+                            </a>
+
+                        <div style="clear: both"></div>
+                    </nav>
+                </div>
+            </div>
+
+            <nav class="nav-wide-wrapper" aria-label="Page navigation">
+                    <a rel="prev" href="../notes/cmake.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                        <i class="fa fa-angle-left"></i>
+                    </a>
+
+                    <a rel="next prefetch" href="../notes/compilers.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                        <i class="fa fa-angle-right"></i>
+                    </a>
+            </nav>
+
+        </div>
+
+
+
+
+        <script>
+            window.playground_copyable = true;
+        </script>
+
+
+        <script src="../elasticlunr.min.js"></script>
+        <script src="../mark.min.js"></script>
+        <script src="../searcher.js"></script>
+
+        <script src="../clipboard.min.js"></script>
+        <script src="../highlight.js"></script>
+        <script src="../book.js"></script>
+
+        <!-- Custom JS scripts -->
+        <script src=".././src/pagetoc.js"></script>
+
+
+    </div>
+    </body>
+</html>
