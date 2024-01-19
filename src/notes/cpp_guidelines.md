@@ -1,4 +1,4 @@
-# cpp-guidelines
+# cpp_guidelines
 
 ## Commenting
 

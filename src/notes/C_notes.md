@@ -368,7 +368,6 @@ int main(void) {
       return 1;
     }
 
-    p != new_p ? free(p) : void(0);
     // If we did, we can just reassign p
     p = new_p;
   }

@@ -1,6 +1,4 @@
 # SUMMARY 
-
-
 - [./notes/algorithms.md](./notes/algorithms.md)
 - [./notes/arp.md](./notes/arp.md)
 - [./notes/asm.md](./notes/asm.md)
@@ -14,7 +12,7 @@
 - [./notes/concurrency.md](./notes/concurrency.md)
 - [./notes/cont_struct.md](./notes/cont_struct.md)
 - [./notes/cp_codes.md](./notes/cp_codes.md)
-- [./notes/cpp-guidelines.md](./notes/cpp-guidelines.md)
+- [./notes/cpp_guidelines.md](./notes/cpp_guidelines.md)
 - [./notes/cpp.md](./notes/cpp.md)
 - [./notes/cp_qs_models.md](./notes/cp_qs_models.md)
 - [./notes/cp_qs_reading.md](./notes/cp_qs_reading.md)
