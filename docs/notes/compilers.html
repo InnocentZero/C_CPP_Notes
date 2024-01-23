@@ -220,13 +220,13 @@ Also performs type checking and shit. May also do <em>coercions</em> (implicit t
 <p>Done using parse trees.</p>
 <ul>
 <li>Root labelled with the start symbol</li>
-<li>Each leaf if a terminal or <data class="katex-src" value="\epsilon"><span class="katex"><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.4306em;"></span><span class="mord mathnormal">ϵ</span></span></span></span></data></li>
+<li>Each leaf if a terminal or <data class="katex-src" value="\epsilon"><span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>ϵ</mi></mrow><annotation encoding="application/x-tex">\epsilon</annotation></semantics></math></span></data></li>
 <li>Each interior node is a non-terminal.</li>
 </ul>
 <p><img src="./compilers/productions.png" alt="an example of productions" /></p>
 <p><img src="./compilers/parse_trees.png" alt="parse tree for the given grammar" /></p>
 <p>Ambiguity occurs when more than one parse trees are possible. Eg:</p>
-<p>string <data class="katex-src" value="\rightarrow"><span class="katex"><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.3669em;"></span><span class="mrel">→</span></span></span></span></data> string + string | string - string | 0 | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9</p>
+<p>string <data class="katex-src" value="\rightarrow"><span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mo>→</mo></mrow><annotation encoding="application/x-tex">\rightarrow</annotation></semantics></math></span></data> string + string | string - string | 0 | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9</p>
 <!---TODO: Figure out Syntax directed translations--->
 
                     </main>

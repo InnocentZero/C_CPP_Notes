@@ -37,7 +37,7 @@ edition = "2021"
 [preprocessor.katex]
 after = ["links"]
 no-css = true
-output = "html"
+output = "mathml"
 include-src = true
 block-delimiter = { left = "$$", right = "$$" }
 inline-delimiter = { left = "$", right = "$" }
