@@ -1,4 +1,4 @@
-# SUMMARY 
+# SUMMARY
 - [./notes/algorithms.md](./notes/algorithms.md)
 - [./notes/arp.md](./notes/arp.md)
 - [./notes/asm.md](./notes/asm.md)
@@ -17,6 +17,7 @@
 - [./notes/cp_qs_models.md](./notes/cp_qs_models.md)
 - [./notes/cp_qs_reading.md](./notes/cp_qs_reading.md)
 - [./notes/cs2200.md](./notes/cs2200.md)
+- [./notes/cs2600.md](./notes/cs2600.md)
 - [./notes/csd.md](./notes/csd.md)
 - [./notes/cv_qualifiers.md](./notes/cv_qualifiers.md)
 - [./notes/data_structures.md](./notes/data_structures.md)
