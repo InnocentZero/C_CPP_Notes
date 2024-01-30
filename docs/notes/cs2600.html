@@ -200,11 +200,61 @@
 </ul>
 </li>
 </ul>
-<h3 id="risc-v"><a class="header" href="#risc-v">RISC V</a></h3>
-<p>Open source. Has 32 registers. Also has XLEN variable which is either 32 or 64 for 32 bit and 64 bit processors respectively.</p>
+<h2 id="risc-v"><a class="header" href="#risc-v">RISC V</a></h2>
+<p>Open source. Has 32 int and 32 FP registers. Also has XLEN variable which is either 32 or 64 for 32 bit and 64 bit processors respectively.</p>
+<div class="table-wrapper"><table><thead><tr><th style="text-align: center">Register</th><th style="text-align: center">ABI Name</th><th style="text-align: center">Description</th></tr></thead><tbody>
+<tr><td style="text-align: center">x0</td><td style="text-align: center">zero</td><td style="text-align: center">Zero always</td></tr>
+<tr><td style="text-align: center">x1</td><td style="text-align: center">ra</td><td style="text-align: center">Return address</td></tr>
+<tr><td style="text-align: center">x2</td><td style="text-align: center">sp</td><td style="text-align: center">Stack Pointer</td></tr>
+<tr><td style="text-align: center">x3</td><td style="text-align: center">gp</td><td style="text-align: center">Global Pointer</td></tr>
+<tr><td style="text-align: center">x4</td><td style="text-align: center">tp</td><td style="text-align: center">Thread Pointer</td></tr>
+<tr><td style="text-align: center">x5-x7</td><td style="text-align: center">t0-t2</td><td style="text-align: center">Temps</td></tr>
+<tr><td style="text-align: center">x8</td><td style="text-align: center">s0 /fp</td><td style="text-align: center">saved / frame pointer (base pointer effectively)</td></tr>
+<tr><td style="text-align: center">x9</td><td style="text-align: center">s1</td><td style="text-align: center">saved register</td></tr>
+<tr><td style="text-align: center">x10-x11</td><td style="text-align: center">a0-a1</td><td style="text-align: center">Fn args/ return values</td></tr>
+<tr><td style="text-align: center">x12-x18</td><td style="text-align: center">a2-a7</td><td style="text-align: center">Fn args</td></tr>
+<tr><td style="text-align: center">x18-x27</td><td style="text-align: center">s2-s11</td><td style="text-align: center">Saved registers</td></tr>
+<tr><td style="text-align: center">x27-x31</td><td style="text-align: center">t3-t6</td><td style="text-align: center">Temporaries</td></tr>
+</tbody></table>
+</div>
+<blockquote>
+<p>Maximum memory depends on the size of the address bus from the load store unit to the memory.</p>
+</blockquote>
+<h3 id="instructions"><a class="header" href="#instructions">Instructions</a></h3>
 <ul>
-<li>x0: First register. Hard-wired to 0.</li>
+<li>
+<p><code>add rd, rs1, rs2</code>: add the contents of rs1 and rs2 and store it in rd. Signed addition. Also has the unsigned version. Similarly, sub, and, or, xor also exist.</p>
+</li>
+<li>
+<p><code>mul/mulh rd, rs1, rs2</code>: multiplies and stores the lower/upper 32 bits in rd.</p>
+</li>
+<li>
+<p><code>div/rem rd, rs1, rs2</code>: stores the quotient/remainder.</p>
+</li>
+<li>
+<p><code>sll rd, rs1, rs2</code>: Left shift the number in rs1 by the value in rs2 and store in rd.</p>
+</li>
+<li>
+<p><code>srl rd, rs1, rs2</code>: Right shift the number in rs1 by the value in rs2 and store in rd. Zero extends.</p>
+</li>
+<li>
+<p><code>sra rd, rs1, rs2</code>: Right shift the number in rs1 by the value in rs2 and store in rd. Sign extends.</p>
+</li>
 </ul>
+<p>All of these also have an immediate version where the last argument is a hardcoded literal.</p>
+<ul>
+<li>
+<p><code>l(b/h/w) rd, imm(rs1)</code>: loads a byte/half-word/word to rd(dest. register) from *(rs1 + imm)</p>
+</li>
+<li>
+<p><code>l(b/h/w)u rd, imm(rs1)</code>: loads a byte/half-word/word to rd(dest. register) from *(rs1 + imm). This one zero-extends on the left.</p>
+</li>
+<li>
+<p><code>s(b/h/w) rd, imm(rs1)</code>: stores a byte/half-word/word to *(rs1 + imm) from the contents of rd.</p>
+</li>
+</ul>
+<h3 id="program-counter"><a class="header" href="#program-counter">Program Counter</a></h3>
+<p>This keeps track of the next instruction to be executed. Usually incremented by 4 unless branches.</p>
 
                     </main>
 
