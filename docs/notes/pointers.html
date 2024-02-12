@@ -182,7 +182,7 @@
 
 char* ptr = &amp;p;
 </code></pre>
-<p>Here, ptr holds the address of c, <code>&amp;</code> is the address-of operator. </p>
+<p>Here, ptr holds the address of c, <code>&amp;</code> is the address-of operator.</p>
 <h2 id="how-pointers-work"><a class="header" href="#how-pointers-work">How Pointers work</a></h2>
 <pre><code class="language-cpp">int var = 10;
 
@@ -206,7 +206,7 @@ std::cout &lt;&lt; a &lt;&lt; '\n';
 }
 </code></pre>
 <p>You’d expect the output to be <code>40</code> right? Wrong! But why though? Enter scoping.</p>
-<p>When we write <code>add(a, b)</code>, what the compiler internally does is that it creates a copy of the variables <code>a</code> and <code>b</code> for the use within the function <code>add</code>. Now the <strong>scope</strong> of the new variables, now referred to as the <em>copies</em> of the original variables is the function block, i.e., the copies exist only temporarily till the function block is being executed. </p>
+<p>When we write <code>add(a, b)</code>, what the compiler internally does is that it creates a copy of the variables <code>a</code> and <code>b</code> for the use within the function <code>add</code>. Now the <strong>scope</strong> of the new variables, now referred to as the <em>copies</em> of the original variables is the function block, i.e., the copies exist only temporarily till the function block is being executed.</p>
 <p>Once the function block is over, the copies are discarded. Hence the value of <em>40</em> that was asssigned to the <em>copy</em> of <code>a</code> vanishes, and <code>a</code> itself retains the value it had.</p>
 <p>This is the scope of a function. There can be self-made scopes too.</p>
 <pre><code class="language-cpp">int main(){
@@ -235,7 +235,7 @@ a = 60; // doesn't change the value of the a in outer scope
 }
 </code></pre>
 <h2 id="arrays-are-pointers"><a class="header" href="#arrays-are-pointers">Arrays are pointers</a></h2>
-<p>Arrays are nothing but pointers with a large range of access. We can also utilise arrays as pointers. </p>
+<p>Arrays are nothing but pointers with a large range of access. We can also utilise arrays as pointers.</p>
 <pre><code class="language-cpp">int main(){
 int array[] = {1, 3, 4, 6};
 cout &lt;&lt; *(array + 1) &lt;&lt; '\n';

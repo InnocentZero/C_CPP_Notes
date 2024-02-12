@@ -188,12 +188,12 @@
 
 //defining the vertical separator of length 3 and blank of length 3
 
-#define line printf(&quot;%*s&quot;,tabsize ,&quot;---&quot;)
-#define blank printf(&quot;%*s&quot;,tabsize ,&quot;&quot;)
+#define line printf("%*s",tabsize ,"---")
+#define blank printf("%*s",tabsize ,"")
 
 //newline 'cause I can't keep typing it
 
-#define endl puts(&quot;&quot;)
+#define endl puts("")
 
 void col_gap(){
     for (int j = 0; j &lt; col_gap_val; j++){
@@ -213,14 +213,14 @@ int main(){
     //take the year as an input
     unsigned long long year;
 
-    puts(&quot;Please enter an year:&quot;);
-    scanf(&quot;%llu&quot;, &amp;year);
+    puts("Please enter an year:");
+    scanf("%llu", &amp;year);
 
     //Array for names of days
-    char *day[7] = {&quot;Mo&quot;, &quot;Tu&quot;, &quot;We&quot;, &quot;Th&quot;, &quot;Fr&quot;, &quot;Sa&quot;, &quot;Su&quot;};
+    char *day[7] = {"Mo", "Tu", "We", "Th", "Fr", "Sa", "Su"};
 
     //Array for names of months
-    char *month_name[12] = {&quot;Jan&quot;, &quot;Feb&quot;, &quot;Mar&quot;, &quot;Apr&quot;, &quot;May&quot;, &quot;Jun&quot;, &quot;Jul&quot;, &quot;Aug&quot;, &quot;Sep&quot;, &quot;Oct&quot;, &quot;Nov&quot;, &quot;Dec&quot;};
+    char *month_name[12] = {"Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"};
 
     //Hold number of days in a month
     unsigned short days_in_month[12];
@@ -259,21 +259,21 @@ int main(){
     for (int i = 0; i &lt; 10; i++){
         blank;
     } col_gap();
-    printf(&quot;%0*llu&quot;, tabsize, year);
+    printf("%0*llu", tabsize, year);
     row_gap(); 
 
     //Four iterations for four rows
     for (unsigned short row_iterator = 0; row_iterator &lt; 4; row_iterator++){
 
         //Month Headers
-        printf(&quot;%*s%*s%*s&quot;, 4*tabsize, month_name[3*row_iterator], (7 + col_gap_val)*tabsize, month_name[3*row_iterator + 1], (7 + col_gap_val)*tabsize, month_name[3*row_iterator + 2]);
+        printf("%*s%*s%*s", 4*tabsize, month_name[3*row_iterator], (7 + col_gap_val)*tabsize, month_name[3*row_iterator + 1], (7 + col_gap_val)*tabsize, month_name[3*row_iterator + 2]);
 
         row_gap();
 
         //Day Headers
         for (unsigned short month_iterator = 0; month_iterator &lt; 3; month_iterator++){
             for (unsigned short day_iterator = 0; day_iterator &lt; 7; day_iterator++){
-                printf(&quot;%*s&quot;, tabsize, day[day_iterator]);
+                printf("%*s", tabsize, day[day_iterator]);
             }
             col_gap();
         }
@@ -301,7 +301,7 @@ int main(){
             }
             //print the days till Sunday
             for (unsigned short day_iterator =  0; day_iterator + month_offset[3*row_iterator + month_iterator] &lt; 7; day_iterator++){
-                printf(&quot;%*d&quot;, tabsize, day_iterator + 1);
+                printf("%*d", tabsize, day_iterator + 1);
                 flag[month_iterator] = day_iterator + 1;
             }
             col_gap();
@@ -313,7 +313,7 @@ int main(){
         for (unsigned short week_iterator = 0; week_iterator &lt; 3; week_iterator++){
             for (unsigned short month_iterator = 0; month_iterator &lt; 3; month_iterator++){
                 for (unsigned short day_iterator = 0; day_iterator &lt; 7; day_iterator++){
-                    printf(&quot;%*d&quot;, tabsize, day_iterator + flag[month_iterator] + 1);
+                    printf("%*d", tabsize, day_iterator + flag[month_iterator] + 1);
                 }
                 flag[month_iterator] += 7;
                 col_gap();
@@ -328,7 +328,7 @@ int main(){
         for (int month_iterator = 0; month_iterator &lt; 3; month_iterator++){
             int day_iterator =  0;
             for (; day_iterator + flag[month_iterator] &lt; days_in_month[3*row_iterator + month_iterator]; day_iterator++){
-                printf(&quot;%*d&quot;, tabsize, day_iterator + flag[month_iterator] + 1);
+                printf("%*d", tabsize, day_iterator + flag[month_iterator] + 1);
                 //check if sixth line is reqd for any month
                 if (day_iterator == 6) {
                     sixlines[month_iterator] = 1;
@@ -350,7 +350,7 @@ int main(){
         for (int month_iterator = 0; month_iterator &lt; 3; month_iterator++){
             if (sixlines[month_iterator] != 0){
                 for (int day_iterator = 0; day_iterator + flag[month_iterator] &lt; days_in_month[3*row_iterator + month_iterator]; day_iterator++){
-                    printf(&quot;%*d&quot;, tabsize, day_iterator + flag[month_iterator] + 1);
+                    printf("%*d", tabsize, day_iterator + flag[month_iterator] + 1);
                 }
                 for (int day_iterator = 0; (day_iterator + days_in_month[3*row_iterator + month_iterator])%7 != 0; day_iterator++){
                     blank;
@@ -379,12 +379,12 @@ int main(){
 
 //defining the vertical separator of length 4 and blank of length 4
 
-#define line printf(&quot;%*s&quot;,tabsize ,&quot;----&quot;)
-#define blank printf(&quot;%*s&quot;,tabsize ,&quot;&quot;)
+#define line printf("%*s",tabsize ,"----")
+#define blank printf("%*s",tabsize ,"")
 
 //newline 'cause I can't keep typing it
 
-#define endl printf(&quot;\n&quot;)
+#define endl printf("\n")
 
 int main(){
 
@@ -394,11 +394,11 @@ int main(){
     
     //prompt to enter the year
     
-    printf(&quot;\nPlease enter the required year: &quot;);
+    printf("\nPlease enter the required year: ");
     
     //take the current year as input
     
-    scanf(&quot;%d&quot;, &amp;year);
+    scanf("%d", &amp;year);
     
     //setting offset for January of the year; every 400 years the calendar repeats; every 100 years an offset of 5 days is added; the rest is calculated manually
     
@@ -406,7 +406,7 @@ int main(){
 
     //The below comment was a test to check the offset for each year. Fuck the julian calendar.
 
-    // //printf(&quot;%d&quot;,start%7);
+    // //printf("%d",start%7);
     
     //blank space for neatness
     
@@ -418,8 +418,8 @@ int main(){
 
     //Array to hold the days
     
-    char* day[7] = {&quot;Mon&quot;,&quot;Tue&quot;,&quot;Wed&quot;,&quot;Thu&quot;,&quot;Fri&quot;,&quot;Sat&quot;,&quot;Sun&quot;};
-    char* month_name[12] = {&quot;Jan&quot;,&quot;Feb&quot;,&quot;Mar&quot;,&quot;Apr&quot;,&quot;May&quot;,&quot;Jun&quot;,&quot;Jul&quot;,&quot;Aug&quot;,&quot;Sep&quot;,&quot;Oct&quot;,&quot;Nov&quot;,&quot;Dec&quot;};
+    char* day[7] = {"Mon","Tue","Wed","Thu","Fri","Sat","Sun"};
+    char* month_name[12] = {"Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"};
 
     //Initialising the no. of days in a month; if it is a year divisible by 400 or it is divisible by 4 but not by 100, then feb has 29 days
     
@@ -443,14 +443,14 @@ int main(){
     }
     //print the month name
 
-    printf(&quot;%*s&quot;, 16, month_name[0]);
+    printf("%*s", 16, month_name[0]);
 
     endl; endl;
     
     //print the first line of days
 
     for (int l = 0; l &lt; 7; l++){
-       printf(&quot;%*s&quot;, tabsize, day[l]);
+       printf("%*s", tabsize, day[l]);
     }
 
     endl;
@@ -482,7 +482,7 @@ int main(){
         //start loop for days in each month
         
         for (int j = 1; j &lt;= month[i]; j++){
-            printf(&quot;%*d&quot;, tabsize, j);
+            printf("%*d", tabsize, j);
 
             
             
@@ -503,12 +503,12 @@ int main(){
         //only do all this if the month is not dec; otherwise there would be stray spaces and an extra header of days at the very last.
         
         if (i &lt; 11){
-            printf(&quot;%*s&quot;, 16, month_name[i+1]);
+            printf("%*s", 16, month_name[i+1]);
 
             endl; endl;
             
             for (int k = 0; k &lt; 7; k++){
-                printf(&quot;%*s&quot;, tabsize, day[k]);
+                printf("%*s", tabsize, day[k]);
             }
 
             endl;

@@ -181,23 +181,23 @@
 <pre><code class="language-bash">cargo new project
 cd project
 </code></pre>
-<p><code>Cargo.toml</code> contains and tracks our version info and dependencies. By default the project is set up as a git repo. </p>
-<p>A <code>main.rs</code> is already set up in the src repository. </p>
+<p><code>Cargo.toml</code> contains and tracks our version info and dependencies. By default the project is set up as a git repo.</p>
+<p>A <code>main.rs</code> is already set up in the src repository.</p>
 <pre><code class="language-bash">cargo run
 </code></pre>
-<p>Build and run the project. </p>
+<p>Build and run the project.</p>
 <h2 id="using-libraries"><a class="header" href="#using-libraries">Using libraries</a></h2>
 <pre><code class="language-rust">use std::io;</code></pre>
 <p>Includes the <code>io</code> library that is used for taking input and output.</p>
 <h2 id="structure"><a class="header" href="#structure">Structure</a></h2>
-<p>By default, the <code>main</code> function is the one the is executed first. Default Rust style is to indent with four spaces and not a tab. <em>This is important.</em> </p>
+<p>By default, the <code>main</code> function is the one the is executed first. Default Rust style is to indent with four spaces and not a tab. <em>This is important.</em></p>
 <h2 id="variables"><a class="header" href="#variables">Variables</a></h2>
 <p>Declaration of variables occurs as follows:</p>
 <pre><code class="language-rust">fn main() {
     let x = 5;
 }</code></pre>
-<p>This is the declaration of an <em>immutable</em> variable. An <em>immutable</em> variable being changed does not compile. All variables are immutable by default. </p>
-<p>To declare a <em>mutable</em> variable (one whose value does not change), we need to use the <code>mut</code> keyword after <code>let</code>. </p>
+<p>This is the declaration of an <em>immutable</em> variable. An <em>immutable</em> variable being changed does not compile. All variables are immutable by default.</p>
+<p>To declare a <em>mutable</em> variable (one whose value does not change), we need to use the <code>mut</code> keyword after <code>let</code>.</p>
 <pre><code class="language-rust">fn main(){
     let mut x = 5;
     // value of x being changed here.
@@ -218,7 +218,7 @@ cd project
 <blockquote>
 <p>Technically variables can be declared globally but only by the use of <code>#[unsafe]</code>.</p>
 </blockquote>
-<p>Unlike variables, the type of constant must be explicitly annotated. Like variables, they can be used to perform minor (extremely limited) calculations. </p>
+<p>Unlike variables, the type of constant must be explicitly annotated. Like variables, they can be used to perform minor (extremely limited) calculations.</p>
 <h2 id="data-types"><a class="header" href="#data-types">Data Types</a></h2>
 <h3 id="integers---signed-or-unsigned"><a class="header" href="#integers---signed-or-unsigned">Integers - Signed or Unsigned</a></h3>
 <div class="table-wrapper"><table><thead><tr><th style="text-align: center">Bit length</th><th style="text-align: center">Signed</th><th style="text-align: center">Unsigned</th></tr></thead><tbody>
@@ -231,7 +231,7 @@ cd project
 </tbody></table>
 </div>
 <p>Signed ints are stored as <a href="https://en.wikipedia.org/wiki/Two%27s_complement">Two’s Complement</a>.</p>
-<p>Integer literals can have <code>_</code> in them to make them more readable. They can also be annotated with their type at the last, like <code>786u16</code>. They can also be specified to use number bases such as binary (<code>0b1000</code>), hexadecimal (<code>0xa7</code>), octal (<code>0o77</code>), and a single byte representation (<code>b1</code>). </p>
+<p>Integer literals can have <code>_</code> in them to make them more readable. They can also be annotated with their type at the last, like <code>786u16</code>. They can also be specified to use number bases such as binary (<code>0b1000</code>), hexadecimal (<code>0xa7</code>), octal (<code>0o77</code>), and a single byte representation (<code>b1</code>).</p>
 <blockquote>
 <p>The single byte representation stores them as u8 behind the scenes.</p>
 </blockquote>
@@ -239,8 +239,8 @@ cd project
 <p>Add integer overflow for int Types</p>
 </blockquote>
 <h3 id="floating-points"><a class="header" href="#floating-points">Floating Points</a></h3>
-<p><code>f32</code>: 32 bit floating point 
-<code>f64</code>: 64 bit floating point </p>
+<p><code>f32</code>: 32 bit floating point
+<code>f64</code>: 64 bit floating point</p>
 <p>Default is 64 bits. They conform to <a href="https://en.wikipedia.org/wiki/IEEE_754">IEEE-754 Standards</a></p>
 
                     </main>

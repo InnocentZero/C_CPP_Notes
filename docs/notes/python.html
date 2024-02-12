@@ -203,7 +203,7 @@ calculated.</p>
 <pre><code class="language-py"> print(11/0)
 
  Traceback(most recent call last):
-  File&quot;\&lt;stdin\&gt;&quot;, line 1, in \&lt;module\&gt;
+  File"\&lt;stdin\&gt;", line 1, in \&lt;module\&gt;
  ZeroDivisionError: division by zero
 </code></pre>
 <blockquote>
@@ -270,8 +270,8 @@ print(1.25%0.5)
 <p>If you want to use text in python, you have to use a <em>string</em>. A
 <em>string</em> is created by entering text between <strong>two single or double
 quotation marks.</strong></p>
-<pre><code class="language-py">print(&quot;Python is fun!&quot;)
-print(&quot;Always look on the bright side&quot;)
+<pre><code class="language-py">print("Python is fun!")
+print("Always look on the bright side")
 </code></pre>
 <blockquote>
 <p>The delimiter (“ or ’) used for a string doesn’t affect how it behaves
@@ -299,10 +299,10 @@ multi-line output.</p>
 </code></pre>
 <p>Newlines will automatically be added for strings that are created using
 three quotes.</p>
-<pre><code class="language-py">print(&quot;&quot;&quot;This
+<pre><code class="language-py">print("""This
 is a
 multiline
-text&quot;&quot;&quot;)
+text""")
 </code></pre>
 <blockquote>
 <p>Similarly, ** represents a tab.</p>
@@ -311,7 +311,7 @@ text&quot;&quot;&quot;)
 <h3 id="concatenation"><a class="header" href="#concatenation">Concatenation</a></h3>
 <p>As with integers and floats, strings in Python can be added, using a
 process called <em>concatenation</em>, which can be done on any two strings.</p>
-<pre><code class="language-py">print(&quot;Spam&quot; + 'eggs')
+<pre><code class="language-py">print("Spam" + 'eggs')
 </code></pre>
 <blockquote>
 <p>When concatenating strings, it doesn’t matter whether they have been
@@ -326,7 +326,7 @@ might look similar, they are two different entities</p>
 <p>Strings can also be <strong>multiplied</strong> with integers. This produces a
 repeated version of that <em>string</em>. The order of the <em>string</em> and the
 <em>integer</em> doesn’t matter, but the <em>string</em> usually comes first.</p>
-<pre><code class="language-py">print(&quot;spam&quot;*3)
+<pre><code class="language-py">print("spam"*3)
 
 print(4*'2')
 </code></pre>
@@ -341,7 +341,7 @@ which can be used to refer to the value later in the program. For
 example, in game development, you would use a <em>variable</em> to to store the
 points of the player.</p>
 <p>To assign a <em>variable</em>, use <strong>one equals sign</strong>.</p>
-<pre><code class="language-py">user = &quot;James&quot;
+<pre><code class="language-py">user = "James"
 </code></pre>
 <p>You can use variables to perform corresponding operations, just as you
 did with numbers and strings:</p>
@@ -361,8 +361,8 @@ same <em>variable</em>.</p>
 <pre><code class="language-py">x = 123.456
 print(x)
 
-x = &quot;This is a string&quot;
-print(x+&quot;!&quot;)
+x = "This is a string"
+print(x+"!")
 </code></pre>
 <blockquote>
 <p>However, this is not a good practice. To avoid mistakes, try to avoid
@@ -420,8 +420,8 @@ print(x)
 <p>The <strong>input</strong> statement needs to be followed by parentheses. You can
 provide a <em>string</em> to <strong>input()</strong> between the parentheses, producing a
 prompt message.</p>
-<pre><code class="language-py">name = input(&quot;Enter your name: &quot;)
-print(&quot;Hello&quot;+name)
+<pre><code class="language-py">name = input("Enter your name: ")
+print("Hello"+name)
 </code></pre>
 <blockquote>
 <p>The prompt message helps clarify what the input is asking for.</p>
@@ -434,7 +434,7 @@ print(age)
 <em>function</em> is used. This can be useful if you need to use a number in
 <em>string concatenation</em>. <strong>For example:</strong></p>
 <pre><code class="language-py">age = 42
-print(&quot;His age is&quot; + str(age))
+print("His age is" + str(age))
 </code></pre>
 <blockquote>
 <p>You can convert to float using the float() function.</p>
@@ -444,7 +444,7 @@ example:</strong></p>
 <pre><code class="language-py">name = input()
 age = input()
 
-print(name + &quot;is&quot; + age)
+print(name + "is" + age)
 </code></pre>
 <blockquote>
 <p>When input function executes, program flow stops until the user enters
@@ -463,10 +463,10 @@ print(x)
 </code></pre>
 <p>These operators can be used on types other than numbers, as well, such
 as <strong>strings.</strong></p>
-<pre><code class="language-py">x= &quot;spam&quot;
+<pre><code class="language-py">x= "spam"
 print(x)
 
-x += &quot;eggs&quot;
+x += "eggs"
 print(x)
 </code></pre>
 <blockquote>
@@ -485,7 +485,7 @@ True
 print(2 == 3)
 False
 
-print(&quot;hello&quot; == 'hello')
+print("hello" == 'hello')
 True
 </code></pre>
 <blockquote>
@@ -500,7 +500,7 @@ they are.</p>
 <pre><code class="language-py">print(1 != 1)
 False
 
-print(&quot;eleven&quot; != &quot;seven&quot;)
+print("eleven" != "seven")
 True
 
 print(2 != 10)
@@ -534,7 +534,7 @@ True
 </code></pre>
 <p>Greater than and smaller than operators can also be used to compare
 strings <strong>lexicographically</strong>. <strong>For Example:</strong></p>
-<pre><code class="language-py">print(&quot;Annie&quot; &gt; &quot;Andy&quot;)
+<pre><code class="language-py">print("Annie" &gt; "Andy")
 True
 </code></pre>
 <hr />
@@ -553,9 +553,9 @@ indentation can be mandatory. As you can see, the statements in the
 </blockquote>
 <p>Here is an example of <strong>if</strong> statement:</p>
 <pre><code class="language-py">if 10 &gt; 5:
-    print(&quot;10 is greater than 5&quot;)
+    print("10 is greater than 5")
 
-print(&quot;The program ended&quot;)
+print("The program ended")
 </code></pre>
 <p>The expression determines whether 10 is greater than 5. Since it is, the
 indented statement runs, and “10 is greater than 5” is output. Then, the
@@ -572,9 +572,9 @@ conditions are satisfied.</p>
 <p><strong>For example:</strong></p>
 <pre><code class="language-py">num = 12
 if num &gt; 5:
-    print(&quot;Bigger than 5&quot;)
+    print("Bigger than 5")
     if num &lt;= 47:
-        print(&quot;between 5 and 47&quot;)
+        print("between 5 and 47")
 </code></pre>
 <blockquote>
 <p><em><strong>Indentation</strong> is used to define the level of nesting.</em></p>
@@ -588,9 +588,9 @@ is <strong>False</strong>.</p>
 <p>As with <strong>if</strong> statements, the code inside the block should be indented.</p>
 <pre><code class="language-py">x = 4
 if x == 5:
-    print(&quot;Yes&quot;)
+    print("Yes")
 else:
-    print(&quot;No&quot;)
+    print("No")
 </code></pre>
 <blockquote>
 <p><em>Notice the colon after the else keyword.</em></p>
@@ -602,13 +602,13 @@ statements.</p>
 variable’s value as text:</p>
 <pre><code class="language-py">num = 3
 if num == 1:
-    print(&quot;One&quot;)
+    print("One")
 else:
     if num == 2:
-        print(&quot;Two&quot;)
+        print("Two")
     else:
         if num == 3:
-            print(&quot;Three&quot;)
+            print("Three")
 </code></pre>
 <blockquote>
 <p><em>Indentation determines which <strong>if/else</strong> statements the code blocks
@@ -624,17 +624,17 @@ shorter.</p>
 statements:</p>
 <pre><code class="language-py">num = 3:
 if num == 1:
-    print(&quot;One&quot;)
+    print("One")
 elif num == 2:
-    print(&quot;Two&quot;)
+    print("Two")
 elif num == 3:
-    print(&quot;Three&quot;)
+    print("Three")
 else:
-    print(&quot;None are true&quot;)
+    print("None are true")
 </code></pre>
 <p>As you can see in the example above, a series of <strong>if elif</strong> statements
 can have a final <strong>else</strong> block, which is called if none of the <strong>if</strong>
-or <strong>elif</strong> expressions is <strong>True</strong>. </p>
+or <strong>elif</strong> expressions is <strong>True</strong>.</p>
 <blockquote>
 <p>The <strong>elif</strong> statement is
 equivalent to an <strong>else/if</strong> statement. It is used to make the code
@@ -722,7 +722,7 @@ using the Boolean operators.</p>
 100:</p>
 <pre><code class="language-py">grade = 88
 if (grade &gt;= 70 and grade &lt;= 100):
-    print(&quot;Passed!&quot;)
+    print("Passed!")
 </code></pre>
 <blockquote>
 <p>You can use multiple <strong>and</strong>, <strong>or</strong>, <strong>not</strong> operators to chain
@@ -743,7 +743,7 @@ is displayed as the empty string.</p>
 <p>The <strong>None</strong> object is returned by any function that doesn’t explicitly
 return anything else.</p>
 <pre><code class="language-py">def some_func():
-print(&quot;Hi!&quot;)
+print("Hi!")
 var = some_func()
 print(var)
 </code></pre>
@@ -751,13 +751,13 @@ print(var)
 <h2 id="lists"><a class="header" href="#lists">Lists</a></h2>
 <p><strong>Lists</strong> are used to store items. A list is created using <strong>square
 brackets</strong> with <strong>commas</strong> separating items.</p>
-<pre><code class="language-py">words = [&quot;Hello&quot;, &quot;world&quot;, &quot;!&quot;]
+<pre><code class="language-py">words = ["Hello", "world", "!"]
 </code></pre>
 <p>In the example above the words list contains three string items.</p>
 <p>A certain item in the list can be accessed by using its index in square
 brackets.</p>
 <p><strong>For example:</strong></p>
-<pre><code class="language-py">words = [&quot;Hello&quot;, &quot;world&quot;, &quot;!&quot;]
+<pre><code class="language-py">words = ["Hello", "world", "!"]
 print(words[0])
 print(words[1])
 print(words[2])
@@ -782,7 +782,7 @@ list. It’s not mandatory, but perfectly valid.</p>
 also possible to include several different types. Lists can also be
 nested within other lists.</p>
 <pre><code class="language-py">number = 3
-things = [&quot;string&quot;,  0,  [1,  2, number],  4.56]
+things = ["string",  0,  [1,  2, number],  4.56]
 print(things[1])
 print(things[2])
 print(things[2][2])
@@ -801,7 +801,7 @@ the 2nd row.</p>
 <strong>strings</strong> behaves as though you are indexing a list containing each
 character in the string.</p>
 <p><strong>For example:</strong></p>
-<pre><code class="language-py">string = &quot;Hello world&quot;
+<pre><code class="language-py">string = "Hello world"
 print(string[6])
 </code></pre>
 <p>Space (“ “) is also a symbol and has an index.</p>
@@ -835,10 +835,10 @@ second item is “e”, and so on.</p>
 <p>To check if an item is in a list, the <strong>in</strong> operator can be used. It
 returns <strong>True</strong> if the item occurs one or more times in the list, and
 <strong>False</strong> if it doesn’t.</p>
-<pre><code class="language-py">words = [&quot;spam&quot;,  &quot;egg&quot;,  &quot;spam&quot;,  &quot;sausage&quot;]
-print(&quot;spam&quot;  in words)
-print(&quot;egg&quot;  in words)
-print(&quot;tomato&quot;  in words)
+<pre><code class="language-py">words = ["spam",  "egg",  "spam",  "sausage"]
+print("spam"  in words)
+print("egg"  in words)
+print("tomato"  in words)
 </code></pre>
 <blockquote>
 <p>The <strong>in</strong> operator is also used to determine whether or not a string
@@ -877,9 +877,9 @@ dot.</p>
 <p>The <strong>insert</strong> method is similar to <strong>append</strong>, except that it allows
 you to insert a new item at any position in the list, as opposed to just
 at the end.</p>
-<pre><code class="language-py">words = [&quot;Python&quot;,  &quot;fun&quot;]
+<pre><code class="language-py">words = ["Python",  "fun"]
 index = 1
-words.insert(index,  &quot;is&quot;)
+words.insert(index,  "is")
 print(words)
 </code></pre>
 <blockquote>
@@ -915,7 +915,7 @@ time the user inputs something, the same block of code needs to execute.</p>
 while i &lt;=5:
     print(i)
     i += 1
-print(&quot;Finished!&quot;)
+print("Finished!")
 </code></pre>
 <p>During each loop iteration, the i variable will get incremented by one,
 until it reaches 5. So, the loop will execute the print statement 5
@@ -933,9 +933,9 @@ the even and odd numbers in the range of 1 to 10:</p>
 <pre><code class="language-py">x = 1
 while x &lt;= 10:
     if x%2 == 0:
-        print(str(x) + &quot;is even&quot;)
+        print(str(x) + "is even")
     else:
-        print(str(x) + &quot;is odd&quot;)
+        print(str(x) + "is odd")
     x += 1
 </code></pre>
 <p><strong>str(x)</strong> is used to convert the number x to a string, so that it can
@@ -954,9 +954,9 @@ while  1==1:
     print(i)
     i = i + 1
     if i &gt;= 5:
-        print(&quot;Breaking&quot;)
+        print("Breaking")
         break
-print(&quot;Finished&quot;)
+print("Finished")
 </code></pre>
 <p><strong>while True</strong> is a short and easy way to make an infinite loop.</p>
 <p><strong>An example use case of break:</strong> An infinite while loop can be used to
@@ -978,7 +978,7 @@ iteration and continues with the next one.</p>
 while i&lt;5:
     i += 1
     if i==3:
-        print(&quot;Skipping 3&quot;)
+        print("Skipping 3")
         continue
     print(i)
 </code></pre>
@@ -1009,7 +1009,7 @@ word is equal to “hello”, and during the 2nd iteration it’s equal to
 </blockquote>
 <p>The <strong>for</strong> loop can be used to iterate over strings.</p>
 <p><strong>For example:</strong></p>
-<pre><code class="language-py">str = &quot;testing for loops&quot;
+<pre><code class="language-py">str = "testing for loops"
 count = 0
 for x in  str:
     if(x == 't'):
@@ -1080,7 +1080,7 @@ as the third argument, for example <strong>list(range(20, 5, -2))</strong>.</p>
 <p>The <strong>for</strong> loop is commonly used to repeat some code a certain number
 of times. This is done by combining for loops with <strong>range</strong> objects.</p>
 <pre><code class="language-py">for i in range(5):
-    print(&quot;hello world!&quot;)
+    print("hello world!")
 </code></pre>
 <blockquote>
 <p>You don’t need to call <strong>list</strong> on the <strong>range</strong> object when it is
@@ -1102,7 +1102,7 @@ Twice</strong>, or <strong>We Enjoy Typing</strong>.</p>
 <p>You’ve already used <strong>functions</strong> previously. Any statement that
 consists of a word followed by information in <strong>parentheses</strong> is a
 function call. Here are some examples that you’ve already seen:</p>
-<pre><code class="language-py">print(&quot;Hello world&quot;)
+<pre><code class="language-py">print("Hello world")
 range(2,20)
 str(12)
 range(10,20,3)
@@ -1118,9 +1118,9 @@ function named <code>my_func</code>. It takes no arguments, and prints “spam�
 three times. It is defined, and then called. The statements in the
 function are executed only when the function is called.</p>
 <pre><code class="language-py">def my_func():
-    print(&quot;spam&quot;)
-    print(&quot;spam&quot;)
-    print(&quot;spam&quot;)
+    print("spam")
+    print("spam")
+    print("spam")
 my_func()
 </code></pre>
 <blockquote>
@@ -1141,10 +1141,10 @@ of zero arguments, which are called with empty parentheses. However,
 most functions take arguments. The example below defines a function that
 takes one argument:</p>
 <pre><code class="language-py">def print_with_exclamation(word):
-    print(word + &quot;!&quot;)
-print_with_exclamation(&quot;spam&quot;)
-print_with_exclamation(&quot;eggs&quot;)
-print_with_exclamation(&quot;python&quot;)
+    print(word + "!")
+print_with_exclamation("spam")
+print_with_exclamation("eggs")
+print_with_exclamation("python")
 </code></pre>
 <blockquote>
 <p>As you can see, the argument is defined inside the parentheses.</p>
@@ -1197,7 +1197,7 @@ executed. Any code after the <strong>return</strong> statement will never happen
 <pre><code class="language-py">def add_numbers(x, y):
     total = x + y
     return total
-    print(&quot;This won't be printed&quot;)
+    print("This won't be printed")
 print(add_numbers(4,  5))
 </code></pre>
 <hr />
@@ -1226,12 +1226,12 @@ specific and have a different syntax. They are created by putting a
 multiline string containing an explanation of the function below the
 <strong>function’s first line</strong>.</p>
 <pre><code class="language-py">def shout(word):
-&quot;&quot;&quot;
+"""
 Print a word with an
 exclamation mark following it.
-&quot;&quot;&quot;
-print(word + &quot;!&quot;)
-shout(&quot;spam&quot;)
+"""
+print(word + "!")
+shout("spam")
 </code></pre>
 <blockquote>
 <p>Unlike conventional comments, <strong>docstrings</strong> are retained throughout
@@ -1376,10 +1376,10 @@ run. <strong>For example:</strong></p>
     num1 = 7
     num2 = 0
     print  (num1 / num2)
-    print(&quot;Done calculation&quot;)
+    print("Done calculation")
 except ZeroDivisionError:
-    print(&quot;An error occurred&quot;)
-    print(&quot;due to zero division&quot;)
+    print("An error occurred")
+    print("due to zero division")
 </code></pre>
 <blockquote>
 <p>In the code above, the except statement defines the type of exception
@@ -1391,21 +1391,21 @@ single <strong>except</strong> block using parentheses, to have the <strong>exce
 handle all of them.</p>
 <pre><code class="language-py">try:
     variable = 10
-    print(variable + &quot;hello&quot;)
+    print(variable + "hello")
     print(variable / 2)
 except ZeroDivisionError:
-    print(&quot;Divided by zero&quot;)
+    print("Divided by zero")
 except  (ValueError, TypeError):
-    print(&quot;Error occurred&quot;)
+    print("Error occurred")
 </code></pre>
 <p>An <strong>except</strong> statement without any exception specified will catch all
 errors. These should be used sparingly, as they can catch unexpected
 errors and hide programming mistakes. <strong>For example:</strong></p>
 <pre><code class="language-py">try:
-    word =&quot;spam&quot;
+    word ="spam"
     print(word/0)
 except:
-    print(&quot;An error occured&quot;)
+    print("An error occured")
 </code></pre>
 <blockquote>
 <p>Exception handling is particularly useful when dealing with user
@@ -1417,12 +1417,12 @@ of a <strong>try/except</strong> statement. Code within a <strong>finally</stron
 always runs after execution of the code in the <strong>try</strong>, and possibly in
 the <strong>except</strong>, blocks.</p>
 <pre><code class="language-py">try:
-    print(&quot;Hello&quot;)
+    print("Hello")
     print(1 / 0)
 except ZeroDivisionError:
-    print(&quot;Divided by zero&quot;)
+    print("Divided by zero")
 finally:
-    print(&quot;This code will run no matter what&quot;)
+    print("This code will run no matter what")
 </code></pre>
 <blockquote>
 <p>Run the code and see how it works!</p>
@@ -1435,7 +1435,7 @@ occurs in one of the preceding blocks.</p>
 except ZeroDivisionError:
     print(unknown_var)
 finally:
-    print(&quot;This is executed last&quot;)
+    print("This is executed last")
 </code></pre>
 <hr />
 <h3 id="raising-exceptions"><a class="header" href="#raising-exceptions">Raising exceptions</a></h3>
@@ -1449,15 +1449,15 @@ print(2)
 </blockquote>
 <p>Exceptions can be raised with arguments that give detail about them.
 <strong>For example:</strong></p>
-<pre><code class="language-py">name = &quot;123&quot;
-raise NameError(&quot;Invalid Name: &quot;)
+<pre><code class="language-py">name = "123"
+raise NameError("Invalid Name: ")
 </code></pre>
 <p>In <strong>except</strong> blocks, the <strong>raise</strong> statement can be used without
 arguments to re-raise whatever exception occurred. <strong>For example:</strong></p>
 <pre><code class="language-py">try:
     num = 5 / 0
 except:
-    print(&quot;An error occurred&quot;)
+    print("An error occurred")
     raise
 </code></pre>
 <hr />
@@ -1479,7 +1479,7 @@ for valid input, and after a function call to check for valid output.</p>
 <p>The <strong>assert</strong> can take a second argument that is passed to the
 <code>AssertionError</code> raised if the assertion fails.</p>
 <pre><code class="language-py">temp = -10
-assert (temp &gt;=0), &quot;Colder than absolute zero!&quot;
+assert (temp &gt;=0), "Colder than absolute zero!"
 </code></pre>
 <blockquote>
 <p>AssertionError exceptions can be caught and handled like any other
@@ -1491,7 +1491,7 @@ type of exception will terminate the program.</p>
 <p>You can use Python to read and write the contents of <strong>files</strong>. Text
 files are the easiest to manipulate. Before a file can be edited, it
 must be opened, using the <strong>open</strong> function.</p>
-<pre><code class="language-py">myfile = open(&quot;filename.txt&quot;)
+<pre><code class="language-py">myfile = open("filename.txt")
 </code></pre>
 <blockquote>
 <p>The argument of the <strong>open</strong> function is the <strong>path</strong> to the file. If
@@ -1506,14 +1506,14 @@ content to the end of the file.</p>
 <p>Adding “b” to a mode opens it in <strong>binary</strong> mode, which is used for
 non-text files (such as image and sound files). <strong>For example:</strong></p>
 <pre><code class="language-py"># write mode
-open(&quot;filename.txt&quot;, &quot;w&quot;)
+open("filename.txt", "w")
 
 # read mode
-open(&quot;filename.txt&quot;, &quot;r&quot;)
-open(&quot;filename.txt&quot;)
+open("filename.txt", "r")
+open("filename.txt")
 
 # binary write mode
-open(&quot;filename.txt&quot;, &quot;wb&quot;)
+open("filename.txt", "wb")
 </code></pre>
 <blockquote>
 <p>You can use the + sign with each of the modes above to give them extra
@@ -1522,14 +1522,14 @@ writing.</p>
 </blockquote>
 <p>Once a file has been opened and used, you should close it. This is done
 with the <strong>close</strong> method of the file object.</p>
-<pre><code class="language-py">file = open(&quot;filename.txt&quot;, &quot;w&quot;)
+<pre><code class="language-py">file = open("filename.txt", "w")
 # do stuff to the file
 file.close()
 </code></pre>
 <hr />
 <p>The contents of a file that has been opened in text mode can be read
 using the <strong>read</strong> method.</p>
-<pre><code class="language-py">file = open(&quot;filename.txt&quot;, &quot;r&quot;)
+<pre><code class="language-py">file = open("filename.txt", "r")
 cont = file.read()
 print(cont)
 file.close()
@@ -1542,7 +1542,7 @@ argument to the <strong>read</strong> function. This determines the number of
 <strong>bytes</strong> that should be read. You can make more calls to <strong>read</strong> on
 the same file object to read more of the file byte by byte. With no
 argument, <strong>read</strong> returns the rest of the file.</p>
-<pre><code class="language-py">file = open(&quot;filename.txt&quot;, &quot;r&quot;)
+<pre><code class="language-py">file = open("filename.txt", "r")
 print(file.read(16))
 print(file.read(4))
 print(file.read(4))
@@ -1556,11 +1556,11 @@ contents.</p>
 <p>After all contents in a file have been read, any attempts to read
 further from that file will return an empty string, because you are
 trying to read from the end of the file.</p>
-<pre><code class="language-py">file = open(&quot;filename.txt&quot;, &quot;r&quot;)
+<pre><code class="language-py">file = open("filename.txt", "r")
 file.read()
-print(&quot;Re-reading&quot;)
+print("Re-reading")
 print(file.read())
-print(&quot;Finished&quot;)
+print("Finished")
 file.close()
 </code></pre>
 <p><strong>Result:</strong></p>
@@ -1581,7 +1581,7 @@ example:</strong></p>
 </code></pre>
 <p>You can also use a <strong>for</strong> loop to iterate through the lines in the
 file:</p>
-<pre><code class="language-py">file = open(&quot;filename.txt&quot;, &quot;r&quot;)
+<pre><code class="language-py">file = open("filename.txt", "r")
 
 for line in file:
 print(line)
@@ -1605,10 +1605,10 @@ output.</p>
 <hr />
 <p>To write to files you use the <strong>write</strong> method, which writes a string to
 the file. <strong>For example:</strong></p>
-<pre><code class="language-py">file = open(&quot;newfile.txt&quot;,  &quot;w&quot;)
-file.write(&quot;This has been written to a file&quot;)
+<pre><code class="language-py">file = open("newfile.txt",  "w")
+file.write("This has been written to a file")
 file.close()
-file = open(&quot;newfile.txt&quot;,  &quot;r&quot;)
+file = open("newfile.txt",  "r")
 print(file.read())
 file.close()
 </code></pre>
@@ -1617,13 +1617,13 @@ file.close()
 </blockquote>
 <p>When a file is opened in write mode, the file’s existing content is
 deleted.</p>
-<pre><code class="language-py">file = open(&quot;newfile.txt&quot;,  &quot;w&quot;)
-file.write(&quot;Some new text&quot;)
+<pre><code class="language-py">file = open("newfile.txt",  "w")
+file.write("Some new text")
 file.close()
-file = open(&quot;newfile.txt&quot;,  &quot;r&quot;)
-print(&quot;Reading new contents&quot;)
+file = open("newfile.txt",  "r")
+print("Reading new contents")
 print(file.read())
-print(&quot;Finished&quot;)
+print("Finished")
 file.close()
 </code></pre>
 <blockquote>
@@ -1631,8 +1631,8 @@ file.close()
 </blockquote>
 <p>The <strong>write</strong> method returns the number of <strong>bytes</strong> written to a file,
 if successful.</p>
-<pre><code class="language-py">msg = &quot;Hello world!&quot;
-file = open(&quot;newfile.txt&quot;,  &quot;w&quot;)
+<pre><code class="language-py">msg = "Hello world!"
+file = open("newfile.txt",  "w")
 amount_written = file.write(msg)
 print(amount_written)
 file.close()
@@ -1646,7 +1646,7 @@ string first.</p>
 are always closed after they have been used. One way of doing this is to
 use <strong>try</strong> and <strong>finally</strong></p>
 <pre><code class="language-py">try:
-    f = open(&quot;filename.txt&quot;)
+    f = open("filename.txt")
     print(f.read())
 finally:
     f.close()
@@ -1657,7 +1657,7 @@ finally:
 <p>An alternative way of doing this is using <strong>with</strong> statements. This
 creates a temporary variable (often called <strong>f</strong>), which is only
 accessible in the indented block of the <strong>with</strong> statement.</p>
-<pre><code class="language-py">with open(&quot;filename.txt&quot;)  as f:
+<pre><code class="language-py">with open("filename.txt")  as f:
 print(f.read())
 </code></pre>
 <blockquote>
@@ -1670,9 +1670,9 @@ even if exceptions occur within it.</p>
 values. Lists can be thought of as dictionaries with integer keys within
 a certain range. Dictionaries can be indexed in the same way as lists,
 using <strong>square brackets</strong> containing keys. <strong>Example:</strong></p>
-<pre><code class="language-py">ages = {&quot;Dave&quot;:  24,  &quot;Mary&quot;:  42,  &quot;John&quot;:  58}
-print(ages[&quot;Dave&quot;])
-print(ages[&quot;Mary&quot;])
+<pre><code class="language-py">ages = {"Dave":  24,  "Mary":  42,  "John":  58}
+print(ages["Dave"])
+print(ages["Mary"])
 </code></pre>
 <blockquote>
 <p>Each element in a dictionary is represented by a <strong>key:value</strong> pair.</p>
@@ -1680,12 +1680,12 @@ print(ages[&quot;Mary&quot;])
 <p>Trying to index a key that isn’t part of the dictionary returns a
 <strong>KeyError</strong>. <strong>Example:</strong></p>
 <pre><code class="language-py">primary = {
-&quot;red&quot;:  [255,  0,  0],
-&quot;green&quot;:  [0,  255,  0],
-&quot;blue&quot;:  [0,  0,  255],
+"red":  [255,  0,  0],
+"green":  [0,  255,  0],
+"blue":  [0,  0,  255],
 }
-print(primary[&quot;red&quot;])
-print(primary[&quot;yellow&quot;])
+print(primary["red"])
+print(primary["yellow"])
 </code></pre>
 <p>As you can see, a dictionary can store any types of data as values. &gt;An
 empty dictionary is defined as <strong>{}</strong>.</p>
@@ -1696,7 +1696,7 @@ Trying to use a mutable object as a dictionary key causes a
 <strong>TypeError</strong>.</p>
 <pre><code class="language-py">bad_dict = {
 
-[1,  2,  3]:  &quot;one two three&quot;,
+[1,  2,  3]:  "one two three",
 
 }
 </code></pre>
@@ -1706,7 +1706,7 @@ Trying to use a mutable object as a dictionary key causes a
 <p>Just like lists, dictionary keys can be assigned to different values.
 However, unlike lists, a new dictionary key can also be assigned a
 value, not just ones that already exist.</p>
-<pre><code class="language-py">squares = {1:  1,  2:  4,  3:  &quot;error&quot;,  4:  16,}
+<pre><code class="language-py">squares = {1:  1,  2:  4,  3:  "error",  4:  16,}
 squares[8] = 64
 squares[3] = 9
 print(squares)
@@ -1714,40 +1714,40 @@ print(squares)
 <p>To determine whether a key is in a dictionary, you can use <strong>in</strong> and
 <strong>not in</strong>, just as you can for a list. <strong>Example:</strong></p>
 <pre><code class="language-py">nums = {
-1:  &quot;one&quot;,
-2:  &quot;two&quot;,
-3:  &quot;three&quot;,
+1:  "one",
+2:  "two",
+3:  "three",
 }
 print(1  in nums)
-print(&quot;three&quot;  in nums)
+print("three"  in nums)
 print(4  not  in nums)
 </code></pre>
 <p>A useful dictionary method is <strong>get</strong>. It does the same thing as
 indexing, but if the key is not found in the dictionary it returns
 another specified value instead (‘None’, by default). <strong>Example:</strong></p>
-<pre><code class="language-py">pairs = {1:  &quot;apple&quot;,
-&quot;orange&quot;:  [2,  3,  4],
+<pre><code class="language-py">pairs = {1:  "apple",
+"orange":  [2,  3,  4],
 True:  False,
-None:  &quot;True&quot;,
+None:  "True",
 }
 
-print(pairs.get(&quot;orange&quot;))
+print(pairs.get("orange"))
 print(pairs.get(7))
-print(pairs.get(12345,  &quot;not in dictionary&quot;))
+print(pairs.get(12345,  "not in dictionary"))
 </code></pre>
 <hr />
 <h2 id="tuples"><a class="header" href="#tuples">Tuples</a></h2>
 <p><strong>Tuples</strong> are very similar to lists, except that they are immutable
 (they cannot be changed). Also, they are created using <strong>parentheses</strong>,
 rather than square brackets. <strong>Example:</strong></p>
-<pre><code class="language-py">words = (&quot;spam&quot;, &quot;eggs&quot;, &quot;sausages&quot;,)
+<pre><code class="language-py">words = ("spam", "eggs", "sausages",)
 </code></pre>
 <p>You can access the values in the tuple with their index, just as you did
 with lists:</p>
 <pre><code class="language-py">print(words[0])
 </code></pre>
 <p>Trying to reassign a value causes a TypeError.</p>
-<pre><code class="language-py">words[1] = &quot;cheese&quot;
+<pre><code class="language-py">words[1] = "cheese"
 </code></pre>
 <blockquote>
 <p>You can access the values in the tuple with their index, just as you
@@ -1755,7 +1755,7 @@ did with lists.</p>
 </blockquote>
 <p>Tuples can be created without the parentheses, by just separating the
 values with commas. <strong>Example:</strong></p>
-<pre><code class="language-py">my_tuple = &quot;one&quot;, &quot;two&quot;, &quot;three&quot;
+<pre><code class="language-py">my_tuple = "one", "two", "three"
 print(my_tuple[0])
 </code></pre>
 <p>An empty tuple is created using an empty parenthesis pair.</p>
@@ -1844,7 +1844,7 @@ a string’s <strong>format</strong> method to substitute a number of arguments 
 string. <strong>Example:</strong></p>
 <pre><code class="language-py"># string formatting
 nums = [4,  5,  6]
-msg = &quot;Numbers: {0} {1} {2}&quot;. format(nums[0], nums[1], nums[2])
+msg = "Numbers: {0} {1} {2}". format(nums[0], nums[1], nums[2])
 print(msg)
 </code></pre>
 <blockquote>
@@ -1853,7 +1853,7 @@ corresponding position, which is determined using the curly braces {
 }.</p>
 </blockquote>
 <p>String formatting can also be done with named arguments. <strong>Example:</strong></p>
-<pre><code class="language-py">a= &quot;{x}, {y}&quot;.format(x = 5, y = 12)
+<pre><code class="language-py">a= "{x}, {y}".format(x = 5, y = 12)
 print(a)
 </code></pre>
 <hr />
@@ -1866,26 +1866,26 @@ substring at the start and end of a string, respectively. To change the
 case of a string, you can use <strong>lower</strong> and <strong>upper</strong>. The method
 <strong>split</strong> is the opposite of <strong>join</strong> turning a string with a certain
 separator into a list. <strong>Some examples:</strong></p>
-<pre><code class="language-py">print(&quot;, &quot;.join([&quot;spam&quot;,  &quot;eggs&quot;,  &quot;ham&quot;]))
-#prints &quot;spam, eggs, ham&quot;
+<pre><code class="language-py">print(", ".join(["spam",  "eggs",  "ham"]))
+#prints "spam, eggs, ham"
 
-print(&quot;Hello ME&quot;.replace(&quot;ME&quot;,  &quot;world&quot;))
-#prints &quot;Hello world&quot;
+print("Hello ME".replace("ME",  "world"))
+#prints "Hello world"
 
-print(&quot;This is a sentence.&quot;.startswith(&quot;This&quot;))
-# prints &quot;True&quot;
+print("This is a sentence.".startswith("This"))
+# prints "True"
 
-print(&quot;This is a sentence.&quot;.endswith(&quot;sentence.&quot;))
-# prints &quot;True&quot;
+print("This is a sentence.".endswith("sentence."))
+# prints "True"
 
-print(&quot;This is a sentence.&quot;.upper())
-# prints &quot;THIS IS A SENTENCE.&quot;
+print("This is a sentence.".upper())
+# prints "THIS IS A SENTENCE."
 
-print(&quot;AN ALL CAPS SENTENCE&quot;.lower())
-#prints &quot;an all caps sentence&quot;
+print("AN ALL CAPS SENTENCE".lower())
+#prints "an all caps sentence"
 
-print(&quot;spam, eggs, ham&quot;.split(&quot;, &quot;))
-#prints &quot;['spam', 'eggs', 'ham']&quot;
+print("spam, eggs, ham".split(", "))
+#prints "['spam', 'eggs', 'ham']"
 </code></pre>
 <hr />
 <h2 id="numeric-functions"><a class="header" href="#numeric-functions">Numeric Functions</a></h2>
@@ -1909,10 +1909,10 @@ arguments evaluate to <strong>True</strong> (and <strong>False</strong> otherwis
 list simultaneously. <strong>Example:</strong></p>
 <pre><code class="language-py">nums = [55,  44,  33,  22,  11]
 if  all([i &gt; 5  for i in nums]):
-    print(&quot;All larger than 5&quot;)
+    print("All larger than 5")
 
 if  any([i % 2 == 0  for i in nums]):
-    print(&quot;At least one is even&quot;)
+    print("At least one is even")
 
 for v in  enumerate(nums):
     print(v)
@@ -2114,13 +2114,13 @@ This is ideal when you need to extend the functionality of functions
 that you don’t want to modify. <strong>Example:</strong></p>
 <pre><code class="language-py">def decor(func):
     def wrap():
-        print(&quot;============&quot;)
+        print("============")
         func()
-        print(&quot;============&quot;)
+        print("============")
     return wrap
 
 def print_text():
-print(&quot;Hello world!&quot;)
+print("Hello world!")
 
 decorated = decor(print_text)
 decorated()
@@ -2137,13 +2137,13 @@ always got our “plus something” version of <strong>print_text</strong>. This
 by re-assigning the variable that contains our function:</p>
 <pre><code class="language-py">def decor(func):
     def wrap():
-        print(&quot;============&quot;)
+        print("============")
         func()
-        print(&quot;============&quot;)
+        print("============")
     return wrap
 
 def print_text():
-print(&quot;Hello world!&quot;)
+print("Hello world!")
 
 print_text = decor(print_text)
 print_text()
@@ -2157,7 +2157,7 @@ function definition with a decorator name and the @ symbol. If we are
 defining a function we can “decorate” it with the @ symbol like:</p>
 <pre><code class="language-py">@decor
 def print_text():
-    print(&quot;Hello world!&quot;)
+    print("Hello world!")
 
 print_text();
 </code></pre>
@@ -2221,10 +2221,10 @@ created using curly braces, or the <strong>set</strong> function. They share som
 functionality with lists, such as the use of <strong>in</strong> to check whether
 they contain a particular item.</p>
 <pre><code class="language-py">num_set = {1,  2,  3,  4,  5}
-word_set = set([&quot;spam&quot;,  &quot;eggs&quot;,  &quot;sausage&quot;])
+word_set = set(["spam",  "eggs",  "sausage"])
 
 print(3  in num_set)
-print(&quot;spam&quot;  not  in word_set)
+print("spam"  not  in word_set)
 </code></pre>
 <blockquote>
 <p>To create an empty set, you must use <strong>set()</strong>, as <strong>{}</strong> creates an
@@ -2310,7 +2310,7 @@ print(list(takewhile(lambda x: x&lt;= 6, nums)))
 accomplish a task with all possible combinations of some items.
 <strong>Example:</strong></p>
 <pre><code class="language-py">from itertools import product, permutations
-letters = (&quot;A&quot;,  &quot;B&quot;)
+letters = ("A",  "B")
 print(list(product(letters,  range(2))))
 print(list(permutations(letters)))
 </code></pre>

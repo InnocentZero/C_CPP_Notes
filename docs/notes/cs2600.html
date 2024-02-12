@@ -186,14 +186,14 @@
 <ul>
 <li>Has capacitors.</li>
 <li>Capacitors discharge over time hence needs to be continuously powered and recharged.</li>
-<li>Take time to charge and discharge which creates bottlenecks for CPU.</li>
+<li>Take time to charge and discharge, which creates bottlenecks for CPU.</li>
 </ul>
 <h2 id="instruction-set"><a class="header" href="#instruction-set">Instruction Set</a></h2>
 <p>Different Instructions: x86, ARM, RISC V, MIPS.</p>
 <ul>
 <li>Programs written for one processor cannot execute on another.</li>
 <li>Early trend: more instructions, complex instructions.</li>
-<li>RISC - Reduced Instruction Set Computing
+<li>RISC – Reduced Instruction Set Computing
 <ul>
 <li>Instructions are small and simple</li>
 <li>Software does not complicate operations.</li>
@@ -201,7 +201,7 @@
 </li>
 </ul>
 <h2 id="risc-v"><a class="header" href="#risc-v">RISC V</a></h2>
-<p>Open source. Has 32 int and 32 FP registers. Also has XLEN variable which is either 32 or 64 for 32 bit and 64 bit processors respectively.</p>
+<p>Open source. Has 32 int and 32 FP registers. Also has XLEN variable, which is either 32 or 64 for 32-bit and 64-bit processors respectively.</p>
 <div class="table-wrapper"><table><thead><tr><th style="text-align: center">Register</th><th style="text-align: center">ABI Name</th><th style="text-align: center">Description</th></tr></thead><tbody>
 <tr><td style="text-align: center">x0</td><td style="text-align: center">zero</td><td style="text-align: center">Zero always</td></tr>
 <tr><td style="text-align: center">x1</td><td style="text-align: center">ra</td><td style="text-align: center">Return address</td></tr>
@@ -260,8 +260,42 @@
 </li>
 </ul>
 <p>The above instructions have greater than, greater than equal to variants as well. Also immediate variants of all.</p>
-<h3 id="program-counter"><a class="header" href="#program-counter">Program Counter</a></h3>
-<p>This keeps track of the next instruction to be executed. Usually incremented by 4 unless branches.</p>
+<h4 id="function-calls"><a class="header" href="#function-calls">Function calls</a></h4>
+<ul>
+<li>
+<p><code>jal rd, imm</code>: Jump to PC + imm, and store pc + 4 in register rd.</p>
+</li>
+<li>
+<p><code>jalr rd, rs1, imm</code>: Jump to rs1 + imm, storing PC + 4 in the register rd. Used for function pointers.</p>
+</li>
+<li>
+<p><code>j label</code>: alias to <code>jal zero, label</code>, discards the return address</p>
+</li>
+<li>
+<p><code>ret rs1</code>: return to the address in rs1, if no argument is specified use ra (return addres register/x1). Alias to <code>jal rs1, 0</code></p>
+</li>
+</ul>
+<p>For function calls we also need a stack-based execution. s2 register is the stack pointer that points to the top of the stack. Frame pointer s0 saves the base of the stack.
+These mark the stack frame in the stack.</p>
+<p>Registers a0 to a7 are used to pass function arguments from one function to another. These are 8 parameters. If we have more, then you need to use the stack.</p>
+<h3 id="executing-instructions"><a class="header" href="#executing-instructions">Executing instructions</a></h3>
+<p>If we are using an operating system:</p>
+<ul>
+<li>Proxy Kernel is handling syscalls, mapping memory, program counter according to memory map, etc.</li>
+</ul>
+<p>If we are without an operating system:</p>
+<ul>
+<li>Manually write the <code>.text</code> section to the flash memory.</li>
+<li>Load the <code>.data</code> section to the RAM.</li>
+<li>Set/reset the program counter to the required memory. It resets to a fixed value called as <strong>reset vector</strong>.</li>
+<li>Address out of range is your skill issue.</li>
+<li>Instruction fetched by the <strong>Instruction Pointer</strong>. 32 bits in width.</li>
+<li>Then it is sent to control ROM. This does not have microcodes and are instead hardcoded using combinational circuit.</li>
+</ul>
+<h4 id="register-bank"><a class="header" href="#register-bank">Register Bank</a></h4>
+<p>Has all the registers and 2 muxs + 1 demux to select the register to use.</p>
+<h4 id="program-counter"><a class="header" href="#program-counter">Program Counter</a></h4>
+<p>This keeps track of the next instruction to be executed. Usually incremented by 4 unless branches. It resets to a fixed value called as <strong>reset vector</strong>.</p>
 <h2 id="multiprecision-arithmetic-in-riscv"><a class="header" href="#multiprecision-arithmetic-in-riscv">Multiprecision Arithmetic in RISCV</a></h2>
 <p>Multiprecision addition</p>
 <pre><code class="language-assembly">.data
@@ -366,6 +400,7 @@ return:
 ret
 </code></pre>
 <p>Multiprecision multiplication</p>
+<p>This is WRONG!!!!</p>
 <pre><code class="language-assembly">.data
 # data goes here
 iter: .dword 0x2 # number of chunks
@@ -425,6 +460,65 @@ add s2, s2, a2 #i = i + 1
 j outer_loop
 
 return:
+ret
+</code></pre>
+<h2 id="function-call-examples-in-riscv"><a class="header" href="#function-call-examples-in-riscv">Function call examples in RISCV</a></h2>
+<p>Recursive fibonacci</p>
+<pre><code class="language-assembly">.data
+# data goes here
+fib_in: .dword 0xa #the 3rd fibonacci number
+fib_out: .dword 0 #output is stored here
+
+.section .text
+.global main
+
+main:
+addi sp, sp, -0x8 #create stack frame
+sd ra, 0(sp) #store return address of main
+ld a0, fib_in #load the argument in the a0 reg
+
+jal ra, fib #call the function with a0 = fib_in
+
+la t1, fib_out #take the return value from the a1 reg 
+sd a1, 0(t1) #store the return value in the required place
+ld ra, 0(sp) #load the return address
+addi sp, sp, 0x8 #restore stack frame
+ret
+
+fib: #fib(k)
+
+addi sp, sp, -0x20 #make the stack frame
+
+sd ra, 0(sp) #store the return address
+sd a0, 0x8(sp) #store the argument
+
+li t0, 2 #if a0 == 1 || a0 == 2
+bleu a0, t0, fib_done #leave
+
+addi a0, a0, -0x1 #a0 = a0 - 1
+jal ra, fib #fib(k - 1)
+sd a1, 0x10(sp) #t1 = fib(k-1)
+
+addi a0, a0, -0x1 #store fib(k - 1)
+jal ra, fib #fib(k - 2)
+sd a1, 0x18(sp) #store fib(k - 2)
+
+ld t1, 0x10(sp)
+ld t2, 0x18(sp)
+add a1, t2, t1 #a1 = fib(k - 1) + fib(k - 2)
+  
+
+ld ra, 0(sp) #restore return address
+ld a0, 0x8(sp) #restore a0
+addi sp, sp ,0x20 #restore stack frame
+ret
+
+fib_done:
+ld ra, 0(sp) #restore return address
+ld a0, 0x8(sp) #restore 
+li a1, 0x1 #send value
+addi sp, sp, 0x20 #restore stack frame
+
 ret
 </code></pre>
 

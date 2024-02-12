@@ -194,13 +194,13 @@
 
 project(tic_tac_toe
     VERSION 0.1
-    DESCRIPTION &quot;Learning CMake and FXTUI together&quot;
+    DESCRIPTION "Learning CMake and FXTUI together"
     LANGUAGES CXX
 )
 # CMAKE Standard
 set (CMAKE_CXX_STANDARD 17)
 # Adding global flags
-set(CMAKE_CXX_FLAGS &quot;${CMAKE_CXX_FLAGS} -Wall -Wextra -Wpedantic&quot;)
+set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wall -Wextra -Wpedantic")
 include(FetchContent)
 
 FetchContent_Declare(ftxui
@@ -220,7 +220,7 @@ add_subdirectory(src)
 </code></pre>
 <p><code>CMakeLists.txt</code> at src:</p>
 <pre><code class="language-cmake">set (TARGET ${PROJECT_NAME})
-file(GLOB SRC_LIST CONFIGURE_DEPENDS &quot;${CMAKE_SOURCE_DIR}/src/*.cpp&quot;)
+file(GLOB SRC_LIST CONFIGURE_DEPENDS "${CMAKE_SOURCE_DIR}/src/*.cpp")
 add_executable(${TARGET} ${SRC_LIST})
 target_link_libraries(${TARGET}
   PRIVATE ftxui::screen
@@ -231,8 +231,8 @@ target_link_libraries(${TARGET}
 <p><code>CMakeLists.txt</code> at libs:</p>
 <pre><code class="language-cmake"># Note that headers are optional, and do not affect add_library, but they will not
 
-file(GLOB LIB_HEADER_LIST CONFIGURE_DEPENDS &quot;${ModernCMakeExample_SOURCE_DIR}/libs/*.cpp&quot;)
-file(GLOB LIB_SRC_LIST CONFIGURE_DEPENDS &quot;${ModernCMakeExample_SOURCE_DIR}/libs/src/*.cpp&quot;)
+file(GLOB LIB_HEADER_LIST CONFIGURE_DEPENDS "${ModernCMakeExample_SOURCE_DIR}/libs/*.cpp")
+file(GLOB LIB_SRC_LIST CONFIGURE_DEPENDS "${ModernCMakeExample_SOURCE_DIR}/libs/src/*.cpp")
 
 # Make an automatic library - will be static or dynamic based on user setting
 add_library(modern_library ${LIB_SRC_LIST} ${LIB_HEADER_LIST})

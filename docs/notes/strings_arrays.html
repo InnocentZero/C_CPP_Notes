@@ -182,17 +182,17 @@
 using namespace std;
 
 //creating a new string using assignment
-string greeting1 = &quot;Hello &quot;;
+string greeting1 = "Hello ";
 
 //Creating a new string using the constructor
-string greeeting2(&quot;World&quot;);
+string greeeting2("World");
 </code></pre>
 <p>There are various cons of using C-style strings:</p>
 <ul>
 <li>If allocated on the stack, it will always occupy a size you specify (a character occupies a byte assuming a byte is 8 bits long) no matter how long the text it contains is.</li>
-<li>If allocated on the heap (using malloc()) or on the Free Store (new char[]) you’re responsible for releasing the memory afterwards and you will always have the overhead of a heap allocation. </li>
+<li>If allocated on the heap (using malloc()) or on the Free Store (new char[]) you’re responsible for releasing the memory afterwards and you will always have the overhead of a heap allocation.</li>
 <li>If you copy a text of more than 256 chars into the array, it might crash, produce ugly assertion messages or cause unexplainable (mis-)behavior somewhere else in your program.</li>
-<li>To determine the text’s length, the array has to be scanned, character by character, for a \0 character. </li>
+<li>To determine the text’s length, the array has to be scanned, character by character, for a \0 character.</li>
 <li>You need to check and handle oversized strings yourself else the code will be unsafe (looking at you <code>strcpy</code>).</li>
 </ul>
 <p>Pros of using C style strings:</p>
@@ -214,16 +214,16 @@ string greeeting2(&quot;World&quot;);
 <li>A <code>const</code> qualified string is hardcoded in memory. So it has zero runtime cost. But be aware while using it as it can literally be read through the binary data.</li>
 </ul>
 <pre><code class="language-cpp">// declare greeting 
-string greeting = &quot;aeblablo&quot;
+string greeting = "aeblablo"
 
 //accessing individual characters of a string
-cout &lt;&lt; greeting1[1] &lt;&lt; &quot; is 'e'&quot; &lt;&lt; endl;
+cout &lt;&lt; greeting1[1] &lt;&lt; " is 'e'" &lt;&lt; endl;
 
 //Length of the string
 cout &lt;&lt; greeting.length() &lt;&lt; endl;
 
 //substring from the starting index for a specified length
-// gives &quot;ell&quot; in this case
+// gives "ell" in this case
 cout &lt;&lt; greeting.substr(1, 3) &lt;&lt; endl;
 
 //adding two Strings

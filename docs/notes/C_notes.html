@@ -176,13 +176,13 @@
                 <div id="content" class="content">
                     <main>
                         <h1 id="c_notes"><a class="header" href="#c_notes">C_notes</a></h1>
-<p>Must read: <a href="https://beej.us/guide/bgc/html/index-wide.html">Brian Jorgensen Hall’s blog</a> </p>
+<p>Must read: <a href="https://beej.us/guide/bgc/html/index-wide.html">Brian Jorgensen Hall’s blog</a></p>
 <div class="epigraph"><blockquote><p> C is not a big language, and it is not well served by a big book.</p><footer>
 Brian W. Kernighan, Dennis M. Ritchie</footer></blockquote></div>
 <pre><code class="language-c">/* Hello World Program */
 #include &lt;stdio.h&gt;
 
-int main(void) { printf(&quot;Hello World!\n&quot;); }
+int main(void) { printf("Hello World!\n"); }
 </code></pre>
 <p><code>#include</code> is a preprocessor directive.</p>
 <blockquote>
@@ -208,7 +208,7 @@ int main(void) { printf(&quot;Hello World!\n&quot;); }
 <h4 id="booleans"><a class="header" href="#booleans">Booleans</a></h4>
 <p>Traditionally, <code>0</code> is false, and any other value is true. <code>#include &lt;stdbool.h&gt;</code> to include a <code>bool</code> type.</p>
 <h3 id="arithmetic"><a class="header" href="#arithmetic">Arithmetic</a></h3>
-<p>Standard operators. Also, ternary operator. </p>
+<p>Standard operators. Also, ternary operator.</p>
 <p>Ternary operator is <strong>NOT</strong> flow control. It is an expression that evaluates to something.</p>
 <p>Also, there is pre and post decrement. Stir clear of these unless you know what you are doing.</p>
 <h4 id="weird-ass-comma-operators"><a class="header" href="#weird-ass-comma-operators">Weird Ass comma operators</a></h4>
@@ -245,13 +245,13 @@ int x = 0;
 int main() {
   switch (x) {
   case 1:
-    printf(&quot;1\n&quot;);
+    printf("1\n");
     break;
   case 2:
-    printf(&quot;2\n&quot;);
+    printf("2\n");
     break;
   default:
-    printf(&quot;any other value\n&quot;);
+    printf("any other value\n");
   }
 }
 </code></pre>
@@ -268,8 +268,8 @@ int main(void)
 {
     int i = 10;
 
-    printf(&quot;The value of i is %d\n&quot;, i);
-    printf(&quot;And its address is %p\n&quot;, (void *)&amp;i);
+    printf("The value of i is %d\n", i);
+    printf("And its address is %p\n", (void *)&amp;i);
 
     // %p expects the argument to be a pointer to void
     // so we cast it to make the compiler happy.
@@ -310,8 +310,8 @@ int main(void)
 <h3 id="strings"><a class="header" href="#strings">Strings</a></h3>
 <p>Arrays of characters terminated by the null character.</p>
 <pre><code class="language-c">int main() {
-  char *s = &quot;Hello world\n&quot;;
-  char t[] = &quot;Loss pro max\n&quot;;
+  char *s = "Hello world\n";
+  char t[] = "Loss pro max\n";
 }
 </code></pre>
 <p>In the above example, s is <em>immutable</em> because it points to a hardcoded place in memory. On the other hand, the array copies the individual bytes from the hardcoded location and is therefore mutable.</p>
@@ -326,21 +326,21 @@ int main(void)
 };
 
 // Now with an initializer! Same field order as in the struct declaration:
-struct car saturn = {&quot;Saturn SL/2&quot;, 16000.99, 175};
+struct car saturn = {"Saturn SL/2", 16000.99, 175};
 
-printf(&quot;Name:      %s\n&quot;, saturn.name);
-printf(&quot;Price:     %f\n&quot;, saturn.price);
-printf(&quot;Top Speed: %d km\n&quot;, saturn.speed);
+printf("Name:      %s\n", saturn.name);
+printf("Price:     %f\n", saturn.price);
+printf("Top Speed: %d km\n", saturn.speed);
 </code></pre>
-<p><code>struct car saturn = {.speed=175, .name=&quot;Saturn SL/2&quot;};</code> something like this can also be done.</p>
+<p><code>struct car saturn = {.speed=175, .name="Saturn SL/2"};</code> something like this can also be done.</p>
 <p>Whatever isn’t initialized explicitly is initialised to 0 in memory.</p>
 <p>Dot to access fields, arrow to access if it is a pointer to a struct.</p>
 <blockquote>
-<p>Note: Do <strong>NOT</strong> <a href="https://stackoverflow.com/questions/7179174/why-doesnt-c-provide-struct-comparison">compare structs directly</a>. </p>
+<p>Note: Do <strong>NOT</strong> <a href="https://stackoverflow.com/questions/7179174/why-doesnt-c-provide-struct-comparison">compare structs directly</a>.</p>
 </blockquote>
 <h2 id="file-handling"><a class="header" href="#file-handling">File handling</a></h2>
 <p><code>FILE *</code> is a pointer to a file in C. <code>fprintf</code> and <code>fscanf</code> take the first arguments as the file pointer and the rest is the same as <code>printf</code> and <code>scanf</code>.</p>
-<p>To open a file, use <code>fopen(&quot;file_path&quot;, &quot;mode&quot;)</code>. Mode can be r or w (for read or write).</p>
+<p>To open a file, use <code>fopen("file_path", "mode")</code>. Mode can be r or w (for read or write).</p>
 <blockquote>
 <p>Note: <code>fgetc</code> returns an int. This is because EOF doesn’t fit in char.</p>
 </blockquote>
@@ -360,12 +360,12 @@ typedef struct {
 } animal;                         // &lt;-- new name
 
 //struct animal y;  // ERROR: this no longer works--no such struct!
-animal z;           // This works because &quot;animal&quot; is an alias
+animal z;           // This works because "animal" is an alias
 </code></pre>
 <pre><code class="language-c">typedef int *intptr;
 
 int a = 10;
-intptr x = &amp;a, y = &amp;a;  // &quot;intptr&quot; is type &quot;int*&quot;
+intptr x = &amp;a, y = &amp;a;  // "intptr" is type "int*"
 </code></pre>
 <pre><code class="language-c">// Make type five_ints an array of 5 ints
 typedef int five_ints[5];
@@ -379,7 +379,7 @@ five_ints x = {11, 22, 33, 44, 55};
 <pre><code class="language-c">int *x;
 
 if ((x = malloc(sizeof(int) * 10)) == NULL)
-    printf(&quot;Error allocating 10 ints\n&quot;);
+    printf("Error allocating 10 ints\n");
     // do something here to handle it
 }
 </code></pre>
@@ -398,7 +398,7 @@ int main(void)
 
     // Print all values 0, 5, 10, 15, ..., 40, 45
     for (int i = 0; i &lt; 10; i++)
-        printf(&quot;%d\n&quot;, p[i]);
+        printf("%d\n", p[i]);
 
     // Free the space
     free(p);
@@ -430,7 +430,7 @@ int main(void) {
 
     // Check to see if we successfully reallocated
     if (new_p == NULL) {
-      printf(&quot;Error reallocing\n&quot;);
+      printf("Error reallocing\n");
       return 1;
     }
 
@@ -443,7 +443,7 @@ int main(void) {
 
   // Print all values 0.0-2.0 in the 40 elements:
   for (int i = 0; i &lt; 40; i++)
-    printf(&quot;%f\n&quot;, p[i]);
+    printf("%f\n", p[i]);
 
   // Free the space
   free(p);
@@ -527,12 +527,12 @@ char *readline(FILE *fp)
 
 int main(void)
 {
-    FILE *fp = fopen(&quot;foo.txt&quot;, &quot;r&quot;);
+    FILE *fp = fopen("foo.txt", "r");
 
     char *line;
 
     while ((line = readline(fp)) != NULL) {
-        printf(&quot;%s\n&quot;, line);
+        printf("%s\n", line);
         free(line);
     }
 

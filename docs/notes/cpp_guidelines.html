@@ -195,7 +195,7 @@
 </code></pre>
 <p>The <code>-*- C++ -*-</code> string on the first line is there to tell Emacs that the source file is a C++ file, not a C file (Emacs assumes .h files are C files by default).</p>
 <p>Next line license.</p>
-<p>The <code>///</code> are doxygen comments describing the purpose of the files. </p>
+<p>The <code>///</code> are doxygen comments describing the purpose of the files.</p>
 <p>Abstract for the file: first sentence or a paragraph beginning with <code>\brief</code>.</p>
 <h3 id="header-guard"><a class="header" href="#header-guard">Header Guard</a></h3>
 <p>Combination of <code>#ifndef</code> and <code>#define</code>. This is meant for protecting the linker against including the same function / class / whatever multiple times as it causes error during linking.</p>
@@ -205,7 +205,7 @@
 <p>The header file’s guard should be the all-caps path that a user of this header would #include, using ‘_’ instead of path separator and extension marker. For example, the header file llvm/include/llvm/Analysis/Utils/Local.h would be #include-ed as #include <code>llvm/Analysis/Utils/Local.h</code>, so its guard is <code>LLVM_ANALYSIS_UTILS_LOCAL_H</code>.</p>
 <h4 id="classes-methods-and-global-functions"><a class="header" href="#classes-methods-and-global-functions">Classes, methods and global functions</a></h4>
 <p>Single line comment explaining the purpose. If non-trivial, use Doxygen comment blocks.</p>
-<p>For functions and methods, single line about what it does and a description of edge cases. </p>
+<p>For functions and methods, single line about what it does and a description of edge cases.</p>
 <h4 id="commenting-1"><a class="header" href="#commenting-1">Commenting</a></h4>
 <p>In general, C++ style comments. (//, ///). C style comments are useful if the comment strictly needs to be inline. Eg. <code>Object.emitName(/*Prefix=*/nullptr);</code></p>
 <p>Don’t comment out large blocks of code. If extremely necessary, (for instance, to give a debugging example), use <code>#if 0</code> and <code>#endif</code>. Better than C style comments.</p>

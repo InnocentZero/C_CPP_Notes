@@ -469,7 +469,7 @@ int main(void){
 ASSERT(x == y);
 
 //will be converted to
-printf(&quot;x==y&quot;);
+printf("x==y");
 </code></pre>
 <ol start="2">
 <li>
@@ -496,7 +496,7 @@ printf(&quot;x==y&quot;);
 io_service service;
 
 //
-ip::tcp::endpoint ep( ip::address::from_string(&quot;127.0.0.1&quot;), 2001);
+ip::tcp::endpoint ep( ip::address::from_string("127.0.0.1"), 2001);
 ip::tcp::socket sock(service);
 sock.async_connect(ep, connect_handler);
 service.run();
@@ -568,12 +568,12 @@ acceptor.bind(endpoint);
 
 //defining the vertical separator of length 3 and blank of length 3
 
-#define line printf(&quot;%*s&quot;,tabsize ,&quot;---&quot;)
-#define blank printf(&quot;%*s&quot;,tabsize ,&quot;&quot;)
+#define line printf("%*s",tabsize ,"---")
+#define blank printf("%*s",tabsize ,"")
 
 //newline 'cause I can't keep typing it
 
-#define endl puts(&quot;&quot;)
+#define endl puts("")
 
 void col_gap(){
     for (int j = 0; j &lt; col_gap_val; j++){
@@ -593,14 +593,14 @@ int main(){
     //take the year as an input
     unsigned long long year;
 
-    puts(&quot;Please enter an year:&quot;);
-    scanf(&quot;%llu&quot;, &amp;year);
+    puts("Please enter an year:");
+    scanf("%llu", &amp;year);
 
     //Array for names of days
-    char *day[7] = {&quot;Mo&quot;, &quot;Tu&quot;, &quot;We&quot;, &quot;Th&quot;, &quot;Fr&quot;, &quot;Sa&quot;, &quot;Su&quot;};
+    char *day[7] = {"Mo", "Tu", "We", "Th", "Fr", "Sa", "Su"};
 
     //Array for names of months
-    char *month_name[12] = {&quot;Jan&quot;, &quot;Feb&quot;, &quot;Mar&quot;, &quot;Apr&quot;, &quot;May&quot;, &quot;Jun&quot;, &quot;Jul&quot;, &quot;Aug&quot;, &quot;Sep&quot;, &quot;Oct&quot;, &quot;Nov&quot;, &quot;Dec&quot;};
+    char *month_name[12] = {"Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"};
 
     //Hold number of days in a month
     unsigned short days_in_month[12];
@@ -639,21 +639,21 @@ int main(){
     for (int i = 0; i &lt; 10; i++){
         blank;
     } col_gap();
-    printf(&quot;%0*llu&quot;, tabsize, year);
+    printf("%0*llu", tabsize, year);
     row_gap(); 
 
     //Four iterations for four rows
     for (unsigned short row_iterator = 0; row_iterator &lt; 4; row_iterator++){
 
         //Month Headers
-        printf(&quot;%*s%*s%*s&quot;, 4*tabsize, month_name[3*row_iterator], (7 + col_gap_val)*tabsize, month_name[3*row_iterator + 1], (7 + col_gap_val)*tabsize, month_name[3*row_iterator + 2]);
+        printf("%*s%*s%*s", 4*tabsize, month_name[3*row_iterator], (7 + col_gap_val)*tabsize, month_name[3*row_iterator + 1], (7 + col_gap_val)*tabsize, month_name[3*row_iterator + 2]);
 
         row_gap();
 
         //Day Headers
         for (unsigned short month_iterator = 0; month_iterator &lt; 3; month_iterator++){
             for (unsigned short day_iterator = 0; day_iterator &lt; 7; day_iterator++){
-                printf(&quot;%*s&quot;, tabsize, day[day_iterator]);
+                printf("%*s", tabsize, day[day_iterator]);
             }
             col_gap();
         }
@@ -681,7 +681,7 @@ int main(){
             }
             //print the days till Sunday
             for (unsigned short day_iterator =  0; day_iterator + month_offset[3*row_iterator + month_iterator] &lt; 7; day_iterator++){
-                printf(&quot;%*d&quot;, tabsize, day_iterator + 1);
+                printf("%*d", tabsize, day_iterator + 1);
                 flag[month_iterator] = day_iterator + 1;
             }
             col_gap();
@@ -693,7 +693,7 @@ int main(){
         for (unsigned short week_iterator = 0; week_iterator &lt; 3; week_iterator++){
             for (unsigned short month_iterator = 0; month_iterator &lt; 3; month_iterator++){
                 for (unsigned short day_iterator = 0; day_iterator &lt; 7; day_iterator++){
-                    printf(&quot;%*d&quot;, tabsize, day_iterator + flag[month_iterator] + 1);
+                    printf("%*d", tabsize, day_iterator + flag[month_iterator] + 1);
                 }
                 flag[month_iterator] += 7;
                 col_gap();
@@ -708,7 +708,7 @@ int main(){
         for (int month_iterator = 0; month_iterator &lt; 3; month_iterator++){
             int day_iterator =  0;
             for (; day_iterator + flag[month_iterator] &lt; days_in_month[3*row_iterator + month_iterator]; day_iterator++){
-                printf(&quot;%*d&quot;, tabsize, day_iterator + flag[month_iterator] + 1);
+                printf("%*d", tabsize, day_iterator + flag[month_iterator] + 1);
                 //check if sixth line is reqd for any month
                 if (day_iterator == 6) {
                     sixlines[month_iterator] = 1;
@@ -730,7 +730,7 @@ int main(){
         for (int month_iterator = 0; month_iterator &lt; 3; month_iterator++){
             if (sixlines[month_iterator] != 0){
                 for (int day_iterator = 0; day_iterator + flag[month_iterator] &lt; days_in_month[3*row_iterator + month_iterator]; day_iterator++){
-                    printf(&quot;%*d&quot;, tabsize, day_iterator + flag[month_iterator] + 1);
+                    printf("%*d", tabsize, day_iterator + flag[month_iterator] + 1);
                 }
                 for (int day_iterator = 0; (day_iterator + days_in_month[3*row_iterator + month_iterator])%7 != 0; day_iterator++){
                     blank;
@@ -759,12 +759,12 @@ int main(){
 
 //defining the vertical separator of length 4 and blank of length 4
 
-#define line printf(&quot;%*s&quot;,tabsize ,&quot;----&quot;)
-#define blank printf(&quot;%*s&quot;,tabsize ,&quot;&quot;)
+#define line printf("%*s",tabsize ,"----")
+#define blank printf("%*s",tabsize ,"")
 
 //newline 'cause I can't keep typing it
 
-#define endl printf(&quot;\n&quot;)
+#define endl printf("\n")
 
 int main(){
 
@@ -774,11 +774,11 @@ int main(){
     
     //prompt to enter the year
     
-    printf(&quot;\nPlease enter the required year: &quot;);
+    printf("\nPlease enter the required year: ");
     
     //take the current year as input
     
-    scanf(&quot;%d&quot;, &amp;year);
+    scanf("%d", &amp;year);
     
     //setting offset for January of the year; every 400 years the calendar repeats; every 100 years an offset of 5 days is added; the rest is calculated manually
     
@@ -786,7 +786,7 @@ int main(){
 
     //The below comment was a test to check the offset for each year. Fuck the julian calendar.
 
-    // //printf(&quot;%d&quot;,start%7);
+    // //printf("%d",start%7);
     
     //blank space for neatness
     
@@ -798,8 +798,8 @@ int main(){
 
     //Array to hold the days
     
-    char* day[7] = {&quot;Mon&quot;,&quot;Tue&quot;,&quot;Wed&quot;,&quot;Thu&quot;,&quot;Fri&quot;,&quot;Sat&quot;,&quot;Sun&quot;};
-    char* month_name[12] = {&quot;Jan&quot;,&quot;Feb&quot;,&quot;Mar&quot;,&quot;Apr&quot;,&quot;May&quot;,&quot;Jun&quot;,&quot;Jul&quot;,&quot;Aug&quot;,&quot;Sep&quot;,&quot;Oct&quot;,&quot;Nov&quot;,&quot;Dec&quot;};
+    char* day[7] = {"Mon","Tue","Wed","Thu","Fri","Sat","Sun"};
+    char* month_name[12] = {"Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"};
 
     //Initialising the no. of days in a month; if it is a year divisible by 400 or it is divisible by 4 but not by 100, then feb has 29 days
     
@@ -823,14 +823,14 @@ int main(){
     }
     //print the month name
 
-    printf(&quot;%*s&quot;, 16, month_name[0]);
+    printf("%*s", 16, month_name[0]);
 
     endl; endl;
     
     //print the first line of days
 
     for (int l = 0; l &lt; 7; l++){
-       printf(&quot;%*s&quot;, tabsize, day[l]);
+       printf("%*s", tabsize, day[l]);
     }
 
     endl;
@@ -862,7 +862,7 @@ int main(){
         //start loop for days in each month
         
         for (int j = 1; j &lt;= month[i]; j++){
-            printf(&quot;%*d&quot;, tabsize, j);
+            printf("%*d", tabsize, j);
 
             
             
@@ -883,12 +883,12 @@ int main(){
         //only do all this if the month is not dec; otherwise there would be stray spaces and an extra header of days at the very last.
         
         if (i &lt; 11){
-            printf(&quot;%*s&quot;, 16, month_name[i+1]);
+            printf("%*s", 16, month_name[i+1]);
 
             endl; endl;
             
             for (int k = 0; k &lt; 7; k++){
-                printf(&quot;%*s&quot;, tabsize, day[k]);
+                printf("%*s", tabsize, day[k]);
             }
 
             endl;
@@ -1321,13 +1321,13 @@ int main(int argc, char *argv[]) {
 
 project(tic_tac_toe
     VERSION 0.1
-    DESCRIPTION &quot;Learning CMake and FXTUI together&quot;
+    DESCRIPTION "Learning CMake and FXTUI together"
     LANGUAGES CXX
 )
 # CMAKE Standard
 set (CMAKE_CXX_STANDARD 17)
 # Adding global flags
-set(CMAKE_CXX_FLAGS &quot;${CMAKE_CXX_FLAGS} -Wall -Wextra -Wpedantic&quot;)
+set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wall -Wextra -Wpedantic")
 include(FetchContent)
 
 FetchContent_Declare(ftxui
@@ -1347,7 +1347,7 @@ add_subdirectory(src)
 </code></pre>
 <p><code>CMakeLists.txt</code> at src:</p>
 <pre><code class="language-cmake">set (TARGET ${PROJECT_NAME})
-file(GLOB SRC_LIST CONFIGURE_DEPENDS &quot;${CMAKE_SOURCE_DIR}/src/*.cpp&quot;)
+file(GLOB SRC_LIST CONFIGURE_DEPENDS "${CMAKE_SOURCE_DIR}/src/*.cpp")
 add_executable(${TARGET} ${SRC_LIST})
 target_link_libraries(${TARGET}
   PRIVATE ftxui::screen
@@ -1358,8 +1358,8 @@ target_link_libraries(${TARGET}
 <p><code>CMakeLists.txt</code> at libs:</p>
 <pre><code class="language-cmake"># Note that headers are optional, and do not affect add_library, but they will not
 
-file(GLOB LIB_HEADER_LIST CONFIGURE_DEPENDS &quot;${ModernCMakeExample_SOURCE_DIR}/libs/*.cpp&quot;)
-file(GLOB LIB_SRC_LIST CONFIGURE_DEPENDS &quot;${ModernCMakeExample_SOURCE_DIR}/libs/src/*.cpp&quot;)
+file(GLOB LIB_HEADER_LIST CONFIGURE_DEPENDS "${ModernCMakeExample_SOURCE_DIR}/libs/*.cpp")
+file(GLOB LIB_SRC_LIST CONFIGURE_DEPENDS "${ModernCMakeExample_SOURCE_DIR}/libs/src/*.cpp")
 
 # Make an automatic library - will be static or dynamic based on user setting
 add_library(modern_library ${LIB_SRC_LIST} ${LIB_HEADER_LIST})
@@ -1385,13 +1385,13 @@ target_compile_features(modern_library PUBLIC cxx_std_17)
 <li></li>
 </ul>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="c_notes"><a class="header" href="#c_notes">C_notes</a></h1>
-<p>Must read: <a href="https://beej.us/guide/bgc/html/index-wide.html">Brian Jorgensen Hall’s blog</a> </p>
+<p>Must read: <a href="https://beej.us/guide/bgc/html/index-wide.html">Brian Jorgensen Hall’s blog</a></p>
 <div class="epigraph"><blockquote><p> C is not a big language, and it is not well served by a big book.</p><footer>
 Brian W. Kernighan, Dennis M. Ritchie</footer></blockquote></div>
 <pre><code class="language-c">/* Hello World Program */
 #include &lt;stdio.h&gt;
 
-int main(void) { printf(&quot;Hello World!\n&quot;); }
+int main(void) { printf("Hello World!\n"); }
 </code></pre>
 <p><code>#include</code> is a preprocessor directive.</p>
 <blockquote>
@@ -1417,7 +1417,7 @@ int main(void) { printf(&quot;Hello World!\n&quot;); }
 <h4 id="booleans"><a class="header" href="#booleans">Booleans</a></h4>
 <p>Traditionally, <code>0</code> is false, and any other value is true. <code>#include &lt;stdbool.h&gt;</code> to include a <code>bool</code> type.</p>
 <h3 id="arithmetic"><a class="header" href="#arithmetic">Arithmetic</a></h3>
-<p>Standard operators. Also, ternary operator. </p>
+<p>Standard operators. Also, ternary operator.</p>
 <p>Ternary operator is <strong>NOT</strong> flow control. It is an expression that evaluates to something.</p>
 <p>Also, there is pre and post decrement. Stir clear of these unless you know what you are doing.</p>
 <h4 id="weird-ass-comma-operators"><a class="header" href="#weird-ass-comma-operators">Weird Ass comma operators</a></h4>
@@ -1454,13 +1454,13 @@ int x = 0;
 int main() {
   switch (x) {
   case 1:
-    printf(&quot;1\n&quot;);
+    printf("1\n");
     break;
   case 2:
-    printf(&quot;2\n&quot;);
+    printf("2\n");
     break;
   default:
-    printf(&quot;any other value\n&quot;);
+    printf("any other value\n");
   }
 }
 </code></pre>
@@ -1477,8 +1477,8 @@ int main(void)
 {
     int i = 10;
 
-    printf(&quot;The value of i is %d\n&quot;, i);
-    printf(&quot;And its address is %p\n&quot;, (void *)&amp;i);
+    printf("The value of i is %d\n", i);
+    printf("And its address is %p\n", (void *)&amp;i);
 
     // %p expects the argument to be a pointer to void
     // so we cast it to make the compiler happy.
@@ -1519,8 +1519,8 @@ int main(void)
 <h3 id="strings"><a class="header" href="#strings">Strings</a></h3>
 <p>Arrays of characters terminated by the null character.</p>
 <pre><code class="language-c">int main() {
-  char *s = &quot;Hello world\n&quot;;
-  char t[] = &quot;Loss pro max\n&quot;;
+  char *s = "Hello world\n";
+  char t[] = "Loss pro max\n";
 }
 </code></pre>
 <p>In the above example, s is <em>immutable</em> because it points to a hardcoded place in memory. On the other hand, the array copies the individual bytes from the hardcoded location and is therefore mutable.</p>
@@ -1535,21 +1535,21 @@ int main(void)
 };
 
 // Now with an initializer! Same field order as in the struct declaration:
-struct car saturn = {&quot;Saturn SL/2&quot;, 16000.99, 175};
+struct car saturn = {"Saturn SL/2", 16000.99, 175};
 
-printf(&quot;Name:      %s\n&quot;, saturn.name);
-printf(&quot;Price:     %f\n&quot;, saturn.price);
-printf(&quot;Top Speed: %d km\n&quot;, saturn.speed);
+printf("Name:      %s\n", saturn.name);
+printf("Price:     %f\n", saturn.price);
+printf("Top Speed: %d km\n", saturn.speed);
 </code></pre>
-<p><code>struct car saturn = {.speed=175, .name=&quot;Saturn SL/2&quot;};</code> something like this can also be done.</p>
+<p><code>struct car saturn = {.speed=175, .name="Saturn SL/2"};</code> something like this can also be done.</p>
 <p>Whatever isn’t initialized explicitly is initialised to 0 in memory.</p>
 <p>Dot to access fields, arrow to access if it is a pointer to a struct.</p>
 <blockquote>
-<p>Note: Do <strong>NOT</strong> <a href="https://stackoverflow.com/questions/7179174/why-doesnt-c-provide-struct-comparison">compare structs directly</a>. </p>
+<p>Note: Do <strong>NOT</strong> <a href="https://stackoverflow.com/questions/7179174/why-doesnt-c-provide-struct-comparison">compare structs directly</a>.</p>
 </blockquote>
 <h2 id="file-handling"><a class="header" href="#file-handling">File handling</a></h2>
 <p><code>FILE *</code> is a pointer to a file in C. <code>fprintf</code> and <code>fscanf</code> take the first arguments as the file pointer and the rest is the same as <code>printf</code> and <code>scanf</code>.</p>
-<p>To open a file, use <code>fopen(&quot;file_path&quot;, &quot;mode&quot;)</code>. Mode can be r or w (for read or write).</p>
+<p>To open a file, use <code>fopen("file_path", "mode")</code>. Mode can be r or w (for read or write).</p>
 <blockquote>
 <p>Note: <code>fgetc</code> returns an int. This is because EOF doesn’t fit in char.</p>
 </blockquote>
@@ -1569,12 +1569,12 @@ typedef struct {
 } animal;                         // &lt;-- new name
 
 //struct animal y;  // ERROR: this no longer works--no such struct!
-animal z;           // This works because &quot;animal&quot; is an alias
+animal z;           // This works because "animal" is an alias
 </code></pre>
 <pre><code class="language-c">typedef int *intptr;
 
 int a = 10;
-intptr x = &amp;a, y = &amp;a;  // &quot;intptr&quot; is type &quot;int*&quot;
+intptr x = &amp;a, y = &amp;a;  // "intptr" is type "int*"
 </code></pre>
 <pre><code class="language-c">// Make type five_ints an array of 5 ints
 typedef int five_ints[5];
@@ -1588,7 +1588,7 @@ five_ints x = {11, 22, 33, 44, 55};
 <pre><code class="language-c">int *x;
 
 if ((x = malloc(sizeof(int) * 10)) == NULL)
-    printf(&quot;Error allocating 10 ints\n&quot;);
+    printf("Error allocating 10 ints\n");
     // do something here to handle it
 }
 </code></pre>
@@ -1607,7 +1607,7 @@ int main(void)
 
     // Print all values 0, 5, 10, 15, ..., 40, 45
     for (int i = 0; i &lt; 10; i++)
-        printf(&quot;%d\n&quot;, p[i]);
+        printf("%d\n", p[i]);
 
     // Free the space
     free(p);
@@ -1639,7 +1639,7 @@ int main(void) {
 
     // Check to see if we successfully reallocated
     if (new_p == NULL) {
-      printf(&quot;Error reallocing\n&quot;);
+      printf("Error reallocing\n");
       return 1;
     }
 
@@ -1652,7 +1652,7 @@ int main(void) {
 
   // Print all values 0.0-2.0 in the 40 elements:
   for (int i = 0; i &lt; 40; i++)
-    printf(&quot;%f\n&quot;, p[i]);
+    printf("%f\n", p[i]);
 
   // Free the space
   free(p);
@@ -1736,12 +1736,12 @@ char *readline(FILE *fp)
 
 int main(void)
 {
-    FILE *fp = fopen(&quot;foo.txt&quot;, &quot;r&quot;);
+    FILE *fp = fopen("foo.txt", "r");
 
     char *line;
 
     while ((line = readline(fp)) != NULL) {
-        printf(&quot;%s\n&quot;, line);
+        printf("%s\n", line);
         free(line);
     }
 
@@ -1804,7 +1804,7 @@ Also performs type checking and shit. May also do <em>coercions</em> (implicit t
 <div style="break-before: page; page-break-before: always;"></div><h1 id="concurrency"><a class="header" href="#concurrency">concurrency</a></h1>
 <p>C++ 11: Threads</p>
 <ul>
-<li>performance improvement </li>
+<li>performance improvement</li>
 <li>asynchronous code</li>
 </ul>
 <h2 id="memory-model"><a class="header" href="#memory-model">Memory model</a></h2>
@@ -1828,10 +1828,10 @@ Also performs type checking and shit. May also do <em>coercions</em> (implicit t
 <p>We can also have N user threads on M kernel threads (N:M model)</p>
 </li>
 </ul>
-<p>User threads: <strong>tasks</strong> executed by <strong>pools</strong> of kernel threads </p>
+<p>User threads: <strong>tasks</strong> executed by <strong>pools</strong> of kernel threads</p>
 <p><code>std::thread</code> is a user thread.</p>
 <h2 id="problems-with-threads"><a class="header" href="#problems-with-threads">Problems with threads</a></h2>
-<p>Thread overhead - if multiple active kernel threads are computing for much fewer processes. </p>
+<p>Thread overhead - if multiple active kernel threads are computing for much fewer processes.</p>
 <p>Since <code>std::thread</code> is user thread, there shouldn’t be a problem but since most OS’s offer 1:1 thread models, there is. At best, we end up with a badly broken N:M model. A new thread for every computation makes the program slower.</p>
 <p>Threads are expensive to start and join. (in 100s of microseconds per thread)</p>
 <h3 id="how-to-improve-perf"><a class="header" href="#how-to-improve-perf">How to improve perf</a></h3>
@@ -1866,7 +1866,7 @@ Also performs type checking and shit. May also do <em>coercions</em> (implicit t
 </li>
 </ul>
 <h2 id="locks"><a class="header" href="#locks">Locks</a></h2>
-<p><code>std::mutex</code> </p>
+<p><code>std::mutex</code></p>
 <ul>
 <li>just forwards the calls to <code>pthread_mutex_t</code></li>
 <li>OS based locking</li>
@@ -1895,7 +1895,7 @@ sum += i;
 m.lock(); //thread 1
 m.lock(); //thread 2
 </code></pre>
-<p>Only thread 1 can unlock the mutex. Thread 2 locking it causes a deadlock since instructions can’t move forward. </p>
+<p>Only thread 1 can unlock the mutex. Thread 2 locking it causes a deadlock since instructions can’t move forward.</p>
 <p>If for some reason you have to do that, <code>std::recursive_mutex</code> (keeps a reference count).</p>
 <p>Interesting scenario of a deadlock.</p>
 <pre><code class="language-cpp">std::mutex m1, m2;
@@ -1908,7 +1908,7 @@ m2.lock();
 m1.lock();
 </code></pre>
 <p>Both are waiting for the other thread to release the lock first. Not happening.</p>
-<p>Solution </p>
+<p>Solution</p>
 <ul>
 <li><code>std::lock(m1, m2, m3, ...)</code> - guarantees no deadlock.
 <ul>
@@ -1924,7 +1924,7 @@ m1.lock();
 </li>
 </ul>
 <p><code>shared_mutex</code> - read write lock</p>
-<p>Unlike <code>lock()</code>, <code>lock_shared()</code> only gives you read access. Good in theory, performance not so good in practice. RAII wrapper is <code>std::shared_lock</code> for the same. </p>
+<p>Unlike <code>lock()</code>, <code>lock_shared()</code> only gives you read access. Good in theory, performance not so good in practice. RAII wrapper is <code>std::shared_lock</code> for the same.</p>
 <h3 id="condition-variables"><a class="header" href="#condition-variables">Condition Variables</a></h3>
 <ul>
 <li>Sync barrier</li>
@@ -1946,20 +1946,20 @@ do_work(data);
 </code></pre>
 <h3 id="function-calls"><a class="header" href="#function-calls">Function calls</a></h3>
 <p><code>std::call_once()</code> &amp; <code>std::once_flag</code> to be used in conjunction.</p>
-<p><code>std::call_once(/* std::once_flag*/ done, []{cout &lt;&lt; &quot;running&quot; &lt;&lt; endl;});</code></p>
+<p><code>std::call_once(/* std::once_flag*/ done, []{cout &lt;&lt; "running" &lt;&lt; endl;});</code></p>
 <ul>
 <li>Concurrent calls are safe, only one active call is executed till the end.</li>
-<li>If exception occurs, then call is considered a failure and some other thread will do the call. </li>
+<li>If exception occurs, then call is considered a failure and some other thread will do the call.</li>
 <li>Passive calls will see the side effect of active calls.</li>
 </ul>
 <p><code>thread_local</code> like static but one copy per thread. So the same variable will have multiple addresses.</p>
-<p><code>std::latch</code> - synchronization barrier without explicitly joining the thread back to main function. Latches cannot be used multiple times. </p>
+<p><code>std::latch</code> - synchronization barrier without explicitly joining the thread back to main function. Latches cannot be used multiple times.</p>
 <ul>
 <li>
 <p><code>std::barrier</code> is a multi time use latch. Barrier countdown is reset after all threads arrive to an instance.</p>
 </li>
 <li>
-<p><code>std::counting_semaphore</code> basically keeps a finite count of the number of acquires that can be had at one time. Other requests are blocked by it. </p>
+<p><code>std::counting_semaphore</code> basically keeps a finite count of the number of acquires that can be had at one time. Other requests are blocked by it.</p>
 </li>
 </ul>
 <p>Syntax : <code>std::counting_semaphore&lt;max_num&gt;::release()</code> for releasing the locks and <code>std::counting_semaphore&lt;max_num&gt;::acquire()</code> to acquire a resource.</p>
@@ -1973,7 +1973,7 @@ do_work(data);
 <li>Remainder / Modulus: <code>a%b</code></li>
 </ul>
 <blockquote>
-<p>Multiplication can easily run out of the bounds of the given datatype. So take care while multiplying numbers. </p>
+<p>Multiplication can easily run out of the bounds of the given datatype. So take care while multiplying numbers.</p>
 </blockquote>
 <blockquote>
 <p>Division by zero mostly leads to a fatal error. So take care of b being 0 explicitly.</p>
@@ -1982,7 +1982,7 @@ do_work(data);
 <p>Remainder can be negative too if you use the modulus operator. SO take care when you need the remainders according to mathematical logic.</p>
 </blockquote>
 <blockquote>
-<p>Syntactic sugar for assignment: <code>c += 3;</code> and similar for other arithmetic operations as well. </p>
+<p>Syntactic sugar for assignment: <code>c += 3;</code> and similar for other arithmetic operations as well.</p>
 </blockquote>
 <div class ="epigraph"><blockquote><p> Every good work of software starts by scratching a developer’s personal itch.</p>
 <footer>Eric S. Raymond, <cite>The Cathedral and the Bazaar</cite></footer></bockquote></div>
@@ -2110,7 +2110,7 @@ while (end - start &gt;= 0) {
     else end = mid - 1;
 }
 if (arr[mid] != key)
-cout &lt;&lt; &quot;Not present\n&quot;;
+cout &lt;&lt; "Not present\n";
 
 </code></pre>
 <h2 id="finding-powers-that-are-constants"><a class="header" href="#finding-powers-that-are-constants">Finding powers that are constants</a></h2>
@@ -2168,7 +2168,7 @@ int trash = 1;
 </code></pre>
 <p>The <code>-*- C++ -*-</code> string on the first line is there to tell Emacs that the source file is a C++ file, not a C file (Emacs assumes .h files are C files by default).</p>
 <p>Next line license.</p>
-<p>The <code>///</code> are doxygen comments describing the purpose of the files. </p>
+<p>The <code>///</code> are doxygen comments describing the purpose of the files.</p>
 <p>Abstract for the file: first sentence or a paragraph beginning with <code>\brief</code>.</p>
 <h3 id="header-guard"><a class="header" href="#header-guard">Header Guard</a></h3>
 <p>Combination of <code>#ifndef</code> and <code>#define</code>. This is meant for protecting the linker against including the same function / class / whatever multiple times as it causes error during linking.</p>
@@ -2178,12 +2178,12 @@ int trash = 1;
 <p>The header file’s guard should be the all-caps path that a user of this header would #include, using ‘_’ instead of path separator and extension marker. For example, the header file llvm/include/llvm/Analysis/Utils/Local.h would be #include-ed as #include <code>llvm/Analysis/Utils/Local.h</code>, so its guard is <code>LLVM_ANALYSIS_UTILS_LOCAL_H</code>.</p>
 <h4 id="classes-methods-and-global-functions"><a class="header" href="#classes-methods-and-global-functions">Classes, methods and global functions</a></h4>
 <p>Single line comment explaining the purpose. If non-trivial, use Doxygen comment blocks.</p>
-<p>For functions and methods, single line about what it does and a description of edge cases. </p>
+<p>For functions and methods, single line about what it does and a description of edge cases.</p>
 <h4 id="commenting-1"><a class="header" href="#commenting-1">Commenting</a></h4>
 <p>In general, C++ style comments. (//, ///). C style comments are useful if the comment strictly needs to be inline. Eg. <code>Object.emitName(/*Prefix=*/nullptr);</code></p>
 <p>Don’t comment out large blocks of code. If extremely necessary, (for instance, to give a debugging example), use <code>#if 0</code> and <code>#endif</code>. Better than C style comments.</p>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="c"><a class="header" href="#c">C++</a></h1>
-<div class="epigraph">
+ <div class="epigraph">
 <blockquote><p>Programming is not all the same. Normal written languages have different rhythms and idioms, right? Well, so do programming languages. The language called C is all harsh imperatives, almost raw computer-speak. The language called Lisp is like one long, looping sentence, full of subclauses, so long in fact that you usually forget what it was even about in the first place. The language called Erlang is just like it sounds: eccentric and Scandinavian. </p>
 <footer>Robin Sloane</footer></blockquote>
 </div>
@@ -2262,7 +2262,7 @@ $gcc -c file.c #This gives the machine code
 <blockquote>
 <p><em>Decision problem</em> is a function that has a one bit output: true or false, 1 or 0.</p>
 </blockquote>
-<p>To completely specify a decision problem, specify a set of possible inputs and the subset for which the output is true.</p>
+<p>To completely specify a decision problem, specify a set of possible inputs, and the subset for which the output is true.</p>
 <p>Encoding the input of a decision problem as a fixed finite length string is possible over some fixed finite alphabet.</p>
 <blockquote>
 <p>A <strong>finite alphabet</strong> is any finite set. A finite length string is a sequence of the elements.</p>
@@ -2307,7 +2307,7 @@ $gcc -c file.c #This gives the machine code
 <p>Proof that union of two regular languages is regular:</p>
 </blockquote>
 <p>Let DFA 1 be <data class="katex-src" value="\left(Q_1, \Sigma, \delta_1, s_1, F_1\right)"><span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mo fence="true">(</mo><msub><mi>Q</mi><mn>1</mn></msub><mo separator="true">,</mo><mi mathvariant="normal">Σ</mi><mo separator="true">,</mo><msub><mi>δ</mi><mn>1</mn></msub><mo separator="true">,</mo><msub><mi>s</mi><mn>1</mn></msub><mo separator="true">,</mo><msub><mi>F</mi><mn>1</mn></msub><mo fence="true">)</mo></mrow><annotation encoding="application/x-tex">\left(Q_1, \Sigma, \delta_1, s_1, F_1\right)</annotation></semantics></math></span></data> and DFA 2 be <data class="katex-src" value="\left(Q_2, \Sigma, \delta_2, s_2, F_2\right)"><span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mo fence="true">(</mo><msub><mi>Q</mi><mn>2</mn></msub><mo separator="true">,</mo><mi mathvariant="normal">Σ</mi><mo separator="true">,</mo><msub><mi>δ</mi><mn>2</mn></msub><mo separator="true">,</mo><msub><mi>s</mi><mn>2</mn></msub><mo separator="true">,</mo><msub><mi>F</mi><mn>2</mn></msub><mo fence="true">)</mo></mrow><annotation encoding="application/x-tex">\left(Q_2, \Sigma, \delta_2, s_2, F_2\right)</annotation></semantics></math></span></data></p>
-<p>The final automata has the cartesian product of the two sets of states as the set of states (Q) and the delta is also from Q1 x Q2 to Q1 x Q2. The set of final states is <data class="katex-src" value="Q_1\times F_2 \cup Q_2 \times F_1"><span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>Q</mi><mn>1</mn></msub><mo>×</mo><msub><mi>F</mi><mn>2</mn></msub><mo>∪</mo><msub><mi>Q</mi><mn>2</mn></msub><mo>×</mo><msub><mi>F</mi><mn>1</mn></msub></mrow><annotation encoding="application/x-tex">Q_1\times F_2 \cup Q_2 \times F_1</annotation></semantics></math></span></data>. Also, <data class="katex-src" value="\hat{\delta}\left(\left(s_1, s_2\right), w\right) = \left(\hat{\delta}\left(s_1, w\right),\hat{\delta}\left(s_2, w\right)\right)"><span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mover accent="true"><mi>δ</mi><mo>^</mo></mover><mrow><mo fence="true">(</mo><mrow><mo fence="true">(</mo><msub><mi>s</mi><mn>1</mn></msub><mo separator="true">,</mo><msub><mi>s</mi><mn>2</mn></msub><mo fence="true">)</mo></mrow><mo separator="true">,</mo><mi>w</mi><mo fence="true">)</mo></mrow><mo>=</mo><mrow><mo fence="true">(</mo><mover accent="true"><mi>δ</mi><mo>^</mo></mover><mrow><mo fence="true">(</mo><msub><mi>s</mi><mn>1</mn></msub><mo separator="true">,</mo><mi>w</mi><mo fence="true">)</mo></mrow><mo separator="true">,</mo><mover accent="true"><mi>δ</mi><mo>^</mo></mover><mrow><mo fence="true">(</mo><msub><mi>s</mi><mn>2</mn></msub><mo separator="true">,</mo><mi>w</mi><mo fence="true">)</mo></mrow><mo fence="true">)</mo></mrow></mrow><annotation encoding="application/x-tex">\hat{\delta}\left(\left(s_1, s_2\right), w\right) = \left(\hat{\delta}\left(s_1, w\right),\hat{\delta}\left(s_2, w\right)\right)</annotation></semantics></math></span></data></p>
+<p>The final automata has the cartesian product of the two sets of states as the set of states (Q), and the delta is also from Q1 x Q2 to Q1 x Q2. The set of final states is <data class="katex-src" value="Q_1\times F_2 \cup Q_2 \times F_1"><span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>Q</mi><mn>1</mn></msub><mo>×</mo><msub><mi>F</mi><mn>2</mn></msub><mo>∪</mo><msub><mi>Q</mi><mn>2</mn></msub><mo>×</mo><msub><mi>F</mi><mn>1</mn></msub></mrow><annotation encoding="application/x-tex">Q_1\times F_2 \cup Q_2 \times F_1</annotation></semantics></math></span></data>. Also, <data class="katex-src" value="\hat{\delta}\left(\left(s_1, s_2\right), w\right) = \left(\hat{\delta}\left(s_1, w\right),\hat{\delta}\left(s_2, w\right)\right)"><span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mover accent="true"><mi>δ</mi><mo>^</mo></mover><mrow><mo fence="true">(</mo><mrow><mo fence="true">(</mo><msub><mi>s</mi><mn>1</mn></msub><mo separator="true">,</mo><msub><mi>s</mi><mn>2</mn></msub><mo fence="true">)</mo></mrow><mo separator="true">,</mo><mi>w</mi><mo fence="true">)</mo></mrow><mo>=</mo><mrow><mo fence="true">(</mo><mover accent="true"><mi>δ</mi><mo>^</mo></mover><mrow><mo fence="true">(</mo><msub><mi>s</mi><mn>1</mn></msub><mo separator="true">,</mo><mi>w</mi><mo fence="true">)</mo></mrow><mo separator="true">,</mo><mover accent="true"><mi>δ</mi><mo>^</mo></mover><mrow><mo fence="true">(</mo><msub><mi>s</mi><mn>2</mn></msub><mo separator="true">,</mo><mi>w</mi><mo fence="true">)</mo></mrow><mo fence="true">)</mo></mrow></mrow><annotation encoding="application/x-tex">\hat{\delta}\left(\left(s_1, s_2\right), w\right) = \left(\hat{\delta}\left(s_1, w\right),\hat{\delta}\left(s_2, w\right)\right)</annotation></semantics></math></span></data></p>
 <blockquote>
 <p>Proof the the complement of a regular language is also regular:</p>
 </blockquote>
@@ -2317,8 +2317,8 @@ $gcc -c file.c #This gives the machine code
 </blockquote>
 <p>Using set properties (De Morgan’s Law), or instead follow the proof of union and replace the final set with <data class="katex-src" value="F_1 \times F_2"><span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>F</mi><mn>1</mn></msub><mo>×</mo><msub><mi>F</mi><mn>2</mn></msub></mrow><annotation encoding="application/x-tex">F_1 \times F_2</annotation></semantics></math></span></data>.</p>
 <h3 id="non-deterministic-finite-automata"><a class="header" href="#non-deterministic-finite-automata">Non-deterministic Finite Automata</a></h3>
-<p>A finite automata where the next state is not necessarily determined by the current state and the input symbol. It is effectively in a state of <em>guesssing</em>.</p>
-<p>To show that an automata accepts a set <data class="katex-src" value="B"><span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>B</mi></mrow><annotation encoding="application/x-tex">B</annotation></semantics></math></span></data>, we argue that there exists a lucky sequence of guesses that lead from the start state to an accept state when the end of <data class="katex-src" value="x\in B"><span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>x</mi><mo>∈</mo><mi>B</mi></mrow><annotation encoding="application/x-tex">x\in B</annotation></semantics></math></span></data> is reached, but for any string outside of the set, it is impossible.</p>
+<p>A finite automata where the next state is not necessarily determined by the current state, and the input symbol. It is effectively in a state of <em>guesssing</em>.</p>
+<p>To show that an automata accepts a set <data class="katex-src" value="B"><span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>B</mi></mrow><annotation encoding="application/x-tex">B</annotation></semantics></math></span></data>, we argue that there exists a lucky sequence of guesses that lead from the start state to an accept state when the end of <data class="katex-src" value="x\in B"><span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>x</mi><mo>∈</mo><mi>B</mi></mrow><annotation encoding="application/x-tex">x\in B</annotation></semantics></math></span></data> is reached, but for any string outside the set, it is impossible.</p>
 <p>Formally,</p>
 <p><data class="katex-src" value="M = \left(Q,\Sigma,\Delta,S,F\right)"><span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><mi>M</mi><mo>=</mo><mrow><mo fence="true">(</mo><mi>Q</mi><mo separator="true">,</mo><mi mathvariant="normal">Σ</mi><mo separator="true">,</mo><mi mathvariant="normal">Δ</mi><mo separator="true">,</mo><mi>S</mi><mo separator="true">,</mo><mi>F</mi><mo fence="true">)</mo></mrow></mrow><annotation encoding="application/x-tex">M = \left(Q,\Sigma,\Delta,S,F\right)</annotation></semantics></math></span></data></p>
 <ul>
@@ -2350,6 +2350,20 @@ $gcc -c file.c #This gives the machine code
 <p><data class="katex-src" value="&#10;\begin{align*}&#10;\hat{\Delta}\left(\bigcup_i A_i, xa\right) & = \hat{\Delta}\left(\hat{\Delta}\left(\bigcup_i A_i,x\right),a\right) \\ & = \hat{\Delta}\left(\bigcup_i\hat{\Delta}\left(A_i, x\right),a\right) \\ & = \bigcup_i \hat{\Delta}\left(\hat{\Delta}\left(A_i , x\right), a\right) \\ & = \bigcup_i\hat{\Delta}\left(A_i, xa\right)&#10;\end{align*}&#10;"><span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mtable rowspacing="0.25em" columnalign="right left" columnspacing="0em"><mtr><mtd><mstyle scriptlevel="0" displaystyle="true"><mrow><mover accent="true"><mi mathvariant="normal">Δ</mi><mo>^</mo></mover><mrow><mo fence="true">(</mo><munder><mo>⋃</mo><mi>i</mi></munder><msub><mi>A</mi><mi>i</mi></msub><mo separator="true">,</mo><mi>x</mi><mi>a</mi><mo fence="true">)</mo></mrow></mrow></mstyle></mtd><mtd><mstyle scriptlevel="0" displaystyle="true"><mrow><mrow></mrow><mo>=</mo><mover accent="true"><mi mathvariant="normal">Δ</mi><mo>^</mo></mover><mrow><mo fence="true">(</mo><mover accent="true"><mi mathvariant="normal">Δ</mi><mo>^</mo></mover><mrow><mo fence="true">(</mo><munder><mo>⋃</mo><mi>i</mi></munder><msub><mi>A</mi><mi>i</mi></msub><mo separator="true">,</mo><mi>x</mi><mo fence="true">)</mo></mrow><mo separator="true">,</mo><mi>a</mi><mo fence="true">)</mo></mrow></mrow></mstyle></mtd></mtr><mtr><mtd><mstyle scriptlevel="0" displaystyle="true"><mrow></mrow></mstyle></mtd><mtd><mstyle scriptlevel="0" displaystyle="true"><mrow><mrow></mrow><mo>=</mo><mover accent="true"><mi mathvariant="normal">Δ</mi><mo>^</mo></mover><mrow><mo fence="true">(</mo><munder><mo>⋃</mo><mi>i</mi></munder><mover accent="true"><mi mathvariant="normal">Δ</mi><mo>^</mo></mover><mrow><mo fence="true">(</mo><msub><mi>A</mi><mi>i</mi></msub><mo separator="true">,</mo><mi>x</mi><mo fence="true">)</mo></mrow><mo separator="true">,</mo><mi>a</mi><mo fence="true">)</mo></mrow></mrow></mstyle></mtd></mtr><mtr><mtd><mstyle scriptlevel="0" displaystyle="true"><mrow></mrow></mstyle></mtd><mtd><mstyle scriptlevel="0" displaystyle="true"><mrow><mrow></mrow><mo>=</mo><munder><mo>⋃</mo><mi>i</mi></munder><mover accent="true"><mi mathvariant="normal">Δ</mi><mo>^</mo></mover><mrow><mo fence="true">(</mo><mover accent="true"><mi mathvariant="normal">Δ</mi><mo>^</mo></mover><mrow><mo fence="true">(</mo><msub><mi>A</mi><mi>i</mi></msub><mo separator="true">,</mo><mi>x</mi><mo fence="true">)</mo></mrow><mo separator="true">,</mo><mi>a</mi><mo fence="true">)</mo></mrow></mrow></mstyle></mtd></mtr><mtr><mtd><mstyle scriptlevel="0" displaystyle="true"><mrow></mrow></mstyle></mtd><mtd><mstyle scriptlevel="0" displaystyle="true"><mrow><mrow></mrow><mo>=</mo><munder><mo>⋃</mo><mi>i</mi></munder><mover accent="true"><mi mathvariant="normal">Δ</mi><mo>^</mo></mover><mrow><mo fence="true">(</mo><msub><mi>A</mi><mi>i</mi></msub><mo separator="true">,</mo><mi>x</mi><mi>a</mi><mo fence="true">)</mo></mrow></mrow></mstyle></mtd></mtr></mtable><annotation encoding="application/x-tex"> \begin{align*} \hat{\Delta}\left(\bigcup_i A_i, xa\right) &amp; = \hat{\Delta}\left(\hat{\Delta}\left(\bigcup_i A_i,x\right),a\right) \ &amp; = \hat{\Delta}\left(\bigcup_i\hat{\Delta}\left(A_i, x\right),a\right) \ &amp; = \bigcup_i \hat{\Delta}\left(\hat{\Delta}\left(A_i , x\right), a\right) \ &amp; = \bigcup_i\hat{\Delta}\left(A_i, xa\right) \end{align*} </annotation></semantics></math></span></data></p>
 <p>Now the following two automata can be shown to accept the same set.</p>
 <p><data class="katex-src" value="\left(Q, \Sigma, \Delta, S, F\right) = \left(2^Q, \Sigma, \hat{\Delta}, S, \{ A | A \subseteq Q, A \cap F ≠ \phi\} \right)"><span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><mrow><mo fence="true">(</mo><mi>Q</mi><mo separator="true">,</mo><mi mathvariant="normal">Σ</mi><mo separator="true">,</mo><mi mathvariant="normal">Δ</mi><mo separator="true">,</mo><mi>S</mi><mo separator="true">,</mo><mi>F</mi><mo fence="true">)</mo></mrow><mo>=</mo><mrow><mo fence="true">(</mo><msup><mn>2</mn><mi>Q</mi></msup><mo separator="true">,</mo><mi mathvariant="normal">Σ</mi><mo separator="true">,</mo><mover accent="true"><mi mathvariant="normal">Δ</mi><mo>^</mo></mover><mo separator="true">,</mo><mi>S</mi><mo separator="true">,</mo><mo stretchy="false">{</mo><mi>A</mi><mi mathvariant="normal">∣</mi><mi>A</mi><mo>⊆</mo><mi>Q</mi><mo separator="true">,</mo><mi>A</mi><mo>∩</mo><mi>F</mi><mo mathvariant="normal">≠</mo><mi>ϕ</mi><mo stretchy="false">}</mo><mo fence="true">)</mo></mrow></mrow><annotation encoding="application/x-tex">\left(Q, \Sigma, \Delta, S, F\right) = \left(2^Q, \Sigma, \hat{\Delta}, S, { A | A \subseteq Q, A \cap F ≠ \phi} \right)</annotation></semantics></math></span></data></p>
+<p>To create a minimal DFA from an NFA, check the decision tree for the NFA and do a BFS, stopping when you don’t get any new states.</p>
+<h4 id="ϵepsilon-transition"><a class="header" href="#ϵepsilon-transition"><data class="katex-src" value="\epsilon"><span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>ϵ</mi></mrow><annotation encoding="application/x-tex">\epsilon</annotation></semantics></math></span></data> transition</a></h4>
+<p>This has an <data class="katex-src" value="\epsilon"><span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>ϵ</mi></mrow><annotation encoding="application/x-tex">\epsilon</annotation></semantics></math></span></data> slip that allows the state to transition without reading any input symbol.</p>
+<blockquote>
+<p>Proof that <data class="katex-src" value="\epsilon"><span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>ϵ</mi></mrow><annotation encoding="application/x-tex">\epsilon</annotation></semantics></math></span></data> transition NFA’s have an equivalent NFA with just one start state and no <data class="katex-src" value="\epsilon"><span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>ϵ</mi></mrow><annotation encoding="application/x-tex">\epsilon</annotation></semantics></math></span></data> transitions.</p>
+</blockquote>
+<p><strong>Defn:</strong> <data class="katex-src" value="\epsilon"><span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>ϵ</mi></mrow><annotation encoding="application/x-tex">\epsilon</annotation></semantics></math></span></data> closure: The set of all states that a state can reach on an <data class="katex-src" value="\epsilon"><span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>ϵ</mi></mrow><annotation encoding="application/x-tex">\epsilon</annotation></semantics></math></span></data> transition.</p>
+<p>Define a new transition function such that the states attained by the state with <data class="katex-src" value="\epsilon"><span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>ϵ</mi></mrow><annotation encoding="application/x-tex">\epsilon</annotation></semantics></math></span></data> transitions further take one symbol.</p>
+<p>For an <data class="katex-src" value="\epsilon"><span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>ϵ</mi></mrow><annotation encoding="application/x-tex">\epsilon</annotation></semantics></math></span></data> NFA to be converted to a regular NFA, we define</p>
+<p><data class="katex-src" value="\begin{align*}&#10;\Delta'\left(q,\sigma\right) = \bigcup_{q'\in \epsilon(q)}\Delta\left(q', \sigma\right)&#10;\end{align*}&#10;"><span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mtable rowspacing="0.25em" columnalign="right" columnspacing=""><mtr><mtd><mstyle scriptlevel="0" displaystyle="true"><mrow><msup><mi mathvariant="normal">Δ</mi><mo mathvariant="normal" lspace="0em" rspace="0em">′</mo></msup><mrow><mo fence="true">(</mo><mi>q</mi><mo separator="true">,</mo><mi>σ</mi><mo fence="true">)</mo></mrow><mo>=</mo><munder><mo>⋃</mo><mrow><msup><mi>q</mi><mo mathvariant="normal" lspace="0em" rspace="0em">′</mo></msup><mo>∈</mo><mi>ϵ</mi><mo stretchy="false">(</mo><mi>q</mi><mo stretchy="false">)</mo></mrow></munder><mi mathvariant="normal">Δ</mi><mrow><mo fence="true">(</mo><msup><mi>q</mi><mo mathvariant="normal" lspace="0em" rspace="0em">′</mo></msup><mo separator="true">,</mo><mi>σ</mi><mo fence="true">)</mo></mrow></mrow></mstyle></mtd></mtr></mtable><annotation encoding="application/x-tex">\begin{align*} \Delta'\left(q,\sigma\right) = \bigcup_{q'\in \epsilon(q)}\Delta\left(q', \sigma\right) \end{align*} </annotation></semantics></math></span></data></p>
+<p>where <data class="katex-src" value="\epsilon(q)"><span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>ϵ</mi><mo stretchy="false">(</mo><mi>q</mi><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">\epsilon(q)</annotation></semantics></math></span></data> is the <data class="katex-src" value="\epsilon"><span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>ϵ</mi></mrow><annotation encoding="application/x-tex">\epsilon</annotation></semantics></math></span></data> closure of q.</p>
+<p>The final states</p>
+<p><data class="katex-src" value="&#10;F' = \{q | \epsilon(q)\cap F \neq \phi\}&#10;"><span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><msup><mi>F</mi><mo mathvariant="normal" lspace="0em" rspace="0em">′</mo></msup><mo>=</mo><mo stretchy="false">{</mo><mi>q</mi><mi mathvariant="normal">∣</mi><mi>ϵ</mi><mo stretchy="false">(</mo><mi>q</mi><mo stretchy="false">)</mo><mo>∩</mo><mi>F</mi><mo mathvariant="normal">≠</mo><mi>ϕ</mi><mo stretchy="false">}</mo></mrow><annotation encoding="application/x-tex"> F' = {q | \epsilon(q)\cap F \neq \phi} </annotation></semantics></math></span></data></p>
+<p>Everything else remains the same.</p>
 <h2 id="pattern-matching"><a class="header" href="#pattern-matching">Pattern Matching</a></h2>
 <ul>
 <li><data class="katex-src" value="a"><span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>a</mi></mrow><annotation encoding="application/x-tex">a</annotation></semantics></math></span></data> for each <data class="katex-src" value="a \in \Sigma"><span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>a</mi><mo>∈</mo><mi mathvariant="normal">Σ</mi></mrow><annotation encoding="application/x-tex">a \in \Sigma</annotation></semantics></math></span></data>, matched by <data class="katex-src" value="a"><span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>a</mi></mrow><annotation encoding="application/x-tex">a</annotation></semantics></math></span></data> only.</li>
@@ -2385,9 +2399,18 @@ $gcc -c file.c #This gives the machine code
 <tr><td>f(01)</td><td>1</td><td>1</td><td>0</td><td>1</td></tr>
 </tbody></table>
 </div>
-<p>The entries in the table tell whether that particular element is present in the subset that is obtained from the result or not.</p>
+<p>The entries in the table tell whether that particular element is present in the subset is obtained from the result or not.</p>
 <p>Take the diagonal and bit flip all bits. It will differ from all the strings in the table by atleast one bit.</p>
 <p>Go to <a href="notes/./cs2200.html#cs2200">top</a> till <a href="notes/./cs2200.html#deterministic-finite-automata">Deterministic Finite Automata</a> along with a few examples of languages based on the problem.</p>
+<h3 id="limits-of-dfas"><a class="header" href="#limits-of-dfas">Limits of DFAs</a></h3>
+<ul>
+<li>DFAs have finite memory.</li>
+<li>They can also only read one symbol at a time from left to right.</li>
+</ul>
+<p>For instance, there is no way of constructing a DFA that can accept <data class="katex-src" value="L = \{0^n1^n | n \in \mathbb{N}\}"><span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>L</mi><mo>=</mo><mo stretchy="false">{</mo><msup><mn>0</mn><mi>n</mi></msup><msup><mn>1</mn><mi>n</mi></msup><mi mathvariant="normal">∣</mi><mi>n</mi><mo>∈</mo><mi mathvariant="double-struck">N</mi><mo stretchy="false">}</mo></mrow><annotation encoding="application/x-tex">L = {0^n1^n | n \in \mathbb{N}}</annotation></semantics></math></span></data>.</p>
+<p>Similarly, there is no DFA that can accept the language <data class="katex-src" value="L = \{0^{2^n}| n \in \mathbb{N}\}"><span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>L</mi><mo>=</mo><mo stretchy="false">{</mo><msup><mn>0</mn><msup><mn>2</mn><mi>n</mi></msup></msup><mi mathvariant="normal">∣</mi><mi>n</mi><mo>∈</mo><mi mathvariant="double-struck">N</mi><mo stretchy="false">}</mo></mrow><annotation encoding="application/x-tex">L = {0^{2^n}| n \in \mathbb{N}}</annotation></semantics></math></span></data></p>
+<h3 id="pumping-lemma"><a class="header" href="#pumping-lemma">Pumping Lemma</a></h3>
+<p>If <data class="katex-src" value="L"><span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>L</mi></mrow><annotation encoding="application/x-tex">L</annotation></semantics></math></span></data> is regular, then <data class="katex-src" value="\exists k > 0"><span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi mathvariant="normal">∃</mi><mi>k</mi><mo>&gt;</mo><mn>0</mn></mrow><annotation encoding="application/x-tex">\exists k &gt; 0</annotation></semantics></math></span></data> s.t. <data class="katex-src" value="\forall x,y,z"><span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi mathvariant="normal">∀</mi><mi>x</mi><mo separator="true">,</mo><mi>y</mi><mo separator="true">,</mo><mi>z</mi></mrow><annotation encoding="application/x-tex">\forall x,y,z</annotation></semantics></math></span></data> s.t. <data class="katex-src" value="xyz \in L"><span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>x</mi><mi>y</mi><mi>z</mi><mo>∈</mo><mi>L</mi></mrow><annotation encoding="application/x-tex">xyz \in L</annotation></semantics></math></span></data>, <data class="katex-src" value="\left|y\right| > k \exists u,v,w"><span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mrow><mo fence="true">∣</mo><mi>y</mi><mo fence="true">∣</mo></mrow><mo>&gt;</mo><mi>k</mi><mi mathvariant="normal">∃</mi><mi>u</mi><mo separator="true">,</mo><mi>v</mi><mo separator="true">,</mo><mi>w</mi></mrow><annotation encoding="application/x-tex">\left|y\right| &gt; k \exists u,v,w</annotation></semantics></math></span></data> s.t. <data class="katex-src" value="y = uvw"><span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>y</mi><mo>=</mo><mi>u</mi><mi>v</mi><mi>w</mi></mrow><annotation encoding="application/x-tex">y = uvw</annotation></semantics></math></span></data>, <data class="katex-src" value="v \neq \epsilon"><span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>v</mi><mo mathvariant="normal">≠</mo><mi>ϵ</mi></mrow><annotation encoding="application/x-tex">v \neq \epsilon</annotation></semantics></math></span></data>, <data class="katex-src" value="\forall i \geq 0, xuv^iwz \in L"><span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi mathvariant="normal">∀</mi><mi>i</mi><mo>≥</mo><mn>0</mn><mo separator="true">,</mo><mi>x</mi><mi>u</mi><msup><mi>v</mi><mi>i</mi></msup><mi>w</mi><mi>z</mi><mo>∈</mo><mi>L</mi></mrow><annotation encoding="application/x-tex">\forall i \geq 0, xuv^iwz \in L</annotation></semantics></math></span></data></p>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="cs2600"><a class="header" href="#cs2600">cs2600</a></h1>
 <h2 id="von-neumann-architecture"><a class="header" href="#von-neumann-architecture">Von Neumann Architecture</a></h2>
 <p>Fetches the memory into various kinds of buffers to speed up memory fetch by CPU.</p>
@@ -2399,14 +2422,14 @@ $gcc -c file.c #This gives the machine code
 <ul>
 <li>Has capacitors.</li>
 <li>Capacitors discharge over time hence needs to be continuously powered and recharged.</li>
-<li>Take time to charge and discharge which creates bottlenecks for CPU.</li>
+<li>Take time to charge and discharge, which creates bottlenecks for CPU.</li>
 </ul>
 <h2 id="instruction-set"><a class="header" href="#instruction-set">Instruction Set</a></h2>
 <p>Different Instructions: x86, ARM, RISC V, MIPS.</p>
 <ul>
 <li>Programs written for one processor cannot execute on another.</li>
 <li>Early trend: more instructions, complex instructions.</li>
-<li>RISC - Reduced Instruction Set Computing
+<li>RISC – Reduced Instruction Set Computing
 <ul>
 <li>Instructions are small and simple</li>
 <li>Software does not complicate operations.</li>
@@ -2414,7 +2437,7 @@ $gcc -c file.c #This gives the machine code
 </li>
 </ul>
 <h2 id="risc-v"><a class="header" href="#risc-v">RISC V</a></h2>
-<p>Open source. Has 32 int and 32 FP registers. Also has XLEN variable which is either 32 or 64 for 32 bit and 64 bit processors respectively.</p>
+<p>Open source. Has 32 int and 32 FP registers. Also has XLEN variable, which is either 32 or 64 for 32-bit and 64-bit processors respectively.</p>
 <div class="table-wrapper"><table><thead><tr><th style="text-align: center">Register</th><th style="text-align: center">ABI Name</th><th style="text-align: center">Description</th></tr></thead><tbody>
 <tr><td style="text-align: center">x0</td><td style="text-align: center">zero</td><td style="text-align: center">Zero always</td></tr>
 <tr><td style="text-align: center">x1</td><td style="text-align: center">ra</td><td style="text-align: center">Return address</td></tr>
@@ -2473,8 +2496,42 @@ $gcc -c file.c #This gives the machine code
 </li>
 </ul>
 <p>The above instructions have greater than, greater than equal to variants as well. Also immediate variants of all.</p>
-<h3 id="program-counter"><a class="header" href="#program-counter">Program Counter</a></h3>
-<p>This keeps track of the next instruction to be executed. Usually incremented by 4 unless branches.</p>
+<h4 id="function-calls-1"><a class="header" href="#function-calls-1">Function calls</a></h4>
+<ul>
+<li>
+<p><code>jal rd, imm</code>: Jump to PC + imm, and store pc + 4 in register rd.</p>
+</li>
+<li>
+<p><code>jalr rd, rs1, imm</code>: Jump to rs1 + imm, storing PC + 4 in the register rd. Used for function pointers.</p>
+</li>
+<li>
+<p><code>j label</code>: alias to <code>jal zero, label</code>, discards the return address</p>
+</li>
+<li>
+<p><code>ret rs1</code>: return to the address in rs1, if no argument is specified use ra (return addres register/x1). Alias to <code>jal rs1, 0</code></p>
+</li>
+</ul>
+<p>For function calls we also need a stack-based execution. s2 register is the stack pointer that points to the top of the stack. Frame pointer s0 saves the base of the stack.
+These mark the stack frame in the stack.</p>
+<p>Registers a0 to a7 are used to pass function arguments from one function to another. These are 8 parameters. If we have more, then you need to use the stack.</p>
+<h3 id="executing-instructions"><a class="header" href="#executing-instructions">Executing instructions</a></h3>
+<p>If we are using an operating system:</p>
+<ul>
+<li>Proxy Kernel is handling syscalls, mapping memory, program counter according to memory map, etc.</li>
+</ul>
+<p>If we are without an operating system:</p>
+<ul>
+<li>Manually write the <code>.text</code> section to the flash memory.</li>
+<li>Load the <code>.data</code> section to the RAM.</li>
+<li>Set/reset the program counter to the required memory. It resets to a fixed value called as <strong>reset vector</strong>.</li>
+<li>Address out of range is your skill issue.</li>
+<li>Instruction fetched by the <strong>Instruction Pointer</strong>. 32 bits in width.</li>
+<li>Then it is sent to control ROM. This does not have microcodes and are instead hardcoded using combinational circuit.</li>
+</ul>
+<h4 id="register-bank"><a class="header" href="#register-bank">Register Bank</a></h4>
+<p>Has all the registers and 2 muxs + 1 demux to select the register to use.</p>
+<h4 id="program-counter"><a class="header" href="#program-counter">Program Counter</a></h4>
+<p>This keeps track of the next instruction to be executed. Usually incremented by 4 unless branches. It resets to a fixed value called as <strong>reset vector</strong>.</p>
 <h2 id="multiprecision-arithmetic-in-riscv"><a class="header" href="#multiprecision-arithmetic-in-riscv">Multiprecision Arithmetic in RISCV</a></h2>
 <p>Multiprecision addition</p>
 <pre><code class="language-assembly">.data
@@ -2579,6 +2636,7 @@ return:
 ret
 </code></pre>
 <p>Multiprecision multiplication</p>
+<p>This is WRONG!!!!</p>
 <pre><code class="language-assembly">.data
 # data goes here
 iter: .dword 0x2 # number of chunks
@@ -2638,6 +2696,65 @@ add s2, s2, a2 #i = i + 1
 j outer_loop
 
 return:
+ret
+</code></pre>
+<h2 id="function-call-examples-in-riscv"><a class="header" href="#function-call-examples-in-riscv">Function call examples in RISCV</a></h2>
+<p>Recursive fibonacci</p>
+<pre><code class="language-assembly">.data
+# data goes here
+fib_in: .dword 0xa #the 3rd fibonacci number
+fib_out: .dword 0 #output is stored here
+
+.section .text
+.global main
+
+main:
+addi sp, sp, -0x8 #create stack frame
+sd ra, 0(sp) #store return address of main
+ld a0, fib_in #load the argument in the a0 reg
+
+jal ra, fib #call the function with a0 = fib_in
+
+la t1, fib_out #take the return value from the a1 reg 
+sd a1, 0(t1) #store the return value in the required place
+ld ra, 0(sp) #load the return address
+addi sp, sp, 0x8 #restore stack frame
+ret
+
+fib: #fib(k)
+
+addi sp, sp, -0x20 #make the stack frame
+
+sd ra, 0(sp) #store the return address
+sd a0, 0x8(sp) #store the argument
+
+li t0, 2 #if a0 == 1 || a0 == 2
+bleu a0, t0, fib_done #leave
+
+addi a0, a0, -0x1 #a0 = a0 - 1
+jal ra, fib #fib(k - 1)
+sd a1, 0x10(sp) #t1 = fib(k-1)
+
+addi a0, a0, -0x1 #store fib(k - 1)
+jal ra, fib #fib(k - 2)
+sd a1, 0x18(sp) #store fib(k - 2)
+
+ld t1, 0x10(sp)
+ld t2, 0x18(sp)
+add a1, t2, t1 #a1 = fib(k - 1) + fib(k - 2)
+  
+
+ld ra, 0(sp) #restore return address
+ld a0, 0x8(sp) #restore a0
+addi sp, sp ,0x20 #restore stack frame
+ret
+
+fib_done:
+ld ra, 0(sp) #restore return address
+ld a0, 0x8(sp) #restore 
+li a1, 0x1 #send value
+addi sp, sp, 0x20 #restore stack frame
+
 ret
 </code></pre>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="csd"><a class="header" href="#csd">csd</a></h1>
@@ -2938,7 +3055,7 @@ In the fourth one, the value is loaded to B instead of A.</p>
 <ul>
 <li>Full tree: Every node has 0 or 2 children.</li>
 <li>Complete tree: Filled in level order fashion.</li>
-<li>Perfect tree: 2<sup>n</sup> - 1 </li>
+<li>Perfect tree: 2<sup>n</sup> - 1</li>
 </ul>
 <h3 id="binary-search-tree"><a class="header" href="#binary-search-tree">Binary Search Tree</a></h3>
 <p>All nodes on the right side of the current node are smaller in value than the current node. All on the right are greater than the current node.</p>
@@ -2991,7 +3108,7 @@ In the fourth one, the value is loaded to B instead of A.</p>
 <tr><td style="text-align: center">\r</td><td style="text-align: center">Carriage return. Moves the cursor to the beginning of the line.</td></tr>
 <tr><td style="text-align: center">\a</td><td style="text-align: center">Alerts the system bell</td></tr>
 <tr><td style="text-align: center">\\</td><td style="text-align: center">Prints backslash</td></tr>
-<tr><td style="text-align: center">\&quot;</td><td style="text-align: center">Prints double quotes</td></tr>
+<tr><td style="text-align: center">\"</td><td style="text-align: center">Prints double quotes</td></tr>
 <tr><td style="text-align: center">\f</td><td style="text-align: center">Goes to the line immediately below the cursor and gives a space</td></tr>
 <tr><td style="text-align: center">\b</td><td style="text-align: center">Backspace</td></tr>
 <tr><td style="text-align: center">\'</td><td style="text-align: center">single quote</td></tr>
@@ -3078,12 +3195,12 @@ If in between some values are undefined then their value is set as the previous 
 </ul>
 <h2 id="dynamic-allocation"><a class="header" href="#dynamic-allocation">Dynamic Allocation</a></h2>
 <ul>
-<li>Router gets a range from network admin. Each client requests an address during network initialization. </li>
+<li>Router gets a range from network admin. Each client requests an address during network initialization.</li>
 <li>Uses a lease concept with a controllable time period, so router can reclaim and reallocate the IP address to some other device.</li>
 </ul>
 <h2 id="automatic-allocation"><a class="header" href="#automatic-allocation">Automatic Allocation</a></h2>
 <ul>
-<li>Like dynamic, but once an IP is allotted to a MAC address it is saved for the device. </li>
+<li>Like dynamic, but once an IP is allotted to a MAC address it is saved for the device.</li>
 <li>It is preferential and not strict (ofc).</li>
 </ul>
 <h2 id="staticmanual-allocation"><a class="header" href="#staticmanual-allocation">Static/Manual Allocation</a></h2>
@@ -3114,7 +3231,7 @@ If in between some values are undefined then their value is set as the previous 
 </ul>
 <h3 id="acknowledgement"><a class="header" href="#acknowledgement">Acknowledgement</a></h3>
 <ul>
-<li><strong>DHCPACK</strong> sent by the server. </li>
+<li><strong>DHCPACK</strong> sent by the server.</li>
 <li>Includes lease duration and other requested information.</li>
 <li>ARP is conducted (again). If conflicting, <strong>DHCPDECLINE</strong> is sent.</li>
 </ul>
@@ -3345,7 +3462,7 @@ int main(){
 </code></pre>
 <h3 id="help-1"><a class="header" href="#help-1">Help</a></h3>
 <pre><code>(gdb) help running      list commands in one command class
-(gdb) help run        	bottom-level help for a command &quot;run&quot; 
+(gdb) help run        	bottom-level help for a command "run" 
 (gdb) help info         list info commands (running program state)
 (gdb) help info line    help for a particular info command
 (gdb) help show         list show commands (gdb state)
@@ -3552,7 +3669,7 @@ int main(){
 <pre><code class="language-cpp">if(expr){statements}
 else{statements}
 </code></pre>
-<p>Multiple <code>if-else</code> can be chained together. </p>
+<p>Multiple <code>if-else</code> can be chained together.</p>
 <pre><code class="language-cpp">if(expr){statements}
 else if(expr){statements}
 else if(expr){statements}
@@ -3566,12 +3683,12 @@ else if(expr){statements}
 </blockquote>
 <h3 id="switch-case-1"><a class="header" href="#switch-case-1"><code>switch-case</code></a></h3>
 <p>only for equality and integers\characters (used as ascii values)</p>
-<pre><code class="language-cpp">scanf(&quot;%d&quot;,&amp;isd);
+<pre><code class="language-cpp">scanf("%d",&amp;isd);
 switch (isd){
-    case 91: printf(&quot;india\n&quot;); break;
-    case 1: printf(&quot;us-canada\n&quot;); break;
-    case 61: printf(&quot;astralia\n&quot;); break;
-    default: printf(&quot;india\n&quot;); 
+    case 91: printf("india\n"); break;
+    case 1: printf("us-canada\n"); break;
+    case 61: printf("astralia\n"); break;
+    default: printf("india\n"); 
 }
 </code></pre>
 <blockquote>
@@ -3586,7 +3703,7 @@ switch (isd){
 <pre><code class="language-cpp">int main(){
     int count = 1
     for(int i = 0; i &lt; count; i++){
-        printf(&quot;%d&quot;,i);
+        printf("%d",i);
     }
 }
 </code></pre>
@@ -3596,7 +3713,7 @@ switch (isd){
     int stud = 0, NSTUD = 10;
     for(;;){
         if (stud &lt; NSTUD){
-            printf(&quot;%d&quot;,stud);
+            printf("%d",stud);
             stud++;
             continue;
         }
@@ -3651,7 +3768,7 @@ for (int &amp;x: v){ //take them as a reference this time so that values can be 
 <div style="break-before: page; page-break-before: always;"></div><h1 id="io"><a class="header" href="#io">IO</a></h1>
 <p><code>iostream</code> is the header file responsible for input and output. <code>std</code> is the namespace for <code>cout</code> object which is <strong>normally</strong> connected to the screen. <code>&lt;&lt;</code> is the <em>stream insertion operator</em>. <code>endl</code> is equivalent to <code>'\n' &lt;&lt; flush</code>. What this basically means is that a newline escape character is inserted into the stream and the output that was buffered in the memory was expelled onto the the screen.</p>
 <blockquote>
-<p>C++ buffers it because printing is an expensive task for memory and CPU. </p>
+<p>C++ buffers it because printing is an expensive task for memory and CPU.</p>
 </blockquote>
 <p>There is another function called <code>getline</code> that takes 1 (optionally 2 or 3) arguments. The basic function signature is as follows. It is a part of the <code>string</code> header, as opposed to the <code>iostream</code> header.</p>
 <pre><code>getline(istream&amp; stream, str&amp; s, char delim);
@@ -3766,8 +3883,8 @@ int main(){
 <div style="break-before: page; page-break-before: always;"></div><h1 id="stack-memory-vs-heap-memory"><a class="header" href="#stack-memory-vs-heap-memory">Stack memory vs Heap memory</a></h1>
 <p>Whenever a program is run, it has two kinds of memories, stack and heap.</p>
 <p><img src="notes/./.assets/memory_1.png" alt="Memory layout" /></p>
-<p>This describes the layout of memory when the program is run. </p>
-<p>Higher memory address is read off first, then the data that was at the top of the stack is removed and the data below it is read. </p>
+<p>This describes the layout of memory when the program is run.</p>
+<p>Higher memory address is read off first, then the data that was at the top of the stack is removed and the data below it is read.</p>
 <p>Think of stack like a pile of dishes. To take a plate, sane people would pick up one from the top of the pile. Then the next one is picked, and so on.</p>
 <p>Stack contains both function calls and local variables. Heap contains only variables.</p>
 <p>BSS and data segments are not relevant, but they contain the global uninitialized and initialized data respectively.</p>
@@ -3807,9 +3924,9 @@ int main(){
 <pre><code class="language-py">#!/bin/python
 import requests,string
 
-url = &quot;http://natas15.natas.labs.overthewire.org&quot;
-auth_username = &quot;natas15&quot;
-auth_password = &quot;TTkaI7AWG4iDERztBcEyKV7kRXH1EZRB&quot;
+url = "http://natas15.natas.labs.overthewire.org"
+auth_username = "natas15"
+auth_password = "TTkaI7AWG4iDERztBcEyKV7kRXH1EZRB"
 
 characters = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789'
 
@@ -3819,10 +3936,10 @@ iter = 1
 
 while(True):
     for i in characters:
-        uri = url + &quot;?debug=true&quot;
-        r = requests.get(uri, auth = (auth_username,auth_password), params = {'username':'natas16&quot; and BINARY SUBSTR(password, 1, ' + str(iter) + ')=&quot;' + password + i})
+        uri = url + "?debug=true"
+        r = requests.get(uri, auth = (auth_username,auth_password), params = {'username':'natas16" and BINARY SUBSTR(password, 1, ' + str(iter) + ')="' + password + i})
         # print(r.text)
-        if &quot;This user exists&quot; in r.text:
+        if "This user exists" in r.text:
             iter += 1
             password += i
             print(password)
@@ -4319,7 +4436,7 @@ When the supply or demand curves shift, the equilibrium in the market changes. T
 
 char* ptr = &amp;p;
 </code></pre>
-<p>Here, ptr holds the address of c, <code>&amp;</code> is the address-of operator. </p>
+<p>Here, ptr holds the address of c, <code>&amp;</code> is the address-of operator.</p>
 <h2 id="how-pointers-work"><a class="header" href="#how-pointers-work">How Pointers work</a></h2>
 <pre><code class="language-cpp">int var = 10;
 
@@ -4343,7 +4460,7 @@ std::cout &lt;&lt; a &lt;&lt; '\n';
 }
 </code></pre>
 <p>You’d expect the output to be <code>40</code> right? Wrong! But why though? Enter scoping.</p>
-<p>When we write <code>add(a, b)</code>, what the compiler internally does is that it creates a copy of the variables <code>a</code> and <code>b</code> for the use within the function <code>add</code>. Now the <strong>scope</strong> of the new variables, now referred to as the <em>copies</em> of the original variables is the function block, i.e., the copies exist only temporarily till the function block is being executed. </p>
+<p>When we write <code>add(a, b)</code>, what the compiler internally does is that it creates a copy of the variables <code>a</code> and <code>b</code> for the use within the function <code>add</code>. Now the <strong>scope</strong> of the new variables, now referred to as the <em>copies</em> of the original variables is the function block, i.e., the copies exist only temporarily till the function block is being executed.</p>
 <p>Once the function block is over, the copies are discarded. Hence the value of <em>40</em> that was asssigned to the <em>copy</em> of <code>a</code> vanishes, and <code>a</code> itself retains the value it had.</p>
 <p>This is the scope of a function. There can be self-made scopes too.</p>
 <pre><code class="language-cpp">int main(){
@@ -4372,7 +4489,7 @@ a = 60; // doesn't change the value of the a in outer scope
 }
 </code></pre>
 <h2 id="arrays-are-pointers"><a class="header" href="#arrays-are-pointers">Arrays are pointers</a></h2>
-<p>Arrays are nothing but pointers with a large range of access. We can also utilise arrays as pointers. </p>
+<p>Arrays are nothing but pointers with a large range of access. We can also utilise arrays as pointers.</p>
 <pre><code class="language-cpp">int main(){
 int array[] = {1, 3, 4, 6};
 cout &lt;&lt; *(array + 1) &lt;&lt; '\n';
@@ -4633,7 +4750,7 @@ calculated.</p>
 <pre><code class="language-py"> print(11/0)
 
  Traceback(most recent call last):
-  File&quot;\&lt;stdin\&gt;&quot;, line 1, in \&lt;module\&gt;
+  File"\&lt;stdin\&gt;", line 1, in \&lt;module\&gt;
  ZeroDivisionError: division by zero
 </code></pre>
 <blockquote>
@@ -4700,8 +4817,8 @@ print(1.25%0.5)
 <p>If you want to use text in python, you have to use a <em>string</em>. A
 <em>string</em> is created by entering text between <strong>two single or double
 quotation marks.</strong></p>
-<pre><code class="language-py">print(&quot;Python is fun!&quot;)
-print(&quot;Always look on the bright side&quot;)
+<pre><code class="language-py">print("Python is fun!")
+print("Always look on the bright side")
 </code></pre>
 <blockquote>
 <p>The delimiter (“ or ’) used for a string doesn’t affect how it behaves
@@ -4729,10 +4846,10 @@ multi-line output.</p>
 </code></pre>
 <p>Newlines will automatically be added for strings that are created using
 three quotes.</p>
-<pre><code class="language-py">print(&quot;&quot;&quot;This
+<pre><code class="language-py">print("""This
 is a
 multiline
-text&quot;&quot;&quot;)
+text""")
 </code></pre>
 <blockquote>
 <p>Similarly, ** represents a tab.</p>
@@ -4741,7 +4858,7 @@ text&quot;&quot;&quot;)
 <h3 id="concatenation"><a class="header" href="#concatenation">Concatenation</a></h3>
 <p>As with integers and floats, strings in Python can be added, using a
 process called <em>concatenation</em>, which can be done on any two strings.</p>
-<pre><code class="language-py">print(&quot;Spam&quot; + 'eggs')
+<pre><code class="language-py">print("Spam" + 'eggs')
 </code></pre>
 <blockquote>
 <p>When concatenating strings, it doesn’t matter whether they have been
@@ -4756,7 +4873,7 @@ might look similar, they are two different entities</p>
 <p>Strings can also be <strong>multiplied</strong> with integers. This produces a
 repeated version of that <em>string</em>. The order of the <em>string</em> and the
 <em>integer</em> doesn’t matter, but the <em>string</em> usually comes first.</p>
-<pre><code class="language-py">print(&quot;spam&quot;*3)
+<pre><code class="language-py">print("spam"*3)
 
 print(4*'2')
 </code></pre>
@@ -4771,7 +4888,7 @@ which can be used to refer to the value later in the program. For
 example, in game development, you would use a <em>variable</em> to to store the
 points of the player.</p>
 <p>To assign a <em>variable</em>, use <strong>one equals sign</strong>.</p>
-<pre><code class="language-py">user = &quot;James&quot;
+<pre><code class="language-py">user = "James"
 </code></pre>
 <p>You can use variables to perform corresponding operations, just as you
 did with numbers and strings:</p>
@@ -4791,8 +4908,8 @@ same <em>variable</em>.</p>
 <pre><code class="language-py">x = 123.456
 print(x)
 
-x = &quot;This is a string&quot;
-print(x+&quot;!&quot;)
+x = "This is a string"
+print(x+"!")
 </code></pre>
 <blockquote>
 <p>However, this is not a good practice. To avoid mistakes, try to avoid
@@ -4850,8 +4967,8 @@ print(x)
 <p>The <strong>input</strong> statement needs to be followed by parentheses. You can
 provide a <em>string</em> to <strong>input()</strong> between the parentheses, producing a
 prompt message.</p>
-<pre><code class="language-py">name = input(&quot;Enter your name: &quot;)
-print(&quot;Hello&quot;+name)
+<pre><code class="language-py">name = input("Enter your name: ")
+print("Hello"+name)
 </code></pre>
 <blockquote>
 <p>The prompt message helps clarify what the input is asking for.</p>
@@ -4864,7 +4981,7 @@ print(age)
 <em>function</em> is used. This can be useful if you need to use a number in
 <em>string concatenation</em>. <strong>For example:</strong></p>
 <pre><code class="language-py">age = 42
-print(&quot;His age is&quot; + str(age))
+print("His age is" + str(age))
 </code></pre>
 <blockquote>
 <p>You can convert to float using the float() function.</p>
@@ -4874,7 +4991,7 @@ example:</strong></p>
 <pre><code class="language-py">name = input()
 age = input()
 
-print(name + &quot;is&quot; + age)
+print(name + "is" + age)
 </code></pre>
 <blockquote>
 <p>When input function executes, program flow stops until the user enters
@@ -4893,10 +5010,10 @@ print(x)
 </code></pre>
 <p>These operators can be used on types other than numbers, as well, such
 as <strong>strings.</strong></p>
-<pre><code class="language-py">x= &quot;spam&quot;
+<pre><code class="language-py">x= "spam"
 print(x)
 
-x += &quot;eggs&quot;
+x += "eggs"
 print(x)
 </code></pre>
 <blockquote>
@@ -4915,7 +5032,7 @@ True
 print(2 == 3)
 False
 
-print(&quot;hello&quot; == 'hello')
+print("hello" == 'hello')
 True
 </code></pre>
 <blockquote>
@@ -4930,7 +5047,7 @@ they are.</p>
 <pre><code class="language-py">print(1 != 1)
 False
 
-print(&quot;eleven&quot; != &quot;seven&quot;)
+print("eleven" != "seven")
 True
 
 print(2 != 10)
@@ -4964,7 +5081,7 @@ True
 </code></pre>
 <p>Greater than and smaller than operators can also be used to compare
 strings <strong>lexicographically</strong>. <strong>For Example:</strong></p>
-<pre><code class="language-py">print(&quot;Annie&quot; &gt; &quot;Andy&quot;)
+<pre><code class="language-py">print("Annie" &gt; "Andy")
 True
 </code></pre>
 <hr />
@@ -4983,9 +5100,9 @@ indentation can be mandatory. As you can see, the statements in the
 </blockquote>
 <p>Here is an example of <strong>if</strong> statement:</p>
 <pre><code class="language-py">if 10 &gt; 5:
-    print(&quot;10 is greater than 5&quot;)
+    print("10 is greater than 5")
 
-print(&quot;The program ended&quot;)
+print("The program ended")
 </code></pre>
 <p>The expression determines whether 10 is greater than 5. Since it is, the
 indented statement runs, and “10 is greater than 5” is output. Then, the
@@ -5002,9 +5119,9 @@ conditions are satisfied.</p>
 <p><strong>For example:</strong></p>
 <pre><code class="language-py">num = 12
 if num &gt; 5:
-    print(&quot;Bigger than 5&quot;)
+    print("Bigger than 5")
     if num &lt;= 47:
-        print(&quot;between 5 and 47&quot;)
+        print("between 5 and 47")
 </code></pre>
 <blockquote>
 <p><em><strong>Indentation</strong> is used to define the level of nesting.</em></p>
@@ -5018,9 +5135,9 @@ is <strong>False</strong>.</p>
 <p>As with <strong>if</strong> statements, the code inside the block should be indented.</p>
 <pre><code class="language-py">x = 4
 if x == 5:
-    print(&quot;Yes&quot;)
+    print("Yes")
 else:
-    print(&quot;No&quot;)
+    print("No")
 </code></pre>
 <blockquote>
 <p><em>Notice the colon after the else keyword.</em></p>
@@ -5032,13 +5149,13 @@ statements.</p>
 variable’s value as text:</p>
 <pre><code class="language-py">num = 3
 if num == 1:
-    print(&quot;One&quot;)
+    print("One")
 else:
     if num == 2:
-        print(&quot;Two&quot;)
+        print("Two")
     else:
         if num == 3:
-            print(&quot;Three&quot;)
+            print("Three")
 </code></pre>
 <blockquote>
 <p><em>Indentation determines which <strong>if/else</strong> statements the code blocks
@@ -5054,17 +5171,17 @@ shorter.</p>
 statements:</p>
 <pre><code class="language-py">num = 3:
 if num == 1:
-    print(&quot;One&quot;)
+    print("One")
 elif num == 2:
-    print(&quot;Two&quot;)
+    print("Two")
 elif num == 3:
-    print(&quot;Three&quot;)
+    print("Three")
 else:
-    print(&quot;None are true&quot;)
+    print("None are true")
 </code></pre>
 <p>As you can see in the example above, a series of <strong>if elif</strong> statements
 can have a final <strong>else</strong> block, which is called if none of the <strong>if</strong>
-or <strong>elif</strong> expressions is <strong>True</strong>. </p>
+or <strong>elif</strong> expressions is <strong>True</strong>.</p>
 <blockquote>
 <p>The <strong>elif</strong> statement is
 equivalent to an <strong>else/if</strong> statement. It is used to make the code
@@ -5152,7 +5269,7 @@ using the Boolean operators.</p>
 100:</p>
 <pre><code class="language-py">grade = 88
 if (grade &gt;= 70 and grade &lt;= 100):
-    print(&quot;Passed!&quot;)
+    print("Passed!")
 </code></pre>
 <blockquote>
 <p>You can use multiple <strong>and</strong>, <strong>or</strong>, <strong>not</strong> operators to chain
@@ -5173,7 +5290,7 @@ is displayed as the empty string.</p>
 <p>The <strong>None</strong> object is returned by any function that doesn’t explicitly
 return anything else.</p>
 <pre><code class="language-py">def some_func():
-print(&quot;Hi!&quot;)
+print("Hi!")
 var = some_func()
 print(var)
 </code></pre>
@@ -5181,13 +5298,13 @@ print(var)
 <h2 id="lists"><a class="header" href="#lists">Lists</a></h2>
 <p><strong>Lists</strong> are used to store items. A list is created using <strong>square
 brackets</strong> with <strong>commas</strong> separating items.</p>
-<pre><code class="language-py">words = [&quot;Hello&quot;, &quot;world&quot;, &quot;!&quot;]
+<pre><code class="language-py">words = ["Hello", "world", "!"]
 </code></pre>
 <p>In the example above the words list contains three string items.</p>
 <p>A certain item in the list can be accessed by using its index in square
 brackets.</p>
 <p><strong>For example:</strong></p>
-<pre><code class="language-py">words = [&quot;Hello&quot;, &quot;world&quot;, &quot;!&quot;]
+<pre><code class="language-py">words = ["Hello", "world", "!"]
 print(words[0])
 print(words[1])
 print(words[2])
@@ -5212,7 +5329,7 @@ list. It’s not mandatory, but perfectly valid.</p>
 also possible to include several different types. Lists can also be
 nested within other lists.</p>
 <pre><code class="language-py">number = 3
-things = [&quot;string&quot;,  0,  [1,  2, number],  4.56]
+things = ["string",  0,  [1,  2, number],  4.56]
 print(things[1])
 print(things[2])
 print(things[2][2])
@@ -5231,7 +5348,7 @@ the 2nd row.</p>
 <strong>strings</strong> behaves as though you are indexing a list containing each
 character in the string.</p>
 <p><strong>For example:</strong></p>
-<pre><code class="language-py">string = &quot;Hello world&quot;
+<pre><code class="language-py">string = "Hello world"
 print(string[6])
 </code></pre>
 <p>Space (“ “) is also a symbol and has an index.</p>
@@ -5265,10 +5382,10 @@ second item is “e”, and so on.</p>
 <p>To check if an item is in a list, the <strong>in</strong> operator can be used. It
 returns <strong>True</strong> if the item occurs one or more times in the list, and
 <strong>False</strong> if it doesn’t.</p>
-<pre><code class="language-py">words = [&quot;spam&quot;,  &quot;egg&quot;,  &quot;spam&quot;,  &quot;sausage&quot;]
-print(&quot;spam&quot;  in words)
-print(&quot;egg&quot;  in words)
-print(&quot;tomato&quot;  in words)
+<pre><code class="language-py">words = ["spam",  "egg",  "spam",  "sausage"]
+print("spam"  in words)
+print("egg"  in words)
+print("tomato"  in words)
 </code></pre>
 <blockquote>
 <p>The <strong>in</strong> operator is also used to determine whether or not a string
@@ -5307,9 +5424,9 @@ dot.</p>
 <p>The <strong>insert</strong> method is similar to <strong>append</strong>, except that it allows
 you to insert a new item at any position in the list, as opposed to just
 at the end.</p>
-<pre><code class="language-py">words = [&quot;Python&quot;,  &quot;fun&quot;]
+<pre><code class="language-py">words = ["Python",  "fun"]
 index = 1
-words.insert(index,  &quot;is&quot;)
+words.insert(index,  "is")
 print(words)
 </code></pre>
 <blockquote>
@@ -5345,7 +5462,7 @@ time the user inputs something, the same block of code needs to execute.</p>
 while i &lt;=5:
     print(i)
     i += 1
-print(&quot;Finished!&quot;)
+print("Finished!")
 </code></pre>
 <p>During each loop iteration, the i variable will get incremented by one,
 until it reaches 5. So, the loop will execute the print statement 5
@@ -5363,9 +5480,9 @@ the even and odd numbers in the range of 1 to 10:</p>
 <pre><code class="language-py">x = 1
 while x &lt;= 10:
     if x%2 == 0:
-        print(str(x) + &quot;is even&quot;)
+        print(str(x) + "is even")
     else:
-        print(str(x) + &quot;is odd&quot;)
+        print(str(x) + "is odd")
     x += 1
 </code></pre>
 <p><strong>str(x)</strong> is used to convert the number x to a string, so that it can
@@ -5384,9 +5501,9 @@ while  1==1:
     print(i)
     i = i + 1
     if i &gt;= 5:
-        print(&quot;Breaking&quot;)
+        print("Breaking")
         break
-print(&quot;Finished&quot;)
+print("Finished")
 </code></pre>
 <p><strong>while True</strong> is a short and easy way to make an infinite loop.</p>
 <p><strong>An example use case of break:</strong> An infinite while loop can be used to
@@ -5408,7 +5525,7 @@ iteration and continues with the next one.</p>
 while i&lt;5:
     i += 1
     if i==3:
-        print(&quot;Skipping 3&quot;)
+        print("Skipping 3")
         continue
     print(i)
 </code></pre>
@@ -5439,7 +5556,7 @@ word is equal to “hello”, and during the 2nd iteration it’s equal to
 </blockquote>
 <p>The <strong>for</strong> loop can be used to iterate over strings.</p>
 <p><strong>For example:</strong></p>
-<pre><code class="language-py">str = &quot;testing for loops&quot;
+<pre><code class="language-py">str = "testing for loops"
 count = 0
 for x in  str:
     if(x == 't'):
@@ -5510,7 +5627,7 @@ as the third argument, for example <strong>list(range(20, 5, -2))</strong>.</p>
 <p>The <strong>for</strong> loop is commonly used to repeat some code a certain number
 of times. This is done by combining for loops with <strong>range</strong> objects.</p>
 <pre><code class="language-py">for i in range(5):
-    print(&quot;hello world!&quot;)
+    print("hello world!")
 </code></pre>
 <blockquote>
 <p>You don’t need to call <strong>list</strong> on the <strong>range</strong> object when it is
@@ -5532,7 +5649,7 @@ Twice</strong>, or <strong>We Enjoy Typing</strong>.</p>
 <p>You’ve already used <strong>functions</strong> previously. Any statement that
 consists of a word followed by information in <strong>parentheses</strong> is a
 function call. Here are some examples that you’ve already seen:</p>
-<pre><code class="language-py">print(&quot;Hello world&quot;)
+<pre><code class="language-py">print("Hello world")
 range(2,20)
 str(12)
 range(10,20,3)
@@ -5548,9 +5665,9 @@ function named <code>my_func</code>. It takes no arguments, and prints “spam�
 three times. It is defined, and then called. The statements in the
 function are executed only when the function is called.</p>
 <pre><code class="language-py">def my_func():
-    print(&quot;spam&quot;)
-    print(&quot;spam&quot;)
-    print(&quot;spam&quot;)
+    print("spam")
+    print("spam")
+    print("spam")
 my_func()
 </code></pre>
 <blockquote>
@@ -5571,10 +5688,10 @@ of zero arguments, which are called with empty parentheses. However,
 most functions take arguments. The example below defines a function that
 takes one argument:</p>
 <pre><code class="language-py">def print_with_exclamation(word):
-    print(word + &quot;!&quot;)
-print_with_exclamation(&quot;spam&quot;)
-print_with_exclamation(&quot;eggs&quot;)
-print_with_exclamation(&quot;python&quot;)
+    print(word + "!")
+print_with_exclamation("spam")
+print_with_exclamation("eggs")
+print_with_exclamation("python")
 </code></pre>
 <blockquote>
 <p>As you can see, the argument is defined inside the parentheses.</p>
@@ -5627,7 +5744,7 @@ executed. Any code after the <strong>return</strong> statement will never happen
 <pre><code class="language-py">def add_numbers(x, y):
     total = x + y
     return total
-    print(&quot;This won't be printed&quot;)
+    print("This won't be printed")
 print(add_numbers(4,  5))
 </code></pre>
 <hr />
@@ -5656,12 +5773,12 @@ specific and have a different syntax. They are created by putting a
 multiline string containing an explanation of the function below the
 <strong>function’s first line</strong>.</p>
 <pre><code class="language-py">def shout(word):
-&quot;&quot;&quot;
+"""
 Print a word with an
 exclamation mark following it.
-&quot;&quot;&quot;
-print(word + &quot;!&quot;)
-shout(&quot;spam&quot;)
+"""
+print(word + "!")
+shout("spam")
 </code></pre>
 <blockquote>
 <p>Unlike conventional comments, <strong>docstrings</strong> are retained throughout
@@ -5806,10 +5923,10 @@ run. <strong>For example:</strong></p>
     num1 = 7
     num2 = 0
     print  (num1 / num2)
-    print(&quot;Done calculation&quot;)
+    print("Done calculation")
 except ZeroDivisionError:
-    print(&quot;An error occurred&quot;)
-    print(&quot;due to zero division&quot;)
+    print("An error occurred")
+    print("due to zero division")
 </code></pre>
 <blockquote>
 <p>In the code above, the except statement defines the type of exception
@@ -5821,21 +5938,21 @@ single <strong>except</strong> block using parentheses, to have the <strong>exce
 handle all of them.</p>
 <pre><code class="language-py">try:
     variable = 10
-    print(variable + &quot;hello&quot;)
+    print(variable + "hello")
     print(variable / 2)
 except ZeroDivisionError:
-    print(&quot;Divided by zero&quot;)
+    print("Divided by zero")
 except  (ValueError, TypeError):
-    print(&quot;Error occurred&quot;)
+    print("Error occurred")
 </code></pre>
 <p>An <strong>except</strong> statement without any exception specified will catch all
 errors. These should be used sparingly, as they can catch unexpected
 errors and hide programming mistakes. <strong>For example:</strong></p>
 <pre><code class="language-py">try:
-    word =&quot;spam&quot;
+    word ="spam"
     print(word/0)
 except:
-    print(&quot;An error occured&quot;)
+    print("An error occured")
 </code></pre>
 <blockquote>
 <p>Exception handling is particularly useful when dealing with user
@@ -5847,12 +5964,12 @@ of a <strong>try/except</strong> statement. Code within a <strong>finally</stron
 always runs after execution of the code in the <strong>try</strong>, and possibly in
 the <strong>except</strong>, blocks.</p>
 <pre><code class="language-py">try:
-    print(&quot;Hello&quot;)
+    print("Hello")
     print(1 / 0)
 except ZeroDivisionError:
-    print(&quot;Divided by zero&quot;)
+    print("Divided by zero")
 finally:
-    print(&quot;This code will run no matter what&quot;)
+    print("This code will run no matter what")
 </code></pre>
 <blockquote>
 <p>Run the code and see how it works!</p>
@@ -5865,7 +5982,7 @@ occurs in one of the preceding blocks.</p>
 except ZeroDivisionError:
     print(unknown_var)
 finally:
-    print(&quot;This is executed last&quot;)
+    print("This is executed last")
 </code></pre>
 <hr />
 <h3 id="raising-exceptions"><a class="header" href="#raising-exceptions">Raising exceptions</a></h3>
@@ -5879,15 +5996,15 @@ print(2)
 </blockquote>
 <p>Exceptions can be raised with arguments that give detail about them.
 <strong>For example:</strong></p>
-<pre><code class="language-py">name = &quot;123&quot;
-raise NameError(&quot;Invalid Name: &quot;)
+<pre><code class="language-py">name = "123"
+raise NameError("Invalid Name: ")
 </code></pre>
 <p>In <strong>except</strong> blocks, the <strong>raise</strong> statement can be used without
 arguments to re-raise whatever exception occurred. <strong>For example:</strong></p>
 <pre><code class="language-py">try:
     num = 5 / 0
 except:
-    print(&quot;An error occurred&quot;)
+    print("An error occurred")
     raise
 </code></pre>
 <hr />
@@ -5909,7 +6026,7 @@ for valid input, and after a function call to check for valid output.</p>
 <p>The <strong>assert</strong> can take a second argument that is passed to the
 <code>AssertionError</code> raised if the assertion fails.</p>
 <pre><code class="language-py">temp = -10
-assert (temp &gt;=0), &quot;Colder than absolute zero!&quot;
+assert (temp &gt;=0), "Colder than absolute zero!"
 </code></pre>
 <blockquote>
 <p>AssertionError exceptions can be caught and handled like any other
@@ -5921,7 +6038,7 @@ type of exception will terminate the program.</p>
 <p>You can use Python to read and write the contents of <strong>files</strong>. Text
 files are the easiest to manipulate. Before a file can be edited, it
 must be opened, using the <strong>open</strong> function.</p>
-<pre><code class="language-py">myfile = open(&quot;filename.txt&quot;)
+<pre><code class="language-py">myfile = open("filename.txt")
 </code></pre>
 <blockquote>
 <p>The argument of the <strong>open</strong> function is the <strong>path</strong> to the file. If
@@ -5936,14 +6053,14 @@ content to the end of the file.</p>
 <p>Adding “b” to a mode opens it in <strong>binary</strong> mode, which is used for
 non-text files (such as image and sound files). <strong>For example:</strong></p>
 <pre><code class="language-py"># write mode
-open(&quot;filename.txt&quot;, &quot;w&quot;)
+open("filename.txt", "w")
 
 # read mode
-open(&quot;filename.txt&quot;, &quot;r&quot;)
-open(&quot;filename.txt&quot;)
+open("filename.txt", "r")
+open("filename.txt")
 
 # binary write mode
-open(&quot;filename.txt&quot;, &quot;wb&quot;)
+open("filename.txt", "wb")
 </code></pre>
 <blockquote>
 <p>You can use the + sign with each of the modes above to give them extra
@@ -5952,14 +6069,14 @@ writing.</p>
 </blockquote>
 <p>Once a file has been opened and used, you should close it. This is done
 with the <strong>close</strong> method of the file object.</p>
-<pre><code class="language-py">file = open(&quot;filename.txt&quot;, &quot;w&quot;)
+<pre><code class="language-py">file = open("filename.txt", "w")
 # do stuff to the file
 file.close()
 </code></pre>
 <hr />
 <p>The contents of a file that has been opened in text mode can be read
 using the <strong>read</strong> method.</p>
-<pre><code class="language-py">file = open(&quot;filename.txt&quot;, &quot;r&quot;)
+<pre><code class="language-py">file = open("filename.txt", "r")
 cont = file.read()
 print(cont)
 file.close()
@@ -5972,7 +6089,7 @@ argument to the <strong>read</strong> function. This determines the number of
 <strong>bytes</strong> that should be read. You can make more calls to <strong>read</strong> on
 the same file object to read more of the file byte by byte. With no
 argument, <strong>read</strong> returns the rest of the file.</p>
-<pre><code class="language-py">file = open(&quot;filename.txt&quot;, &quot;r&quot;)
+<pre><code class="language-py">file = open("filename.txt", "r")
 print(file.read(16))
 print(file.read(4))
 print(file.read(4))
@@ -5986,11 +6103,11 @@ contents.</p>
 <p>After all contents in a file have been read, any attempts to read
 further from that file will return an empty string, because you are
 trying to read from the end of the file.</p>
-<pre><code class="language-py">file = open(&quot;filename.txt&quot;, &quot;r&quot;)
+<pre><code class="language-py">file = open("filename.txt", "r")
 file.read()
-print(&quot;Re-reading&quot;)
+print("Re-reading")
 print(file.read())
-print(&quot;Finished&quot;)
+print("Finished")
 file.close()
 </code></pre>
 <p><strong>Result:</strong></p>
@@ -6011,7 +6128,7 @@ example:</strong></p>
 </code></pre>
 <p>You can also use a <strong>for</strong> loop to iterate through the lines in the
 file:</p>
-<pre><code class="language-py">file = open(&quot;filename.txt&quot;, &quot;r&quot;)
+<pre><code class="language-py">file = open("filename.txt", "r")
 
 for line in file:
 print(line)
@@ -6035,10 +6152,10 @@ output.</p>
 <hr />
 <p>To write to files you use the <strong>write</strong> method, which writes a string to
 the file. <strong>For example:</strong></p>
-<pre><code class="language-py">file = open(&quot;newfile.txt&quot;,  &quot;w&quot;)
-file.write(&quot;This has been written to a file&quot;)
+<pre><code class="language-py">file = open("newfile.txt",  "w")
+file.write("This has been written to a file")
 file.close()
-file = open(&quot;newfile.txt&quot;,  &quot;r&quot;)
+file = open("newfile.txt",  "r")
 print(file.read())
 file.close()
 </code></pre>
@@ -6047,13 +6164,13 @@ file.close()
 </blockquote>
 <p>When a file is opened in write mode, the file’s existing content is
 deleted.</p>
-<pre><code class="language-py">file = open(&quot;newfile.txt&quot;,  &quot;w&quot;)
-file.write(&quot;Some new text&quot;)
+<pre><code class="language-py">file = open("newfile.txt",  "w")
+file.write("Some new text")
 file.close()
-file = open(&quot;newfile.txt&quot;,  &quot;r&quot;)
-print(&quot;Reading new contents&quot;)
+file = open("newfile.txt",  "r")
+print("Reading new contents")
 print(file.read())
-print(&quot;Finished&quot;)
+print("Finished")
 file.close()
 </code></pre>
 <blockquote>
@@ -6061,8 +6178,8 @@ file.close()
 </blockquote>
 <p>The <strong>write</strong> method returns the number of <strong>bytes</strong> written to a file,
 if successful.</p>
-<pre><code class="language-py">msg = &quot;Hello world!&quot;
-file = open(&quot;newfile.txt&quot;,  &quot;w&quot;)
+<pre><code class="language-py">msg = "Hello world!"
+file = open("newfile.txt",  "w")
 amount_written = file.write(msg)
 print(amount_written)
 file.close()
@@ -6076,7 +6193,7 @@ string first.</p>
 are always closed after they have been used. One way of doing this is to
 use <strong>try</strong> and <strong>finally</strong></p>
 <pre><code class="language-py">try:
-    f = open(&quot;filename.txt&quot;)
+    f = open("filename.txt")
     print(f.read())
 finally:
     f.close()
@@ -6087,7 +6204,7 @@ finally:
 <p>An alternative way of doing this is using <strong>with</strong> statements. This
 creates a temporary variable (often called <strong>f</strong>), which is only
 accessible in the indented block of the <strong>with</strong> statement.</p>
-<pre><code class="language-py">with open(&quot;filename.txt&quot;)  as f:
+<pre><code class="language-py">with open("filename.txt")  as f:
 print(f.read())
 </code></pre>
 <blockquote>
@@ -6100,9 +6217,9 @@ even if exceptions occur within it.</p>
 values. Lists can be thought of as dictionaries with integer keys within
 a certain range. Dictionaries can be indexed in the same way as lists,
 using <strong>square brackets</strong> containing keys. <strong>Example:</strong></p>
-<pre><code class="language-py">ages = {&quot;Dave&quot;:  24,  &quot;Mary&quot;:  42,  &quot;John&quot;:  58}
-print(ages[&quot;Dave&quot;])
-print(ages[&quot;Mary&quot;])
+<pre><code class="language-py">ages = {"Dave":  24,  "Mary":  42,  "John":  58}
+print(ages["Dave"])
+print(ages["Mary"])
 </code></pre>
 <blockquote>
 <p>Each element in a dictionary is represented by a <strong>key:value</strong> pair.</p>
@@ -6110,12 +6227,12 @@ print(ages[&quot;Mary&quot;])
 <p>Trying to index a key that isn’t part of the dictionary returns a
 <strong>KeyError</strong>. <strong>Example:</strong></p>
 <pre><code class="language-py">primary = {
-&quot;red&quot;:  [255,  0,  0],
-&quot;green&quot;:  [0,  255,  0],
-&quot;blue&quot;:  [0,  0,  255],
+"red":  [255,  0,  0],
+"green":  [0,  255,  0],
+"blue":  [0,  0,  255],
 }
-print(primary[&quot;red&quot;])
-print(primary[&quot;yellow&quot;])
+print(primary["red"])
+print(primary["yellow"])
 </code></pre>
 <p>As you can see, a dictionary can store any types of data as values. &gt;An
 empty dictionary is defined as <strong>{}</strong>.</p>
@@ -6126,7 +6243,7 @@ Trying to use a mutable object as a dictionary key causes a
 <strong>TypeError</strong>.</p>
 <pre><code class="language-py">bad_dict = {
 
-[1,  2,  3]:  &quot;one two three&quot;,
+[1,  2,  3]:  "one two three",
 
 }
 </code></pre>
@@ -6136,7 +6253,7 @@ Trying to use a mutable object as a dictionary key causes a
 <p>Just like lists, dictionary keys can be assigned to different values.
 However, unlike lists, a new dictionary key can also be assigned a
 value, not just ones that already exist.</p>
-<pre><code class="language-py">squares = {1:  1,  2:  4,  3:  &quot;error&quot;,  4:  16,}
+<pre><code class="language-py">squares = {1:  1,  2:  4,  3:  "error",  4:  16,}
 squares[8] = 64
 squares[3] = 9
 print(squares)
@@ -6144,40 +6261,40 @@ print(squares)
 <p>To determine whether a key is in a dictionary, you can use <strong>in</strong> and
 <strong>not in</strong>, just as you can for a list. <strong>Example:</strong></p>
 <pre><code class="language-py">nums = {
-1:  &quot;one&quot;,
-2:  &quot;two&quot;,
-3:  &quot;three&quot;,
+1:  "one",
+2:  "two",
+3:  "three",
 }
 print(1  in nums)
-print(&quot;three&quot;  in nums)
+print("three"  in nums)
 print(4  not  in nums)
 </code></pre>
 <p>A useful dictionary method is <strong>get</strong>. It does the same thing as
 indexing, but if the key is not found in the dictionary it returns
 another specified value instead (‘None’, by default). <strong>Example:</strong></p>
-<pre><code class="language-py">pairs = {1:  &quot;apple&quot;,
-&quot;orange&quot;:  [2,  3,  4],
+<pre><code class="language-py">pairs = {1:  "apple",
+"orange":  [2,  3,  4],
 True:  False,
-None:  &quot;True&quot;,
+None:  "True",
 }
 
-print(pairs.get(&quot;orange&quot;))
+print(pairs.get("orange"))
 print(pairs.get(7))
-print(pairs.get(12345,  &quot;not in dictionary&quot;))
+print(pairs.get(12345,  "not in dictionary"))
 </code></pre>
 <hr />
 <h2 id="tuples"><a class="header" href="#tuples">Tuples</a></h2>
 <p><strong>Tuples</strong> are very similar to lists, except that they are immutable
 (they cannot be changed). Also, they are created using <strong>parentheses</strong>,
 rather than square brackets. <strong>Example:</strong></p>
-<pre><code class="language-py">words = (&quot;spam&quot;, &quot;eggs&quot;, &quot;sausages&quot;,)
+<pre><code class="language-py">words = ("spam", "eggs", "sausages",)
 </code></pre>
 <p>You can access the values in the tuple with their index, just as you did
 with lists:</p>
 <pre><code class="language-py">print(words[0])
 </code></pre>
 <p>Trying to reassign a value causes a TypeError.</p>
-<pre><code class="language-py">words[1] = &quot;cheese&quot;
+<pre><code class="language-py">words[1] = "cheese"
 </code></pre>
 <blockquote>
 <p>You can access the values in the tuple with their index, just as you
@@ -6185,7 +6302,7 @@ did with lists.</p>
 </blockquote>
 <p>Tuples can be created without the parentheses, by just separating the
 values with commas. <strong>Example:</strong></p>
-<pre><code class="language-py">my_tuple = &quot;one&quot;, &quot;two&quot;, &quot;three&quot;
+<pre><code class="language-py">my_tuple = "one", "two", "three"
 print(my_tuple[0])
 </code></pre>
 <p>An empty tuple is created using an empty parenthesis pair.</p>
@@ -6274,7 +6391,7 @@ a string’s <strong>format</strong> method to substitute a number of arguments 
 string. <strong>Example:</strong></p>
 <pre><code class="language-py"># string formatting
 nums = [4,  5,  6]
-msg = &quot;Numbers: {0} {1} {2}&quot;. format(nums[0], nums[1], nums[2])
+msg = "Numbers: {0} {1} {2}". format(nums[0], nums[1], nums[2])
 print(msg)
 </code></pre>
 <blockquote>
@@ -6283,7 +6400,7 @@ corresponding position, which is determined using the curly braces {
 }.</p>
 </blockquote>
 <p>String formatting can also be done with named arguments. <strong>Example:</strong></p>
-<pre><code class="language-py">a= &quot;{x}, {y}&quot;.format(x = 5, y = 12)
+<pre><code class="language-py">a= "{x}, {y}".format(x = 5, y = 12)
 print(a)
 </code></pre>
 <hr />
@@ -6296,26 +6413,26 @@ substring at the start and end of a string, respectively. To change the
 case of a string, you can use <strong>lower</strong> and <strong>upper</strong>. The method
 <strong>split</strong> is the opposite of <strong>join</strong> turning a string with a certain
 separator into a list. <strong>Some examples:</strong></p>
-<pre><code class="language-py">print(&quot;, &quot;.join([&quot;spam&quot;,  &quot;eggs&quot;,  &quot;ham&quot;]))
-#prints &quot;spam, eggs, ham&quot;
+<pre><code class="language-py">print(", ".join(["spam",  "eggs",  "ham"]))
+#prints "spam, eggs, ham"
 
-print(&quot;Hello ME&quot;.replace(&quot;ME&quot;,  &quot;world&quot;))
-#prints &quot;Hello world&quot;
+print("Hello ME".replace("ME",  "world"))
+#prints "Hello world"
 
-print(&quot;This is a sentence.&quot;.startswith(&quot;This&quot;))
-# prints &quot;True&quot;
+print("This is a sentence.".startswith("This"))
+# prints "True"
 
-print(&quot;This is a sentence.&quot;.endswith(&quot;sentence.&quot;))
-# prints &quot;True&quot;
+print("This is a sentence.".endswith("sentence."))
+# prints "True"
 
-print(&quot;This is a sentence.&quot;.upper())
-# prints &quot;THIS IS A SENTENCE.&quot;
+print("This is a sentence.".upper())
+# prints "THIS IS A SENTENCE."
 
-print(&quot;AN ALL CAPS SENTENCE&quot;.lower())
-#prints &quot;an all caps sentence&quot;
+print("AN ALL CAPS SENTENCE".lower())
+#prints "an all caps sentence"
 
-print(&quot;spam, eggs, ham&quot;.split(&quot;, &quot;))
-#prints &quot;['spam', 'eggs', 'ham']&quot;
+print("spam, eggs, ham".split(", "))
+#prints "['spam', 'eggs', 'ham']"
 </code></pre>
 <hr />
 <h2 id="numeric-functions"><a class="header" href="#numeric-functions">Numeric Functions</a></h2>
@@ -6339,10 +6456,10 @@ arguments evaluate to <strong>True</strong> (and <strong>False</strong> otherwis
 list simultaneously. <strong>Example:</strong></p>
 <pre><code class="language-py">nums = [55,  44,  33,  22,  11]
 if  all([i &gt; 5  for i in nums]):
-    print(&quot;All larger than 5&quot;)
+    print("All larger than 5")
 
 if  any([i % 2 == 0  for i in nums]):
-    print(&quot;At least one is even&quot;)
+    print("At least one is even")
 
 for v in  enumerate(nums):
     print(v)
@@ -6544,13 +6661,13 @@ This is ideal when you need to extend the functionality of functions
 that you don’t want to modify. <strong>Example:</strong></p>
 <pre><code class="language-py">def decor(func):
     def wrap():
-        print(&quot;============&quot;)
+        print("============")
         func()
-        print(&quot;============&quot;)
+        print("============")
     return wrap
 
 def print_text():
-print(&quot;Hello world!&quot;)
+print("Hello world!")
 
 decorated = decor(print_text)
 decorated()
@@ -6567,13 +6684,13 @@ always got our “plus something” version of <strong>print_text</strong>. This
 by re-assigning the variable that contains our function:</p>
 <pre><code class="language-py">def decor(func):
     def wrap():
-        print(&quot;============&quot;)
+        print("============")
         func()
-        print(&quot;============&quot;)
+        print("============")
     return wrap
 
 def print_text():
-print(&quot;Hello world!&quot;)
+print("Hello world!")
 
 print_text = decor(print_text)
 print_text()
@@ -6587,7 +6704,7 @@ function definition with a decorator name and the @ symbol. If we are
 defining a function we can “decorate” it with the @ symbol like:</p>
 <pre><code class="language-py">@decor
 def print_text():
-    print(&quot;Hello world!&quot;)
+    print("Hello world!")
 
 print_text();
 </code></pre>
@@ -6651,10 +6768,10 @@ created using curly braces, or the <strong>set</strong> function. They share som
 functionality with lists, such as the use of <strong>in</strong> to check whether
 they contain a particular item.</p>
 <pre><code class="language-py">num_set = {1,  2,  3,  4,  5}
-word_set = set([&quot;spam&quot;,  &quot;eggs&quot;,  &quot;sausage&quot;])
+word_set = set(["spam",  "eggs",  "sausage"])
 
 print(3  in num_set)
-print(&quot;spam&quot;  not  in word_set)
+print("spam"  not  in word_set)
 </code></pre>
 <blockquote>
 <p>To create an empty set, you must use <strong>set()</strong>, as <strong>{}</strong> creates an
@@ -6740,7 +6857,7 @@ print(list(takewhile(lambda x: x&lt;= 6, nums)))
 accomplish a task with all possible combinations of some items.
 <strong>Example:</strong></p>
 <pre><code class="language-py">from itertools import product, permutations
-letters = (&quot;A&quot;,  &quot;B&quot;)
+letters = ("A",  "B")
 print(list(product(letters,  range(2))))
 print(list(permutations(letters)))
 </code></pre>
@@ -6779,7 +6896,7 @@ int main(){
 <pre><code class="language-cpp">int x = 5;
 int &amp;y = x;
 
-cout &lt;&lt; (&amp;y == &amp;x ? &quot;true&quot;: &quot;false&quot;) &lt;&lt; '\n';
+cout &lt;&lt; (&amp;y == &amp;x ? "true": "false") &lt;&lt; '\n';
 //returns true because both the values point to the same location
 
 y = 6;
@@ -6856,14 +6973,14 @@ int main(){
 <p><code>\S</code> : Match anything that is not a whitespace. Used in conjunction with <code>\s</code> to match anything, inculding line breaks.</p>
 <p><code>[]</code> : Character set. Used to choose any of the characters in the bracket. A range can be specified with a <code>-</code> in between two characters. Eg: <code>[A-Z]</code></p>
 <p><code>[^]</code> : Negated character set. <em>DO NOT</em> match any of the letters inside.</p>
-<p><code>()</code> : Capture group. </p>
+<p><code>()</code> : Capture group.</p>
 <h2 id="anchors-and-quantifiers"><a class="header" href="#anchors-and-quantifiers">Anchors and Quantifiers</a></h2>
 <p><code>^</code> : Beginning of the text. See also the <code>/m</code> flag.</p>
 <p><code>$</code> : Matches the end of the text.</p>
 <p><code>*</code> : Match 0 or more of the preceding token.</p>
 <p><code>+</code> : Match 1 or more of the preceding token.</p>
 <p><code>?</code> : Make the previous token optional.</p>
-<p><code>+?</code>/<code>*?</code> : Make the search lazy. This matches as few characters as possible. </p>
+<p><code>+?</code>/<code>*?</code> : Make the search lazy. This matches as few characters as possible.</p>
 <p><code>|</code> : Boolean <code>OR</code>. Match the expression before or after.</p>
 <h2 id="flags"><a class="header" href="#flags">Flags</a></h2>
 <p>Flags can be one of the following:</p>
@@ -6930,23 +7047,23 @@ int main(){
 <pre><code class="language-bash">cargo new project
 cd project
 </code></pre>
-<p><code>Cargo.toml</code> contains and tracks our version info and dependencies. By default the project is set up as a git repo. </p>
-<p>A <code>main.rs</code> is already set up in the src repository. </p>
+<p><code>Cargo.toml</code> contains and tracks our version info and dependencies. By default the project is set up as a git repo.</p>
+<p>A <code>main.rs</code> is already set up in the src repository.</p>
 <pre><code class="language-bash">cargo run
 </code></pre>
-<p>Build and run the project. </p>
+<p>Build and run the project.</p>
 <h2 id="using-libraries"><a class="header" href="#using-libraries">Using libraries</a></h2>
 <pre><code class="language-rust">use std::io;</code></pre>
 <p>Includes the <code>io</code> library that is used for taking input and output.</p>
 <h2 id="structure"><a class="header" href="#structure">Structure</a></h2>
-<p>By default, the <code>main</code> function is the one the is executed first. Default Rust style is to indent with four spaces and not a tab. <em>This is important.</em> </p>
+<p>By default, the <code>main</code> function is the one the is executed first. Default Rust style is to indent with four spaces and not a tab. <em>This is important.</em></p>
 <h2 id="variables-2"><a class="header" href="#variables-2">Variables</a></h2>
 <p>Declaration of variables occurs as follows:</p>
 <pre><code class="language-rust">fn main() {
     let x = 5;
 }</code></pre>
-<p>This is the declaration of an <em>immutable</em> variable. An <em>immutable</em> variable being changed does not compile. All variables are immutable by default. </p>
-<p>To declare a <em>mutable</em> variable (one whose value does not change), we need to use the <code>mut</code> keyword after <code>let</code>. </p>
+<p>This is the declaration of an <em>immutable</em> variable. An <em>immutable</em> variable being changed does not compile. All variables are immutable by default.</p>
+<p>To declare a <em>mutable</em> variable (one whose value does not change), we need to use the <code>mut</code> keyword after <code>let</code>.</p>
 <pre><code class="language-rust">fn main(){
     let mut x = 5;
     // value of x being changed here.
@@ -6967,7 +7084,7 @@ cd project
 <blockquote>
 <p>Technically variables can be declared globally but only by the use of <code>#[unsafe]</code>.</p>
 </blockquote>
-<p>Unlike variables, the type of constant must be explicitly annotated. Like variables, they can be used to perform minor (extremely limited) calculations. </p>
+<p>Unlike variables, the type of constant must be explicitly annotated. Like variables, they can be used to perform minor (extremely limited) calculations.</p>
 <h2 id="data-types-1"><a class="header" href="#data-types-1">Data Types</a></h2>
 <h3 id="integers---signed-or-unsigned"><a class="header" href="#integers---signed-or-unsigned">Integers - Signed or Unsigned</a></h3>
 <div class="table-wrapper"><table><thead><tr><th style="text-align: center">Bit length</th><th style="text-align: center">Signed</th><th style="text-align: center">Unsigned</th></tr></thead><tbody>
@@ -6980,7 +7097,7 @@ cd project
 </tbody></table>
 </div>
 <p>Signed ints are stored as <a href="https://en.wikipedia.org/wiki/Two%27s_complement">Two’s Complement</a>.</p>
-<p>Integer literals can have <code>_</code> in them to make them more readable. They can also be annotated with their type at the last, like <code>786u16</code>. They can also be specified to use number bases such as binary (<code>0b1000</code>), hexadecimal (<code>0xa7</code>), octal (<code>0o77</code>), and a single byte representation (<code>b1</code>). </p>
+<p>Integer literals can have <code>_</code> in them to make them more readable. They can also be annotated with their type at the last, like <code>786u16</code>. They can also be specified to use number bases such as binary (<code>0b1000</code>), hexadecimal (<code>0xa7</code>), octal (<code>0o77</code>), and a single byte representation (<code>b1</code>).</p>
 <blockquote>
 <p>The single byte representation stores them as u8 behind the scenes.</p>
 </blockquote>
@@ -6988,8 +7105,8 @@ cd project
 <p>Add integer overflow for int Types</p>
 </blockquote>
 <h3 id="floating-points"><a class="header" href="#floating-points">Floating Points</a></h3>
-<p><code>f32</code>: 32 bit floating point 
-<code>f64</code>: 64 bit floating point </p>
+<p><code>f32</code>: 32 bit floating point
+<code>f64</code>: 64 bit floating point</p>
 <p>Default is 64 bits. They conform to <a href="https://en.wikipedia.org/wiki/IEEE_754">IEEE-754 Standards</a></p>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="rvalue-refs"><a class="header" href="#rvalue-refs">rvalue refs</a></h1>
 <p>Introduced on C++11, these are references to rvalues. These exist to extend the object lifetime of an rvalue, say, a function return value.</p>
@@ -7041,7 +7158,7 @@ int main(){
 class init {
 public: 
   init();
-  static void printo() { std::cout &lt;&lt; &quot;hello&quot; &lt;&lt; '\n'; }
+  static void printo() { std::cout &lt;&lt; "hello" &lt;&lt; '\n'; }
   ~init();
 
 private:
@@ -7076,17 +7193,17 @@ int main() { init::printo(); }
 using namespace std;
 
 //creating a new string using assignment
-string greeting1 = &quot;Hello &quot;;
+string greeting1 = "Hello ";
 
 //Creating a new string using the constructor
-string greeeting2(&quot;World&quot;);
+string greeeting2("World");
 </code></pre>
 <p>There are various cons of using C-style strings:</p>
 <ul>
 <li>If allocated on the stack, it will always occupy a size you specify (a character occupies a byte assuming a byte is 8 bits long) no matter how long the text it contains is.</li>
-<li>If allocated on the heap (using malloc()) or on the Free Store (new char[]) you’re responsible for releasing the memory afterwards and you will always have the overhead of a heap allocation. </li>
+<li>If allocated on the heap (using malloc()) or on the Free Store (new char[]) you’re responsible for releasing the memory afterwards and you will always have the overhead of a heap allocation.</li>
 <li>If you copy a text of more than 256 chars into the array, it might crash, produce ugly assertion messages or cause unexplainable (mis-)behavior somewhere else in your program.</li>
-<li>To determine the text’s length, the array has to be scanned, character by character, for a \0 character. </li>
+<li>To determine the text’s length, the array has to be scanned, character by character, for a \0 character.</li>
 <li>You need to check and handle oversized strings yourself else the code will be unsafe (looking at you <code>strcpy</code>).</li>
 </ul>
 <p>Pros of using C style strings:</p>
@@ -7108,16 +7225,16 @@ string greeeting2(&quot;World&quot;);
 <li>A <code>const</code> qualified string is hardcoded in memory. So it has zero runtime cost. But be aware while using it as it can literally be read through the binary data.</li>
 </ul>
 <pre><code class="language-cpp">// declare greeting 
-string greeting = &quot;aeblablo&quot;
+string greeting = "aeblablo"
 
 //accessing individual characters of a string
-cout &lt;&lt; greeting1[1] &lt;&lt; &quot; is 'e'&quot; &lt;&lt; endl;
+cout &lt;&lt; greeting1[1] &lt;&lt; " is 'e'" &lt;&lt; endl;
 
 //Length of the string
 cout &lt;&lt; greeting.length() &lt;&lt; endl;
 
 //substring from the starting index for a specified length
-// gives &quot;ell&quot; in this case
+// gives "ell" in this case
 cout &lt;&lt; greeting.substr(1, 3) &lt;&lt; endl;
 
 //adding two Strings

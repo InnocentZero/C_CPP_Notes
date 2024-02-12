@@ -178,7 +178,7 @@
                         <h1 id="concurrency"><a class="header" href="#concurrency">concurrency</a></h1>
 <p>C++ 11: Threads</p>
 <ul>
-<li>performance improvement </li>
+<li>performance improvement</li>
 <li>asynchronous code</li>
 </ul>
 <h2 id="memory-model"><a class="header" href="#memory-model">Memory model</a></h2>
@@ -202,10 +202,10 @@
 <p>We can also have N user threads on M kernel threads (N:M model)</p>
 </li>
 </ul>
-<p>User threads: <strong>tasks</strong> executed by <strong>pools</strong> of kernel threads </p>
+<p>User threads: <strong>tasks</strong> executed by <strong>pools</strong> of kernel threads</p>
 <p><code>std::thread</code> is a user thread.</p>
 <h2 id="problems-with-threads"><a class="header" href="#problems-with-threads">Problems with threads</a></h2>
-<p>Thread overhead - if multiple active kernel threads are computing for much fewer processes. </p>
+<p>Thread overhead - if multiple active kernel threads are computing for much fewer processes.</p>
 <p>Since <code>std::thread</code> is user thread, there shouldn’t be a problem but since most OS’s offer 1:1 thread models, there is. At best, we end up with a badly broken N:M model. A new thread for every computation makes the program slower.</p>
 <p>Threads are expensive to start and join. (in 100s of microseconds per thread)</p>
 <h3 id="how-to-improve-perf"><a class="header" href="#how-to-improve-perf">How to improve perf</a></h3>
@@ -240,7 +240,7 @@
 </li>
 </ul>
 <h2 id="locks"><a class="header" href="#locks">Locks</a></h2>
-<p><code>std::mutex</code> </p>
+<p><code>std::mutex</code></p>
 <ul>
 <li>just forwards the calls to <code>pthread_mutex_t</code></li>
 <li>OS based locking</li>
@@ -269,7 +269,7 @@ sum += i;
 m.lock(); //thread 1
 m.lock(); //thread 2
 </code></pre>
-<p>Only thread 1 can unlock the mutex. Thread 2 locking it causes a deadlock since instructions can’t move forward. </p>
+<p>Only thread 1 can unlock the mutex. Thread 2 locking it causes a deadlock since instructions can’t move forward.</p>
 <p>If for some reason you have to do that, <code>std::recursive_mutex</code> (keeps a reference count).</p>
 <p>Interesting scenario of a deadlock.</p>
 <pre><code class="language-cpp">std::mutex m1, m2;
@@ -282,7 +282,7 @@ m2.lock();
 m1.lock();
 </code></pre>
 <p>Both are waiting for the other thread to release the lock first. Not happening.</p>
-<p>Solution </p>
+<p>Solution</p>
 <ul>
 <li><code>std::lock(m1, m2, m3, ...)</code> - guarantees no deadlock.
 <ul>
@@ -298,7 +298,7 @@ m1.lock();
 </li>
 </ul>
 <p><code>shared_mutex</code> - read write lock</p>
-<p>Unlike <code>lock()</code>, <code>lock_shared()</code> only gives you read access. Good in theory, performance not so good in practice. RAII wrapper is <code>std::shared_lock</code> for the same. </p>
+<p>Unlike <code>lock()</code>, <code>lock_shared()</code> only gives you read access. Good in theory, performance not so good in practice. RAII wrapper is <code>std::shared_lock</code> for the same.</p>
 <h3 id="condition-variables"><a class="header" href="#condition-variables">Condition Variables</a></h3>
 <ul>
 <li>Sync barrier</li>
@@ -320,20 +320,20 @@ do_work(data);
 </code></pre>
 <h3 id="function-calls"><a class="header" href="#function-calls">Function calls</a></h3>
 <p><code>std::call_once()</code> &amp; <code>std::once_flag</code> to be used in conjunction.</p>
-<p><code>std::call_once(/* std::once_flag*/ done, []{cout &lt;&lt; &quot;running&quot; &lt;&lt; endl;});</code></p>
+<p><code>std::call_once(/* std::once_flag*/ done, []{cout &lt;&lt; "running" &lt;&lt; endl;});</code></p>
 <ul>
 <li>Concurrent calls are safe, only one active call is executed till the end.</li>
-<li>If exception occurs, then call is considered a failure and some other thread will do the call. </li>
+<li>If exception occurs, then call is considered a failure and some other thread will do the call.</li>
 <li>Passive calls will see the side effect of active calls.</li>
 </ul>
 <p><code>thread_local</code> like static but one copy per thread. So the same variable will have multiple addresses.</p>
-<p><code>std::latch</code> - synchronization barrier without explicitly joining the thread back to main function. Latches cannot be used multiple times. </p>
+<p><code>std::latch</code> - synchronization barrier without explicitly joining the thread back to main function. Latches cannot be used multiple times.</p>
 <ul>
 <li>
 <p><code>std::barrier</code> is a multi time use latch. Barrier countdown is reset after all threads arrive to an instance.</p>
 </li>
 <li>
-<p><code>std::counting_semaphore</code> basically keeps a finite count of the number of acquires that can be had at one time. Other requests are blocked by it. </p>
+<p><code>std::counting_semaphore</code> basically keeps a finite count of the number of acquires that can be had at one time. Other requests are blocked by it.</p>
 </li>
 </ul>
 <p>Syntax : <code>std::counting_semaphore&lt;max_num&gt;::release()</code> for releasing the locks and <code>std::counting_semaphore&lt;max_num&gt;::acquire()</code> to acquire a resource.</p>

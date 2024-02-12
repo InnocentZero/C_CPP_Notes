@@ -178,7 +178,7 @@
                         <h1 id="io"><a class="header" href="#io">IO</a></h1>
 <p><code>iostream</code> is the header file responsible for input and output. <code>std</code> is the namespace for <code>cout</code> object which is <strong>normally</strong> connected to the screen. <code>&lt;&lt;</code> is the <em>stream insertion operator</em>. <code>endl</code> is equivalent to <code>'\n' &lt;&lt; flush</code>. What this basically means is that a newline escape character is inserted into the stream and the output that was buffered in the memory was expelled onto the the screen.</p>
 <blockquote>
-<p>C++ buffers it because printing is an expensive task for memory and CPU. </p>
+<p>C++ buffers it because printing is an expensive task for memory and CPU.</p>
 </blockquote>
 <p>There is another function called <code>getline</code> that takes 1 (optionally 2 or 3) arguments. The basic function signature is as follows. It is a part of the <code>string</code> header, as opposed to the <code>iostream</code> header.</p>
 <pre><code>getline(istream&amp; stream, str&amp; s, char delim);
