@@ -202,25 +202,27 @@
 </ul>
 <h2 id="risc-v"><a class="header" href="#risc-v">RISC V</a></h2>
 <p>Open source. Has 32 int and 32 FP registers. Also has XLEN variable, which is either 32 or 64 for 32-bit and 64-bit processors respectively.</p>
-<div class="table-wrapper"><table><thead><tr><th style="text-align: center">Register</th><th style="text-align: center">ABI Name</th><th style="text-align: center">Description</th></tr></thead><tbody>
-<tr><td style="text-align: center">x0</td><td style="text-align: center">zero</td><td style="text-align: center">Zero always</td></tr>
-<tr><td style="text-align: center">x1</td><td style="text-align: center">ra</td><td style="text-align: center">Return address</td></tr>
-<tr><td style="text-align: center">x2</td><td style="text-align: center">sp</td><td style="text-align: center">Stack Pointer</td></tr>
-<tr><td style="text-align: center">x3</td><td style="text-align: center">gp</td><td style="text-align: center">Global Pointer</td></tr>
-<tr><td style="text-align: center">x4</td><td style="text-align: center">tp</td><td style="text-align: center">Thread Pointer</td></tr>
-<tr><td style="text-align: center">x5-x7</td><td style="text-align: center">t0-t2</td><td style="text-align: center">Temps</td></tr>
-<tr><td style="text-align: center">x8</td><td style="text-align: center">s0 /fp</td><td style="text-align: center">saved / frame pointer (base pointer effectively)</td></tr>
-<tr><td style="text-align: center">x9</td><td style="text-align: center">s1</td><td style="text-align: center">saved register</td></tr>
-<tr><td style="text-align: center">x10-x11</td><td style="text-align: center">a0-a1</td><td style="text-align: center">Fn args/ return values</td></tr>
-<tr><td style="text-align: center">x12-x18</td><td style="text-align: center">a2-a7</td><td style="text-align: center">Fn args</td></tr>
-<tr><td style="text-align: center">x18-x27</td><td style="text-align: center">s2-s11</td><td style="text-align: center">Saved registers</td></tr>
-<tr><td style="text-align: center">x27-x31</td><td style="text-align: center">t3-t6</td><td style="text-align: center">Temporaries</td></tr>
+<div class="table-wrapper"><table><thead><tr><th style="text-align: center">Register</th><th style="text-align: center">ABI Name</th><th style="text-align: center">Description</th><th style="text-align: center">Saver</th></tr></thead><tbody>
+<tr><td style="text-align: center">x0</td><td style="text-align: center">zero</td><td style="text-align: center">Zero always</td><td style="text-align: center"></td></tr>
+<tr><td style="text-align: center">x1</td><td style="text-align: center">ra</td><td style="text-align: center">Return address</td><td style="text-align: center">caller</td></tr>
+<tr><td style="text-align: center">x2</td><td style="text-align: center">sp</td><td style="text-align: center">Stack Pointer</td><td style="text-align: center">callee</td></tr>
+<tr><td style="text-align: center">x3</td><td style="text-align: center">gp</td><td style="text-align: center">Global Pointer</td><td style="text-align: center"></td></tr>
+<tr><td style="text-align: center">x4</td><td style="text-align: center">tp</td><td style="text-align: center">Thread Pointer</td><td style="text-align: center"></td></tr>
+<tr><td style="text-align: center">x5-x7</td><td style="text-align: center">t0-t2</td><td style="text-align: center">Temps</td><td style="text-align: center">caller</td></tr>
+<tr><td style="text-align: center">x8</td><td style="text-align: center">s0 /fp</td><td style="text-align: center">saved / frame pointer (base pointer effectively)</td><td style="text-align: center">callee</td></tr>
+<tr><td style="text-align: center">x9</td><td style="text-align: center">s1</td><td style="text-align: center">saved register</td><td style="text-align: center">callee</td></tr>
+<tr><td style="text-align: center">x10-x11</td><td style="text-align: center">a0-a1</td><td style="text-align: center">Fn args/ return values</td><td style="text-align: center">callee</td></tr>
+<tr><td style="text-align: center">x12-x18</td><td style="text-align: center">a2-a7</td><td style="text-align: center">Fn args</td><td style="text-align: center">caller</td></tr>
+<tr><td style="text-align: center">x18-x27</td><td style="text-align: center">s2-s11</td><td style="text-align: center">Saved registers</td><td style="text-align: center">callee</td></tr>
+<tr><td style="text-align: center">x27-x31</td><td style="text-align: center">t3-t6</td><td style="text-align: center">Temporaries</td><td style="text-align: center">caller</td></tr>
 </tbody></table>
 </div>
 <blockquote>
 <p>Maximum memory depends on the size of the address bus from the load store unit to the memory.</p>
 </blockquote>
+<p>The caller saved registers have to be explicitly saved by the caller function in a stacj frame before calling the other function. On the other hand, callee saved functions are guaranteed to stay the same across function calls and there is no need for functions to save them.</p>
 <h3 id="instructions"><a class="header" href="#instructions">Instructions</a></h3>
+<p>The ones listed below are called <em>R-type</em> or <em>register-type</em> instructions.</p>
 <ul>
 <li>
 <p><code>add rd, rs1, rs2</code>: add the contents of rs1 and rs2 and store it in rd. Signed addition. Also has the unsigned version. Similarly, sub, and, or, xor also exist.</p>
@@ -242,6 +244,7 @@
 </li>
 </ul>
 <p>All of these also have an immediate version where the last argument is a hardcoded literal.</p>
+<p>These are called <em>I-type</em> or <em>immediate-type</em> instructions.</p>
 <ul>
 <li>
 <p><code>l(b/h/w) rd, imm(rs1)</code>: loads a byte/half-word/word to rd(dest. register) from *(rs1 + imm)</p>
@@ -249,35 +252,57 @@
 <li>
 <p><code>l(b/h/w)u rd, imm(rs1)</code>: loads a byte/half-word/word to rd(dest. register) from *(rs1 + imm). This one zero-extends on the left.</p>
 </li>
-<li>
-<p><code>s(b/h/w) rd, imm(rs1)</code>: stores a byte/half-word/word to *(rs1 + imm) from the contents of rd.</p>
-</li>
-<li>
-<p><code>j offset/label</code>: jump to the given label/offset</p>
-</li>
-<li>
-<p><code>blt/bltu r1, r2, label/offset</code>: if r1 &lt; r2 (signed or unsigned), jump to label or symbol.</p>
-</li>
+</ul>
+<p>These are also <em>I-type</em> instructions.</p>
+<p>The below one instruction is <em>S-type</em> instruction (for obvious reasons).</p>
+<ul>
+<li><code>s(b/h/w) rd, imm(rs1)</code>: stores a byte/half-word/word to *(rs1 + imm) from the contents of rd.</li>
+</ul>
+<p>The below instruction is called <em>B-type</em> or <em>branch-type</em> instruction.</p>
+<ul>
+<li><code>blt/bltu r1, r2, label/offset</code>: if r1 &lt; r2 (signed or unsigned), jump to label or symbol. Can jump to atmost 4 KiB. (13 bits with the lsb always 0, the rest are used for determining values).</li>
 </ul>
 <p>The above instructions have greater than, greater than equal to variants as well. Also immediate variants of all.</p>
 <h4 id="function-calls"><a class="header" href="#function-calls">Function calls</a></h4>
+<p>The below type is called a <em>J-type</em> instruction.</p>
 <ul>
-<li>
-<p><code>jal rd, imm</code>: Jump to PC + imm, and store pc + 4 in register rd.</p>
-</li>
-<li>
-<p><code>jalr rd, rs1, imm</code>: Jump to rs1 + imm, storing PC + 4 in the register rd. Used for function pointers.</p>
-</li>
+<li><code>jal rd, imm</code>: Jump to PC + imm, and store pc + 4 in register rd.</li>
+</ul>
+<p>The below one is an <em><strong>I-type</strong></em> and <strong>NOT</strong> J-type.</p>
+<ul>
+<li><code>jalr rd, rs1, imm</code>: Jump to rs1 + imm, storing PC + 4 in the register rd. Used for function pointers.</li>
+</ul>
+<p>Both of the ones below are aliases.</p>
+<ul>
 <li>
 <p><code>j label</code>: alias to <code>jal zero, label</code>, discards the return address</p>
 </li>
 <li>
-<p><code>ret rs1</code>: return to the address in rs1, if no argument is specified use ra (return addres register/x1). Alias to <code>jal rs1, 0</code></p>
+<p><code>ret rs1</code>: return to the address in rs1, if no argument is specified use ra (return addres register/x1). Alias to <code>jalr zero, rs1, 0</code></p>
 </li>
 </ul>
 <p>For function calls we also need a stack-based execution. s2 register is the stack pointer that points to the top of the stack. Frame pointer s0 saves the base of the stack.
 These mark the stack frame in the stack.</p>
+<blockquote>
+<p>Always load and save values relative to the frame pointer.</p>
+</blockquote>
 <p>Registers a0 to a7 are used to pass function arguments from one function to another. These are 8 parameters. If we have more, then you need to use the stack.</p>
+<h4 id="control-and-status-registers"><a class="header" href="#control-and-status-registers">Control and status registers</a></h4>
+<ul>
+<li>
+<p><code>csrrw rd, csr</code>: atomic swap values</p>
+</li>
+<li>
+<p><code>csrrs rd, csr</code>: atomic read from rd and set a bit</p>
+</li>
+<li>
+<p><code>csrrs rd, csr</code>: atomic read from rd and reset a bit</p>
+</li>
+<li>
+<p><code>csrr rd, csr</code>: atomic read from <code>csr</code> to <code>rd</code></p>
+</li>
+</ul>
+<p>Atomic means that interrupts won’t stop the entire set of operations that is going on.</p>
 <h3 id="executing-instructions"><a class="header" href="#executing-instructions">Executing instructions</a></h3>
 <p>If we are using an operating system:</p>
 <ul>
@@ -293,9 +318,16 @@ These mark the stack frame in the stack.</p>
 <li>Then it is sent to control ROM. This does not have microcodes and are instead hardcoded using combinational circuit.</li>
 </ul>
 <h4 id="register-bank"><a class="header" href="#register-bank">Register Bank</a></h4>
-<p>Has all the registers and 2 muxs + 1 demux to select the register to use.</p>
+<p>Has all the registers and 2 muxs + 1 demux to select the register to use. There is <em>dual porting</em> to read two source registers at once (hence two muxes).</p>
 <h4 id="program-counter"><a class="header" href="#program-counter">Program Counter</a></h4>
 <p>This keeps track of the next instruction to be executed. Usually incremented by 4 unless branches. It resets to a fixed value called as <strong>reset vector</strong>.</p>
+<p>Instructions and data are fetched every rising edge of the clock and that is when the program counter is also incremented by 4.
+The instruction fetched is later stored in the <strong>instruction register</strong>.</p>
+<p>The instruction register sends it to the control unit which later sends signals to whatever is responsible.</p>
+<p>It also gets reset at interrupts to an interrupt vector and begins to consume instructions from there.</p>
+<h4 id="alu"><a class="header" href="#alu">ALU</a></h4>
+<p>Performs arithmetic (no shit). Has the <strong>gen</strong> module before it that generates the immediate instruction from the opcode, regardless of whether it was an <em>I-type</em> or not.</p>
+<p>After this, there is a 2:1 mux that has a select line coming from the Control Unit that decides whether or not the immediate values has to be selected or not, the other option being 0.</p>
 <h2 id="multiprecision-arithmetic-in-riscv"><a class="header" href="#multiprecision-arithmetic-in-riscv">Multiprecision Arithmetic in RISCV</a></h2>
 <p>Multiprecision addition</p>
 <pre><code class="language-assembly">.data
@@ -521,6 +553,25 @@ addi sp, sp, 0x20 #restore stack frame
 
 ret
 </code></pre>
+<h2 id="peripherals"><a class="header" href="#peripherals">Peripherals</a></h2>
+<p>They are also mapped to the memory. And properties can be changed using that memory area.</p>
+<p>The driver can be blocking or non-blocking. If blocking, it takes up a lot of CPU power as it keeps polling the peripheral for data.
+If it is non-blocking, then there are interrupts then they are detected at hardware level within a clock cycle.</p>
+<h3 id="interrupts"><a class="header" href="#interrupts">Interrupts</a></h3>
+<p>If there is an interrupt, then the program jumps to the supplied <strong>interrupt service routine</strong> and starts executing from there and returns to the OG instruction once
+everything is done.</p>
+<p>Hardware interrupts are done by a bus manager like the network controller (that straight away receives a bunch of kilobytes) and use <em>DMA</em> (Direct Memory Access) to
+straight away start using the memory.</p>
+<p>There are software interrupts (for accessing devices like IO, sockets, etc.) and hardware interrupts for, well, other stuff.</p>
+<p>Apart from that there are exceptions as well that are raised by the CPU when buttfuckery like division by 0 happens.</p>
+<p>All the peripherals are connected to the <strong>PLIC</strong> (<em>Platform Level Interrupt Controller</em>). There is also <strong>CLINT</strong> (<em>Control Local Interrupt Timer</em>) that gives each core timer interrupts
+that can be used a scheduler.</p>
+<p>Interrupts have modes that define previlege level:</p>
+<ul>
+<li>Machine level: M mode, most privileged</li>
+<li>Supervisor level: S mode, OS privilege</li>
+<li>User level: U mode, all binaries run here</li>
+</ul>
 
                     </main>
 
