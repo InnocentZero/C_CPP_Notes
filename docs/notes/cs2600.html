@@ -573,6 +573,25 @@ that can be used a scheduler.</p>
 <li>Supervisor level: S mode, OS privilege</li>
 <li>User level: U mode, all binaries run here</li>
 </ul>
+<blockquote>
+<p>In Intel machines these are called rings.</p>
+</blockquote>
+<h3 id="interrupt-handling"><a class="header" href="#interrupt-handling">Interrupt Handling</a></h3>
+<h4 id="what-caused-the-interrupt"><a class="header" href="#what-caused-the-interrupt">What caused the interrupt?</a></h4>
+<p><code>mcause</code> has the first bit reserved for the interrupt type (interrupt or error) and the rest 31 bits are used for indicating the subtype of the interrupt.</p>
+<p>To find out what peripheral caused the interrupt, the CPU uses the value given by <em>PLIC</em>.</p>
+<h4 id="where-is-the-interrupt-vector-address"><a class="header" href="#where-is-the-interrupt-vector-address">Where is the interrupt vector address?</a></h4>
+<p><code>mtvec</code> stores the address of the interrupt vector.</p>
+<p>If the <em>mode</em> value is set to 1, it is <strong>vectored</strong>. The <code>pc</code> is set to <strong>BASE + 4 * cause</strong>.</p>
+<p>If <em>mode</em> is set to 0, it is a <strong>direct</strong> interrupt and all exceptions set <code>pc</code> to <strong>BASE</strong>.</p>
+<h4 id="where-to-return-to"><a class="header" href="#where-to-return-to">Where to return to?</a></h4>
+<p><code>mepc</code> holds the value of <code>pc</code> when the interrupt occured.</p>
+<p><code>mret</code> instruction loads the <code>mepc</code> to the <code>pc</code>.</p>
+<h4 id="what-was-the-previous-status-level"><a class="header" href="#what-was-the-previous-status-level">What was the previous status level?</a></h4>
+<p><code>mstatus</code> register has 4 bits that are mostly relevant to us.</p>
+<p><code>MPP[1:0]</code> stores the previous execution mode.</p>
+<p><code>MIE</code> enables interrupts in machine mode if set.</p>
+<p><code>MPIE</code> holds the interrupt enable status in the previous mode.</p>
 
                     </main>
 
