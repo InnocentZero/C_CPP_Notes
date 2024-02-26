@@ -580,18 +580,145 @@ that can be used a scheduler.</p>
 <h4 id="what-caused-the-interrupt"><a class="header" href="#what-caused-the-interrupt">What caused the interrupt?</a></h4>
 <p><code>mcause</code> has the first bit reserved for the interrupt type (interrupt or error) and the rest 31 bits are used for indicating the subtype of the interrupt.</p>
 <p>To find out what peripheral caused the interrupt, the CPU uses the value given by <em>PLIC</em>.</p>
+<p>Filled automatically by the hardware when an interrupt happens.</p>
 <h4 id="where-is-the-interrupt-vector-address"><a class="header" href="#where-is-the-interrupt-vector-address">Where is the interrupt vector address?</a></h4>
 <p><code>mtvec</code> stores the address of the interrupt vector.</p>
 <p>If the <em>mode</em> value is set to 1, it is <strong>vectored</strong>. The <code>pc</code> is set to <strong>BASE + 4 * cause</strong>.</p>
 <p>If <em>mode</em> is set to 0, it is a <strong>direct</strong> interrupt and all exceptions set <code>pc</code> to <strong>BASE</strong>.</p>
+<blockquote>
+<p>NOT hardcoded!!</p>
+</blockquote>
 <h4 id="where-to-return-to"><a class="header" href="#where-to-return-to">Where to return to?</a></h4>
 <p><code>mepc</code> holds the value of <code>pc</code> when the interrupt occured.</p>
 <p><code>mret</code> instruction loads the <code>mepc</code> to the <code>pc</code>.</p>
 <h4 id="what-was-the-previous-status-level"><a class="header" href="#what-was-the-previous-status-level">What was the previous status level?</a></h4>
 <p><code>mstatus</code> register has 4 bits that are mostly relevant to us.</p>
 <p><code>MPP[1:0]</code> stores the previous execution mode.</p>
-<p><code>MIE</code> enables interrupts in machine mode if set.</p>
-<p><code>MPIE</code> holds the interrupt enable status in the previous mode.</p>
+<p><code>MPIE</code> holds the interrupt enable status in the previous mode. This is used to determine if the previous mode had interrupts enabled for the lower privileges.</p>
+<h3 id="nested-interrupts"><a class="header" href="#nested-interrupts">Nested interrupts</a></h3>
+<p>To enable a nested interrupt, copy the data in <code>mepc</code>, <code>mcause</code> and <code>mstatus</code>.</p>
+<p><code>mie</code> register enables interrupts in machine mode if set. It is set to zero at the start of the interrupt to make sure no other interrupts disturb the copying of the data during a nested interrupt.</p>
+<h3 id="pending-interrupts"><a class="header" href="#pending-interrupts">Pending Interrupts</a></h3>
+<p><code>mip</code> register holds the important bits for any interrupt that wasn’t executed in between an instruction.</p>
+<pre><code>.data
+my_roll: .word 0xa
+first_name: .asciz "Isfarul"
+last_name: .asciz "Haque"
+fav_num: .word 0x1f
+
+.section .text
+.global main
+
+main:
+addi sp, sp, -0x10 #create stack frame
+sd ra, 0(sp) #store return address
+sd fp, 0x8(sp) #store the previous frame pointer
+add fp, sp, 0x10 #move the fp to the new base of the stack frame
+
+la t0, roll
+lw t1, my_roll
+sw t1, 0(t0)
+
+la a0, first_name
+la a1, last_name
+lw a2, fav_num
+jal ra, print
+
+ld ra, -0x10(fp) #recover the return address
+ld fp, -0x8(fp) #recover the original frame pointer
+
+ret
+</code></pre>
+<pre><code>#include &lt;stdio.h&gt;
+
+int roll;
+
+void print(char *first_name, char *last_name, int fav) {
+	printf("First Name: %s, Last Name: %s, Roll: %d, favNo: %d\n", first_name, last_name, roll, fav);
+}
+</code></pre>
+<pre><code>.data
+#name: .asciz "Isfarul "
+#ame: .asciz "Haque"
+
+.bss 
+.global dest_str
+dest_str: .space 0x50 
+
+.section .text
+.global concat
+
+#main:
+#addi sp, sp, -0x10
+#sd ra, 0(sp)
+#sd fp, 0x8(sp)
+#addi fp, sp, 0x10
+
+#la a0, name
+#la a1, ame
+
+#jal ra, concat 
+
+#ld ra, -0x10(fp) #recover the return address
+#ld fp, -0x8(fp) #recover the original frame pointer
+#addi sp, sp, 0x10
+#ret
+
+concat:
+addi sp, sp, -0x10 #create stack frame
+sd ra, 0(sp) #store return address
+sd fp, 0x8(sp) #store the previous frame pointer
+addi fp, sp, 0x10
+
+la a2, dest_str
+
+
+copy_source:
+lb t0, 0(a0)
+beq t0, zero, end_strcat
+
+sb t0, 0(a2)
+addi a0, a0, 0x1
+addi a2, a2, 0x1
+
+j copy_source
+
+end_strcat:
+
+copy_append:
+lb t0, 0(a1)
+beq t0, zero, epilogue
+
+sb t0, 0(a2)
+addi a1, a1, 0x1
+addi a2, a2, 0x1
+j copy_append
+
+epilogue:
+sb zero, 0(a2)
+
+ld ra, -0x10(fp) #recover the return address
+ld fp, -0x8(fp) #recover the original frame pointer
+addi sp, sp, 0x10
+ret
+</code></pre>
+<pre><code>#include &lt;stdio.h&gt;
+#include &lt;string.h&gt;
+
+extern char * dest_str;
+
+void concat(char *, char *);
+	char *string1 = "Hello";
+	char *string2 = "IIT Madras !!!";
+
+int main() {
+	printf("%p %p", string1, string2);
+	concat(string1, string2);
+	printf("concated string: %s, length = %d", dest_str, strnlen(dest_str, 0x80));
+}
+
+
+</code></pre>
 
                     </main>
 
