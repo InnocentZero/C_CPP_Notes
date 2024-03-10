@@ -176,18 +176,6 @@
                 <div id="content" class="content">
                     <main>
                         <h1 id="cs2600"><a class="header" href="#cs2600">cs2600</a></h1>
-<h2 id="von-neumann-architecture"><a class="header" href="#von-neumann-architecture">Von Neumann Architecture</a></h2>
-<p>Fetches the memory into various kinds of buffers to speed up memory fetch by CPU.</p>
-<h3 id="caches"><a class="header" href="#caches">Caches</a></h3>
-<p>Each core has separate L1 cache for instructions and data. L2 cache is common for both and mostly per-core (can also be shared across multiple cores). L3 cache is shared across all the cores.</p>
-<h3 id="registers"><a class="header" href="#registers">Registers</a></h3>
-<p>Apart from this there are also registers next to the ALU to speed up computation. More can be slower or faster depending on the number. More means lesser loads and stores. More also means longer routes (more time for pulse to travel) and clock cycle logic to choose the register become slower.</p>
-<h3 id="ram-memory"><a class="header" href="#ram-memory">RAM memory</a></h3>
-<ul>
-<li>Has capacitors.</li>
-<li>Capacitors discharge over time hence needs to be continuously powered and recharged.</li>
-<li>Take time to charge and discharge, which creates bottlenecks for CPU.</li>
-</ul>
 <h2 id="instruction-set"><a class="header" href="#instruction-set">Instruction Set</a></h2>
 <p>Different Instructions: x86, ARM, RISC V, MIPS.</p>
 <ul>
@@ -200,8 +188,14 @@
 </ul>
 </li>
 </ul>
+<h3 id="how-compilation-happens"><a class="header" href="#how-compilation-happens">How compilation happens</a></h3>
+<p>First the assembler converts the assembly to an object file. Here, the addresses
+start with 0 and are relocatable. Later on the linker links multiple such object
+files together and resolves function addresses, starting location, etc. using
+something called as a <strong>Linker Descriptor Script</strong>.</p>
 <h2 id="risc-v"><a class="header" href="#risc-v">RISC V</a></h2>
-<p>Open source. Has 32 int and 32 FP registers. Also has XLEN variable, which is either 32 or 64 for 32-bit and 64-bit processors respectively.</p>
+<p>Open source. Has 32 int and 32 FP registers. Also has XLEN variable, which is
+either 32 or 64 for 32-bit and 64-bit processors respectively.</p>
 <div class="table-wrapper"><table><thead><tr><th style="text-align: center">Register</th><th style="text-align: center">ABI Name</th><th style="text-align: center">Description</th><th style="text-align: center">Saver</th></tr></thead><tbody>
 <tr><td style="text-align: center">x0</td><td style="text-align: center">zero</td><td style="text-align: center">Zero always</td><td style="text-align: center"></td></tr>
 <tr><td style="text-align: center">x1</td><td style="text-align: center">ra</td><td style="text-align: center">Return address</td><td style="text-align: center">caller</td></tr>
@@ -218,14 +212,20 @@
 </tbody></table>
 </div>
 <blockquote>
-<p>Maximum memory depends on the size of the address bus from the load store unit to the memory.</p>
+<p>Maximum memory depends on the size of the address bus from the load store unit
+to the memory.</p>
 </blockquote>
-<p>The caller saved registers have to be explicitly saved by the caller function in a stacj frame before calling the other function. On the other hand, callee saved functions are guaranteed to stay the same across function calls and there is no need for functions to save them.</p>
+<p>The caller saved registers have to be explicitly saved by the caller function
+in a stack frame before calling the other function. On the other hand, callee
+saved functions are guaranteed to stay the same across function calls and there
+is no need for functions to save them.</p>
 <h3 id="instructions"><a class="header" href="#instructions">Instructions</a></h3>
 <p>The ones listed below are called <em>R-type</em> or <em>register-type</em> instructions.</p>
 <ul>
 <li>
-<p><code>add rd, rs1, rs2</code>: add the contents of rs1 and rs2 and store it in rd. Signed addition. Also has the unsigned version. Similarly, sub, and, or, xor also exist.</p>
+<p><code>add rd, rs1, rs2</code>: add the contents of rs1 and rs2 and store it in rd.
+Signed addition. Also has the unsigned version. Similarly, sub, and, or, xor
+also exist.</p>
 </li>
 <li>
 <p><code>mul/mulh rd, rs1, rs2</code>: multiplies and stores the lower/upper 32 bits in rd.</p>
@@ -234,44 +234,56 @@
 <p><code>div/rem rd, rs1, rs2</code>: stores the quotient/remainder.</p>
 </li>
 <li>
-<p><code>sll rd, rs1, rs2</code>: Left shift the number in rs1 by the value in rs2 and store in rd.</p>
+<p><code>sll rd, rs1, rs2</code>: Left shift the number in rs1 by the value in rs2 and
+store in rd.</p>
 </li>
 <li>
-<p><code>srl rd, rs1, rs2</code>: Right shift the number in rs1 by the value in rs2 and store in rd. Zero extends.</p>
+<p><code>srl rd, rs1, rs2</code>: Right shift the number in rs1 by the value in rs2 and
+store in rd. Zero extends.</p>
 </li>
 <li>
-<p><code>sra rd, rs1, rs2</code>: Right shift the number in rs1 by the value in rs2 and store in rd. Sign extends.</p>
+<p><code>sra rd, rs1, rs2</code>: Right shift the number in rs1 by the value in rs2 and
+store in rd. Sign extends.</p>
 </li>
 </ul>
-<p>All of these also have an immediate version where the last argument is a hardcoded literal.</p>
+<p>All of these also have an immediate version where the last argument is a
+hardcoded literal.</p>
 <p>These are called <em>I-type</em> or <em>immediate-type</em> instructions.</p>
 <ul>
 <li>
-<p><code>l(b/h/w) rd, imm(rs1)</code>: loads a byte/half-word/word to rd(dest. register) from *(rs1 + imm)</p>
+<p><code>l(b/h/w) rd, imm(rs1)</code>: loads a byte/half-word/word to rd(dest. register)
+from *(rs1 + imm)</p>
 </li>
 <li>
-<p><code>l(b/h/w)u rd, imm(rs1)</code>: loads a byte/half-word/word to rd(dest. register) from *(rs1 + imm). This one zero-extends on the left.</p>
+<p><code>l(b/h/w)u rd, imm(rs1)</code>: loads a byte/half-word/word to rd(dest. register)
+from *(rs1 + imm). This one zero-extends on the left.</p>
 </li>
 </ul>
 <p>These are also <em>I-type</em> instructions.</p>
 <p>The below one instruction is <em>S-type</em> instruction (for obvious reasons).</p>
 <ul>
-<li><code>s(b/h/w) rd, imm(rs1)</code>: stores a byte/half-word/word to *(rs1 + imm) from the contents of rd.</li>
+<li><code>s(b/h/w) rd, imm(rs1)</code>: stores a byte/half-word/word to *(rs1 + imm)
+from the contents of rd.</li>
 </ul>
 <p>The below instruction is called <em>B-type</em> or <em>branch-type</em> instruction.</p>
 <ul>
-<li><code>blt/bltu r1, r2, label/offset</code>: if r1 &lt; r2 (signed or unsigned), jump to label or symbol. Can jump to atmost 4 KiB. (13 bits with the lsb always 0, the rest are used for determining values).</li>
+<li><code>blt/bltu r1, r2, label/offset</code>: if r1 &lt; r2 (signed or unsigned), jump to
+label or symbol. Can jump to atmost 4 KiB. (13 bits with the lsb always 0, the
+rest are used for determining values).</li>
 </ul>
-<p>The above instructions have greater than, greater than equal to variants as well. Also immediate variants of all.</p>
+<p>The above instructions have greater than, greater than equal to variants as
+well. Also immediate variants of all.</p>
 <h4 id="function-calls"><a class="header" href="#function-calls">Function calls</a></h4>
-<p>All of these can jump to at most 1 MiB as they take an immediate value of 20 bits apart from the lsb that’s always 0.</p>
+<p>All of these can jump to at most 1 MiB as they take an immediate value of 20
+bits apart from the lsb that’s always 0.</p>
 <p>The below type is called a <em>J-type</em> instruction.</p>
 <ul>
 <li><code>jal rd, imm</code>: Jump to PC + imm, and store pc + 4 in register rd.</li>
 </ul>
 <p>The below one is an <em><strong>I-type</strong></em> and <strong>NOT</strong> J-type.</p>
 <ul>
-<li><code>jalr rd, rs1, imm</code>: Jump to rs1 + imm, storing PC + 4 in the register rd. Used for function pointers.</li>
+<li><code>jalr rd, rs1, imm</code>: Jump to rs1 + imm, storing PC + 4 in the register
+rd. Used for function pointers.</li>
 </ul>
 <p>Both of the ones below are aliases.</p>
 <ul>
@@ -279,56 +291,70 @@
 <p><code>j label</code>: alias to <code>jal zero, label</code>, discards the return address</p>
 </li>
 <li>
-<p><code>ret rs1</code>: return to the address in rs1, if no argument is specified use ra (return addres register/x1). Alias to <code>jalr zero, rs1, 0</code></p>
+<p><code>ret rs1</code>: return to the address in rs1, if no argument is specified use
+ra (return addres register/x1). Alias to <code>jalr zero, rs1, 0</code></p>
 </li>
 </ul>
-<p>For function calls we also need a stack-based execution. s2 register is the stack pointer that points to the top of the stack. Frame pointer s0 saves the base of the stack.
-These mark the stack frame in the stack.</p>
+<p>For function calls we also need a stack-based execution. s2 register is the
+stack pointer that points to the top of the stack. Frame pointer s0 saves the
+base of the stack. These mark the stack frame in the stack.</p>
 <blockquote>
 <p>Always load and save values relative to the frame pointer.</p>
 </blockquote>
-<p>Registers a0 to a7 are used to pass function arguments from one function to another. These are 8 parameters. If we have more, then you need to use the stack.</p>
+<p>Registers a0 to a7 are used to pass function arguments from one function to
+another. These are 8 parameters. If we have more, then you need to use the
+stack.</p>
 <h4 id="control-and-status-registers"><a class="header" href="#control-and-status-registers">Control and status registers</a></h4>
 <ul>
 <li>
-<p><code>csrrw rd, csr</code>: atomic swap values</p>
+<p><code>csrrw rd, csr, rs</code>: atomic swap values</p>
 </li>
 <li>
-<p><code>csrrs rd, csr</code>: atomic read from rd and set a bit</p>
+<p><code>csrrs rd, csr, rs</code>: atomic read from rd and set a bit</p>
 </li>
 <li>
-<p><code>csrrs rd, csr</code>: atomic read from rd and reset a bit</p>
-</li>
-<li>
-<p><code>csrr rd, csr</code>: atomic read from <code>csr</code> to <code>rd</code></p>
+<p><code>csrrc rd, csr, rs</code>: atomic read from rd and reset a bit</p>
 </li>
 </ul>
-<p>Atomic means that interrupts won’t stop the entire set of operations that is going on.</p>
+<p>Atomic means that interrupts won’t stop the entire set of operations that is
+going on.</p>
 <h3 id="executing-instructions"><a class="header" href="#executing-instructions">Executing instructions</a></h3>
 <p>If we are using an operating system:</p>
 <ul>
-<li>Proxy Kernel is handling syscalls, mapping memory, program counter according to memory map, etc.</li>
+<li>Proxy Kernel is handling syscalls, mapping memory, program counter
+according to memory map, etc.</li>
 </ul>
 <p>If we are without an operating system:</p>
 <ul>
 <li>Manually write the <code>.text</code> section to the flash memory.</li>
 <li>Load the <code>.data</code> section to the RAM.</li>
-<li>Set/reset the program counter to the required memory. It resets to a fixed value called as <strong>reset vector</strong>.</li>
+<li>Set/reset the program counter to the required memory. It resets to a fixed
+value called as <strong>reset vector</strong>.</li>
 <li>Address out of range is your skill issue.</li>
 <li>Instruction fetched by the <strong>Instruction Pointer</strong>. 32 bits in width.</li>
-<li>Then it is sent to control ROM. This does not have microcodes and are instead hardcoded using combinational circuit.</li>
+<li>Then it is sent to control ROM. This does not have microcodes and are instead
+hardcoded using combinational circuit.</li>
 </ul>
 <h4 id="register-bank"><a class="header" href="#register-bank">Register Bank</a></h4>
-<p>Has all the registers and 2 muxs + 1 demux to select the register to use. There is <em>dual porting</em> to read two source registers at once (hence two muxes).</p>
+<p>Has all the registers and 2 muxs + 1 demux to select the register to use. There
+is <em>dual porting</em> to read two source registers at once (hence two muxes).</p>
 <h4 id="program-counter"><a class="header" href="#program-counter">Program Counter</a></h4>
-<p>This keeps track of the next instruction to be executed. Usually incremented by 4 unless branches. It resets to a fixed value called as <strong>reset vector</strong>.</p>
-<p>Instructions and data are fetched every rising edge of the clock and that is when the program counter is also incremented by 4.
+<p>This keeps track of the next instruction to be executed. Usually incremented by
+4 unless branches. It resets to a fixed value called as <strong>reset vector</strong>.</p>
+<p>Instructions and data are fetched every rising edge of the clock and that is
+when the program counter is also incremented by 4.
 The instruction fetched is later stored in the <strong>instruction register</strong>.</p>
-<p>The instruction register sends it to the control unit which later sends signals to whatever is responsible.</p>
-<p>It also gets reset at interrupts to an interrupt vector and begins to consume instructions from there.</p>
+<p>The instruction register sends it to the control unit which later sends signals
+to whatever is responsible.</p>
+<p>It also gets reset at interrupts to an interrupt vector and begins to consume
+instructions from there.</p>
 <h4 id="alu"><a class="header" href="#alu">ALU</a></h4>
-<p>Performs arithmetic (no shit). Has the <strong>gen</strong> module before it that generates the immediate instruction from the opcode, regardless of whether it was an <em>I-type</em> or not.</p>
-<p>After this, there is a 2:1 mux that has a select line coming from the Control Unit that decides whether or not the immediate values has to be selected or not, the other option being 0.</p>
+<p>Performs arithmetic (no shit). Has the <strong>gen</strong> module before it that generates
+the immediate instruction from the opcode, regardless of whether it was an
+<em>I-type</em> or not.</p>
+<p>After this, there is a 2:1 mux that has a select line coming from the Control
+Unit that decides whether or not the immediate values has to be selected or not,
+the other option being 0.</p>
 <h2 id="multiprecision-arithmetic-in-riscv"><a class="header" href="#multiprecision-arithmetic-in-riscv">Multiprecision Arithmetic in RISCV</a></h2>
 <p>Multiprecision addition</p>
 <pre><code class="language-assembly">.data
@@ -555,17 +581,26 @@ addi sp, sp, 0x20 #restore stack frame
 ret
 </code></pre>
 <h2 id="peripherals"><a class="header" href="#peripherals">Peripherals</a></h2>
-<p>They are also mapped to the memory. And properties can be changed using that memory area.</p>
-<p>The driver can be blocking or non-blocking. If blocking, it takes up a lot of CPU power as it keeps polling the peripheral for data.
-If it is non-blocking, then there are interrupts then they are detected at hardware level within a clock cycle.</p>
+<p>They are also mapped to the memory. And properties can be changed using that
+memory area.</p>
+<p>The driver can be blocking or non-blocking. If blocking, it takes up a lot of
+CPU power as it keeps polling the peripheral for data.
+If it is non-blocking, then there are interrupts then they are detected at
+hardware level within a clock cycle.</p>
 <h3 id="interrupts"><a class="header" href="#interrupts">Interrupts</a></h3>
-<p>If there is an interrupt, then the program jumps to the supplied <strong>interrupt service routine</strong> and starts executing from there and returns to the OG instruction once
-everything is done.</p>
-<p>Hardware interrupts are done by a bus manager like the network controller (that straight away receives a bunch of kilobytes) and use <em>DMA</em> (Direct Memory Access) to
-straight away start using the memory.</p>
-<p>There are software interrupts (for accessing devices like IO, sockets, etc.) and hardware interrupts for, well, other stuff.</p>
-<p>Apart from that there are exceptions as well that are raised by the CPU when buttfuckery like division by 0 happens.</p>
-<p>All the peripherals are connected to the <strong>PLIC</strong> (<em>Platform Level Interrupt Controller</em>). There is also <strong>CLINT</strong> (<em>Control Local Interrupt Timer</em>) that gives each core timer interrupts
+<p>If there is an interrupt, then the program jumps to the supplied <strong>interrupt
+service routine</strong> and starts executing from there and returns to the OG
+instruction once everything is done.</p>
+<p>Hardware interrupts are done by a bus manager like the network controller (that
+straight away receives a bunch of kilobytes) and use <em>DMA</em> (Direct Memory
+Access) to straight away start using the memory.</p>
+<p>There are software interrupts (for accessing devices like IO, sockets, etc.)
+and hardware interrupts for, well, other stuff.</p>
+<p>Apart from that there are exceptions as well that are raised by the CPU when
+buttfuckery like division by 0 happens.</p>
+<p>All the peripherals are connected to the <strong>PLIC</strong> (<em>Platform Level Interrupt
+Controller</em>). There is also <strong>CLINT</strong> (<em>Control Local Interrupt Timer</em>) that
+gives each core timer interrupts
 that can be used a scheduler.</p>
 <p>Interrupts have modes that define previlege level:</p>
 <ul>
@@ -578,13 +613,19 @@ that can be used a scheduler.</p>
 </blockquote>
 <h3 id="interrupt-handling"><a class="header" href="#interrupt-handling">Interrupt Handling</a></h3>
 <h4 id="what-caused-the-interrupt"><a class="header" href="#what-caused-the-interrupt">What caused the interrupt?</a></h4>
-<p><code>mcause</code> has the first bit reserved for the interrupt type (interrupt or error) and the rest 31 bits are used for indicating the subtype of the interrupt.</p>
-<p>To find out what peripheral caused the interrupt, the CPU uses the value given by <em>PLIC</em>.</p>
+<p><code>mcause</code> has the first bit reserved for the interrupt type (interrupt or error)
+and the rest 31 bits are used for indicating the subtype of the interrupt.</p>
+<p>If the first bit is 1 then it was an interrupt else it was an exception.</p>
+<p>To find out what peripheral caused the interrupt, the CPU uses the value given
+by <em>PLIC</em>.</p>
 <p>Filled automatically by the hardware when an interrupt happens.</p>
 <h4 id="where-is-the-interrupt-vector-address"><a class="header" href="#where-is-the-interrupt-vector-address">Where is the interrupt vector address?</a></h4>
 <p><code>mtvec</code> stores the address of the interrupt vector.</p>
-<p>If the <em>mode</em> value is set to 1, it is <strong>vectored</strong>. The <code>pc</code> is set to <strong>BASE + 4 * cause</strong>.</p>
-<p>If <em>mode</em> is set to 0, it is a <strong>direct</strong> interrupt and all exceptions set <code>pc</code> to <strong>BASE</strong>.</p>
+<p>If the <em>mode</em> value is set to 1, it is <strong>vectored</strong>. The <code>pc</code> is set to
+<strong>BASE + 4 * cause</strong>.</p>
+<p>If <em>mode</em> is set to 0, it is a <strong>direct</strong> interrupt and all exceptions set
+<code>pc</code> to <strong>BASE</strong>.</p>
+<p>2 and 3 are reserved for future use.</p>
 <blockquote>
 <p>NOT hardcoded!!</p>
 </blockquote>
@@ -594,131 +635,137 @@ that can be used a scheduler.</p>
 <h4 id="what-was-the-previous-status-level"><a class="header" href="#what-was-the-previous-status-level">What was the previous status level?</a></h4>
 <p><code>mstatus</code> register has 4 bits that are mostly relevant to us.</p>
 <p><code>MPP[1:0]</code> stores the previous execution mode.</p>
-<p><code>MPIE</code> holds the interrupt enable status in the previous mode. This is used to determine if the previous mode had interrupts enabled for the lower privileges.</p>
+<p><code>MPIE</code> holds the interrupt enable status in the previous mode. This is used to
+determine if the previous mode had interrupts enabled for the lower privileges.</p>
 <h3 id="nested-interrupts"><a class="header" href="#nested-interrupts">Nested interrupts</a></h3>
-<p>To enable a nested interrupt, copy the data in <code>mepc</code>, <code>mcause</code> and <code>mstatus</code>.</p>
-<p><code>mie</code> register enables interrupts in machine mode if set. It is set to zero at the start of the interrupt to make sure no other interrupts disturb the copying of the data during a nested interrupt.</p>
+<p>To enable a nested interrupt, copy the data from <code>mepc</code>, <code>mcause</code> and <code>mstatus</code>.</p>
+<p><code>mie</code> register enables interrupts in machine mode if set. It is set to zero at
+the start of the interrupt to make sure no other interrupts disturb the copying
+of the data during a nested interrupt.</p>
+<ul>
+<li>11th bit for external/DMA interrupt.</li>
+<li>7th bit for timer interrupt.</li>
+<li>3rd bit for Software interrupt.</li>
+</ul>
 <h3 id="pending-interrupts"><a class="header" href="#pending-interrupts">Pending Interrupts</a></h3>
-<p><code>mip</code> register holds the important bits for any interrupt that wasn’t executed in between an instruction.</p>
-<pre><code>.data
-my_roll: .word 0xa
-first_name: .asciz "Isfarul"
-last_name: .asciz "Haque"
-fav_num: .word 0x1f
-
-.section .text
-.global main
-
-main:
-addi sp, sp, -0x10 #create stack frame
-sd ra, 0(sp) #store return address
-sd fp, 0x8(sp) #store the previous frame pointer
-add fp, sp, 0x10 #move the fp to the new base of the stack frame
-
-la t0, roll
-lw t1, my_roll
-sw t1, 0(t0)
-
-la a0, first_name
-la a1, last_name
-lw a2, fav_num
-jal ra, print
-
-ld ra, -0x10(fp) #recover the return address
-ld fp, -0x8(fp) #recover the original frame pointer
-
-ret
-</code></pre>
-<pre><code>#include &lt;stdio.h&gt;
-
-int roll;
-
-void print(char *first_name, char *last_name, int fav) {
-	printf("First Name: %s, Last Name: %s, Roll: %d, favNo: %d\n", first_name, last_name, roll, fav);
-}
-</code></pre>
-<pre><code>.data
-#name: .asciz "Isfarul "
-#ame: .asciz "Haque"
-
-.bss 
-.global dest_str
-dest_str: .space 0x50 
-
-.section .text
-.global concat
-
-#main:
-#addi sp, sp, -0x10
-#sd ra, 0(sp)
-#sd fp, 0x8(sp)
-#addi fp, sp, 0x10
-
-#la a0, name
-#la a1, ame
-
-#jal ra, concat 
-
-#ld ra, -0x10(fp) #recover the return address
-#ld fp, -0x8(fp) #recover the original frame pointer
-#addi sp, sp, 0x10
-#ret
-
-concat:
-addi sp, sp, -0x10 #create stack frame
-sd ra, 0(sp) #store return address
-sd fp, 0x8(sp) #store the previous frame pointer
-addi fp, sp, 0x10
-
-la a2, dest_str
-
-
-copy_source:
-lb t0, 0(a0)
-beq t0, zero, end_strcat
-
-sb t0, 0(a2)
-addi a0, a0, 0x1
-addi a2, a2, 0x1
-
-j copy_source
-
-end_strcat:
-
-copy_append:
-lb t0, 0(a1)
-beq t0, zero, epilogue
-
-sb t0, 0(a2)
-addi a1, a1, 0x1
-addi a2, a2, 0x1
-j copy_append
-
-epilogue:
-sb zero, 0(a2)
-
-ld ra, -0x10(fp) #recover the return address
-ld fp, -0x8(fp) #recover the original frame pointer
-addi sp, sp, 0x10
-ret
-</code></pre>
-<pre><code>#include &lt;stdio.h&gt;
-#include &lt;string.h&gt;
-
-extern char * dest_str;
-
-void concat(char *, char *);
-	char *string1 = "Hello";
-	char *string2 = "IIT Madras !!!";
-
-int main() {
-	printf("%p %p", string1, string2);
-	concat(string1, string2);
-	printf("concated string: %s, length = %d", dest_str, strnlen(dest_str, 0x80));
-}
-
-
-</code></pre>
+<p><code>mip</code> register holds the important bits for any interrupt that wasn’t executed
+in between an instruction.</p>
+<p>Bit scheme is the same as above.</p>
+<h2 id="virtual-memory-addressing"><a class="header" href="#virtual-memory-addressing">Virtual Memory Addressing</a></h2>
+<p>We introduce a <strong>paging unit</strong> between physical memory and the CPU, which is
+unique for every process.</p>
+<p>RAM is split into multiple page frames (usually 4 KiB). The virtual memory is
+also split into multiple chunks of 4KiB size. These two chunks are then mapped
+in some fashion which is stored in the <strong>process page table</strong>.</p>
+<p>While scheduling, the program has an active page table that is maintained during
+the program’s runtime. In some cases, pages from multiple programs are loaded
+simultaneously to the memory.</p>
+<h3 id="demand-paging"><a class="header" href="#demand-paging">Demand Paging</a></h3>
+<p>Virtual memory takes advantage of the fact that not all blocks need to be loaded
+at once for the program to be executed. Hence, the paging table also has a value
+called present bit that tells you if the page is present in the CPU or not.</p>
+<p>If a page is not loaded when it was supposed to be, the program raises an
+interrupt called <strong>page fault exception</strong>. There is a page fault exception
+handler that takes care of loading the page and fill the page table. It may
+remove a page frame of some other process if necessary.</p>
+<p>There is another bit that keeps track of whether or not a page needs to be
+written back to <em>swap</em> because of data updation. If the dirty bit is set to <em>1</em>,
+we write stuff back to the swap. Else we don’t to save memory operations.</p>
+<p>There are also (usually 2) protection bits for each page to indicate the
+permissions of each page. These are used for maintaining stuff like the code
+being readable, stack being non-executable, etc.</p>
+<p>Usually there are 2 level paging, where one table has the address of another
+sub-table and there is an offset that are used together to obtain the memory.</p>
+<h3 id="shared-memory"><a class="header" href="#shared-memory">Shared memory</a></h3>
+<p>If two programs have the same page frame, then they share the same memory
+physically that lets them have a common shared memory (eg. glibc sharing,
+VDSO in linux).
+You can also duplicate a page within a program by pointing two blocks to the
+same frame.</p>
+<h3 id="2-level-paging"><a class="header" href="#2-level-paging">2 level paging</a></h3>
+<p>The virtual address has the first 10 bits as offset from the
+<strong>page table base register</strong>. This gives you the exact address of the page
+table from the page directory. The next 10 bits store the offset from the base
+of the page table. From this value the first 20 bits of the physical address
+are obtained. The last 12 bits for both virtual and physical address are the
+same. This scheme supports page sizes of 4KB and 2 MB.</p>
+<p>For the <em>satp</em> register (the page table base register), the MSB will indicate
+that translation is on or not. The next 9 bits are just meant for address space
+separation for different processes. The next 22 bits hold the address of the
+first level directory of the page translation.</p>
+<p>The page table format is as follows:</p>
+<div class="table-wrapper"><table><thead><tr><th>PPN[1]</th><th>PPN[0]</th><th>RSW</th><th>D</th><th>A</th><th>G</th><th>U</th><th>X</th><th>W</th><th>R</th><th>V</th></tr></thead><tbody>
+<tr><td>12: physical page number</td><td>10: physical page number</td><td>2: reserved for OS</td><td>1: Dirty (0 for non-leaf)</td><td>1: Accessed (0 for non-leaf)</td><td>1: set to check whether the mapping is valid or not for all virtual address spaces, usually only used by the OS</td><td>1: User mode</td><td>1: execution bit</td><td>1: write bit</td><td>1: read bit</td><td>1: valid bit</td></tr>
+</tbody></table>
+</div>
+<p>The PPN[1] + PPN[0] of the first level are used to get the address of the
+second level table. Once we get that, we use the PPN[1] + PPN[0] to get the
+first 22 bits of the <strong>34 bit</strong> physical page address. The last 12 bits are the
+offset bits from the OG virtual page address. 34 bits somehow work??</p>
+<h3 id="3-level-paging"><a class="header" href="#3-level-paging">3 level paging</a></h3>
+<p>This is done for 64 bit architecture. This comes in two variants:</p>
+<ul>
+<li>39 bit addressing</li>
+<li>48 bit addressing</li>
+</ul>
+<h4 id="39-bit"><a class="header" href="#39-bit">39 bit</a></h4>
+<p>This scheme can support page tables of sizes 2KB, 2MB, 1GB. The most significant
+25 bits are unused. There are a total of <data class="katex-src" value="2^{27}"><span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msup><mn>2</mn><mn>27</mn></msup></mrow><annotation encoding="application/x-tex">2^{27}</annotation></semantics></math></span></data> page table entries. Once again
+, last 12 bits are the same.</p>
+<p>The page table entry is as follows:</p>
+<div class="table-wrapper"><table><thead><tr><th><em>Reserved</em></th><th>PPN[2]</th><th>PPN[1]</th><th>PPN[0]</th><th>RSW</th><th>D</th><th>A</th><th>G</th><th>U</th><th>X</th><th>W</th><th>R</th><th>V</th></tr></thead><tbody>
+<tr><td>10: reserved for future use</td><td>26: physical page number</td><td>9: physical page number</td><td>9: physical page number</td><td>2: reserved for OS</td><td>1: Dirty (0 for non-leaf)</td><td>1: Accessed (0 for non-leaf)</td><td>1: set to check whether the mapping is valid or not for all virtual address spaces, usually only used by the OS</td><td>1: User mode</td><td>1: execution bit</td><td>1: write bit</td><td>1: read bit</td><td>1: valid bit</td></tr>
+</tbody></table>
+</div>
+<p>Once again, all of PPN[2] + PPN[1] + PPN[0] bits will be used to find the
+page directory beginning in the subsequent levels.</p>
+<h2 id="von-neumann-architecture"><a class="header" href="#von-neumann-architecture">Von Neumann Architecture</a></h2>
+<p>Fetches the memory into various kinds of buffers to speed up memory fetch by
+CPU.</p>
+<h3 id="caches"><a class="header" href="#caches">Caches</a></h3>
+<p>Each core has separate L1 cache for instructions and data. L2 cache is common
+for both and mostly per-core (can also be shared across multiple cores). L3
+cache is shared across all the cores.</p>
+<h3 id="registers"><a class="header" href="#registers">Registers</a></h3>
+<p>Apart from this there are also registers next to the ALU to speed up computation
+. More can be slower or faster depending on the number. More means lesser loads
+and stores. More also means longer routes (more time for pulse to travel) and
+clock cycle logic to choose the register become slower.</p>
+<h3 id="ram-memory"><a class="header" href="#ram-memory">RAM memory</a></h3>
+<ul>
+<li>Has capacitors.</li>
+<li>Capacitors discharge over time hence needs to be continuously powered and
+recharged.</li>
+<li>Take time to charge and discharge, which creates bottlenecks for CPU.</li>
+</ul>
+<h4 id="dram"><a class="header" href="#dram">DRAM</a></h4>
+<p>Flow of types through time:</p>
+<ul>
+<li>SDRAM: Synchronous DRAM</li>
+<li>RDRAM: Rambus (company)</li>
+<li>DDR DRAM: Double data rate - over here both rising and falling edges will
+have actions.</li>
+</ul>
+<p>DIMM chips: Dual inline memory modules</p>
+<p>There are two ranks, with 8 chips for each. One rank is on one side. Each bus
+activates all the 8 bits at once.
+This is more efficient as one DRAM chip can be held using 8 pins only. This
+reduces size and number of pins (they are costly).</p>
+<p>However, this activates all the 8 DRAM chips at once when we don’t need to, so
+it is power inefficient.</p>
+<p>For each DRAM cell, there are <strong>banks</strong>, each of which has 8 arrays. Each array
+has 64 bits, however the data is stored so that all the 8 arrays store a bit
+each for any byte.</p>
+<p>Each array has a <em>RAS</em> (row access strobe) and a <em>CAS</em> (column access strobe).
+There are 8 rows and 8 columns. Each row has 8 bits, <strong>but not from the
+same byte</strong>. Those are parallel.</p>
+<p>Each RAS has selects a row and each CAS selects a column to fetch a bit. All the
+8 bits from each of the array combine to form a byte. Therefore a bank stores
+64 bytes but in parallel.</p>
+<blockquote>
+<p>Row hammer attack: When you activate rows that have one row in between such
+that the row in between changes values due to EM fields.</p>
+</blockquote>
 
                     </main>
 
