@@ -634,9 +634,18 @@ by <em>PLIC</em>.</p>
 <p><code>mret</code> instruction loads the <code>mepc</code> to the <code>pc</code>.</p>
 <h4 id="what-was-the-previous-status-level"><a class="header" href="#what-was-the-previous-status-level">What was the previous status level?</a></h4>
 <p><code>mstatus</code> register has 4 bits that are mostly relevant to us.</p>
-<p><code>MPP[1:0]</code> stores the previous execution mode.</p>
+<p><code>MPP[1:0]</code> stores the previous execution mode. These are the 12th and 11th LSB,
+0 indexed.</p>
+<ul>
+<li>User mode: 00</li>
+<li>Supervisor mode: 01</li>
+<li>Machine mode: 11</li>
+</ul>
 <p><code>MPIE</code> holds the interrupt enable status in the previous mode. This is used to
-determine if the previous mode had interrupts enabled for the lower privileges.</p>
+determine if the previous mode had interrupts enabled for the lower privileges.
+This is the 7th LSB, same scheme as above.</p>
+<p><code>MIE</code> holds the interrupt enable status in the current mode. 3rd LSB, same
+scheme.</p>
 <h3 id="nested-interrupts"><a class="header" href="#nested-interrupts">Nested interrupts</a></h3>
 <p>To enable a nested interrupt, copy the data from <code>mepc</code>, <code>mcause</code> and <code>mstatus</code>.</p>
 <p><code>mie</code> register enables interrupts in machine mode if set. It is set to zero at
@@ -647,6 +656,7 @@ of the data during a nested interrupt.</p>
 <li>7th bit for timer interrupt.</li>
 <li>3rd bit for Software interrupt.</li>
 </ul>
+<p>These are 0 indexed LSBs.</p>
 <h3 id="pending-interrupts"><a class="header" href="#pending-interrupts">Pending Interrupts</a></h3>
 <p><code>mip</code> register holds the important bits for any interrupt that wasn’t executed
 in between an instruction.</p>
@@ -671,8 +681,8 @@ remove a page frame of some other process if necessary.</p>
 <p>There is another bit that keeps track of whether or not a page needs to be
 written back to <em>swap</em> because of data updation. If the dirty bit is set to <em>1</em>,
 we write stuff back to the swap. Else we don’t to save memory operations.</p>
-<p>There are also (usually 2) protection bits for each page to indicate the
-permissions of each page. These are used for maintaining stuff like the code
+<p>There are also protection bits for each page to indicate the permissions of
+each page. These are used for maintaining stuff like the code
 being readable, stack being non-executable, etc.</p>
 <p>Usually there are 2 level paging, where one table has the address of another
 sub-table and there is an offset that are used together to obtain the memory.</p>
@@ -686,9 +696,9 @@ same frame.</p>
 <p>The virtual address has the first 10 bits as offset from the
 <strong>page table base register</strong>. This gives you the exact address of the page
 table from the page directory. The next 10 bits store the offset from the base
-of the page table. From this value the first 20 bits of the physical address
+of the page table. From this value the first 22 bits of the physical address
 are obtained. The last 12 bits for both virtual and physical address are the
-same. This scheme supports page sizes of 4KB and 2 MB.</p>
+same. This scheme supports page directory sizes of 4KB and 2 MB.</p>
 <p>For the <em>satp</em> register (the page table base register), the MSB will indicate
 that translation is on or not. The next 9 bits are just meant for address space
 separation for different processes. The next 22 bits hold the address of the
@@ -709,9 +719,9 @@ offset bits from the OG virtual page address. 34 bits somehow work??</p>
 <li>48 bit addressing</li>
 </ul>
 <h4 id="39-bit"><a class="header" href="#39-bit">39 bit</a></h4>
-<p>This scheme can support page tables of sizes 2KB, 2MB, 1GB. The most significant
-25 bits are unused. There are a total of <data class="katex-src" value="2^{27}"><span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msup><mn>2</mn><mn>27</mn></msup></mrow><annotation encoding="application/x-tex">2^{27}</annotation></semantics></math></span></data> page table entries. Once again
-, last 12 bits are the same.</p>
+<p>This scheme can support page table directories of sizes 4KB, 2MB, 1GB. The most
+significant 25 bits are unused. There are a total of <data class="katex-src" value="2^{27}"><span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msup><mn>2</mn><mn>27</mn></msup></mrow><annotation encoding="application/x-tex">2^{27}</annotation></semantics></math></span></data> page table entries
+. Once again, last 12 bits are the same.</p>
 <p>The page table entry is as follows:</p>
 <div class="table-wrapper"><table><thead><tr><th><em>Reserved</em></th><th>PPN[2]</th><th>PPN[1]</th><th>PPN[0]</th><th>RSW</th><th>D</th><th>A</th><th>G</th><th>U</th><th>X</th><th>W</th><th>R</th><th>V</th></tr></thead><tbody>
 <tr><td>10: reserved for future use</td><td>26: physical page number</td><td>9: physical page number</td><td>9: physical page number</td><td>2: reserved for OS</td><td>1: Dirty (0 for non-leaf)</td><td>1: Accessed (0 for non-leaf)</td><td>1: set to check whether the mapping is valid or not for all virtual address spaces, usually only used by the OS</td><td>1: User mode</td><td>1: execution bit</td><td>1: write bit</td><td>1: read bit</td><td>1: valid bit</td></tr>
@@ -748,7 +758,7 @@ have actions.</li>
 </ul>
 <p>DIMM chips: Dual inline memory modules</p>
 <p>There are two ranks, with 8 chips for each. One rank is on one side. Each bus
-activates all the 8 bits at once.
+activates all the 8 chips at once.
 This is more efficient as one DRAM chip can be held using 8 pins only. This
 reduces size and number of pins (they are costly).</p>
 <p>However, this activates all the 8 DRAM chips at once when we don’t need to, so
@@ -762,11 +772,71 @@ same byte</strong>. Those are parallel.</p>
 <p>Each RAS has selects a row and each CAS selects a column to fetch a bit. All the
 8 bits from each of the array combine to form a byte. Therefore a bank stores
 64 bytes but in parallel.</p>
+<p>In each DRAM chip, at one time, only one bank works. The index of the bank is
+the same for all the chips.</p>
+<p>Each bank sends out a byte (we’ll talk about bursts later).</p>
+<p>It takes 9 bits to address a bit in DRAM. 3 for the array (8 in a bank), 3 for
+the row, and 3 for the memory.</p>
+<p>Steps for accessing a bit:</p>
+<ul>
+<li>Row address sent through RAS. Activates the entire row.</li>
+<li>All the charge in the row stored in the <em>Sense Amplifier</em>.</li>
+<li>CAS selects the bit and rest is sent back for recharging the capacitors.</li>
+</ul>
+<p>Step 1 is the slowest. To improve that:</p>
+<p>Store multiple bits after step 2 in a buffer. This is called a <strong>burst</strong>.</p>
+<p>Burst sizes:</p>
+<ul>
+<li>DDR2: 4 bytes</li>
+<li>DDR3: 8 bytes</li>
+<li>DDR4: 16 bytes</li>
+</ul>
+<p>The said buffer still sends out 8 bytes in 8 cycles. So, it takes 8 cycles for
+1 burst. So a burst sends out 8 bytes per bank. This is stored in the row buffer
+below the bank. Each DRAM chip uses one bank at a time. There are 8 DRAM chips,
+so for a burst of 8 bytes, the total data sent in a burst is 64 bytes.</p>
+<p>To improve upon it further, we do <strong>bank interleaving</strong>. How this happens is:</p>
+<div class="table-wrapper"><table><thead><tr><th>T0</th><th>T1</th><th>T2</th><th>T3</th><th>T4</th><th>T5</th></tr></thead><tbody>
+<tr><td>read req</td><td>read burst</td><td>recovery</td><td></td><td></td><td></td></tr>
+<tr><td></td><td>read req</td><td>read burst</td><td>recovery</td><td></td><td></td></tr>
+<tr><td></td><td></td><td>read req</td><td>read burst</td><td>recovery</td><td></td></tr>
+<tr><td></td><td></td><td></td><td>read req</td><td>read burst</td><td>recovery</td></tr>
+</tbody></table>
+</div>
+<p>In the above each row is a separate bank. This approach always keeps the data
+bus saturated.</p>
+<!---TODO: Add DRAM refresh--->
 <blockquote>
 <p>Row hammer attack: When you activate rows that have one row in between such
 that the row in between changes values due to EM fields.
 Saltanat’s work</p>
 </blockquote>
+<h3 id="cache"><a class="header" href="#cache">Cache</a></h3>
+<p>Uses 6 transistors and is much faster than DRAM but also much costlier.</p>
+<p>Each memory line in DRAM is mapped to a memory line in the cache. It is usually
+32 bytes or 64 bytes per cache line.</p>
+<h4 id="direct-memory-mapping"><a class="header" href="#direct-memory-mapping">Direct Memory Mapping</a></h4>
+<p>If there are L cache lines and A lines in the main memory, then the k’th line
+is mapped to k mod L.</p>
+<p>We have tag bits in the address, that are used to identify whether the addresses
+match or not.</p>
+<p>If the addresses don’t match, we have a cache miss and we fetch the bytes from
+the DRAM chip again.</p>
+<p>Example:</p>
+<p>Assume a cache with 1024 cache lines -&gt; 10 bits for indexing the line.</p>
+<p>Cache line size is 1 word (4 bytes) -&gt; 2 offset bits within the word.</p>
+<p>Address size = 64 bits =&gt; tag size = 64 - 10 - 2 = 52 bits.</p>
+<p>This is the 64 bit address.</p>
+<p>Now for the cache line size</p>
+<div class="table-wrapper"><table><thead><tr><th>valid</th><th>Tag</th><th>data</th></tr></thead><tbody>
+<tr><td>1 bit</td><td>52 bits</td><td>32 bits</td></tr>
+</tbody></table>
+</div>
+<p>The valid bit checks if the cache line is valid or not. Can be invalidated due
+to concurrency.</p>
+<p>The tag bits of address and the cache line are XORed to check if it’s the same.
+If same, it is a hit. Then valid bit is checked. Finally data is fetched and the
+offset is used to get the exact byte (if it is byte addressable).</p>
 
                     </main>
 
