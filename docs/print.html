@@ -3383,19 +3383,24 @@ separation for different processes. The next 22 bits hold the address of the
 first level directory of the page translation.</p>
 <p>The page table format is as follows:</p>
 <div class="table-wrapper"><table><thead><tr><th>PPN[1]</th><th>PPN[0]</th><th>RSW</th><th>D</th><th>A</th><th>G</th><th>U</th><th>X</th><th>W</th><th>R</th><th>V</th></tr></thead><tbody>
-<tr><td>12: physical page number</td><td>10: physical page number</td><td>2: reserved for OS</td><td>1: Dirty (0 for non-leaf)</td><td>1: Accessed (0 for non-leaf)</td><td>1: set to check whether the mapping is valid or not for all virtual address spaces, usually only used by the OS</td><td>1: User mode</td><td>1: execution bit</td><td>1: write bit</td><td>1: read bit</td><td>1: valid bit</td></tr>
+<tr><td>12: physical page number</td><td>10: physical page number</td><td>2: reserved for OS</td><td>1: Dirty (0 for non-leaf), used for swapping</td><td>1: Accessed (0 for non-leaf) There are two somewhat complicated schemes that juggle how the page is updated and whether or not it is still valid.</td><td>1: set to check whether the mapping is valid or not for all virtual address spaces, usually only used by the OS</td><td>1: User mode</td><td>1: execution bit</td><td>1: write bit</td><td>1: read bit</td><td>1: valid bit, it is used for caching in TLBs. Implementations can cache both legally but ideally only if valid bit is 1, the translation is valid.</td></tr>
 </tbody></table>
 </div>
 <p>The PPN[1] + PPN[0] of the first level are used to get the address of the
 second level table. Once we get that, we use the PPN[1] + PPN[0] to get the
 first 22 bits of the <strong>34 bit</strong> physical page address. The last 12 bits are the
 offset bits from the OG virtual page address. 34 bits somehow work??</p>
+<p>For a non-leaf page table entry, all three of the read-write-execute bits are 0.
+If a page is writable it also has to be readable as well.</p>
 <h3 id="3-level-paging"><a class="header" href="#3-level-paging">3 level paging</a></h3>
 <p>This is done for 64 bit architecture. This comes in two variants:</p>
 <ul>
 <li>39 bit addressing</li>
 <li>48 bit addressing</li>
 </ul>
+<p>The <em>satp</em> for this scheme has 4 bits for mode specification and 16 bits for
+address space separation. The rest is used for the base address of the top level
+page directory.</p>
 <h4 id="39-bit"><a class="header" href="#39-bit">39 bit</a></h4>
 <p>This scheme can support page table directories of sizes 4KB, 2MB, 1GB. The most
 significant 25 bits are unused. There are a total of <data class="katex-src" value="2^{27}"><span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msup><mn>2</mn><mn>27</mn></msup></mrow><annotation encoding="application/x-tex">2^{27}</annotation></semantics></math></span></data> page table entries
@@ -3436,14 +3441,16 @@ have actions.</li>
 </ul>
 <p>DIMM chips: Dual inline memory modules</p>
 <p>There are two ranks, with 8 chips for each. One rank is on one side. Each bus
-activates all the 8 chips at once.
-This is more efficient as one DRAM chip can be held using 8 pins only. This
+activates all the 8 chips at once.</p>
+<p>One layer/rank/side is only for data and the other is only for instructions and
+commands. There is another bus that chooses the rank.</p>
+<p>This is more efficient as one DRAM chip can be held using 8 pins only. This
 reduces size and number of pins (they are costly).</p>
 <p>However, this activates all the 8 DRAM chips at once when we don’t need to, so
 it is power inefficient.</p>
-<p>For each DRAM cell, there are <strong>banks</strong>, each of which has 8 arrays. Each array
-has 64 bits, however the data is stored so that all the 8 arrays store a bit
-each for any byte.</p>
+<p>For each DRAM cell, there are 8 <strong>banks</strong>, each of which has 8 arrays. Each
+array has 64 bits, however the data is stored so that all the 8 arrays store a
+bit each for any byte.</p>
 <p>Each array has a <em>RAS</em> (row access strobe) and a <em>CAS</em> (column access strobe).
 There are 8 rows and 8 columns. Each row has 8 bits, <strong>but not from the
 same byte</strong>. Those are parallel.</p>
@@ -3483,7 +3490,10 @@ so for a burst of 8 bytes, the total data sent in a burst is 64 bytes.</p>
 </div>
 <p>In the above each row is a separate bank. This approach always keeps the data
 bus saturated.</p>
-<!---TODO: Add DRAM refresh--->
+<p>DRAM refresh happens at bank level and requires all the energy to send the
+charge back from the <em>Sense Amplifier</em> that is right before the column access
+strobe back to the row from which the bits were fetched as we technically
+discharged the capacitor to get the charges.</p>
 <blockquote>
 <p>Row hammer attack: When you activate rows that have one row in between such
 that the row in between changes values due to EM fields.
