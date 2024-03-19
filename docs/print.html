@@ -3515,6 +3515,51 @@ to concurrency.</p>
 <p>The tag bits of address and the cache line are XORed to check if it’s the same.
 If same, it is a hit. Then valid bit is checked. Finally data is fetched and the
 offset is used to get the exact byte (if it is byte addressable).</p>
+<h5 id="miss-penalty"><a class="header" href="#miss-penalty">Miss penalty</a></h5>
+<p>This is the time taken to fill a cache line when there is a miss.
+There are two ways to lessen the miss penalty:</p>
+<ul>
+<li><strong>Early Restart</strong>: The cache is filled sequentially like always but as soon as
+the required word/byte is written to the cache it is sent to the CPU to work
+upon. This is especially useful for instructions as they are mostly used in
+sequence.</li>
+<li><strong>Critical Word First</strong>: The word that is required atm is the one that is
+fetched first and sent to the CPU and the rest is fetched in the background.
+This is helpful for data as that is mostly random access.</li>
+</ul>
+<h5 id="writing-back-to-memory"><a class="header" href="#writing-back-to-memory">Writing back to memory</a></h5>
+<ul>
+<li><strong>Write through</strong>: Write to cache and DRAM both. Very slow since direct cache
+writes take a long time.</li>
+<li><strong>Write buffer</strong>: Write to DRAM using a buffer where writes are queued. In the
+meantime the cache is also updated and the processor can continue to function
+as usual. If the cache line is flushed, then there is no need to be bothered
+as the write will be written by the priority queue before it is recalled.</li>
+<li><strong>Write back</strong>: In this the cache line is written back to the DRAM when
+flushed.</li>
+</ul>
+<h5 id="cache-thrashing"><a class="header" href="#cache-thrashing">Cache thrashing</a></h5>
+<p>When the same cache line is used for all the operations, it is flushed
+repeatedly and is slow while all the other cache lines are just idle. This can
+occur if you are iterating through every k’th step. To counter this, two other
+schemes were used.</p>
+<h4 id="fully-associative-cache-mapping"><a class="header" href="#fully-associative-cache-mapping">Fully associative Cache mapping</a></h4>
+<p>The entire address is used for tag bits. Apart from that any memory block in
+DRAM can go anywhere in the cache. Now cache hits have become slower due to the
+necessity of looking up all the cache lines. However this reduces cache
+thrashing massively. To improve upon the lookup times, we use <strong>set associative
+cache mapping</strong>.</p>
+<h4 id="set-associative-cache-mapping"><a class="header" href="#set-associative-cache-mapping">Set associative Cache mapping</a></h4>
+<p>Tradeoff between hardware size and cache misses. A block of memory can be mapped
+to any cache line in a set of cache lines. If there are S cache sets, then a
+block A gets mapped to any cache line in A mod S.</p>
+<p>Let there be 32 KB of cache with each line being 64 byte. Hence <data class="katex-src" value="2^15"><span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msup><mn>2</mn><mn>1</mn></msup><mn>5</mn></mrow><annotation encoding="application/x-tex">2^15</annotation></semantics></math></span></data> bytes
+with <data class="katex-src" value="2^6"><span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msup><mn>2</mn><mn>6</mn></msup></mrow><annotation encoding="application/x-tex">2^6</annotation></semantics></math></span></data> bytes per line. So there are <data class="katex-src" value="2^9"><span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msup><mn>2</mn><mn>9</mn></msup></mrow><annotation encoding="application/x-tex">2^9</annotation></semantics></math></span></data> lines in total.</p>
+<p>If the cache is 8-way set associative, then there are <data class="katex-src" value="2^6"><span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msup><mn>2</mn><mn>6</mn></msup></mrow><annotation encoding="application/x-tex">2^6</annotation></semantics></math></span></data> cache sets.</p>
+<p>Now the least significant 6 bits are used for offset mapping for the bytes of
+the cache line. The next 6 bits are used for identifying the set. The rest of
+the bits are tag bits.</p>
+<h4 id="split-and-unified-l1-cache"><a class="header" href="#split-and-unified-l1-cache">Split and Unified L1 Cache</a></h4>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="csd"><a class="header" href="#csd">csd</a></h1>
 <blockquote>
 <p>Moore’s Law: The number of transistors in a dense integrated circuit doubles every two years.</p>
