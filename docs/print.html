@@ -196,7 +196,9 @@ for (int i = 0; i &lt; 8; i++){
 </ul>
 <pre><code class="language-cpp">int arr[] = {1,3,6,2,5,4,8,9};
 
-for (int i = 0; i &lt; 8; i++) {
+int n = sizeof(arr)/sizeof(arr[0]);
+
+for (int i = 0; i &lt; n; i++) {
     int x = arr[i];
     int j = i;
     for (j = i; j &gt;= 0 &amp;&amp; arr[j] &gt; x, j--) {
@@ -210,9 +212,11 @@ for (int i = 0; i &lt; 8; i++) {
 </ul>
 <pre><code class="language-cpp">int arr[] = {1,3,6,2,5,4,8,9};
 
-for (int i = 0; i &lt; 8; i++) {
+int n = sizeof(arr)/sizeof(arr[0]);
+
+for (int i = 0; i &lt; n; i++) {
     int min_idx = i;
-    for (int j = i; j &lt; 8; j++) {
+    for (int j = i; j &lt; n; j++) {
         if (arr[j] &lt; arr[min_idx]) {
             min_idx = j;
         }
@@ -221,61 +225,62 @@ for (int i = 0; i &lt; 8; i++) {
 }
 </code></pre>
 <ul>
-<li>Merge Sort:</li>
+<li>Merge Sort that counts inversions:</li>
 </ul>
-<pre><code class="language-cpp">// Array A[] has the items to sort; array B[] is a work array.
-void TopDownMergeSort(A[], B[], n)
-{
-    CopyArray(A, 0, n, B);           // one time copy of A[] to B[]
-    TopDownSplitMerge(A, 0, n, B);   // sort data from B[] into A[]
+<pre><code class="language-cpp">void CopyArray(int A[], int iBegin, int iEnd, int B[]) {
+    for (int k = iBegin; k &lt; iEnd; k++) {
+        B[k] = A[k];
+    }
 }
 
-// Split A[] into 2 runs, sort both runs into B[], merge both runs from B[] to A[]
-// iBegin is inclusive; iEnd is exclusive (A[iEnd] is not in the set).
-void TopDownSplitMerge(B[], iBegin, iEnd, A[])
-{
-    if (iEnd - iBegin &lt;= 1)                     // if run size == 1
-        return;                                 //   consider it sorted
-    // split the run longer than 1 item into halves
-    iMiddle = (iEnd + iBegin) / 2;              // iMiddle = mid point
-    // recursively sort both runs from array A[] into B[]
-    TopDownSplitMerge(A, iBegin,  iMiddle, B);  // sort the left  run
-    TopDownSplitMerge(A, iMiddle,    iEnd, B);  // sort the right run
-    // merge the resulting runs from array B[] into A[]
-    TopDownMerge(B, iBegin, iMiddle, iEnd, A);
-}
-
-//  Left source half is A[ iBegin:iMiddle-1].
+// Left source half is  A[ iBegin:iMiddle-1].
 // Right source half is A[iMiddle:iEnd-1   ].
 // Result is            B[ iBegin:iEnd-1   ].
-void TopDownMerge(B[], iBegin, iMiddle, iEnd, A[])
-{
-    i = iBegin, j = iMiddle;
- 
+int TopDownMerge(int B[], int iBegin, int iMiddle, int iEnd, int A[]) {
+    int i = iBegin, j = iMiddle;
+    int inversions = 0;
     // While there are elements in the left or right runs...
-    for (k = iBegin; k &lt; iEnd; k++) {
-        // If left run head exists and is &lt;= existing right run head.
+    for (int k = iBegin; k &lt; iEnd; k++) {
         if (i &lt; iMiddle &amp;&amp; (j &gt;= iEnd || A[i] &lt;= A[j])) {
             B[k] = A[i];
             i = i + 1;
         } else {
             B[k] = A[j];
             j = j + 1;
+            inversions += iMiddle - i;
         }
     }
+    return inversions;
 }
 
-void CopyArray(A[], iBegin, iEnd, B[])
-{
-    for (k = iBegin; k &lt; iEnd; k++)
-        B[k] = A[k];
+int res = 0;
+
+// Split A[] into 2 runs, sort both runs into B[], merge both runs from B[] to
+// A[] iBegin is inclusive; iEnd is exclusive (A[iEnd] is not in the set).
+void TopDownSplitMerge(int B[], int iBegin, int iEnd, int A[]) {
+    if (iEnd - iBegin &lt;= 1) {
+        return;
+    }
+    // split the run longer than 1 item into halves
+    int iMiddle = (iEnd + iBegin) / 2; // iMiddle = mid point
+    // recursively sort both runs from array A[] into B[]
+    TopDownSplitMerge(A, iBegin, iMiddle, B); // sort the left  run
+    TopDownSplitMerge(A, iMiddle, iEnd, B);   // sort the right run
+    // merge the resulting runs from array B[] into A[]
+    res += TopDownMerge(B, iBegin, iMiddle, iEnd, A);
+}
+
+// Array A[] has the items to sort; array B[] is a work array.
+void TopDownMergeSort(int A[], int n) {
+    int B[n];
+    CopyArray(A, 0, n, B);         // one time copy of A[] to B[]
+    TopDownSplitMerge(A, 0, n, B); // sort data from B[] into A[]
 }
 </code></pre>
 <ul>
 <li>Quick sort:</li>
 </ul>
-<pre><code class="language-cpp">
-void quicksort(int A[], int low, int high) {
+<pre><code class="language-cpp">void quicksort(int A[], int low, int high) {
     if (low &gt;= high) return;
     if (low + 1 == high) {
         if (A[high] &lt; A[low]) {
@@ -307,28 +312,26 @@ void quicksort(int A[], int low, int high) {
 <ul>
 <li>Kruskal’s Algorithm:</li>
 </ul>
-<pre><code class="language-cpp">
-struct Edge {
+<pre><code class="language-cpp">struct Edge {
     int u, v, weight;
-    bool operator&lt;(const Edge&amp; other) {
-        return weight &lt; other.weight;
-    }
 };
 
-int nodes;
+bool operator&lt;(const Edge &amp;first, const Edge &amp;other) {
+    return first.weight &lt; other.weight;
+}
+
+bool operator&gt;(const Edge &amp;first, const Edge &amp;other) {
+    return first.weight &gt; other.weight;
+}
+vector&lt;map&lt;int, int&gt;&gt; AdjList;
 
 std::vector&lt;Edge&gt; edges; // original edges
 
-std::vector&lt;std::pair&lt;int, int&gt;&gt; List; // final list containing our answer
+std::vector&lt;Edge&gt; List; // final list containing our answer
 
-std::vector&lt;int&gt; parent(nodes);
-std::vector&lt;int&gt; rank(nodes);
-
-for (int i = 0; i &lt; nodes; i++) {
-    parent[i] = i;
-    rank[i] = 0;
-
-}
+int nodes;
+std::vector&lt;int&gt; parent;
+std::vector&lt;int&gt; size_rank;
 
 int find_set(int v) {
     std::vector&lt;int&gt; compress_path;
@@ -336,7 +339,7 @@ int find_set(int v) {
         compress_path.push_back(v);
         v = parent[v];
     }
-    for (auto &amp;i: compress_path) {
+    for (auto &amp;i : compress_path) {
         parent[i] = v;
     }
     return v;
@@ -348,60 +351,124 @@ void union_sets(int a, int b, int wt) {
 
     if (c != d) {
         List.push_back({a, b, wt});
-        if (rank[c] &lt; rank[c]) 
+        if (size_rank[c] &lt; size_rank[c]) {
             std::swap(c, d);
+        }
 
         parent[d] = c;
-        rank[d]++;
+        size_rank[d]++;
     }
 }
 
-sort(edges.begin(), edges.end());
+void kruskals(int nodes) {
 
-for (auto &amp;e: edges) {
-    union_sets(e.u, e.v, e.weight);
+    for (int i = 0; i &lt; nodes; i++) {
+        parent[i] = i;
+        size_rank[i] = 0;
+    }
+
+    sort(edges.begin(), edges.end());
+
+    for (auto &amp;e : edges) {
+        union_sets(e.u, e.v, e.weight);
+    }
 }
-
 </code></pre>
 <ul>
 <li>Prim’s Algorithm:</li>
 </ul>
-<pre><code class="language-cpp">
-struct Edge {
+<pre><code class="language-cpp">struct Edge {
     int u, v, weight;
-    bool operator&lt;(const Edge&amp; other) {
-        return weight &lt; other.weight;
-    }
 };
 
-int nodes;
+bool operator&lt;(const Edge &amp;first, const Edge &amp;other) {
+    return first.weight &lt; other.weight;
+}
 
-std::list&lt;Edge&gt; adj(nodes);
+bool operator&gt;(const Edge &amp;first, const Edge &amp;other) {
+    return first.weight &gt; other.weight;
+}
+vector&lt;map&lt;int, int&gt;&gt; AdjList;
 
-std::vector&lt;Edge&gt; edges; // original edges
+vector&lt;Edge&gt; prims(int nodes) {
+    bool visited[nodes];
+    for (auto &amp;i : visited) {
+        i = false;
+    }
 
-std::vector&lt;std::pair&lt;int, int&gt;&gt; List; // final list containing our answer
+    vector&lt;Edge&gt; res;
 
-std::unordered_set&lt;int&gt; vertices;
+    priority_queue&lt;Edge, vector&lt;Edge&gt;, greater&lt;Edge&gt;&gt; pq;
 
-void prims() {
-    vertices.insert(0);
-    while (vertices.size() != nodes) {
-        Edge min = {-1, -1, INT_MAX};
+    visited[0] = true;
 
-        for (auto &amp;i: vertices) {
-            for (auto &amp;j : adj[i]) {
-                if (j.weight &lt; min.weight) {
-                    min = j;
-                }
-            }
+    for (auto &amp;iter : AdjList[0]) {
+        pq.push({0, iter.first, iter.second});
+    }
+
+    while (!pq.empty()) {
+        auto e = pq.top();
+        pq.pop();
+
+        if (visited[e.v]) {
+            continue;
         }
 
-        vertices.insert(min.u);
-        vertices.insert(min.v);
+        visited[e.v] = true;
+        res.push_back(e);
 
-        List.push_back(min);
+        for (auto &amp;edges: AdjList[e.v]) {
+            if (!visited[edges.first]) {
+                pq.push({e.v, edges.first, edges.second});
+            }
+        }
+    }
 
+    return res;
+}
+</code></pre>
+<ul>
+<li>Dijkstra’s Algorithm</li>
+</ul>
+<pre><code class="language-cpp">vector&lt;map&lt;int,int&gt;&gt; AdjList;
+
+void dijkstras(std::ofstream &amp;ofile, int src, int nodes) {
+
+    int dist[nodes];
+    for (auto &amp;i : dist) {
+        i = INT_MAX;
+    }
+
+    int parent[nodes];
+    for (auto &amp;i : parent) {
+        i = -1;
+    }
+
+    priority_queue&lt;pair&lt;int, int&gt;, vector&lt;pair&lt;int, int&gt;&gt;,
+                   greater&lt;pair&lt;int, int&gt;&gt;&gt;
+        pq;
+
+    pq.push({0, src});
+    dist[src] = 0;
+
+    while (!pq.empty()) {
+        int u = pq.top().second;
+        pq.pop();
+
+        for (auto &amp;iter : AdjList[u]) {
+            int v = iter.first;
+            int weight = iter.second;
+
+            if (dist[v] &gt; dist[u] + weight) {
+                dist[v] = dist[u] + weight;
+                parent[v] = u;
+                pq.push({dist[v], v});
+            }
+        }
+    }
+
+    for (int i = 0; i &lt; nodes; i++) {
+        ofile &lt;&lt; i &lt;&lt; " " &lt;&lt; dist[i] &lt;&lt; endl;
     }
 }
 </code></pre>
@@ -3376,7 +3443,7 @@ same frame.</p>
 table from the page directory. The next 10 bits store the offset from the base
 of the page table. From this value the first 22 bits of the physical address
 are obtained. The last 12 bits for both virtual and physical address are the
-same. This scheme supports page directory sizes of 4KB and 2 MB.</p>
+same. This scheme supports page directory sizes of 4KB and 4 MB.</p>
 <p>For the <em>satp</em> register (the page table base register), the MSB will indicate
 that translation is on or not. The next 9 bits are just meant for address space
 separation for different processes. The next 22 bits hold the address of the
@@ -3412,6 +3479,21 @@ significant 25 bits are unused. There are a total of <data class="katex-src" val
 </div>
 <p>Once again, all of PPN[2] + PPN[1] + PPN[0] bits will be used to find the
 page directory beginning in the subsequent levels.</p>
+<h3 id="tlbs"><a class="header" href="#tlbs">TLBs</a></h3>
+<p>These are special memory banks that store the frequently used mappings of
+virtual memory and physical memory.</p>
+<p>There are three types of TLB-cache combinations:</p>
+<h4 id="physically-indexed-physically-tagged"><a class="header" href="#physically-indexed-physically-tagged">Physically indexed physically tagged</a></h4>
+<p>In this case the virtual address is first looked up in the TLB. If the TLB leads
+to a miss, it then goes on to check the page tables which are separate memory
+operations of their own.</p>
+<p>If the TLB gives a hit, then it goes on to check the cache, which is again a
+hit or a miss.</p>
+<p>This is slow as the cache needs to wait for the TLB to finish its operations
+and then proceed further.</p>
+<p>This is useful for low level caches though since they are rarely accessed. There
+is no overhead of translations in case of TLB misses. Basically TLB misses will
+be fewer in this case.</p>
 <h2 id="von-neumann-architecture"><a class="header" href="#von-neumann-architecture">Von Neumann Architecture</a></h2>
 <p>Fetches the memory into various kinds of buffers to speed up memory fetch by
 CPU.</p>
@@ -3497,10 +3579,12 @@ discharged the capacitor to get the charges.</p>
 <blockquote>
 <p>Row hammer attack: When you activate rows that have one row in between such
 that the row in between changes values due to EM fields.
-Saltanat’s work</p>
+Saltanat’s work<br>
+EDIT: I’ve been lied to. She works on TEEs for legacy applications.</p>
 </blockquote>
 <h3 id="cache"><a class="header" href="#cache">Cache</a></h3>
-<p>Uses 6 transistors and is much faster than DRAM but also much costlier.</p>
+<p>Uses 6 transistors and is much faster than DRAM but also much costlier. This is
+called an SRAM cell.</p>
 <p>Each memory line in DRAM is mapped to a memory line in the cache. It is usually
 32 bytes or 64 bytes per cache line.</p>
 <h4 id="direct-memory-mapping"><a class="header" href="#direct-memory-mapping">Direct Memory Mapping</a></h4>
@@ -3570,6 +3654,16 @@ with <data class="katex-src" value="2^6"><span class="katex"><math xmlns="http:/
 the cache line. The next 6 bits are used for identifying the set. The rest of
 the bits are tag bits.</p>
 <h4 id="split-and-unified-l1-cache"><a class="header" href="#split-and-unified-l1-cache">Split and Unified L1 Cache</a></h4>
+<ul>
+<li>
+<p>Split: leads to better performance since instruction and data can be fetched
+independent of each other. However, has the drawback that instruction cache is
+used much more frequently than data cache.</p>
+</li>
+<li>
+<p>Unified: Leads to better utilization of cache resources.</p>
+</li>
+</ul>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="csd"><a class="header" href="#csd">csd</a></h1>
 <blockquote>
 <p>Moore’s Law: The number of transistors in a dense integrated circuit doubles every two years.</p>

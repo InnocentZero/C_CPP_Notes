@@ -698,7 +698,7 @@ same frame.</p>
 table from the page directory. The next 10 bits store the offset from the base
 of the page table. From this value the first 22 bits of the physical address
 are obtained. The last 12 bits for both virtual and physical address are the
-same. This scheme supports page directory sizes of 4KB and 2 MB.</p>
+same. This scheme supports page directory sizes of 4KB and 4 MB.</p>
 <p>For the <em>satp</em> register (the page table base register), the MSB will indicate
 that translation is on or not. The next 9 bits are just meant for address space
 separation for different processes. The next 22 bits hold the address of the
@@ -734,6 +734,21 @@ significant 25 bits are unused. There are a total of <data class="katex-src" val
 </div>
 <p>Once again, all of PPN[2] + PPN[1] + PPN[0] bits will be used to find the
 page directory beginning in the subsequent levels.</p>
+<h3 id="tlbs"><a class="header" href="#tlbs">TLBs</a></h3>
+<p>These are special memory banks that store the frequently used mappings of
+virtual memory and physical memory.</p>
+<p>There are three types of TLB-cache combinations:</p>
+<h4 id="physically-indexed-physically-tagged"><a class="header" href="#physically-indexed-physically-tagged">Physically indexed physically tagged</a></h4>
+<p>In this case the virtual address is first looked up in the TLB. If the TLB leads
+to a miss, it then goes on to check the page tables which are separate memory
+operations of their own.</p>
+<p>If the TLB gives a hit, then it goes on to check the cache, which is again a
+hit or a miss.</p>
+<p>This is slow as the cache needs to wait for the TLB to finish its operations
+and then proceed further.</p>
+<p>This is useful for low level caches though since they are rarely accessed. There
+is no overhead of translations in case of TLB misses. Basically TLB misses will
+be fewer in this case.</p>
 <h2 id="von-neumann-architecture"><a class="header" href="#von-neumann-architecture">Von Neumann Architecture</a></h2>
 <p>Fetches the memory into various kinds of buffers to speed up memory fetch by
 CPU.</p>
@@ -819,10 +834,12 @@ discharged the capacitor to get the charges.</p>
 <blockquote>
 <p>Row hammer attack: When you activate rows that have one row in between such
 that the row in between changes values due to EM fields.
-Saltanat’s work</p>
+Saltanat’s work<br>
+EDIT: I’ve been lied to. She works on TEEs for legacy applications.</p>
 </blockquote>
 <h3 id="cache"><a class="header" href="#cache">Cache</a></h3>
-<p>Uses 6 transistors and is much faster than DRAM but also much costlier.</p>
+<p>Uses 6 transistors and is much faster than DRAM but also much costlier. This is
+called an SRAM cell.</p>
 <p>Each memory line in DRAM is mapped to a memory line in the cache. It is usually
 32 bytes or 64 bytes per cache line.</p>
 <h4 id="direct-memory-mapping"><a class="header" href="#direct-memory-mapping">Direct Memory Mapping</a></h4>
@@ -892,6 +909,16 @@ with <data class="katex-src" value="2^6"><span class="katex"><math xmlns="http:/
 the cache line. The next 6 bits are used for identifying the set. The rest of
 the bits are tag bits.</p>
 <h4 id="split-and-unified-l1-cache"><a class="header" href="#split-and-unified-l1-cache">Split and Unified L1 Cache</a></h4>
+<ul>
+<li>
+<p>Split: leads to better performance since instruction and data can be fetched
+independent of each other. However, has the drawback that instruction cache is
+used much more frequently than data cache.</p>
+</li>
+<li>
+<p>Unified: Leads to better utilization of cache resources.</p>
+</li>
+</ul>
 
                     </main>
 
