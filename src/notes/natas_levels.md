@@ -34,7 +34,7 @@ Check the HTML. It has a comment stating the page that has the password. Use tha
 
 ## Level 8
 
-Check the PHP source they are providing. Obtain the string from the hexadecimal, reverse it, and do a `base64` decode on it.
+Check the PHP source they are providing. Get the string from the hexadecimal, reverse it, and do a `base64` decode on it.
 
 ## Level 9
 
@@ -46,7 +46,7 @@ Do the same as before. Asterisk, period and forward slashes are not there in the
 
 ## Level 11
 
-`base64` decode the data cookie. XOR it with the given cookie to obtain the XOR key. Once the key is obtained use it to change the cookie value to yes and encrypt it. Then send that as the cookie.
+`base64` decode the data cookie. XOR it with the given cookie to get the XOR key. Once the key is received use it to change the cookie value to yes and encrypt it. Then send that as the cookie.
 
 ## Level 12
 
@@ -64,6 +64,12 @@ Comment out the sql query ahead of the username.
 
 ```py
 {{#include ./hacking/natas15.py}}
+```
+
+## Level 16
+
+```py
+{{#include ./hacking/natas16.py}}
 ```
 
 A `post` method can also be used for this.
