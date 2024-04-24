@@ -1,45 +1,68 @@
 # hacking_basics
 
-## How the Internet Works
+## Python Snippets
 
-[Internet Health Report](https://github.com/InternetHealthReport/gsoc/blob/main/ihr-contributor-handbook.md)
+- hex to bytes to string
 
-## Code Execution Important Details
+```python
+hex_value = "4765656b73666f724765656b73"
+byte_str = bytes.fromhex(hex_value)
+result_str = byte_str.decode('utf-8')
+```
 
-![Memory Organisation](./hacking/memory-organization.jpg)
+- hex string to int
 
-- On the top of the memory space is the `kernel`, the literal system of the computer and also the place where environment variables and command line arguements are stored.
-- At the bottommost we have the `code segment`, the raw bits and bytes of the program which is read-only. Write in it and boom, memory violation.
-- Above the code segments are the `Data` and the `BSS` segments. They contain initialized and unintialized global variables respectively.
-- Above that is the `heap` used for dynamic memory allocation. Values stored in `heap` grow upwards.
-- After that comes the stack. It starts from the top and moves towards the bottom. Most buffer overflows happen in this region. The top of the stack (which is at the bottom of the memory space in stack) is tracked by the stack pointer. The bottom of the stack is where the interesting stuff happens.
+```python
+x = int("deadbeef", 16)
+x = int("0xdeadbeef", 0)
+x = int("0xdeadbeef", 16)
+```
 
-## How a main function is executed:
+- integer to binary/octal/hexadecimal
 
-1. Base Pointer is pushed to the stack.
-2. Stack pointer value is copied to the base pointer.
-3. Rn both base pointer and stack pointer point to the top of the stack.
-4. The stack pointer is subtracted from and sent into a lower memory location if there are function calls.
-5. The variables are added to a value offset from the last variable (initially from the base pointer) according to their size.
+```python
+bin(23)  
+oct(31)
+hex(26)
+```
 
-## Assembly Basics
+- basic pwntools template
 
-The processor supports the following data types:
+```py
+{{ #include ./hacking/sol.py }}
+```
 
-- `Word`: 2 byte structure
-- `Doubleword`: 4 byte structure
-- `Quadword`: 8 byte structure
-- `Paragraph`: 16 byte structure
+- connect to a netcat port
 
-### Operation Suffixes
+```python
+io = remote("new.domain.name", 80)
+io = remote("12.12.12.12", 5000)
+```
 
-GAS assembly instructions are generally suffixed with the letters "b", "s", "w", "l", "q" or "t" to determine what size operand is being manipulated.
+- receive xyz after connecting
 
-- `b` = byte (8 bit).
-- `s` = single (32-bit floating point).
-- `w` = word (16 bit).
-- `l` = long (32 bit integer or 64-bit floating point).
-- `q` = quad (64 bit).
-- `t` = ten bytes (80-bit floating point).
+```python
+io.recv(n) # nbytes
+io.recvline() # till newline
+io.recvuntil("string") #receive until the occurance of string
+```
 
-If the suffix is not specified, and there are no memory operands for the instruction, GAS infers the operand size from the size of the destination register operand (the final operand).
+- send xyz after connecting
+
+```python
+io.send(b'bytes')
+io.sendline(b'bytes') # also sends a newline
+```
+
+- convert an integer to 32/64 byte address little-endian
+
+```python
+pwn.p32(some_integer)
+pwn.p64(some_integer)
+```
+
+- same as above, but big-endian, and signed
+
+```python
+pwn.p64(some_int, endian="big", sign=True)
+```

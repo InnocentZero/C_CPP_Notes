@@ -229,28 +229,28 @@ vector<Edge> prims(int nodes) {
 
     vector<Edge> res;
 
-    priority_queue<Edge, vector<Edge>, greater<Edge>> pq;
+    set<Edge, vector<Edge>, greater<Edge>> pq;
 
     visited[0] = true;
 
     for (auto &iter : AdjList[0]) {
-        pq.push({0, iter.first, iter.second});
+        pq.insert({0, iter.first, iter.second});
     }
 
     while (!pq.empty()) {
-        auto e = pq.top();
-        pq.pop();
+        auto e = pq.begin();
+        pq.delete(e);
 
-        if (visited[e.v]) {
+        if (visited[e->v]) {
             continue;
         }
 
-        visited[e.v] = true;
+        visited[e->v] = true;
         res.push_back(e);
 
-        for (auto &edges: AdjList[e.v]) {
+        for (auto &edges: AdjList[e->v]) {
             if (!visited[edges.first]) {
-                pq.push({e.v, edges.first, edges.second});
+                pq.push({e->v, edges.first, edges.second});
             }
         }
     }
