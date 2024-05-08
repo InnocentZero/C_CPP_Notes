@@ -97,3 +97,26 @@ An example of this behaviour in 32 bit architecture.
  422:    8b 0c 24       mov    (%esp),%ecx
  425:    c3                     ret
 ```
+
+In any case, you get the address of the functions this way. During runtime.
+
+Now two cases arise when shared libraries are used:
+
+#### PIE on
+
+In this case, relative offset to the PLT is used. The first invocation jumps to
+`puts@plt` where it jumps to another address in in `.got.plt`. Over there in the
+first invocation it jumps back to `.plt` to the immediate next address, which
+further goes to the runtime linker/resolver.
+
+In the next ISR/stack frame call/whatever you call it, the address at `.got.plt`
+is resolved and overwritten by the final resolved address for future invocation.
+
+Then in the future invocations of the same function it immediately jumps to the
+function directly instead of the resolution bullwork. This also decreases
+execution time btw.
+
+#### PIE off
+
+Most of the details remain the same except the `.plt` address remains constant
+across invocations even if the library itself shifts because of ASLR.

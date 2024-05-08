@@ -10,6 +10,12 @@ byte_str = bytes.fromhex(hex_value)
 result_str = byte_str.decode('utf-8')
 ```
 
+- string to bytes
+
+```python
+byte_arr = str.encode("Foo")
+```
+
 - hex string to int
 
 ```python

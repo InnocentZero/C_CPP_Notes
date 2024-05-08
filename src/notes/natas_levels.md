@@ -80,9 +80,13 @@ A `post` method can also be used for this.
 {{#include ./hacking/natas17.py}}
 ```
 
-natas  8: a6bZCNYwdKqN5cGP11ZdtPg0iImQQhAB
-natas 11: 1KFqoJXi6hRaPluAmk8ESDW4fSysRoIg
-natas 12: YWqo0pjpcXzSIl5NMAVxg12QxeC1w9QG
-natas 14: qPazSJBmrmU7UQJv17MHk1PGC4DxZMEP
-natas 16: TRD7iZrd5gATjj9PkPEuaOlfEjHqj32V
-natas 18: 8nEduUXg8kFGPV84uLWvzKgn6oKjq6aq
+Timing attack basically.
+
+______________________________________________________________________
+
+- natas  8: a6bZCNYwdKqN5cGP11ZdtPg0iImQQhAB
+- natas 11: 1KFqoJXi6hRaPluAmk8ESDW4fSysRoIg
+- natas 12: YWqo0pjpcXzSIl5NMAVxg12QxeC1w9QG
+- natas 14: qPazSJBmrmU7UQJv17MHk1PGC4DxZMEP
+- natas 16: TRD7iZrd5gATjj9PkPEuaOlfEjHqj32V
+- natas 18: 8nEduUXg8kFGPV84uLWvzKgn6oKjq6aq

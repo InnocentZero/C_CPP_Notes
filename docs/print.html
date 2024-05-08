@@ -2646,8 +2646,8 @@ is said to be regular if it is accepted by some automaton <data class="katex-src
 <p>Let DFA 1 be <data class="katex-src" value="\left(Q_1, \Sigma, \delta_1, s_1, F_1\right)"><span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mo fence="true">(</mo><msub><mi>Q</mi><mn>1</mn></msub><mo separator="true">,</mo><mi mathvariant="normal">Σ</mi><mo separator="true">,</mo><msub><mi>δ</mi><mn>1</mn></msub><mo separator="true">,</mo><msub><mi>s</mi><mn>1</mn></msub><mo separator="true">,</mo><msub><mi>F</mi><mn>1</mn></msub><mo fence="true">)</mo></mrow><annotation encoding="application/x-tex">\left(Q_1, \Sigma, \delta_1, s_1, F_1\right)</annotation></semantics></math></span></data> and DFA 2 be
 <data class="katex-src" value="\left(Q_2, \Sigma, \delta_2, s_2, F_2\right)"><span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mo fence="true">(</mo><msub><mi>Q</mi><mn>2</mn></msub><mo separator="true">,</mo><mi mathvariant="normal">Σ</mi><mo separator="true">,</mo><msub><mi>δ</mi><mn>2</mn></msub><mo separator="true">,</mo><msub><mi>s</mi><mn>2</mn></msub><mo separator="true">,</mo><msub><mi>F</mi><mn>2</mn></msub><mo fence="true">)</mo></mrow><annotation encoding="application/x-tex">\left(Q_2, \Sigma, \delta_2, s_2, F_2\right)</annotation></semantics></math></span></data></p>
 <p>The final automata has the cartesian product of the two sets of states as the
-set of states (Q), and the delta is also from Q1 x Q2 to Q1 x Q2. The set of
-final states is <data class="katex-src" value="Q_1\times F_2 \cup Q_2 \times F_1"><span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>Q</mi><mn>1</mn></msub><mo>×</mo><msub><mi>F</mi><mn>2</mn></msub><mo>∪</mo><msub><mi>Q</mi><mn>2</mn></msub><mo>×</mo><msub><mi>F</mi><mn>1</mn></msub></mrow><annotation encoding="application/x-tex">Q_1\times F_2 \cup Q_2 \times F_1</annotation></semantics></math></span></data>. Also,
+set of states (Q), and the delta is also from <data class="katex-src" value="Q_1 \times Q2"><span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>Q</mi><mn>1</mn></msub><mo>×</mo><mi>Q</mi><mn>2</mn></mrow><annotation encoding="application/x-tex">Q_1 \times Q2</annotation></semantics></math></span></data> to <data class="katex-src" value="Q_1 \times Q2"><span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>Q</mi><mn>1</mn></msub><mo>×</mo><mi>Q</mi><mn>2</mn></mrow><annotation encoding="application/x-tex">Q_1 \times Q2</annotation></semantics></math></span></data>
+. The set of final states is <data class="katex-src" value="Q_1\times F_2 \cup Q_2 \times F_1"><span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>Q</mi><mn>1</mn></msub><mo>×</mo><msub><mi>F</mi><mn>2</mn></msub><mo>∪</mo><msub><mi>Q</mi><mn>2</mn></msub><mo>×</mo><msub><mi>F</mi><mn>1</mn></msub></mrow><annotation encoding="application/x-tex">Q_1\times F_2 \cup Q_2 \times F_1</annotation></semantics></math></span></data>. Also,
 <data class="katex-src" value="\hat{\delta}\left(\left(s_1, s_2\right), w\right) =&#10;\left(\hat{\delta}\left(s_1, w\right),\hat{\delta}\left(s_2, w\right)\right)"><span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mover accent="true"><mi>δ</mi><mo>^</mo></mover><mrow><mo fence="true">(</mo><mrow><mo fence="true">(</mo><msub><mi>s</mi><mn>1</mn></msub><mo separator="true">,</mo><msub><mi>s</mi><mn>2</mn></msub><mo fence="true">)</mo></mrow><mo separator="true">,</mo><mi>w</mi><mo fence="true">)</mo></mrow><mo>=</mo><mrow><mo fence="true">(</mo><mover accent="true"><mi>δ</mi><mo>^</mo></mover><mrow><mo fence="true">(</mo><msub><mi>s</mi><mn>1</mn></msub><mo separator="true">,</mo><mi>w</mi><mo fence="true">)</mo></mrow><mo separator="true">,</mo><mover accent="true"><mi>δ</mi><mo>^</mo></mover><mrow><mo fence="true">(</mo><msub><mi>s</mi><mn>2</mn></msub><mo separator="true">,</mo><mi>w</mi><mo fence="true">)</mo></mrow><mo fence="true">)</mo></mrow></mrow><annotation encoding="application/x-tex">\hat{\delta}\left(\left(s_1, s_2\right), w\right) = \left(\hat{\delta}\left(s_1, w\right),\hat{\delta}\left(s_2, w\right)\right)</annotation></semantics></math></span></data></p>
 <blockquote>
 <p>Proof the the complement of a regular language is also regular:</p>
@@ -2736,7 +2736,7 @@ with <data class="katex-src" value="\epsilon"><span class="katex"><math xmlns="h
 <li><data class="katex-src" value="x"><span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>x</mi></mrow><annotation encoding="application/x-tex">x</annotation></semantics></math></span></data> matches <data class="katex-src" value="\alpha + \beta"><span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>α</mi><mo>+</mo><mi>β</mi></mrow><annotation encoding="application/x-tex">\alpha + \beta</annotation></semantics></math></span></data> if <data class="katex-src" value="x"><span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>x</mi></mrow><annotation encoding="application/x-tex">x</annotation></semantics></math></span></data> matches either of those.</li>
 <li><data class="katex-src" value="x"><span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>x</mi></mrow><annotation encoding="application/x-tex">x</annotation></semantics></math></span></data> matches <data class="katex-src" value="\alpha\cap\beta"><span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>α</mi><mo>∩</mo><mi>β</mi></mrow><annotation encoding="application/x-tex">\alpha\cap\beta</annotation></semantics></math></span></data> if <data class="katex-src" value="x"><span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>x</mi></mrow><annotation encoding="application/x-tex">x</annotation></semantics></math></span></data> matches both of them.</li>
 <li><data class="katex-src" value="x"><span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>x</mi></mrow><annotation encoding="application/x-tex">x</annotation></semantics></math></span></data> matches <data class="katex-src" value="\alpha\beta"><span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>α</mi><mi>β</mi></mrow><annotation encoding="application/x-tex">\alpha\beta</annotation></semantics></math></span></data> if <data class="katex-src" value="x"><span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>x</mi></mrow><annotation encoding="application/x-tex">x</annotation></semantics></math></span></data> matches <data class="katex-src" value="\alpha"><span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>α</mi></mrow><annotation encoding="application/x-tex">\alpha</annotation></semantics></math></span></data> followed by <data class="katex-src" value="\beta"><span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>β</mi></mrow><annotation encoding="application/x-tex">\beta</annotation></semantics></math></span></data>.</li>
-<li><data class="katex-src" value="x"><span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>x</mi></mrow><annotation encoding="application/x-tex">x</annotation></semantics></math></span></data> matches <data class="katex-src" value="~\alpha"><span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mtext> </mtext><mi>α</mi></mrow><annotation encoding="application/x-tex">~\alpha</annotation></semantics></math></span></data> if it doesn’t match <data class="katex-src" value="\alpha"><span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>α</mi></mrow><annotation encoding="application/x-tex">\alpha</annotation></semantics></math></span></data>.</li>
+<li><data class="katex-src" value="x"><span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>x</mi></mrow><annotation encoding="application/x-tex">x</annotation></semantics></math></span></data> matches <data class="katex-src" value="\~\alpha"><span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mover accent="true"><mi>α</mi><mo>˜</mo></mover></mrow><annotation encoding="application/x-tex">~\alpha</annotation></semantics></math></span></data> if it doesn’t match <data class="katex-src" value="\alpha"><span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>α</mi></mrow><annotation encoding="application/x-tex">\alpha</annotation></semantics></math></span></data>.</li>
 <li><data class="katex-src" value="x"><span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>x</mi></mrow><annotation encoding="application/x-tex">x</annotation></semantics></math></span></data> matches <data class="katex-src" value="\alpha^*"><span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msup><mi>α</mi><mo>∗</mo></msup></mrow><annotation encoding="application/x-tex">\alpha^*</annotation></semantics></math></span></data> and <data class="katex-src" value="\alpha^+"><span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msup><mi>α</mi><mo>+</mo></msup></mrow><annotation encoding="application/x-tex">\alpha^+</annotation></semantics></math></span></data> the same way as regex.</li>
 </ul>
 <p>NOTE:<br>
@@ -2895,7 +2895,7 @@ final state, other is not).</p>
 <p>If <data class="katex-src" value="\exists \{p,q\}"><span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi mathvariant="normal">∃</mi><mo stretchy="false">{</mo><mi>p</mi><mo separator="true">,</mo><mi>q</mi><mo stretchy="false">}</mo></mrow><annotation encoding="application/x-tex">\exists {p,q}</annotation></semantics></math></span></data> s.t. for some <data class="katex-src" value="\sigma \in \Sigma"><span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>σ</mi><mo>∈</mo><mi mathvariant="normal">Σ</mi></mrow><annotation encoding="application/x-tex">\sigma \in \Sigma</annotation></semantics></math></span></data>, <data class="katex-src" value="\{\delta(p,\sigma),&#10;\delta(q,\sigma)\}"><span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mo stretchy="false">{</mo><mi>δ</mi><mo stretchy="false">(</mo><mi>p</mi><mo separator="true">,</mo><mi>σ</mi><mo stretchy="false">)</mo><mo separator="true">,</mo><mi>δ</mi><mo stretchy="false">(</mo><mi>q</mi><mo separator="true">,</mo><mi>σ</mi><mo stretchy="false">)</mo><mo stretchy="false">}</mo></mrow><annotation encoding="application/x-tex">{\delta(p,\sigma), \delta(q,\sigma)}</annotation></semantics></math></span></data> are marked then mark <data class="katex-src" value="\{p,q\}"><span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mo stretchy="false">{</mo><mi>p</mi><mo separator="true">,</mo><mi>q</mi><mo stretchy="false">}</mo></mrow><annotation encoding="application/x-tex">{p,q}</annotation></semantics></math></span></data></p>
 <p>Go to <a href="notes/./cs2200.html#pattern-matching">pattern matching</a></p>
 <h3 id="context-free-languages"><a class="header" href="#context-free-languages">Context free languages</a></h3>
-<p>Productions: A kind of statement that telly you substitution rule.</p>
+<p>Productions: A kind of statement that tells you substitution rule.</p>
 <p>Non-terminal strings are strings that can be replaced using productions.</p>
 <p>Terminals are ones that can’t be further replaced.</p>
 <p>Therefore, CFG is a 4 tuple that is defined using
@@ -3032,14 +3032,21 @@ and makes the stack empty as well.</p>
 <p>TL;DR: Absolute pain in the ass</p>
 </blockquote>
 <p>If you have a PDA with a single state that accepts using an empty stack:</p>
-<p>If <data class="katex-src" value="\left(\left(q,\sigma, A\right), \left(q, B_1B_2\dots B_k\right)\right)&#10;\in\delta"><span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mrow><mo fence="true">(</mo><mrow><mo fence="true">(</mo><mi>q</mi><mo separator="true">,</mo><mi>σ</mi><mo separator="true">,</mo><mi>A</mi><mo fence="true">)</mo></mrow><mo separator="true">,</mo><mrow><mo fence="true">(</mo><mi>q</mi><mo separator="true">,</mo><msub><mi>B</mi><mn>1</mn></msub><msub><mi>B</mi><mn>2</mn></msub><mo>…</mo><msub><mi>B</mi><mi>k</mi></msub><mo fence="true">)</mo></mrow><mo fence="true">)</mo></mrow><mo>∈</mo><mi>δ</mi></mrow><annotation encoding="application/x-tex">\left(\left(q,\sigma, A\right), \left(q, B_1B_2\dots B_k\right)\right) \in\delta</annotation></semantics></math></span></data> then add the production <data class="katex-src" value="A\rightarrow\sigma B-1B_2\dots B_k"><span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>A</mi><mo>→</mo><mi>σ</mi><mi>B</mi><mo>−</mo><mn>1</mn><msub><mi>B</mi><mn>2</mn></msub><mo>…</mo><msub><mi>B</mi><mi>k</mi></msub></mrow><annotation encoding="application/x-tex">A\rightarrow\sigma B-1B_2\dots B_k</annotation></semantics></math></span></data></p>
+<p>If <data class="katex-src" value="\left(\left(q,\sigma, A\right), \left(q, B_1B_2\dots B_k\right)\right)&#10;\in\delta"><span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mrow><mo fence="true">(</mo><mrow><mo fence="true">(</mo><mi>q</mi><mo separator="true">,</mo><mi>σ</mi><mo separator="true">,</mo><mi>A</mi><mo fence="true">)</mo></mrow><mo separator="true">,</mo><mrow><mo fence="true">(</mo><mi>q</mi><mo separator="true">,</mo><msub><mi>B</mi><mn>1</mn></msub><msub><mi>B</mi><mn>2</mn></msub><mo>…</mo><msub><mi>B</mi><mi>k</mi></msub><mo fence="true">)</mo></mrow><mo fence="true">)</mo></mrow><mo>∈</mo><mi>δ</mi></mrow><annotation encoding="application/x-tex">\left(\left(q,\sigma, A\right), \left(q, B_1B_2\dots B_k\right)\right) \in\delta</annotation></semantics></math></span></data> then add the production <data class="katex-src" value="A\rightarrow\sigma B_1B_2\dots B_k"><span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>A</mi><mo>→</mo><mi>σ</mi><msub><mi>B</mi><mn>1</mn></msub><msub><mi>B</mi><mn>2</mn></msub><mo>…</mo><msub><mi>B</mi><mi>k</mi></msub></mrow><annotation encoding="application/x-tex">A\rightarrow\sigma B_1B_2\dots B_k</annotation></semantics></math></span></data></p>
+<p>Nothing pushed on the stack case needs to be handled separately.</p>
 <p>To convert a general PDA with a single final state to a PDA that accepts with
 the empty stack:</p>
 <p>Let <data class="katex-src" value="M = \left(Q, \Sigma, \Gamma, \delta, s, \perp, \{f\}\right)"><span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>M</mi><mo>=</mo><mrow><mo fence="true">(</mo><mi>Q</mi><mo separator="true">,</mo><mi mathvariant="normal">Σ</mi><mo separator="true">,</mo><mi mathvariant="normal">Γ</mi><mo separator="true">,</mo><mi>δ</mi><mo separator="true">,</mo><mi>s</mi><mo separator="true">,</mo><mo>⊥</mo><mo separator="true">,</mo><mo stretchy="false">{</mo><mi>f</mi><mo stretchy="false">}</mo><mo fence="true">)</mo></mrow></mrow><annotation encoding="application/x-tex">M = \left(Q, \Sigma, \Gamma, \delta, s, \perp, {f}\right)</annotation></semantics></math></span></data></p>
 <p>We define <data class="katex-src" value="M' = \left({q}, \Sigma, \Gamma', \delta', \{q\},&#10;\left(s, \perp, f\right), \phi\right)"><span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msup><mi>M</mi><mo mathvariant="normal" lspace="0em" rspace="0em">′</mo></msup><mo>=</mo><mrow><mo fence="true">(</mo><mi>q</mi><mo separator="true">,</mo><mi mathvariant="normal">Σ</mi><mo separator="true">,</mo><msup><mi mathvariant="normal">Γ</mi><mo mathvariant="normal" lspace="0em" rspace="0em">′</mo></msup><mo separator="true">,</mo><msup><mi>δ</mi><mo mathvariant="normal" lspace="0em" rspace="0em">′</mo></msup><mo separator="true">,</mo><mo stretchy="false">{</mo><mi>q</mi><mo stretchy="false">}</mo><mo separator="true">,</mo><mrow><mo fence="true">(</mo><mi>s</mi><mo separator="true">,</mo><mo>⊥</mo><mo separator="true">,</mo><mi>f</mi><mo fence="true">)</mo></mrow><mo separator="true">,</mo><mi>ϕ</mi><mo fence="true">)</mo></mrow></mrow><annotation encoding="application/x-tex">M' = \left({q}, \Sigma, \Gamma', \delta', {q}, \left(s, \perp, f\right), \phi\right)</annotation></semantics></math></span></data></p>
 <p>Here <data class="katex-src" value="\Gamma' = Q\times\Gamma\times Q"><span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msup><mi mathvariant="normal">Γ</mi><mo mathvariant="normal" lspace="0em" rspace="0em">′</mo></msup><mo>=</mo><mi>Q</mi><mo>×</mo><mi mathvariant="normal">Γ</mi><mo>×</mo><mi>Q</mi></mrow><annotation encoding="application/x-tex">\Gamma' = Q\times\Gamma\times Q</annotation></semantics></math></span></data></p>
-<p>Over here, both the Q’s are guesses for us,</p>
-<!---TODO: Fill the details  --->
+<p>Over here, both the Q’s are guesses for us, and we keep on guessing the entire
+sequence of things that are happening and put it on the stack. So we have an
+exponential number of items pushed onto the stack.</p>
+<p>Suppose you are at state <data class="katex-src" value="p"><span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>p</mi></mrow><annotation encoding="application/x-tex">p</annotation></semantics></math></span></data> with <data class="katex-src" value="\sigma"><span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>σ</mi></mrow><annotation encoding="application/x-tex">\sigma</annotation></semantics></math></span></data> on the input string and the contents
+on the top of the stack were <data class="katex-src" value="A"><span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>A</mi></mrow><annotation encoding="application/x-tex">A</annotation></semantics></math></span></data>. You transition to <data class="katex-src" value="q"><span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>q</mi></mrow><annotation encoding="application/x-tex">q</annotation></semantics></math></span></data> and the stack is now
+<data class="katex-src" value="B_1B_2\dots B_k"><span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>B</mi><mn>1</mn></msub><msub><mi>B</mi><mn>2</mn></msub><mo>…</mo><msub><mi>B</mi><mi>k</mi></msub></mrow><annotation encoding="application/x-tex">B_1B_2\dots B_k</annotation></semantics></math></span></data>. For each of those you add a <em>guess</em> to the new PDA stack
+with surrounding states <data class="katex-src" value="pB_1q_1"><span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>p</mi><msub><mi>B</mi><mn>1</mn></msub><msub><mi>q</mi><mn>1</mn></msub></mrow><annotation encoding="application/x-tex">pB_1q_1</annotation></semantics></math></span></data> and so on upto <data class="katex-src" value="q_{k-1}B_kq_k"><span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>q</mi><mrow><mi>k</mi><mo>−</mo><mn>1</mn></mrow></msub><msub><mi>B</mi><mi>k</mi></msub><msub><mi>q</mi><mi>k</mi></msub></mrow><annotation encoding="application/x-tex">q_{k-1}B_kq_k</annotation></semantics></math></span></data>. Here <data class="katex-src" value="q_k"><span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>q</mi><mi>k</mi></msub></mrow><annotation encoding="application/x-tex">q_k</annotation></semantics></math></span></data> is
+equal to <data class="katex-src" value="q"><span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>q</mi></mrow><annotation encoding="application/x-tex">q</annotation></semantics></math></span></data>.</p>
 <h3 id="effective-computability"><a class="header" href="#effective-computability">Effective Computability</a></h3>
 <p>Multiple notions of effective computability:</p>
 <ul>
@@ -3128,6 +3135,90 @@ then <data class="katex-src" value="N"><span class="katex"><math xmlns="http://w
 <p>If <data class="katex-src" value="N"><span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>N</mi></mrow><annotation encoding="application/x-tex">N</annotation></semantics></math></span></data> halts on <data class="katex-src" value="x \Longleftrightarrow K"><span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>x</mi><mo>⟺</mo><mi>K</mi></mrow><annotation encoding="application/x-tex">x \Longleftrightarrow K</annotation></semantics></math></span></data> rejects <data class="katex-src" value="(M_x,x) \Longleftrightarrow&#10;M_x"><span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mo stretchy="false">(</mo><msub><mi>M</mi><mi>x</mi></msub><mo separator="true">,</mo><mi>x</mi><mo stretchy="false">)</mo><mo>⟺</mo><msub><mi>M</mi><mi>x</mi></msub></mrow><annotation encoding="application/x-tex">(M_x,x) \Longleftrightarrow M_x</annotation></semantics></math></span></data> loops on <data class="katex-src" value="x"><span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>x</mi></mrow><annotation encoding="application/x-tex">x</annotation></semantics></math></span></data>. This implies that <data class="katex-src" value="N"><span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>N</mi></mrow><annotation encoding="application/x-tex">N</annotation></semantics></math></span></data> differs from each row of the table
 at the diagonal. However the list contained every Turing Machine in existence,
 so the assumption that the table entries are determinable is wrong.</p>
+<h4 id="reductions"><a class="header" href="#reductions">Reductions</a></h4>
+<p>If a problem <data class="katex-src" value="A"><span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>A</mi></mrow><annotation encoding="application/x-tex">A</annotation></semantics></math></span></data> is solvable by making a subroutine call to another problem <data class="katex-src" value="B"><span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>B</mi></mrow><annotation encoding="application/x-tex">B</annotation></semantics></math></span></data>,
+we say that the problem <data class="katex-src" value="A"><span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>A</mi></mrow><annotation encoding="application/x-tex">A</annotation></semantics></math></span></data> is reducible to another problem <data class="katex-src" value="B"><span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>B</mi></mrow><annotation encoding="application/x-tex">B</annotation></semantics></math></span></data>.</p>
+<p>Basically all the following are equivalent:</p>
+<ul>
+<li>
+<pre><code>if B is True:
+  A is True
+else:
+  A is False
+</code></pre>
+</li>
+<li>
+<p><data class="katex-src" value="A"><span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>A</mi></mrow><annotation encoding="application/x-tex">A</annotation></semantics></math></span></data> is reducible to <data class="katex-src" value="B"><span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>B</mi></mrow><annotation encoding="application/x-tex">B</annotation></semantics></math></span></data></p>
+</li>
+<li>
+<p><data class="katex-src" value="A \le_m B"><span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>A</mi><msub><mo>≤</mo><mi>m</mi></msub><mi>B</mi></mrow><annotation encoding="application/x-tex">A \le_m B</annotation></semantics></math></span></data></p>
+</li>
+<li>
+<p><data class="katex-src" value="A"><span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>A</mi></mrow><annotation encoding="application/x-tex">A</annotation></semantics></math></span></data> can be solved by a subroutine call to <data class="katex-src" value="B"><span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>B</mi></mrow><annotation encoding="application/x-tex">B</annotation></semantics></math></span></data></p>
+</li>
+</ul>
+<p><em>Many-one</em> reductions can be used to prove that something is not recognizable
+(or vice-versa). In that case only one subroutine call is allowed and the
+result has to be passed <em>as-is</em> by the outer machine.</p>
+<p>In case you are generating a description of a machine from the input machine,
+the function that you use to generate the description must be computable and
+total.</p>
+<p>Also, if <data class="katex-src" value="A \le_m B"><span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>A</mi><msub><mo>≤</mo><mi>m</mi></msub><mi>B</mi></mrow><annotation encoding="application/x-tex">A \le_m B</annotation></semantics></math></span></data>, then <data class="katex-src" value="\bar{A} \le_m \bar{B}"><span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mover accent="true"><mi>A</mi><mo>ˉ</mo></mover><msub><mo>≤</mo><mi>m</mi></msub><mover accent="true"><mi>B</mi><mo>ˉ</mo></mover></mrow><annotation encoding="application/x-tex">\bar{A} \le_m \bar{B}</annotation></semantics></math></span></data>.</p>
+<p><em>Turing</em> reductions are more lax in their rules, allowing multiple subroutine
+calls and modifying the output. However, they can only be used to demonstrate
+recursiveness (or the lack of it).</p>
+<h4 id="examples-of-undecidable-problems"><a class="header" href="#examples-of-undecidable-problems">Examples of undecidable problems</a></h4>
+<p>Given a TM <data class="katex-src" value="M"><span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>M</mi></mrow><annotation encoding="application/x-tex">M</annotation></semantics></math></span></data> and a string <data class="katex-src" value="x"><span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>x</mi></mrow><annotation encoding="application/x-tex">x</annotation></semantics></math></span></data>, decide if <data class="katex-src" value="M"><span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>M</mi></mrow><annotation encoding="application/x-tex">M</annotation></semantics></math></span></data> accepts <data class="katex-src" value="x"><span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>x</mi></mrow><annotation encoding="application/x-tex">x</annotation></semantics></math></span></data>.</p>
+<p>Proof:</p>
+<p>Create a turing machine <data class="katex-src" value="H"><span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>H</mi></mrow><annotation encoding="application/x-tex">H</annotation></semantics></math></span></data> that takes input <data class="katex-src" value="M,x"><span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>M</mi><mo separator="true">,</mo><mi>x</mi></mrow><annotation encoding="application/x-tex">M,x</annotation></semantics></math></span></data> and decides whether <data class="katex-src" value="M"><span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>M</mi></mrow><annotation encoding="application/x-tex">M</annotation></semantics></math></span></data>
+accepts <data class="katex-src" value="x"><span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>x</mi></mrow><annotation encoding="application/x-tex">x</annotation></semantics></math></span></data>.</p>
+<p>Create a machine <data class="katex-src" value="D"><span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>D</mi></mrow><annotation encoding="application/x-tex">D</annotation></semantics></math></span></data> that does the opposite of what <data class="katex-src" value="H"><span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>H</mi></mrow><annotation encoding="application/x-tex">H</annotation></semantics></math></span></data> does when given input
+<data class="katex-src" value="M,M"><span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>M</mi><mo separator="true">,</mo><mi>M</mi></mrow><annotation encoding="application/x-tex">M,M</annotation></semantics></math></span></data></p>
+<p><data class="katex-src" value="D"><span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>D</mi></mrow><annotation encoding="application/x-tex">D</annotation></semantics></math></span></data> with the input <data class="katex-src" value="D"><span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>D</mi></mrow><annotation encoding="application/x-tex">D</annotation></semantics></math></span></data> will cause a contradiction.</p>
+<p>Therefore <data class="katex-src" value="H"><span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>H</mi></mrow><annotation encoding="application/x-tex">H</annotation></semantics></math></span></data> cannot exist.</p>
+<hr />
+<p>Undecidability of the Halting Problem using Reduction from TM acceptance</p>
+<p>Proof:</p>
+<p>If <data class="katex-src" value="H"><span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>H</mi></mrow><annotation encoding="application/x-tex">H</annotation></semantics></math></span></data> tell you that it halts, then we can run the simulation in a universal
+turing machine and see the acceptance. If <data class="katex-src" value="H"><span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>H</mi></mrow><annotation encoding="application/x-tex">H</annotation></semantics></math></span></data> tells you that it doesn’t halt,
+then you can say no for acceptance. Therefore, if the halting problem is
+solvable, then the acceptance problem is also solvable. But we know for a fact
+that acceptance problem isn’t solvable.</p>
+<hr />
+<p>Check if a language of a turing machine is empty being undecidable</p>
+<p>Proof:</p>
+<p>We modify the machine <data class="katex-src" value="M"><span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>M</mi></mrow><annotation encoding="application/x-tex">M</annotation></semantics></math></span></data> and create a machine <data class="katex-src" value="M_1"><span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>M</mi><mn>1</mn></msub></mrow><annotation encoding="application/x-tex">M_1</annotation></semantics></math></span></data>.</p>
+<p>If <data class="katex-src" value="L(M)"><span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>L</mi><mo stretchy="false">(</mo><mi>M</mi><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">L(M)</annotation></semantics></math></span></data> is empty, then it returns false. If <data class="katex-src" value="L(M)"><span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>L</mi><mo stretchy="false">(</mo><mi>M</mi><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">L(M)</annotation></semantics></math></span></data> is non-empty, then it
+checks if <data class="katex-src" value="w"><span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>w</mi></mrow><annotation encoding="application/x-tex">w</annotation></semantics></math></span></data> is in the language or not.</p>
+<p>We use the description of <data class="katex-src" value="M_1"><span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>M</mi><mn>1</mn></msub></mrow><annotation encoding="application/x-tex">M_1</annotation></semantics></math></span></data> to feed into the checker for <data class="katex-src" value="E_{TM}"><span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>E</mi><mrow><mi>T</mi><mi>M</mi></mrow></msub></mrow><annotation encoding="application/x-tex">E_{TM}</annotation></semantics></math></span></data> that
+checks if the language is empty or not. Inverting the output of the checker can
+give us the output of the checker of Acceptance problem.</p>
+<p>Note that the checker for <data class="katex-src" value="E_{TM}"><span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>E</mi><mrow><mi>T</mi><mi>M</mi></mrow></msub></mrow><annotation encoding="application/x-tex">E_{TM}</annotation></semantics></math></span></data> need not necessarily run the machine
+description. It only deduces that based on some heuristics that are not our
+concern. We do not have to find the machine that does that, only prove it
+does not exist. For which we assume the contrary.</p>
+<hr />
+<p>Check if a a language of a turing machine is regular or not being undecidable</p>
+<p>Proof:</p>
+<p>We have a machine <data class="katex-src" value="R_{TM}"><span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>R</mi><mrow><mi>T</mi><mi>M</mi></mrow></msub></mrow><annotation encoding="application/x-tex">R_{TM}</annotation></semantics></math></span></data> that decides whether a TM description is regular or
+not.</p>
+<p>We need to create a machine <data class="katex-src" value="A_{TM}"><span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>A</mi><mrow><mi>T</mi><mi>M</mi></mrow></msub></mrow><annotation encoding="application/x-tex">A_{TM}</annotation></semantics></math></span></data> that decides whether the input <data class="katex-src" value="(M,x)"><span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mo stretchy="false">(</mo><mi>M</mi><mo separator="true">,</mo><mi>x</mi><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">(M,x)</annotation></semantics></math></span></data> will
+be accepted or not.</p>
+<p>We create <data class="katex-src" value="M_1"><span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>M</mi><mn>1</mn></msub></mrow><annotation encoding="application/x-tex">M_1</annotation></semantics></math></span></data> from <data class="katex-src" value="(M,x)"><span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mo stretchy="false">(</mo><mi>M</mi><mo separator="true">,</mo><mi>x</mi><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">(M,x)</annotation></semantics></math></span></data> and runs <data class="katex-src" value="M"><span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>M</mi></mrow><annotation encoding="application/x-tex">M</annotation></semantics></math></span></data> on <data class="katex-src" value="x"><span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>x</mi></mrow><annotation encoding="application/x-tex">x</annotation></semantics></math></span></data> and gives us “true” if the
+input to <data class="katex-src" value="M_1"><span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>M</mi><mn>1</mn></msub></mrow><annotation encoding="application/x-tex">M_1</annotation></semantics></math></span></data>, i.e. <data class="katex-src" value="y"><span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>y</mi></mrow><annotation encoding="application/x-tex">y</annotation></semantics></math></span></data> has the form <data class="katex-src" value="0^n1^n"><span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msup><mn>0</mn><mi>n</mi></msup><msup><mn>1</mn><mi>n</mi></msup></mrow><annotation encoding="application/x-tex">0^n1^n</annotation></semantics></math></span></data> else it gives “true” if <data class="katex-src" value="M"><span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>M</mi></mrow><annotation encoding="application/x-tex">M</annotation></semantics></math></span></data>
+gives “true” on <data class="katex-src" value="x"><span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>x</mi></mrow><annotation encoding="application/x-tex">x</annotation></semantics></math></span></data>.</p>
+<p>Carefully observe what this is doing. When <data class="katex-src" value="M"><span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>M</mi></mrow><annotation encoding="application/x-tex">M</annotation></semantics></math></span></data> accepts <data class="katex-src" value="x"><span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>x</mi></mrow><annotation encoding="application/x-tex">x</annotation></semantics></math></span></data>, its language is
+<data class="katex-src" value="\Sigma^*"><span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msup><mi mathvariant="normal">Σ</mi><mo>∗</mo></msup></mrow><annotation encoding="application/x-tex">\Sigma^*</annotation></semantics></math></span></data>, otherwise it is <data class="katex-src" value="0^n1^n"><span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msup><mn>0</mn><mi>n</mi></msup><msup><mn>1</mn><mi>n</mi></msup></mrow><annotation encoding="application/x-tex">0^n1^n</annotation></semantics></math></span></data>. So the regular language decider will
+give “true” if <data class="katex-src" value="M"><span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>M</mi></mrow><annotation encoding="application/x-tex">M</annotation></semantics></math></span></data> accepts <data class="katex-src" value="x"><span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>x</mi></mrow><annotation encoding="application/x-tex">x</annotation></semantics></math></span></data> and “false” otherwise.</p>
+<p>We feed this description of <data class="katex-src" value="M_1"><span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>M</mi><mn>1</mn></msub></mrow><annotation encoding="application/x-tex">M_1</annotation></semantics></math></span></data> to the decider <data class="katex-src" value="R_{TM}"><span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>R</mi><mrow><mi>T</mi><mi>M</mi></mrow></msub></mrow><annotation encoding="application/x-tex">R_{TM}</annotation></semantics></math></span></data> and use the output as
+the output of <data class="katex-src" value="A_{TM}"><span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>A</mi><mrow><mi>T</mi><mi>M</mi></mrow></msub></mrow><annotation encoding="application/x-tex">A_{TM}</annotation></semantics></math></span></data>.</p>
+<hr />
+<p>Proof of two machines having equal languages being undecidable</p>
+<p>Suppose a decider for the above problem exists. It takes <data class="katex-src" value="M_1,M_2"><span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>M</mi><mn>1</mn></msub><mo separator="true">,</mo><msub><mi>M</mi><mn>2</mn></msub></mrow><annotation encoding="application/x-tex">M_1,M_2</annotation></semantics></math></span></data> and gives
+“true” if they are equal. Run it with <data class="katex-src" value="M, M_1"><span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>M</mi><mo separator="true">,</mo><msub><mi>M</mi><mn>1</mn></msub></mrow><annotation encoding="application/x-tex">M, M_1</annotation></semantics></math></span></data> where <data class="katex-src" value="M_1"><span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>M</mi><mn>1</mn></msub></mrow><annotation encoding="application/x-tex">M_1</annotation></semantics></math></span></data> rejects everything
+and <data class="katex-src" value="M"><span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>M</mi></mrow><annotation encoding="application/x-tex">M</annotation></semantics></math></span></data> is the input to the decider of the empty language problem will solve the
+empty language problem.</p>
+<hr />
 <div style="break-before: page; page-break-before: always;"></div><h1 id="cs2600"><a class="header" href="#cs2600">cs2600</a></h1>
 <h2 id="instruction-set"><a class="header" href="#instruction-set">Instruction Set</a></h2>
 <p>Different Instructions: x86, ARM, RISC V, MIPS.</p>
@@ -3149,6 +3240,9 @@ something called as a <strong>Linker Descriptor Script</strong>.</p>
 <h2 id="risc-v"><a class="header" href="#risc-v">RISC V</a></h2>
 <p>Open source. Has 32 int and 32 FP registers. Also has XLEN variable, which is
 either 32 or 64 for 32-bit and 64-bit processors respectively.</p>
+<p>There are 13 callee saved registers. 12 of them are explicitly called <em>saved</em>
+registers, and the first one of them (<code>s0</code>) is the <em>frame pointer</em> (equivalent to
+<strong>base pointer</strong> in AMD64). The 13 one is the <em>stack pointer</em>.</p>
 <div class="table-wrapper"><table><thead><tr><th style="text-align: center">Register</th><th style="text-align: center">ABI Name</th><th style="text-align: center">Description</th><th style="text-align: center">Saver</th></tr></thead><tbody>
 <tr><td style="text-align: center">x0</td><td style="text-align: center">zero</td><td style="text-align: center">Zero always</td><td style="text-align: center"></td></tr>
 <tr><td style="text-align: center">x1</td><td style="text-align: center">ra</td><td style="text-align: center">Return address</td><td style="text-align: center">caller</td></tr>
@@ -3176,51 +3270,52 @@ is no need for functions to save them.</p>
 <p>The ones listed below are called <em>R-type</em> or <em>register-type</em> instructions.</p>
 <ul>
 <li>
-<p><code>add rd, rs1, rs2</code>: add the contents of rs1 and rs2 and store it in rd.
+<p><code>add rd, rs1, rs2</code>: add the contents of <code>rs1</code> and <code>rs2</code> and store it in <code>rd</code>.
 Signed addition. Also has the unsigned version. Similarly, sub, and, or, xor
 also exist.</p>
 </li>
 <li>
-<p><code>mul/mulh rd, rs1, rs2</code>: multiplies and stores the lower/upper 32 bits in rd.</p>
+<p><code>mul/mulh rd, rs1, rs2</code>: multiplies and stores the lower/upper 32 bits in
+<code>rd</code>.</p>
 </li>
 <li>
 <p><code>div/rem rd, rs1, rs2</code>: stores the quotient/remainder.</p>
 </li>
 <li>
-<p><code>sll rd, rs1, rs2</code>: Left shift the number in rs1 by the value in rs2 and
-store in rd.</p>
+<p><code>sll rd, rs1, rs2</code>: Left shift the number in <code>rs1</code> by the value in <code>rs2</code> and
+store in <code>rd</code>.</p>
 </li>
 <li>
-<p><code>srl rd, rs1, rs2</code>: Right shift the number in rs1 by the value in rs2 and
-store in rd. Zero extends.</p>
+<p><code>srl rd, rs1, rs2</code>: Right shift the number in <code>rs1</code> by the value in <code>rs2</code> and
+store in <code>rd</code>. Zero extends.</p>
 </li>
 <li>
-<p><code>sra rd, rs1, rs2</code>: Right shift the number in rs1 by the value in rs2 and
-store in rd. Sign extends.</p>
+<p><code>sra rd, rs1, rs2</code>: Right shift the number in <code>rs1</code> by the value in <code>rs2</code> and
+store in <code>rd</code>. Sign extends.</p>
 </li>
 </ul>
 <p>All of these also have an immediate version where the last argument is a
-hardcoded literal.</p>
+hardcoded literal that is 12 bits.</p>
 <p>These are called <em>I-type</em> or <em>immediate-type</em> instructions.</p>
 <ul>
 <li>
-<p><code>l(b/h/w) rd, imm(rs1)</code>: loads a byte/half-word/word to rd(dest. register)
-from *(rs1 + imm)</p>
+<p><code>l(b/h/w) rd, imm(rs1)</code>: loads a byte/half-word/word to <code>rd</code>(dest. register)
+from <code>*(rs1 + imm)</code></p>
 </li>
 <li>
-<p><code>l(b/h/w)u rd, imm(rs1)</code>: loads a byte/half-word/word to rd(dest. register)
-from *(rs1 + imm). This one zero-extends on the left.</p>
+<p><code>l(b/h/w)u rd, imm(rs1)</code>: loads a byte/half-word/word to <code>rd</code>(dest. register)
+from <code>*(rs1 + imm)</code>. This one zero-extends on the left.</p>
 </li>
 </ul>
 <p>These are also <em>I-type</em> instructions.</p>
 <p>The below one instruction is <em>S-type</em> instruction (for obvious reasons).</p>
 <ul>
-<li><code>s(b/h/w) rd, imm(rs1)</code>: stores a byte/half-word/word to *(rs1 + imm)
-from the contents of rd.</li>
+<li><code>s(b/h/w) rd, imm(rs1)</code>: stores a byte/half-word/word to <code>*(rs1 + imm)</code>
+from the contents of <code>rd</code>.</li>
 </ul>
 <p>The below instruction is called <em>B-type</em> or <em>branch-type</em> instruction.</p>
 <ul>
-<li><code>blt/bltu r1, r2, label/offset</code>: if r1 &lt; r2 (signed or unsigned), jump to
+<li><code>blt/bltu r1, r2, label/offset</code>: if <code>r1 &lt; r2</code> (signed or unsigned), jump to
 label or symbol. Can jump to atmost 4 KiB. (13 bits with the lsb always 0, the
 rest are used for determining values).</li>
 </ul>
@@ -3231,12 +3326,12 @@ well. Also immediate variants of all.</p>
 bits apart from the lsb that’s always 0.</p>
 <p>The below type is called a <em>J-type</em> instruction.</p>
 <ul>
-<li><code>jal rd, imm</code>: Jump to PC + imm, and store pc + 4 in register rd.</li>
+<li><code>jal rd, imm</code>: Jump to <code>pc + imm</code>, and store <code>pc + 4</code> in register <code>rd</code>.</li>
 </ul>
 <p>The below one is an <em><strong>I-type</strong></em> and <strong>NOT</strong> J-type.</p>
 <ul>
-<li><code>jalr rd, rs1, imm</code>: Jump to rs1 + imm, storing PC + 4 in the register
-rd. Used for function pointers.</li>
+<li><code>jalr rd, rs1, imm</code>: Jump to <code>rs1 + imm</code>, storing <code>pc + 4</code> in the register
+<code>rd</code>. Used for function pointers.</li>
 </ul>
 <p>Both of the ones below are aliases.</p>
 <ul>
@@ -3244,17 +3339,17 @@ rd. Used for function pointers.</li>
 <p><code>j label</code>: alias to <code>jal zero, label</code>, discards the return address</p>
 </li>
 <li>
-<p><code>ret rs1</code>: return to the address in rs1, if no argument is specified use
-ra (return addres register/x1). Alias to <code>jalr zero, rs1, 0</code></p>
+<p><code>ret rs1</code>: return to the address in <code>rs1</code>, if no argument is specified use
+<code>ra</code> (return addres register/<code>x1</code>). Alias to <code>jalr zero, rs1, 0</code></p>
 </li>
 </ul>
-<p>For function calls we also need a stack-based execution. x2 register is the
-stack pointer that points to the top of the stack. Frame pointer s0 saves the
+<p>For function calls we also need a stack-based execution. <code>x2</code> register is the
+stack pointer that points to the top of the stack. Frame pointer <code>s0</code> saves the
 base of the stack. These mark the stack frame in the stack.</p>
 <blockquote>
 <p>Always load and save values relative to the frame pointer.</p>
 </blockquote>
-<p>Registers a0 to a7 are used to pass function arguments from one function to
+<p>Registers <code>a0</code> to <code>a7</code> are used to pass function arguments from one function to
 another. These are 8 parameters. If we have more, then you need to use the
 stack.</p>
 <h4 id="control-and-status-registers"><a class="header" href="#control-and-status-registers">Control and status registers</a></h4>
@@ -3263,14 +3358,16 @@ stack.</p>
 <p><code>csrrw rd, csr, rs</code>: atomic swap values</p>
 </li>
 <li>
-<p><code>csrrs rd, csr, rs</code>: atomic read from rd and set a bit</p>
+<p><code>csrrs rd, csr, rs</code>: atomic copy to <code>rd</code> and set the bits that are set in
+<code>rs</code>.</p>
 </li>
 <li>
-<p><code>csrrc rd, csr, rs</code>: atomic read from rd and reset a bit</p>
+<p><code>csrrc rd, csr, rs</code>: atomic copy to <code>rd</code> and reset the bits that are reset
+in <code>rs</code>.</p>
 </li>
 </ul>
 <p>Atomic means that interrupts won’t stop the entire set of operations that is
-going on.</p>
+going on. If one of the operands is <code>x0/zero</code>, then that copying doesn’t happen.</p>
 <h3 id="executing-instructions"><a class="header" href="#executing-instructions">Executing instructions</a></h3>
 <p>If we are using an operating system:</p>
 <ul>
@@ -3680,7 +3777,13 @@ If a page is writable it also has to be readable as well.</p>
 <p>The <em>satp</em> for this scheme has 4 bits for mode specification and 16 bits for
 address space separation. The rest is used for the base address of the top level
 page directory. Once again, left shift by 12 bits before getting the root
-directory’s address.</p>
+directory’s address. The first 4 bits are:</p>
+<ul>
+<li>0 if virtualization is off.</li>
+<li>8 if it is 39 bit scheme.</li>
+<li>9 if it is 48 bit scheme.</li>
+<li>Others are reserved.</li>
+</ul>
 <h4 id="39-bit"><a class="header" href="#39-bit">39 bit</a></h4>
 <p>This scheme can support page table directories of sizes 4KB, 2MB, 1GB. The most
 significant 25 bits are unused. There are a total of <data class="katex-src" value="2^{27}"><span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msup><mn>2</mn><mn>27</mn></msup></mrow><annotation encoding="application/x-tex">2^{27}</annotation></semantics></math></span></data> page table entries
@@ -3872,7 +3975,7 @@ cache mapping</strong>.</p>
 <p>Tradeoff between hardware size and cache misses. A block of memory can be mapped
 to any cache line in a set of cache lines. If there are S cache sets, then a
 block A gets mapped to any cache line in A mod S.</p>
-<p>Let there be 32 KB of cache with each line being 64 byte. Hence <data class="katex-src" value="2^15"><span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msup><mn>2</mn><mn>1</mn></msup><mn>5</mn></mrow><annotation encoding="application/x-tex">2^15</annotation></semantics></math></span></data> bytes
+<p>Let there be 32 KB of cache with each line being 64 byte. Hence <data class="katex-src" value="2^{15}"><span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msup><mn>2</mn><mn>15</mn></msup></mrow><annotation encoding="application/x-tex">2^{15}</annotation></semantics></math></span></data> bytes
 with <data class="katex-src" value="2^6"><span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msup><mn>2</mn><mn>6</mn></msup></mrow><annotation encoding="application/x-tex">2^6</annotation></semantics></math></span></data> bytes per line. So there are <data class="katex-src" value="2^9"><span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msup><mn>2</mn><mn>9</mn></msup></mrow><annotation encoding="application/x-tex">2^9</annotation></semantics></math></span></data> lines in total.</p>
 <p>If the cache is 8-way set associative, then there are <data class="katex-src" value="2^6"><span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msup><mn>2</mn><mn>6</mn></msup></mrow><annotation encoding="application/x-tex">2^6</annotation></semantics></math></span></data> cache sets.</p>
 <p>Now the least significant 6 bits are used for offset mapping for the bytes of
@@ -3953,6 +4056,24 @@ predictors.</p>
 <p><img src="notes/./riscv/branch_predictor_1bit.png" alt="1 bit saturating branch predictor" /></p>
 <p><img src="notes/./riscv/branch_predictor_2bit.png" alt="2 bit saturating branch predictor" /></p>
 <p>There are many other methods of predicting branches.</p>
+<h4 id="branch-predictors"><a class="header" href="#branch-predictors">Branch Predictors</a></h4>
+<p>It has two buffers, a <strong>direction predictor</strong> and a <strong>Branch Target Buffer</strong>.</p>
+<p>The branch target buffer is a cache that has entries in the format <code>pc:jump</code> for
+every single <code>pc</code> value possible. That is <data class="katex-src" value="2^{32}"><span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msup><mn>2</mn><mn>32</mn></msup></mrow><annotation encoding="application/x-tex">2^{32}</annotation></semantics></math></span></data> possible <code>pc</code> values. In the
+first invocation it actually stalls, calculates and loads the address. In
+subsequent invocations it just reads it off from there.</p>
+<p>The direction predictor is also a table of sorts that has one of those counters
+for every single <code>pc</code>. Each time a branch is encountered, you fetch the counter
+value and predict accordingly. And later on update the result in the counter.</p>
+<p>This is good for single branches like loops and if-else. However in case of
+nested branches performance can be improved by using something called as a
+<strong>GShare</strong>.</p>
+<p>A global share history buffer register is a shift register that stores the
+values of the previous 32 branches. When we want to choose the index for the
+direction predictor, we first XOR <code>pc</code> with the gshare value and then use it.
+The branch target buffer indexing remains the same.</p>
+<p>When we want to update the counter, we update both the counter and the gshare.
+We update the original counter, and then push back the bit in gshare.</p>
 <blockquote>
 <p>May be nice to watch <a href="https://www.youtube.com/watch?v=g-WPhYREFjk">this talk</a>
 by Fedor Pikus.</p>
@@ -4914,6 +5035,21 @@ function to get the fixed address.</p>
  422:    8b 0c 24       mov    (%esp),%ecx
  425:    c3                     ret
 </code></pre>
+<p>In any case, you get the address of the functions this way. During runtime.</p>
+<p>Now two cases arise when shared libraries are used:</p>
+<h4 id="pie-on"><a class="header" href="#pie-on">PIE on</a></h4>
+<p>In this case, relative offset to the PLT is used. The first invocation jumps to
+<code>puts@plt</code> where it jumps to another address in in <code>.got.plt</code>. Over there in the
+first invocation it jumps back to <code>.plt</code> to the immediate next address, which
+further goes to the runtime linker/resolver.</p>
+<p>In the next ISR/stack frame call/whatever you call it, the address at <code>.got.plt</code>
+is resolved and overwritten by the final resolved address for future invocation.</p>
+<p>Then in the future invocations of the same function it immediately jumps to the
+function directly instead of the resolution bullwork. This also decreases
+execution time btw.</p>
+<h4 id="pie-off"><a class="header" href="#pie-off">PIE off</a></h4>
+<p>Most of the details remain the same except the <code>.plt</code> address remains constant
+across invocations even if the library itself shifts because of ASLR.</p>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="hacking_basics"><a class="header" href="#hacking_basics">hacking_basics</a></h1>
 <h2 id="python-snippets"><a class="header" href="#python-snippets">Python Snippets</a></h2>
 <ul>
@@ -4922,6 +5058,11 @@ function to get the fixed address.</p>
 <pre><code class="language-python">hex_value = "4765656b73666f724765656b73"
 byte_str = bytes.fromhex(hex_value)
 result_str = byte_str.decode('utf-8')
+</code></pre>
+<ul>
+<li>string to bytes</li>
+</ul>
+<pre><code class="language-python">byte_arr = str.encode("Foo")
 </code></pre>
 <ul>
 <li>hex string to int</li>
@@ -5474,12 +5615,16 @@ while test:
 
 print("password:", password)
 </code></pre>
-<p>natas  8: a6bZCNYwdKqN5cGP11ZdtPg0iImQQhAB
-natas 11: 1KFqoJXi6hRaPluAmk8ESDW4fSysRoIg
-natas 12: YWqo0pjpcXzSIl5NMAVxg12QxeC1w9QG
-natas 14: qPazSJBmrmU7UQJv17MHk1PGC4DxZMEP
-natas 16: TRD7iZrd5gATjj9PkPEuaOlfEjHqj32V
-natas 18: 8nEduUXg8kFGPV84uLWvzKgn6oKjq6aq</p>
+<p>Timing attack basically.</p>
+<hr />
+<ul>
+<li>natas  8: a6bZCNYwdKqN5cGP11ZdtPg0iImQQhAB</li>
+<li>natas 11: 1KFqoJXi6hRaPluAmk8ESDW4fSysRoIg</li>
+<li>natas 12: YWqo0pjpcXzSIl5NMAVxg12QxeC1w9QG</li>
+<li>natas 14: qPazSJBmrmU7UQJv17MHk1PGC4DxZMEP</li>
+<li>natas 16: TRD7iZrd5gATjj9PkPEuaOlfEjHqj32V</li>
+<li>natas 18: 8nEduUXg8kFGPV84uLWvzKgn6oKjq6aq</li>
+</ul>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="network_stack"><a class="header" href="#network_stack">network_stack</a></h1>
 <ul>
 <li>Just a list of protocols that you need to satisfy in order to be able to use connections.</li>

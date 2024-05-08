@@ -196,6 +196,9 @@ something called as a <strong>Linker Descriptor Script</strong>.</p>
 <h2 id="risc-v"><a class="header" href="#risc-v">RISC V</a></h2>
 <p>Open source. Has 32 int and 32 FP registers. Also has XLEN variable, which is
 either 32 or 64 for 32-bit and 64-bit processors respectively.</p>
+<p>There are 13 callee saved registers. 12 of them are explicitly called <em>saved</em>
+registers, and the first one of them (<code>s0</code>) is the <em>frame pointer</em> (equivalent to
+<strong>base pointer</strong> in AMD64). The 13 one is the <em>stack pointer</em>.</p>
 <div class="table-wrapper"><table><thead><tr><th style="text-align: center">Register</th><th style="text-align: center">ABI Name</th><th style="text-align: center">Description</th><th style="text-align: center">Saver</th></tr></thead><tbody>
 <tr><td style="text-align: center">x0</td><td style="text-align: center">zero</td><td style="text-align: center">Zero always</td><td style="text-align: center"></td></tr>
 <tr><td style="text-align: center">x1</td><td style="text-align: center">ra</td><td style="text-align: center">Return address</td><td style="text-align: center">caller</td></tr>
@@ -223,51 +226,52 @@ is no need for functions to save them.</p>
 <p>The ones listed below are called <em>R-type</em> or <em>register-type</em> instructions.</p>
 <ul>
 <li>
-<p><code>add rd, rs1, rs2</code>: add the contents of rs1 and rs2 and store it in rd.
+<p><code>add rd, rs1, rs2</code>: add the contents of <code>rs1</code> and <code>rs2</code> and store it in <code>rd</code>.
 Signed addition. Also has the unsigned version. Similarly, sub, and, or, xor
 also exist.</p>
 </li>
 <li>
-<p><code>mul/mulh rd, rs1, rs2</code>: multiplies and stores the lower/upper 32 bits in rd.</p>
+<p><code>mul/mulh rd, rs1, rs2</code>: multiplies and stores the lower/upper 32 bits in
+<code>rd</code>.</p>
 </li>
 <li>
 <p><code>div/rem rd, rs1, rs2</code>: stores the quotient/remainder.</p>
 </li>
 <li>
-<p><code>sll rd, rs1, rs2</code>: Left shift the number in rs1 by the value in rs2 and
-store in rd.</p>
+<p><code>sll rd, rs1, rs2</code>: Left shift the number in <code>rs1</code> by the value in <code>rs2</code> and
+store in <code>rd</code>.</p>
 </li>
 <li>
-<p><code>srl rd, rs1, rs2</code>: Right shift the number in rs1 by the value in rs2 and
-store in rd. Zero extends.</p>
+<p><code>srl rd, rs1, rs2</code>: Right shift the number in <code>rs1</code> by the value in <code>rs2</code> and
+store in <code>rd</code>. Zero extends.</p>
 </li>
 <li>
-<p><code>sra rd, rs1, rs2</code>: Right shift the number in rs1 by the value in rs2 and
-store in rd. Sign extends.</p>
+<p><code>sra rd, rs1, rs2</code>: Right shift the number in <code>rs1</code> by the value in <code>rs2</code> and
+store in <code>rd</code>. Sign extends.</p>
 </li>
 </ul>
 <p>All of these also have an immediate version where the last argument is a
-hardcoded literal.</p>
+hardcoded literal that is 12 bits.</p>
 <p>These are called <em>I-type</em> or <em>immediate-type</em> instructions.</p>
 <ul>
 <li>
-<p><code>l(b/h/w) rd, imm(rs1)</code>: loads a byte/half-word/word to rd(dest. register)
-from *(rs1 + imm)</p>
+<p><code>l(b/h/w) rd, imm(rs1)</code>: loads a byte/half-word/word to <code>rd</code>(dest. register)
+from <code>*(rs1 + imm)</code></p>
 </li>
 <li>
-<p><code>l(b/h/w)u rd, imm(rs1)</code>: loads a byte/half-word/word to rd(dest. register)
-from *(rs1 + imm). This one zero-extends on the left.</p>
+<p><code>l(b/h/w)u rd, imm(rs1)</code>: loads a byte/half-word/word to <code>rd</code>(dest. register)
+from <code>*(rs1 + imm)</code>. This one zero-extends on the left.</p>
 </li>
 </ul>
 <p>These are also <em>I-type</em> instructions.</p>
 <p>The below one instruction is <em>S-type</em> instruction (for obvious reasons).</p>
 <ul>
-<li><code>s(b/h/w) rd, imm(rs1)</code>: stores a byte/half-word/word to *(rs1 + imm)
-from the contents of rd.</li>
+<li><code>s(b/h/w) rd, imm(rs1)</code>: stores a byte/half-word/word to <code>*(rs1 + imm)</code>
+from the contents of <code>rd</code>.</li>
 </ul>
 <p>The below instruction is called <em>B-type</em> or <em>branch-type</em> instruction.</p>
 <ul>
-<li><code>blt/bltu r1, r2, label/offset</code>: if r1 &lt; r2 (signed or unsigned), jump to
+<li><code>blt/bltu r1, r2, label/offset</code>: if <code>r1 &lt; r2</code> (signed or unsigned), jump to
 label or symbol. Can jump to atmost 4 KiB. (13 bits with the lsb always 0, the
 rest are used for determining values).</li>
 </ul>
@@ -278,12 +282,12 @@ well. Also immediate variants of all.</p>
 bits apart from the lsb that’s always 0.</p>
 <p>The below type is called a <em>J-type</em> instruction.</p>
 <ul>
-<li><code>jal rd, imm</code>: Jump to PC + imm, and store pc + 4 in register rd.</li>
+<li><code>jal rd, imm</code>: Jump to <code>pc + imm</code>, and store <code>pc + 4</code> in register <code>rd</code>.</li>
 </ul>
 <p>The below one is an <em><strong>I-type</strong></em> and <strong>NOT</strong> J-type.</p>
 <ul>
-<li><code>jalr rd, rs1, imm</code>: Jump to rs1 + imm, storing PC + 4 in the register
-rd. Used for function pointers.</li>
+<li><code>jalr rd, rs1, imm</code>: Jump to <code>rs1 + imm</code>, storing <code>pc + 4</code> in the register
+<code>rd</code>. Used for function pointers.</li>
 </ul>
 <p>Both of the ones below are aliases.</p>
 <ul>
@@ -291,17 +295,17 @@ rd. Used for function pointers.</li>
 <p><code>j label</code>: alias to <code>jal zero, label</code>, discards the return address</p>
 </li>
 <li>
-<p><code>ret rs1</code>: return to the address in rs1, if no argument is specified use
-ra (return addres register/x1). Alias to <code>jalr zero, rs1, 0</code></p>
+<p><code>ret rs1</code>: return to the address in <code>rs1</code>, if no argument is specified use
+<code>ra</code> (return addres register/<code>x1</code>). Alias to <code>jalr zero, rs1, 0</code></p>
 </li>
 </ul>
-<p>For function calls we also need a stack-based execution. x2 register is the
-stack pointer that points to the top of the stack. Frame pointer s0 saves the
+<p>For function calls we also need a stack-based execution. <code>x2</code> register is the
+stack pointer that points to the top of the stack. Frame pointer <code>s0</code> saves the
 base of the stack. These mark the stack frame in the stack.</p>
 <blockquote>
 <p>Always load and save values relative to the frame pointer.</p>
 </blockquote>
-<p>Registers a0 to a7 are used to pass function arguments from one function to
+<p>Registers <code>a0</code> to <code>a7</code> are used to pass function arguments from one function to
 another. These are 8 parameters. If we have more, then you need to use the
 stack.</p>
 <h4 id="control-and-status-registers"><a class="header" href="#control-and-status-registers">Control and status registers</a></h4>
@@ -310,14 +314,16 @@ stack.</p>
 <p><code>csrrw rd, csr, rs</code>: atomic swap values</p>
 </li>
 <li>
-<p><code>csrrs rd, csr, rs</code>: atomic read from rd and set a bit</p>
+<p><code>csrrs rd, csr, rs</code>: atomic copy to <code>rd</code> and set the bits that are set in
+<code>rs</code>.</p>
 </li>
 <li>
-<p><code>csrrc rd, csr, rs</code>: atomic read from rd and reset a bit</p>
+<p><code>csrrc rd, csr, rs</code>: atomic copy to <code>rd</code> and reset the bits that are reset
+in <code>rs</code>.</p>
 </li>
 </ul>
 <p>Atomic means that interrupts won’t stop the entire set of operations that is
-going on.</p>
+going on. If one of the operands is <code>x0/zero</code>, then that copying doesn’t happen.</p>
 <h3 id="executing-instructions"><a class="header" href="#executing-instructions">Executing instructions</a></h3>
 <p>If we are using an operating system:</p>
 <ul>
@@ -727,7 +733,13 @@ If a page is writable it also has to be readable as well.</p>
 <p>The <em>satp</em> for this scheme has 4 bits for mode specification and 16 bits for
 address space separation. The rest is used for the base address of the top level
 page directory. Once again, left shift by 12 bits before getting the root
-directory’s address.</p>
+directory’s address. The first 4 bits are:</p>
+<ul>
+<li>0 if virtualization is off.</li>
+<li>8 if it is 39 bit scheme.</li>
+<li>9 if it is 48 bit scheme.</li>
+<li>Others are reserved.</li>
+</ul>
 <h4 id="39-bit"><a class="header" href="#39-bit">39 bit</a></h4>
 <p>This scheme can support page table directories of sizes 4KB, 2MB, 1GB. The most
 significant 25 bits are unused. There are a total of <data class="katex-src" value="2^{27}"><span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msup><mn>2</mn><mn>27</mn></msup></mrow><annotation encoding="application/x-tex">2^{27}</annotation></semantics></math></span></data> page table entries
@@ -919,7 +931,7 @@ cache mapping</strong>.</p>
 <p>Tradeoff between hardware size and cache misses. A block of memory can be mapped
 to any cache line in a set of cache lines. If there are S cache sets, then a
 block A gets mapped to any cache line in A mod S.</p>
-<p>Let there be 32 KB of cache with each line being 64 byte. Hence <data class="katex-src" value="2^15"><span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msup><mn>2</mn><mn>1</mn></msup><mn>5</mn></mrow><annotation encoding="application/x-tex">2^15</annotation></semantics></math></span></data> bytes
+<p>Let there be 32 KB of cache with each line being 64 byte. Hence <data class="katex-src" value="2^{15}"><span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msup><mn>2</mn><mn>15</mn></msup></mrow><annotation encoding="application/x-tex">2^{15}</annotation></semantics></math></span></data> bytes
 with <data class="katex-src" value="2^6"><span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msup><mn>2</mn><mn>6</mn></msup></mrow><annotation encoding="application/x-tex">2^6</annotation></semantics></math></span></data> bytes per line. So there are <data class="katex-src" value="2^9"><span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msup><mn>2</mn><mn>9</mn></msup></mrow><annotation encoding="application/x-tex">2^9</annotation></semantics></math></span></data> lines in total.</p>
 <p>If the cache is 8-way set associative, then there are <data class="katex-src" value="2^6"><span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msup><mn>2</mn><mn>6</mn></msup></mrow><annotation encoding="application/x-tex">2^6</annotation></semantics></math></span></data> cache sets.</p>
 <p>Now the least significant 6 bits are used for offset mapping for the bytes of
@@ -1000,6 +1012,24 @@ predictors.</p>
 <p><img src="./riscv/branch_predictor_1bit.png" alt="1 bit saturating branch predictor" /></p>
 <p><img src="./riscv/branch_predictor_2bit.png" alt="2 bit saturating branch predictor" /></p>
 <p>There are many other methods of predicting branches.</p>
+<h4 id="branch-predictors"><a class="header" href="#branch-predictors">Branch Predictors</a></h4>
+<p>It has two buffers, a <strong>direction predictor</strong> and a <strong>Branch Target Buffer</strong>.</p>
+<p>The branch target buffer is a cache that has entries in the format <code>pc:jump</code> for
+every single <code>pc</code> value possible. That is <data class="katex-src" value="2^{32}"><span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msup><mn>2</mn><mn>32</mn></msup></mrow><annotation encoding="application/x-tex">2^{32}</annotation></semantics></math></span></data> possible <code>pc</code> values. In the
+first invocation it actually stalls, calculates and loads the address. In
+subsequent invocations it just reads it off from there.</p>
+<p>The direction predictor is also a table of sorts that has one of those counters
+for every single <code>pc</code>. Each time a branch is encountered, you fetch the counter
+value and predict accordingly. And later on update the result in the counter.</p>
+<p>This is good for single branches like loops and if-else. However in case of
+nested branches performance can be improved by using something called as a
+<strong>GShare</strong>.</p>
+<p>A global share history buffer register is a shift register that stores the
+values of the previous 32 branches. When we want to choose the index for the
+direction predictor, we first XOR <code>pc</code> with the gshare value and then use it.
+The branch target buffer indexing remains the same.</p>
+<p>When we want to update the counter, we update both the counter and the gshare.
+We update the original counter, and then push back the bit in gshare.</p>
 <blockquote>
 <p>May be nice to watch <a href="https://www.youtube.com/watch?v=g-WPhYREFjk">this talk</a>
 by Fedor Pikus.</p>
